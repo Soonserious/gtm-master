@@ -1,0 +1,4 @@
+--2018-03-03 14:16:42--  ftp://https/toolbelt.heroku.com/install-ubuntu.sh
+           => ‘install-ubuntu.sh’
+Resolving https (https)... failed: Name or service not known.
+wget: unable to resolve host address ‘https’

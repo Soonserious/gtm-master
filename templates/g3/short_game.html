@@ -1,0 +1,575 @@
+{% extends "common/base.html" %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#tab1"><b>9 Hole Scoring Aility Test</b></a></li>
+    <li><a data-toggle="tab" href="#tab2"><b>Seve Game</b></a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="tab1" class="tab-pane fade in active">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <br/>
+                        <h5 class="col-xs-3 panel-title">Within 40 yards</h5>
+                        <h5 class="col-xs-9 panel-title">Par = 18</h5>
+                    </div>
+                    <div class="row">
+                        <br/>
+                        <h5 class="col-xs-12 panel-title">각 홀의 총 스트로크 수를 입력한다</h5>
+                    </div>
+                </div>
+                <form action="{% url 'g3_nine_hole_submit' %}" method="post" id="nine_hole_form">
+                    {% csrf_token %}
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <p style="">Date</p>
+                                </div>
+                                <div class="col-xs-10">
+                                    <input type='date' required="true" name='date' class="form-control"/>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <label class="col-xs-1 col-xs-push-2">Point</label>
+                            </div>
+
+                            <div class="form-group">
+                                {% for label in nine_hole_label %}
+                                <div class="row">
+                                    <label class="col-xs-2">Hole #{{ forloop.counter }}</label>
+                                    <div class="col-xs-4">
+                                        <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                            {% for point in "12345" %}
+                                            <label class="btn btn-default">
+                                                <input type="radio" required="true"
+                                                       name="shot_{{ forloop.parentloop.counter }}"
+                                                       value="{{ point }}"/> {{ point }}
+                                            </label>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <label class="col-xs-6">{{ label }}</label>
+                                </div>
+                                {% endfor %}
+                                <br/>
+                            </div>
+
+                            <br/>
+
+                            <br/>
+
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-2">
+                                </div>
+                                <div class="col-xs-10">
+                                    <div class="btn-group btn-group-justified" role="group">
+                                        <div class="btn-group" role="group">
+                                            <button type="submit" class="btn btn-primary" id="nine_hole_submit">Submit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="row" id="nine_hole_result">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <td>Your level</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Better than most</td>
+                                        <td>Top Tour Level (+4hdcp)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Tournament level player</td>
+                                        <td>Q-School qualifier (+1 hdcp)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Competitive level player</td>
+                                        <td>US Amateur (2 hdcp)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Weekly level player</td>
+                                        <td>A/B Flight (6/12 hdcp)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Recreational level player</td>
+                                        <td>C/D Flight (18/24 hdcp)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>0</td>
+                                        <td>Beginning level player</td>
+                                        <td>Last Flight (30+ hdcp)</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row" id="nine_hole_result_value"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="tab2" class="tab-pane fade">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <br/>
+                        <h5 class="col-xs-12 panel-title">Missing every GIR</h5>
+                    </div>
+                    <div class="row">
+                        <br/>
+                        <h5 class="col-xs-6 panel-title">Par is 72 (36 + 36)</h5>
+                        <h5 class="col-xs-6 panel-title">'Up and down' is par</h5>
+                    </div>
+                    <div class="row">
+                        <br/>
+                        <h5 class="col-xs-12 panel-title">각 홀의 총 스트로크 수 + 2를 하여 각 홀의 스코어를 입력한다.</h5>
+                    </div>
+                </div>
+                <form action="{% url 'g3_seve_game_submit' %}" method="post" id="seve_game_form">
+                    {% csrf_token %}
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-3 col-xs-5">
+                                    <p style="">Date</p>
+                                </div>
+                                <div class="col-sm-9 col-xs-7">
+                                    <input type='date' required="true" name='date' class="form-control"/>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <label class="col-sm-1 col-xs-2">chip shot</label>
+                                <label class="col-sm-2 col-xs-3 text-right">그린 엣지로부터 10야드 이내의 거리</label>
+                                <label class="col-xs-1">Point</label>
+                            </div>
+
+                            <div class="form-group">
+                                {% for label in seve_game_label1 %}
+                                <div class="row">
+                                    <label class="col-sm-3 col-xs-5 text-right">{{ label }}</label>
+
+                                    <div class="col-sm-9 col-xs-7">
+                                        <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                            {% for point in "34567" %}
+                                            <label class="btn btn-default">
+                                                <input type="radio" required="true"
+                                                       name="shot_1_{{ forloop.parentloop.counter }}"
+                                                       value="{{ point }}"/> {{ point }}
+                                            </label>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                <br/>
+                            </div>
+
+                            <br/>
+
+                            <div class="row">
+                                <label class="col-sm-1 col-xs-2">pitch shot</label>
+                                <label class="col-sm-2 col-xs-3 text-right">그린 엣지로부터 15-30야드의 거리</label>
+                                <label class="col-xs-1">Point</label>
+                            </div>
+
+                            <div class="form-group">
+                                {% for label in seve_game_label2 %}
+                                <div class="row">
+                                    <label class="col-sm-3 col-xs-5 text-right">{{ label }}</label>
+
+                                    <div class="col-sm-9 col-xs-7">
+                                        <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                            {% for point in "34567" %}
+                                            <label class="btn btn-default">
+                                                <input type="radio" required="true"
+                                                       name="shot_2_{{ forloop.parentloop.counter }}"
+                                                       value="{{ point }}"/> {{ point }}
+                                            </label>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                <br/>
+                            </div>
+
+                            <br/>
+
+                            <div class="row">
+                                <label class="col-sm-1 col-xs-2">lob/flop shot</label>
+                                <label class="col-sm-2 col-xs-3 text-right">그린 엣지로부터 5-20야드의 거리</label>
+                                <label class="col-xs-1">Point</label>
+                            </div>
+
+                            <div class="form-group">
+                                {% for label in seve_game_label3 %}
+                                <div class="row">
+                                    <label class="col-sm-3 col-xs-5 text-right">{{ label }}</label>
+
+                                    <div class="col-sm-9 col-xs-7">
+                                        <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                            {% for point in "34567" %}
+                                            <label class="btn btn-default">
+                                                <input type="radio" required="true"
+                                                       name="shot_3_{{ forloop.parentloop.counter }}"
+                                                       value="{{ point }}"/> {{ point }}
+                                            </label>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                <br/>
+                            </div>
+
+                            <br/>
+
+                            <div class="row">
+                                <label class="col-sm-1 col-xs-2">bunker shots</label>
+                                <label class="col-sm-2 col-xs-3 text-right">Place the ball</label>
+                                <label class="col-xs-1">Point</label>
+                            </div>
+
+                            <div class="form-group">
+                                {% for label in seve_game_label4 %}
+                                <div class="row">
+                                    <label class="col-sm-3 col-xs-5 text-right">{{ label }}</label>
+
+                                    <div class="col-sm-9 col-xs-7">
+                                        <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                            {% for point in "34567" %}
+                                            <label class="btn btn-default">
+                                                <input type="radio" required="true"
+                                                       name="shot_4_{{ forloop.parentloop.counter }}"
+                                                       value="{{ point }}"/> {{ point }}
+                                            </label>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                <br/>
+                            </div>
+
+                            <br/>
+
+                            <div class="row">
+                                <label class="col-sm-1 col-xs-2">putting</label>
+                                <label class="col-sm-2 col-xs-3 text-right">프린지에서</label>
+                                <label class="col-xs-1">Point</label>
+                            </div>
+
+                            <div class="form-group">
+                                {% for label in seve_game_label5 %}
+                                <div class="row">
+                                    <label class="col-sm-3 col-xs-5 text-right">{{ label }}</label>
+
+                                    <div class="col-sm-9 col-xs-7">
+                                        <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                            {% for point in "34567" %}
+                                            <label class="btn btn-default">
+                                                <input type="radio" required="true"
+                                                       name="shot_5_{{ forloop.parentloop.counter }}"
+                                                       value="{{ point }}"/> {{ point }}
+                                            </label>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                <br/>
+                            </div>
+
+                            <br/>
+
+                            <div class="row">
+                                <label class="col-sm-1 col-xs-2">shot from jail</label>
+                                <label class="col-sm-2 col-xs-3 text-right">깊은 러프나 장애물 바로 뒤</label>
+                                <label class="col-xs-1">Point</label>
+                            </div>
+
+                            <div class="form-group">
+                                {% for label in seve_game_label6 %}
+                                <div class="row">
+                                    <label class="col-sm-3 col-xs-5 text-right">{{ label }}</label>
+
+                                    <div class="col-sm-9 col-xs-7">
+                                        <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                            {% for point in "34567" %}
+                                            <label class="btn btn-default">
+                                                <input type="radio" required="true"
+                                                       name="shot_6_{{ forloop.parentloop.counter }}"
+                                                       value="{{ point }}"/> {{ point }}
+                                            </label>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                <br/>
+                            </div>
+
+                            <br/>
+
+                            <br/>
+
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 col-xs-5">
+                                </div>
+                                <div class="col-sm-9 col-xs-7">
+                                    <div class="btn-group btn-group-justified" role="group">
+                                        <div class="btn-group" role="group">
+                                            <button type="submit" class="btn btn-primary" id="seve_game_submit">Submit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row" id="seve_game_result">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <td>Your level</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Better than most</td>
+                                        <td>Seve at his best</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Tournament level player</td>
+                                        <td>An average day for Seve</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Competitive level player</td>
+                                        <td>Just Missed the Cut</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Weekly level player</td>
+                                        <td>Never will make it in the starting field</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Recreational level player</td>
+                                        <td>You will make more money as a caddie</td>
+                                    </tr>
+                                    <tr>
+                                        <td>0</td>
+                                        <td>Beginning level player</td>
+                                        <td>Never hit another range ball</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row" id="seve_game_result_value"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+    $(function () {
+        $('input[name="date"]').datetimepicker({
+            format: 'YYYY-MM-DD',
+            showTodayButton: true,
+            showClose: true
+        });
+    });
+
+    $(document).ready(function(){
+        $('input[value="0"]').attr("checked", true);
+        $('#seve_game_result').hide();
+    });
+
+    $('#seve_game_form').submit(function(event){
+        event.preventDefault();
+        console.log("form submitted!")
+        $.ajax({
+            url : $(this).attr('action'),
+            type : $(this).attr('method'),
+            data : $(this).serialize(),
+
+            success : function(json) {
+                $('#seve_game_submit').hide();
+                console.log(json);
+                $('#seve_game_result').show();
+{#                    $('#seve_game_result_value').append('<div class="alert alert-success" role="alert">Total Score: ' + json.score + '</div>').append('<div class="alert alert-success" role="alert">Your level: ' + json.level + '</div>')#}
+                $('#seve_game_result_value').append('<div class="alert alert-success" role="alert">Your level: ' + json.level + '</div>')
+                console.log("success");
+            },
+
+            error : function(xhr,errmsg,err) {
+                $('#seve_game_result_value').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+                        " <a href='#' class='close'>&times;</a></div>");
+                console.log(xhr.status + ": " + xhr.responseText);
+            }
+        });
+    });
+
+    $(document).ready(function(){
+        $('input[value="0"]').attr("checked", true);
+        $('#nine_hole_result').hide();
+        $("input").each(function(){
+                if(localStorage.getItem($(this).attr("name"))){
+                    if($(this).attr("type") == "radio"){
+                        var target = "input:radio[name='"+$(this).attr("name")+"'][value='"+localStorage.getItem($(this).attr("name"))+"']";
+                        $(target).parent().addClass("active");
+                    }else{
+                        $(this).val(localStorage.getItem($(this).attr("name")));
+                    }
+                }
+            })
+    });
+    $('#nine_hole_form').submit(function(event){
+        event.preventDefault();
+        console.log("form submitted!")
+        $.ajax({
+            url : $(this).attr('action'),
+            type : $(this).attr('method'),
+            data : $(this).serialize(),
+
+            success : function(json) {
+                $('#nine_hole_submit').hide();
+                console.log(json);
+                $('#nine_hole_result').show();
+{#                    $('#nine_hole_result_value').append('<div class="alert alert-success" role="alert">Total Score: ' + json.score + '</div>').append('<div class="alert alert-success" role="alert">Your level: ' + json.level + '</div>')#}
+                $('#nine_hole_result_value').append('<div class="alert alert-success" role="alert">Your level: ' + json.level + '</div>')
+                console.log("success");
+                $("input").each(function(){
+                        localStorage.removeItem($(this).attr("name"));
+                    })
+            },
+
+            error : function(xhr,errmsg,err) {
+                $('#nine_hole_result_value').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+                        " <a href='#' class='close'>&times;</a></div>");
+                console.log(xhr.status + ": " + xhr.responseText);
+            }
+        });
+    });
+
+    $("input[name^=date]").on('input',function(){
+        var text = $("li.active").text();
+        console.log(text)
+        $.ajax({
+                    url : "/g3/date_exsist",
+                    type : 'GET',
+                    data : {"date" : $(this).val(),
+                            "text" : text},
+                    success : function(json) {
+                        if(json.result){
+                            if(text == '9 Hole Scoring Aility Test'){
+                                changeSoringNineHole(json.tuple);
+                            }else if(text == 'Seve Game'){
+                                changeSeveGame(json.tuple);
+                            }
+
+                        }
+                    },
+                    error : function(xhr, errmsg, err) {
+                        console.log(xhr.status + ": " + xhr.responseText);
+                    }
+                });
+
+    })
+
+         $("input").on("input",function(){
+            localStorage.setItem($(this).attr("name"),$(this).val());
+        })
+
+        $("input:radio[name^='shot']").on("select",function(){
+            localStorage.setItem($(this).attr("name"),$(this).val());
+            console.log($(this).attr("name")+ " " + $(this).val())
+        })
+
+
+    function changeScoringNineHole(tuple){
+
+        $('input:radio[name="shot_1"][value="'+tuple.shot_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2"][value="'+tuple.shot_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3"][value="'+tuple.shot_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_4"][value="'+tuple.shot_4+'"]').parent().addClass("active");
+        $('input:radio[name="shot_5"][value="'+tuple.shot_5+'"]').parent().addClass("active");
+        $('input:radio[name="shot_6"][value="'+tuple.shot_6+'"]').parent().addClass("active");
+        $('input:radio[name="shot_7"][value="'+tuple.shot_7+'"]').parent().addClass("active");
+        $('input:radio[name="shot_8"][value="'+tuple.shot_8+'"]').parent().addClass("active");
+        $('input:radio[name="shot_9"][value="'+tuple.shot_9+'"]').parent().addClass("active");
+    }
+
+    function changeSeveGame(tuple){
+
+        $('input:radio[name="shot_1_1"][value="'+tuple.shot_1_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_2"][value="'+tuple.shot_1_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_3"][value="'+tuple.shot_1_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_4"][value="'+tuple.shot_1_4+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_1"][value="'+tuple.shot_2_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_2"][value="'+tuple.shot_2_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_3"][value="'+tuple.shot_2_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_4"][value="'+tuple.shot_2_4+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_1"][value="'+tuple.shot_3_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_2"][value="'+tuple.shot_3_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_3"][value="'+tuple.shot_3_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_4"][value="'+tuple.shot_3_4+'"]').parent().addClass("active");
+        $('input:radio[name="shot_4_1"][value="'+tuple.shot_4_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_4_2"][value="'+tuple.shot_4_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_4_3"][value="'+tuple.shot_4_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_4_4"][value="'+tuple.shot_4_4+'"]').parent().addClass("active");
+        $('input:radio[name="shot_5_1"][value="'+tuple.shot_5_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_6_1"][value="'+tuple.shot_6_1+'"]').parent().addClass("active");
+
+    }
+
+</script>
+{% endblock %}

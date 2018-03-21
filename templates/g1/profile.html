@@ -1,0 +1,478 @@
+{% extends "common/base.html" %}
+
+{% block css %}
+    <style>
+        .positive { color:blue; }
+        .negative { color:red; }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h3>G1 Profile</h3>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4><b>Student Information</b></h4></div>
+        <table class="table table-bordered">
+            <thead class="thead">
+            <tr>
+                <th><div align="center">이름</div></th>
+                <th><div align="center">성별</div></th>
+                <th><div align="center">생년월일</div></th>
+                <th><div align="center">핸디캡</div></th>
+                <th><div align="center">소속</div></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><div align="center">{{ member_info.name }}</div></td>
+                <td><div align="center">{{ member_info.sex }}</div></td>
+                <td><div align="center">{{ member_info.birth }}</div></td>
+                <td><div align="center">{{ member_info.handicap|floatformat:2 }}</div></td>
+                <td><div align="center">{{ member_info.association }}</div></td>
+            </tr>
+        </table>
+    </div>
+    {% if round_posted == 0 %}
+        <p>라운딩 게시 기록 없음</p>
+    {% else %}
+        <table class='table'>
+            <thead>
+            <tr>
+                <th>골프통계분석</th>
+                <th>PGA Tour 상위 10%</th>
+                <th>Average</th>
+                <th>Differential</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th>Scoring Average</th>
+                <td>{{ cr.score|floatformat:2 }}</td>
+                <td>{{ avg.score|floatformat:2 }}</td>
+                <td class="differential">{{ minus.score|floatformat:2 }}</td>
+            </tr>
+            <tr>
+                <th>Driving Accuracy (Fairway Hit %)</th>
+                <td>{{ cr.fairway_hit|floatformat:2 }}%</td>
+                <td>{{ avg.fairway_hit|floatformat:2 }}%</td>
+                <td class="differential">{{ minus.fairway_hit|floatformat:2 }}%</td>
+            </tr>
+            <tr>
+                <th>Greens In Regulations (GIR %)</th>
+                <td>{{ cr.gir|floatformat:2 }}%</td>
+                <td>{{ avg.gir|floatformat:2 }}%</td>
+                <td class="differential">{{ minus.gir|floatformat:2 }}%</td>
+            </tr>
+            <tr>
+                <th>Putts per Round</th>
+                <td>{{ cr.putt|floatformat:2 }}</td>
+                <td>{{ avg.putt|floatformat:2 }}</td>
+                <td class="differential">{{ minus.putt|floatformat:2 }}</td>
+            </tr>
+            <tr>
+                <th>Putts per GIR</th>
+                <td>{{ cr.putt_gir|floatformat:2 }}</td>
+                <td>{{ avg.putt_gir|floatformat:2 }}</td>
+                <td class="differential">{{ minus.putt_gir|floatformat:2 }}</td>
+            </tr>
+            <tr>
+                <th>Recovery (Up and Down %)</th>
+                <td>{{ cr.up_and_down|floatformat:2 }}%</td>
+                <td>{{ avg.up_and_down|floatformat:2 }}%</td>
+                <td class="differential">{{ minus.up_and_down|floatformat:2 }}%</td>
+            </tr>
+            <tr>
+                <th>Sand Greenside (bunker)</th>
+                <td>{{ cr.bunker|floatformat:2 }}</td>
+                <td>{{ avg.bunker|floatformat:2 }}</td>
+                <td class="differential">{{ minus.bunker|floatformat:2 }}</td>
+            </tr>
+            <tr>
+                <th>Sand Saves %</th>
+                <td>{{ cr.sand_save|floatformat:2 }}%</td>
+                <td>{{ avg.sand_save|floatformat:2 }}%</td>
+                <td class="differential">{{ minus.sand_save|floatformat:2 }}%</td>
+            </tr>
+            <tr>
+                <th>Proximity(meter)</th>
+                <td>{{ cr.proximity|floatformat:2 }}</td>
+                <td>{{ avg.proximity|floatformat:2 }}</td>
+                <td class="differential">{{ minus.proximity|floatformat:2 }}</td>
+            </tr>
+            <tr>
+                <th>Birdies per round</th>
+                <td>{{ cr.birdie|floatformat:2 }}</td>
+                <td>{{ avg.birdie|floatformat:2 }}</td>
+                <td class="differential">{{ minus.birdie|floatformat:2 }}</td>
+            </tr>
+            <tr>
+                <th>Bogey per round</th>
+                <td>{{ cr.bogey|floatformat:2 }}</td>
+                <td>{{ avg.bogey|floatformat:2 }}</td>
+                <td class="differential">{{ minus.bogey|floatformat:2 }}</td>
+            </tr>
+            <tr>
+                <th>Double bogey or more per round</th>
+                <td>{{ cr.double_bogey_or_more|floatformat:2 }}</td>
+                <td>{{ avg.double_bogey_or_more|floatformat:2 }}</td>
+                <td class="differential">{{ minus.double_bogey_or_more|floatformat:2 }}</td>
+            </tr>
+            <tr>
+                <th>Bounce Back %</th>
+                <td>{{ cr.bounce_back|floatformat:2 }}%</td>
+                <td>{{ avg.bounce_back|floatformat:2 }}%</td>
+                <td class="differential">{{ minus.bounce_back|floatformat:2 }}%</td>
+            </tr>
+            <tr>
+                <th>Penalty strokes per round</th>
+                <td>{{ cr.penalty|floatformat:2 }}</td>
+                <td>{{ avg.penalty|floatformat:2 }}</td>
+                <td class="differential">{{ minus.penalty|floatformat:2 }}</td>
+            </tr>
+            <tr>
+                <th>Driving Distance(meter)</th>
+                <td>{{ cr.driving_distance|floatformat:2 }}</td>
+                <td>{{ avg.driving_distance|floatformat:2 }}</td>
+                <td class="differential">{{ minus.driving_distance|floatformat:2 }}</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-xs-12">
+                <canvas id="chart-percentage" height="240"></canvas>
+            </div>
+        </div>
+        <br><hr><br>
+        <div class="row">
+            <div class="col-xs-6">
+                <canvas id="chart-small" height="240"></canvas>
+            </div>
+            <div class="col-xs-6">
+                <canvas id="chart-large" height="240"></canvas>
+            </div>
+        </div>
+        <br><hr><br>
+        <div class="row">
+            <div class="col-xs-6">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th colspan="2">Average Strokes for Par 3, 4, 5</th>
+                    </tr>
+                    <tr>
+                        <th>Hole</th>
+                        <th>Average Strokes</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>Par 3</th>
+                        <td>{{ par3|floatformat:2 }}</td>
+                    </tr>
+                    <tr>
+                        <th>Par 4</th>
+                        <td>{{ par4|floatformat:2 }}</td>
+                    </tr>
+                    <tr>
+                        <th>Par 5</th>
+                        <td>{{ par5|floatformat:2 }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-6">
+                <canvas id="avg_stroke" height="200"></canvas>
+            </div>
+        </div>
+        <br><hr><br>
+        <div class="row">
+            <div class="col-xs-6">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th colspan="2">Stroke Analysis</th>
+                    </tr>
+                    <tr>
+                        <th>Stroke</th>
+                        <th>Average Percentage</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>Birdie</th>
+                        <td>{{ birdie|floatformat:2 }}%</td>
+                    </tr>
+                    <tr>
+                        <th>Par</th>
+                        <td>{{ par|floatformat:2 }}%</td>
+                    </tr>
+                    <tr>
+                        <th>Bogey</th>
+                        <td>{{ bogey|floatformat:2 }}%</td>
+                    </tr>
+                    <tr>
+                        <th>Double Bogey or More</th>
+                        <td>{{ double_bogey_or_more|floatformat:2 }}%</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-6">
+                <canvas id="stroke_anal" height="200"></canvas>
+            </div>
+        </div>
+        <br><br>
+        <div class="row">
+            <div class="col-sm-1" align="center">코멘트</div>
+            <div class="col-sm-11">
+                {% if is_admin %}
+                <textarea id="comment" class="form-control" rows="5">{{ comment }}</textarea>
+                {% else %}
+                <div class="well well-sm" id="comment" align="justify">{{ comment }}</div>
+                {% endif %}
+            </div>
+        </div>
+        {% if is_admin %}
+            <br>
+            <div class="row">
+                <div class="col-sm-12" align="right">
+                    <button type="button" class="btn btn-primary" onclick="save_comment_clicked()">저장하기</button>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <script>
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    $(function() { $.ajaxSetup({headers: {"X-CSRFToken": getCookie("csrftoken")}}); });
+    Chart.defaults.global.responsive = true;
+    Chart.defaults.global.maintainAspectRatio = false;
+
+    Number.prototype.zeroPad = Number.prototype.zeroPad ||
+        function(base){
+            var nr = this, len = (String(base).length - String(nr).length)+1;
+            return len > 0? new Array(len).join('0')+nr : nr;
+        };
+
+    $('.differential').each(function() {
+        this.innerText.match("^-")? $(this).addClass("negative"): $(this).addClass("positive");
+    });
+
+    $(function() {
+        console.log("target_user_id: " + "{{ target_user_id }}");
+
+        // Bar charts
+        red_bg = "rgba(255, 99, 132, 0.2)";
+        red_bd = "rgba(255, 99, 132, 1.0)";
+        blue_bg = "rgba(54, 162, 235, 0.2)";
+        blue_bd = "rgba(54, 162, 235, 1.0)";
+
+        var ctx = $("#chart-percentage");
+        var data = {
+            labels: [
+                ["Driving", "Accuracy"],
+                ["GIR"],
+                ["Recovery"],
+                ["Sand", "Saves"],
+                ["Bounce", "Back"]
+            ],
+            datasets: [{
+                label: "PGA Tour 상위 10%",
+                backgroundColor: red_bg,
+                borderColor: red_bd,
+                borderWidth: 1,
+                data: [
+                    {{ cr.fairway_hit|floatformat:2 }},
+                    {{ cr.gir|floatformat:2 }},
+                    {{ cr.up_and_down|floatformat:2 }},
+                    {{ cr.sand_save|floatformat:2 }},
+                    {{ cr.bounce_back|floatformat:2 }}
+                ]
+            }, {
+                label: "Average",
+                backgroundColor: blue_bg,
+                borderColor: blue_bd,
+                borderWidth: 1,
+                data: [
+                    {{ avg.fairway_hit|floatformat:2 }},
+                    {{ avg.gir|floatformat:2 }},
+                    {{ avg.up_and_down|floatformat:2 }},
+                    {{ avg.sand_save|floatformat:2 }},
+                    {{ avg.bounce_back|floatformat:2 }}
+                ]
+            }]
+        };
+        var options = {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                        max: 100,
+                        stepSize: 10
+                    }
+                }]
+            }
+        };
+        new Chart(ctx, {type: "bar", data: data, options: options});
+
+        var ctx = $("#chart-large");
+        var data = {
+            labels: [["Scoring", "Average"], ["Putts", "per", "Round"], ["Proximity"]],
+            datasets: [{
+                label: "PGA Tour 상위 10%",
+                backgroundColor: red_bg,
+                borderColor: red_bd,
+                borderWidth: 1,
+                data: [
+                    {{ cr.score|floatformat:2 }},
+                    {{ cr.putt|floatformat:2 }},
+                    {{ cr.proximity|floatformat:2 }}
+                ]
+            }, {
+                label: "Average",
+                backgroundColor: blue_bg,
+                borderColor: blue_bd,
+                borderWidth: 1,
+                data: [
+                    {{ avg.score|floatformat:2 }},
+                    {{ avg.putt|floatformat:2 }},
+                    {{ avg.proximity|floatformat:2 }}
+                ]
+            }]
+        };
+        var options = {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                        max: 100,
+                        stepSize: 10
+                    }
+                }]
+            }
+        };
+        new Chart(ctx, {type: "bar", data: data, options: options});
+
+        var ctx = $("#chart-small");
+        var data = {
+            labels: [["Putts", "per", "GIR"], ["Sand", "Greenside", "(bunker)"], ["Penalty"]],
+            datasets: [{
+                label: "PGA Tour 상위 10%",
+                backgroundColor: red_bg,
+                borderColor: red_bd,
+                borderWidth: 1,
+                data: [
+                    {{ cr.putt_gir|floatformat:2 }},
+                    {{ cr.bunker|floatformat:2 }},
+                    {{ cr.penalty|floatformat:2 }}
+                ]
+            }, {
+                label: "Average",
+                backgroundColor: blue_bg,
+                borderColor: blue_bd,
+                borderWidth: 1,
+                data: [
+                    {{ avg.putt_gir|floatformat:2 }},
+                    {{ avg.bunker|floatformat:2 }},
+                    {{ avg.penalty|floatformat:2 }}
+                ]
+            }]
+        }
+        var options = {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                        max: 5,
+                        stepSize: 1
+                    }
+                }]
+            }
+        }
+        new Chart(ctx, {type: "bar", data: data, options: options});
+
+        var data = {
+            labels: ["Par 3", "Par 4", "Par 5"],
+            datasets: [{
+                label: "Average Stroke",
+                backgroundColor: "rgba(255,99,132,0.2)",
+                borderColor: "rgba(255,99,132,1)",
+                borderWidth: 1,
+                hoverBackgroundColor: "rgba(255,99,132,0.4)",
+                hoverBorderColor: "rgba(255,99,132,1)",
+                data: [{{ par3|floatformat:2 }},{{ par4|floatformat:2 }},{{ par5|floatformat:2 }}]
+            }]
+        };
+        var options = {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                        max: 10,
+                        stepSize: 1
+                    }
+                }]
+            }
+        }
+        new Chart($('#avg_stroke').get(0).getContext("2d"), {
+            type: "bar",
+            data: data,
+            options: options
+        });
+
+        var data = {
+            labels: ["Birdie", "Par", "Bogey", "Double Bogey or More"],
+            datasets: [
+                {
+                    data: [
+                        {{ birdie|floatformat:2 }},
+                        {{ par|floatformat:2 }},
+                        {{ bogey|floatformat:2 }},
+                        {{ double_bogey_or_more|floatformat:2 }},
+                    ],
+                    backgroundColor: [
+                        "rgba(255, 30, 30, 0.4)",
+                        "rgba(54, 162, 235, 0.4)",
+                        "rgba(255, 226, 56, 0.6)",
+                        "rgba(54, 206, 86, 0.4)",
+                    ],
+                }]
+        };
+        new Chart($('#stroke_anal').get(0).getContext("2d"),{
+            type: 'pie',
+            data: data,
+        });
+    })
+
+    function save_comment_clicked() {
+        var comment = $("#comment").val();
+        $.ajax({
+            url: "{% url 'g1_update' %}",
+            type: "POST",
+            data: {"target_user_id": "{{ target_user_id }}", "comment": comment},
+            dataType: "json",
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    }
+    </script>
+{% endblock %}

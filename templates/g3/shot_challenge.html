@@ -1,0 +1,1052 @@
+{% extends "common/base.html" %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#tab1"><b>Tee Shot Challenge</b></a></li>
+    <li><a data-toggle="tab" href="#tab2"><b>Approach Shot Challenge</b></a></li>
+    <li><a data-toggle="tab" href="#tab3"><b>54 Shot Challenge</b></a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="tab1" class="tab-pane fade in active">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        </br>
+                        <h5 class="col-xs-3 panel-title">14 Tee Shot (Drive)</h5>
+                        <h5 class="col-xs-9 panel-title">중압감 증가 상황에서 기술과 멘탈 훈련</h5>
+                    </div>
+                    <div class="row">
+                        </br>
+                        <h5 class="col-xs-3 panel-title">사전 준비 운동을 한다</h5>
+                        <h5 class="col-xs-9 panel-title">매 샷을 하기 전에 완전한 Routine을 실행한다</h5>
+                    </div>
+                    <div class="row">
+                        </br>
+                        <h5 class="col-xs-3 panel-title">매 샷마다 목표 지점을 정한다</h5>
+                        <h5 class="col-xs-9 panel-title">Post-shot routine 은 샷의 과정에 초점을 맞춘다</h5>
+                    </div>
+                </div>
+                <form action="{% url 'g3_tee_shot_submit' %}" method="post" id="tee_shot_form">
+                    {% csrf_token %}
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <p style="">Date</p>
+                                </div>
+                                <div class="col-xs-9">
+                                    <input type='date' required="true" name='date' class="form-control"/>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <label class="col-xs-3"></label>
+                                <label class="col-xs-9">Score</label>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-xs-3">1 ~ 10 Shot</label>
+                                <label class="col-xs-9">페어웨이, 구제되는 지역, Wrong Side (+1, 0, -2)</label>
+                            </div>
+
+                            <div class="form-group">
+                                {% for shot_num in tee_shot_div1 %}
+                                <div class="row">
+                                    <label class="col-xs-2"></label>
+                                    <label class="col-xs-1">{{ shot_num }}</label>
+                                    <div class="col-xs-9">
+                                        <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                            <label class="btn btn-default">
+                                                <input type="radio" required="" name="shot_{{ shot_num }}"
+                                                       value="-2"/> -2
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio"  name="shot_{{ shot_num }}"
+                                                       value="0"/> 0
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio"  name="shot_{{ shot_num }}"
+                                                       value="1"/> +1
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br/>
+                                {% endfor %}
+                            </div>
+
+                            <br/>
+
+                            <div class="row">
+                                <label class="col-xs-3"></label>
+                                <label class="col-xs-9">Score</label>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-xs-3">11 ~ 13 Shot</label>
+                                <label class="col-xs-9">페어웨이, 구제되는 지역, Wrong Side (+2, 0, -4)</label>
+                            </div>
+
+                            <div class="form-group">
+                                {% for shot_num in tee_shot_div2 %}
+                                <div class="row">
+                                    <label class="col-xs-2"></label>
+                                    <label class="col-xs-1">{{ shot_num }}</label>
+                                    <div class="col-xs-9">
+                                        <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                            <label class="btn btn-default">
+                                                <input type="radio" required="true" name="shot_{{ shot_num }}"
+                                                       value="-4"/> -4
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio" name="shot_{{ shot_num }}"
+                                                       value="0"/> 0
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio"name="shot_{{ shot_num }}"
+                                                       value="2"/> +2
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br/>
+                                {% endfor %}
+                            </div>
+
+                            <br/>
+
+                            <div class="row">
+                                <label class="col-xs-3"></label>
+                                <label class="col-xs-9">Score</label>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-xs-3">14 Shot</label>
+                                <label class="col-xs-9">페어웨이, 구제되는 지역, Wrong Side (+3, 0, -6)</label>
+                            </div>
+
+                            <div class="form-group">
+                                {% for shot_num in tee_shot_div3 %}
+                                <div class="row">
+                                    <label class="col-xs-2"></label>
+                                    <label class="col-xs-1">{{ forloop.counter|add:13 }}</label>
+                                    <div class="col-xs-9">
+                                        <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                            <label class="btn btn-default">
+                                                <input type="radio" required="true" name="shot_{{ shot_num }}"
+                                                       value="-6"/> -6
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio"  name="shot_{{ shot_num }}"
+                                                       value="0"/> 0
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input  type="radio"  name="shot_{{ shot_num }}"
+                                                       value="3"/> +3
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br/>
+                                {% endfor %}
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-3">
+                                </div>
+                                <div class="col-xs-9">
+                                    <div class="btn-group btn-group-justified" role="group">
+                                        <div class="btn-group" role="group">
+                                            <button type="submit" class="btn btn-primary" id="tee_shot_submit">Submit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" id="tee_shot_result">
+                            <div class="row">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <td>Your level</td>
+                                        <td></td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Better than most</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Tournament level player</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Competitive level player</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Weekly level player</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Recreational level player</td>
+                                    </tr>
+                                    <tr>
+                                        <td>0</td>
+                                        <td>Beginning level player</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row" id="tee_shot_result_value"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="tab2" class="tab-pane fade">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <br/>
+                        <h5 class="col-xs-3 panel-title">14 Approach Shot</h5>
+                        <h5 class="col-xs-9 panel-title">중압감 증가 상황에서 기술과 멘탈 훈련</h5>
+                    </div>
+                    <div class="row">
+                        <br/>
+                        <h5 class="col-xs-3 panel-title">사전 준비 운동을 한다</h5>
+                        <h5 class="col-xs-9 panel-title">매 샷을 하기 전에 완전한 Routine을 실행한다</h5>
+                    </div>
+                    <div class="row">
+                        <br/>
+                        <h5 class="col-xs-3 panel-title">매 샷마다 목표 지점을 정한다</h5>
+                        <h5 class="col-xs-9 panel-title">Post-shot routine 은 샷의 과정에 초점을 맞춘다</h5>
+                    </div>
+                </div>
+                <form action="{% url 'g3_approach_shot_submit' %}" method="post" id="approach_shot_form">
+                    {% csrf_token %}
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <p style="">Date</p>
+                                </div>
+                                <div class="col-xs-9">
+                                    <input type='date' required="true" name='date' class="form-control"/>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <label class="col-xs-3"></label>
+                                <label class="col-xs-9">Score</label>
+                            </div>
+                            <div class="row">
+                                <label class="col-xs-3">1 ~ 10 Shot</label>
+                                <label class="col-xs-9">PEI 7% 이내, GIR, 그외 (+2, +1, -2)</label>
+                            </div>
+                            <br/>
+                            <div class="form-group">
+                                {% for label in approach_shot_div1 %}
+                                <div class="row">
+                                    <label class="col-xs-2">{{ label }}</label>
+                                    <label class="col-xs-1">{{ forloop.counter }}</label>
+                                    <div class="col-xs-9">
+                                        <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                            <label class="btn btn-default">
+                                                <input type="radio" required="true" name="shot_{{ forloop.counter }}"
+                                                       value="2"/> +2
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio" required="true" name="shot_{{ forloop.counter }}"
+                                                       value="1"/> +1
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio" required="true" name="shot_{{ forloop.counter }}"
+                                                       value="-2"/> -2
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br/>
+                                {% endfor %}
+                            </div>
+
+                            <br/>
+
+                            <div class="row">
+                                <label class="col-xs-3"></label>
+                                <label class="col-xs-9">Score</label>
+                            </div>
+                            <div class="row">
+                                <label class="col-xs-3">11 ~ 13 Shot</label>
+                                <label class="col-xs-9">PEI 7% 이내, GIR, 그외 (+3, +1, -4)</label>
+                            </div>
+                            </br>
+                            <div class="form-group">
+                                {% for label in approach_shot_div2 %}
+                                <div class="row">
+                                    <label class="col-xs-2">{{ label }}</label>
+                                    <label class="col-xs-1">{{ forloop.counter|add:10 }}</label>
+                                    <div class="col-xs-9">
+                                        <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                            <label class="btn btn-default">
+                                                <input type="radio" required="true"
+                                                       name="shot_{{ forloop.counter|add:10 }}" value="3"/> +3
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio" required="true"
+                                                       name="shot_{{ forloop.counter|add:10 }}" value="1"/> +1
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio" required="true"
+                                                       name="shot_{{ forloop.counter|add:10 }}" value="-4"/> -4
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br/>
+                                {% endfor %}
+                            </div>
+
+                            <br/>
+
+                            <div class="row">
+                                <label class="col-xs-3"></label>
+                                <label class="col-xs-9">Score</label>
+                            </div>
+
+                            <div class="row">
+                                <label class="col-xs-3">14 Shot</label>
+                                <label class="col-xs-9">PEI 7% 이내, GIR, 그외 (+4, +1, -6)</label>
+                            </div>
+
+                            <div class="form-group">
+                                {% for label in approach_shot_div3 %}
+                                <div class="row">
+                                    <label class="col-xs-2">{{ label }}</label>
+                                    <label class="col-xs-1">{{ forloop.counter|add:13 }}</label>
+                                    <div class="col-xs-9">
+                                        <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                            <label class="btn btn-default">
+                                                <input type="radio" required="true"
+                                                       name="shot_{{ forloop.counter|add:13 }}" value="4"/> +4
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio" required="true"
+                                                       name="shot_{{ forloop.counter|add:13 }}" value="1"/> +1
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio" required="true"
+                                                       name="shot_{{ forloop.counter|add:13 }}" value="-6"/> -6
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br/>
+                                {% endfor %}
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-3">
+                                </div>
+                                <div class="col-xs-9">
+                                    <div class="btn-group btn-group-justified" role="group">
+                                        <div class="btn-group" role="group">
+                                            <button type="submit" class="btn btn-primary" id="approach_shot_submit">
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item" id="approach_shot_result">
+                            <div class="row">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <td>Your level</td>
+                                        <td></td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Better than most</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Tournament level player</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Competitive level player</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Weekly level player</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Recreational level player</td>
+                                    </tr>
+                                    <tr>
+                                        <td>0</td>
+                                        <td>Beginning level player</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row" id="approach_shot_result_value"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="tab3" class="tab-pane fade">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <br/>
+                        <h5 class="col-xs-3 panel-title">54 Shot</h5>
+                    </div>
+                    <div class="row">
+                        <br/>
+                        <h5 class="col-xs-3 panel-title">사전 준비 운동을 한다</h5>
+                        <h5 class="col-xs-9 panel-title">매 샷을 하기 전에 완전한 Routine을 실행한다</h5>
+                    </div>
+                    <div class="row">
+                        <br/>
+                        <h5 class="col-xs-3 panel-title">매 샷마다 목표 지점을 정한다</h5>
+                        <h5 class="col-xs-9 panel-title">1 ~ 5 스케일로 샷을 평가한다</h5>
+                    </div>
+                    <div class="row">
+                        <br/>
+                        <h5 class="col-xs-9 panel-title">Post-shot routine 은 샷의 과정에 초점을 맞춘다</h5>
+                    </div>
+                </div>
+                <form action="{% url 'g3_fifty_four_shot_submit' %}" method="post" id="fifty_four_shot_form">
+                    {% csrf_token %}
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <p style="">Date</p>
+                                </div>
+                                <div class="col-xs-9">
+                                    <input type='date' required="true" name='date' class="form-control"/>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <br>
+
+                            <div class="row">
+                                <label class="col-xs-3">1</label>
+                                <div class="row col-xs-9">
+                                    {% for row in fifty_four_shot_row1 %}
+                                    <label class="col-xs-2">
+                                        {{ row }}
+                                    </label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {% for label in fifty_four_shot_label1 %}
+                                <div class="row">
+                                    <label class="col-xs-3 text-center">{{ label }}</label>
+                                    <div class="row col-xs-9">
+                                        {% for row in fifty_four_shot_row1 %}
+                                        <label class="col-xs-2 btn-select-dropdown">
+                                            <select required="true" class="input-sm save_temp_select_parent"
+                                                    name="shot_1_{{ forloop.parentloop.counter }}_{{ forloop.counter }}">
+                                                <option value="1" class="save_temp_select">1</option>
+                                                <option value="2" class="save_temp_select">2</option>
+                                                <option value="3" class="save_temp_select">3</option>
+                                                <option value="4" class="save_temp_select">4</option>
+                                                <option value="5" class="save_temp_select">5</option>
+                                            </select>
+                                        </label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                <br>
+                            </div>
+
+                            <br>
+
+                            <div class="row">
+                                <label class="col-xs-3">2</label>
+                                <div class="row col-xs-9">
+                                    {% for row in fifty_four_shot_row2 %}
+                                    <label class="col-xs-2">
+                                        {{ row }}
+                                    </label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {% for label in fifty_four_shot_label2 %}
+                                <div class="row">
+                                    <label class="col-xs-3 text-center">{{ label }}</label>
+                                    <div class="row col-xs-9">
+                                        {% for row in fifty_four_shot_row2 %}
+                                        <label class="col-xs-2 btn-select-dropdown">
+                                            <select required="true" class="input-sm"
+                                                    name="shot_2_{{ forloop.parentloop.counter }}_{{ forloop.counter }}">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                <br/>
+                            </div>
+
+                            <br>
+
+                            <div class="row">
+                                <label class="col-xs-3">3</label>
+                                <div class="row col-xs-9">
+                                    {% for row in fifty_four_shot_row3 %}
+                                    <label class="col-xs-2">
+                                        {{ row }}
+                                    </label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {% for label in fifty_four_shot_label3 %}
+                                <div class="row">
+                                    <label class="col-xs-3 text-center">{{ label }}</label>
+                                    <div class="row col-xs-9">
+                                        {% for row in fifty_four_shot_row3 %}
+                                        <label class="col-xs-2 btn-select-dropdown">
+                                            <select required="true" class="input-sm"
+                                                    name="shot_3_{{ forloop.parentloop.counter }}_{{ forloop.counter }}">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                <br>
+                            </div>
+
+                            <br>
+
+                            <div class="row">
+                                <label class="col-xs-3">4</label>
+                                <div class="row col-xs-9">
+                                    {% for row in fifty_four_shot_row4 %}
+                                    <label class="col-xs-2">
+                                        {{ row }}
+                                    </label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {% for label in fifty_four_shot_label4 %}
+                                <div class="row">
+                                    <label class="col-xs-3 text-center">{{ label }}</label>
+                                    <div class="row col-xs-9">
+                                        {% for row in fifty_four_shot_row4 %}
+                                        <label class="col-xs-2 btn-select-dropdown">
+                                            <select required="true" class="input-sm"
+                                                    name="shot_4_{{ forloop.parentloop.counter }}_{{ forloop.counter }}">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                <br>
+                            </div>
+
+                            <br>
+
+                            <div class="row">
+                                <label class="col-xs-3">5</label>
+                                <div class="row col-xs-9">
+                                    {% for row in fifty_four_shot_row5 %}
+                                    <label class="col-xs-2">
+                                        {{ row }}
+                                    </label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {% for label in fifty_four_shot_label5 %}
+                                <div class="row">
+                                    <label class="col-xs-3 text-center">{{ label }}</label>
+                                    <div class="row col-xs-9">
+                                        {% for row in fifty_four_shot_row5 %}
+                                            <label class="col-xs-2 btn-select-dropdown">
+                                            <select required="true" class="input-sm"
+                                                    name="shot_5_{{ forloop.parentloop.counter }}_{{ forloop.counter }}">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                <br>
+                            </div>
+
+                            <br>
+
+                            <div class="row">
+                                <label class="col-xs-3">6</label>
+                                <div class="row col-xs-9">
+                                    {% for row in fifty_four_shot_row6 %}
+                                    <label class="col-xs-2">
+                                        {{ row }}
+                                    </label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {% for label in fifty_four_shot_label6 %}
+                                <div class="row">
+                                    <label class="col-xs-3 text-center">{{ label }}</label>
+                                    <div class="row col-xs-9">
+                                        {% for row in fifty_four_shot_row6 %}
+                                        <label class="col-xs-2 btn-select-dropdown">
+                                            <select required="true" class="input-sm"
+                                                    name="shot_6_{{ forloop.parentloop.counter }}_{{ forloop.counter }}">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                <br>
+                            </div>
+
+                            <br>
+
+                            <div class="row">
+                                <label class="col-xs-3">7</label>
+                                <div class="row col-xs-9">
+                                    {% for row in fifty_four_shot_row7 %}
+                                    <label class="col-xs-2">
+                                        {{ row }}
+                                    </label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {% for label in fifty_four_shot_label7 %}
+                                <div class="row">
+                                    <label class="col-xs-3 text-center">{{ label }}</label>
+                                    <div class="row col-xs-9">
+                                        {% for row in fifty_four_shot_row7 %}
+                                        <label class="col-xs-2 btn-select-dropdown">
+                                            <select required="true" class="input-sm"
+                                                    name="shot_7_{{ forloop.parentloop.counter }}_{{ forloop.counter }}">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                <br>
+                            </div>
+
+                            <br>
+
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-3">
+                                </div>
+                                <div class="col-xs-9">
+                                    <div class="btn-group btn-group-justified" role="group">
+                                        <div class="btn-group" role="group">
+                                            <button type="submit" class="btn btn-primary" id="fifty_four_shot_submit">
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item" id="fifty_four_shot_result">
+                            <div class="row">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <td>Your level</td>
+                                        <td></td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Better than most</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Tournament level player</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Competitive level player</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Weekly level player</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Recreational level player</td>
+                                    </tr>
+                                    <tr>
+                                        <td>0</td>
+                                        <td>Beginning level player</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row" id="fifty_four_shot_result_value"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+<script type="text/javascript">
+    document.getElementsByName("date").valueAsDate = new Date();
+</script>
+
+<script>
+$(document).ready(function(){
+    $('#tee_shot_result').hide();
+    $(".save_temp_select_parent").each(function(){
+        if(localStorage.getItem($(this).attr("name")) !=null){
+            $(this).val(localStorage.getItem($(this).attr("name")));
+        }
+        console.log(localStorage.getItem($(this).attr("name")));
+    });
+});
+</script>
+
+<script>
+    $(document).ready(function(){
+        $('#approach_shot_result').hide();
+        $("input").each(function(){
+                if(localStorage.getItem($(this).attr("name"))){
+                    if($(this).attr("type") == "radio"){
+                        var target = "input:radio[name='"+$(this).attr("name")+"'][value='"+localStorage.getItem($(this).attr("name"))+"']";
+                        $(target).parent().addClass("active");
+                    }else{
+                        $(this).val(localStorage.getItem($(this).attr("name")));
+                    }
+                }
+            })
+    });
+    $('#approach_shot_form').submit(function(event){
+        $(".save_temp_select_parent").each(function(){
+            localStorage.removeItem($(this).attr("name"));
+        })
+        event.preventDefault();
+        console.log("form submitted!")
+        $.ajax({
+            url: $(this).attr('action'),
+            type: $(this).attr('method'),
+            data: $(this).serialize(),
+            success: function(json) {
+                $('#approach_shot_submit').hide();
+                console.log(json);
+                $('#approach_shot_result').show();
+{#                $('#approach_shot_result_value').append('<div class="alert alert-success" role="alert">Total Score: ' + json.score + '</div>').append('<div class="alert alert-success" role="alert">Your level: ' + json.level + '</div>')#}
+                $('#approach_shot_result_value').append('<div class="alert alert-success" role="alert">Your level: ' + json.level + '</div>')
+                console.log("success");
+            },
+
+            error : function(xhr,errmsg,err) {
+                $('#approach_shot_result_value').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+                        " <a href='#' class='close'>&times;</a></div>");
+                console.log(xhr.status + ": " + xhr.responseText);
+            }
+        });
+    });
+
+        $("input").on("input",function(){
+            localStorage.setItem($(this).attr("name"),$(this).val());
+        })
+
+        $("input:radio[name^='shot']").on("select",function(){
+            localStorage.setItem($(this).attr("name"),$(this).val());
+            console.log($(this).attr("name")+ " " + $(this).val())
+        })
+
+
+$('#tee_shot_form').submit(function(event){
+    event.preventDefault();
+    console.log("form submitted!")
+    console.log("action: " + $(this).attr('action'));
+    console.log("method: " + $(this).attr('method'));
+    $.ajax({
+        url: $(this).attr('action'),
+        type: $(this).attr('method'),
+        data: $(this).serialize(),
+        success: function(json) {
+            $('#tee_shot_submit').hide();
+            console.log(json);
+            $('#tee_shot_result').show();
+            $('#tee_shot_result_value')
+{#                .append('<div class="alert alert-success" role="alert">Total Score: ' + json.score + '</div>')#}
+                .append('<div class="alert alert-success" role="alert">Your level: ' + json.level + '</div>')
+            console.log("success");
+        },
+        error: function(xhr, errmsg, err) {
+            $('#tee_shot_result_value').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+                    " <a href='#' class='close'>&times;</a></div>");
+            console.log(xhr.status + ": " + xhr.responseText);
+        }
+    });
+});
+$('#fifty_four_shot_form').submit(
+    function(event){
+    event.preventDefault();
+    console.log("form submitted!")
+    $.ajax({
+        url: $(this).attr('action'),
+        type: $(this).attr('method'),
+        data: $(this).serialize(),
+        success: function(json) {
+            $('#fifty_four_shot_submit').hide();
+            console.log(json);
+            $('#fifty_four_shot_result').show();
+{#            $('#fifty_four_shot_result_value').append('<div class="alert alert-success" role="alert">Total Score: ' + json.score + '</div>').append('<div class="alert alert-success" role="alert">Your level: ' + json.level + '</div>')#}
+            $('#fifty_four_shot_result_value').append('<div class="alert alert-success" role="alert">Your level: ' + json.level + '</div>')
+            console.log("success");
+            $("input").each(function(){
+                        localStorage.removeItem($(this).attr("name"));
+                    })
+        },
+        error: function(xhr,errmsg,err) {
+            $('#fifty_four_shot_result_value').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+                " <a href='#' class='close'>&times;</a></div>");
+            console.log(xhr.status + ": " + xhr.responseText);
+        }
+    });
+});
+</script>
+
+<script>
+$(document).ready(function(){
+    $('#fifty_four_shot_result').hide();
+});
+
+</script>
+<script type='text/javascript'>
+    $(".save_temp_select_parent").on('input',function(){
+        localStorage.setItem($(this).attr("name"),$(this).val());
+        console.log(localStorage.getItem($(this).attr("name")));
+        console.log($(this).attr("name"));
+    })
+
+    $("input[name^=date]").on('input',function(){
+        var text = $("li.active").text();
+        console.log(text);
+        selection_remove();
+        $.ajax({
+                    url : "/g3/date_exsist",
+                    type : 'GET',
+                    data : {"date" : $(this).val(),
+                            "text" : text},
+                    success : function(json) {
+                        if(json.result){
+                            if(text == 'Tee Shot Challenge'){
+                                changeTeeShot(json.tuple);
+                            }else if(text == 'Approach Shot Challenge'){
+                                changeApproachShot(json.tuple);
+                            }else if(text == '54 Shot Challenge'){
+                                console.log(json.tuple)
+                                changeFifty(json.tuple);
+                            }
+
+                        }
+                    },
+                    error : function(xhr, errmsg, err) {
+                        console.log(xhr.status + ": " + xhr.responseText);
+                    }
+                });
+
+    })
+
+    function selection_remove(){
+        var selection = $('input:radio[name^=shot]').parent();
+        selection.each(function(){
+            $(this).removeClass("active");
+        })
+    }
+
+    function changeTeeShot(tuple){
+        console.log(tuple.shot_1);
+        $('input:radio[name="shot_1"][value="'+tuple.shot_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2"][value="'+tuple.shot_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3"][value="'+tuple.shot_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_4"][value="'+tuple.shot_4+'"]').parent().addClass("active");
+        $('input:radio[name="shot_5"][value="'+tuple.shot_5+'"]').parent().addClass("active");
+        $('input:radio[name="shot_6"][value="'+tuple.shot_6+'"]').parent().addClass("active");
+        $('input:radio[name="shot_7"][value="'+tuple.shot_7+'"]').parent().addClass("active");
+        $('input:radio[name="shot_8"][value="'+tuple.shot_8+'"]').parent().addClass("active");
+        $('input:radio[name="shot_9"][value="'+tuple.shot_9+'"]').parent().addClass("active");
+        $('input:radio[name="shot_10"][value="'+tuple.shot_10+'"]').parent().addClass("active");
+        $('input:radio[name="shot_11"][value="'+tuple.shot_11+'"]').parent().addClass("active");
+        $('input:radio[name="shot_12"][value="'+tuple.shot_12+'"]').parent().addClass("active");
+        $('input:radio[name="shot_13"][value="'+tuple.shot_13+'"]').parent().addClass("active");
+        $('input:radio[name="shot_14"][value="'+tuple.shot_14+'"]').parent().addClass("active");
+    }
+
+    function changeApproachShot(tuple){
+        $('input:radio[name="shot_1"][value="'+tuple.shot_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2"][value="'+tuple.shot_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3"][value="'+tuple.shot_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_4"][value="'+tuple.shot_4+'"]').parent().addClass("active");
+        $('input:radio[name="shot_5"][value="'+tuple.shot_5+'"]').parent().addClass("active");
+        $('input:radio[name="shot_6"][value="'+tuple.shot_6+'"]').parent().addClass("active");
+        $('input:radio[name="shot_7"][value="'+tuple.shot_7+'"]').parent().addClass("active");
+        $('input:radio[name="shot_8"][value="'+tuple.shot_8+'"]').parent().addClass("active");
+        $('input:radio[name="shot_9"][value="'+tuple.shot_9+'"]').parent().addClass("active");
+        $('input:radio[name="shot_10"][value="'+tuple.shot_10+'"]').parent().addClass("active");
+        $('input:radio[name="shot_11"][value="'+tuple.shot_11+'"]').parent().addClass("active");
+        $('input:radio[name="shot_12"][value="'+tuple.shot_12+'"]').parent().addClass("active");
+        $('input:radio[name="shot_13"][value="'+tuple.shot_13+'"]').parent().addClass("active");
+        $('input:radio[name="shot_14"][value="'+tuple.shot_14+'"]').parent().addClass("active");
+    }
+
+    function changeFifty(tuple){
+        $("select[name='shot_1_1_1']").val(tuple.shot_1_1_1);
+        $("select[name='shot_1_1_2']").val(tuple.shot_1_1_2);
+        $("select[name='shot_1_1_3']").val(tuple.shot_1_1_3);
+        $("select[name='shot_1_1_4']").val(tuple.shot_1_1_5);
+        $("select[name='shot_2_1_1']").val(tuple.shot_2_1_1);
+        $("select[name='shot_2_1_2']").val(tuple.shot_2_1_2);
+        $("select[name='shot_2_1_3']").val(tuple.shot_2_1_3);
+        $("select[name='shot_2_1_4']").val(tuple.shot_2_1_4);
+        $("select[name='shot_2_1_5']").val(tuple.shot_2_1_5);
+        $("select[name='shot_2_2_1']").val(tuple.shot_2_2_1);
+        $("select[name='shot_2_2_2']").val(tuple.shot_2_2_2);
+        $("select[name='shot_2_2_3']").val(tuple.shot_2_2_3);
+        $("select[name='shot_2_2_4']").val(tuple.shot_2_2_4);
+        $("select[name='shot_2_2_5']").val(tuple.shot_2_2_5);
+        $("select[name='shot_2_3_1']").val(tuple.shot_2_3_1);
+        $("select[name='shot_2_3_2']").val(tuple.shot_2_3_2);
+        $("select[name='shot_2_3_3']").val(tuple.shot_2_3_3);
+        $("select[name='shot_2_3_4']").val(tuple.shot_2_3_4);
+        $("select[name='shot_2_3_5']").val(tuple.shot_2_3_5);
+        $("select[name='shot_2_4_1']").val(tuple.shot_2_4_1);
+        $("select[name='shot_2_4_2']").val(tuple.shot_2_4_2);
+        $("select[name='shot_2_4_3']").val(tuple.shot_2_4_3);
+        $("select[name='shot_2_4_4']").val(tuple.shot_2_4_4);
+        $("select[name='shot_2_4_5']").val(tuple.shot_2_4_5);
+        $("select[name='shot_2_5_1']").val(tuple.shot_2_5_1);
+        $("select[name='shot_2_5_2']").val(tuple.shot_2_5_2);
+        $("select[name='shot_2_5_3']").val(tuple.shot_2_5_3);
+        $("select[name='shot_2_5_4']").val(tuple.shot_2_5_4);
+        $("select[name='shot_2_5_5']").val(tuple.shot_2_5_5);
+        $("select[name='shot_3_1_1']").val(tuple.shot_3_1_1);
+        $("select[name='shot_3_1_2']").val(tuple.shot_3_1_2);
+        $("select[name='shot_3_1_3']").val(tuple.shot_3_1_3);
+        $("select[name='shot_3_1_4']").val(tuple.shot_3_1_4);
+        $("select[name='shot_3_1_5']").val(tuple.shot_3_1_5);
+        $("select[name='shot_4_1_1']").val(tuple.shot_4_1_1);
+        $("select[name='shot_4_1_2']").val(tuple.shot_4_1_2);
+        $("select[name='shot_4_1_3']").val(tuple.shot_4_1_3);
+        $("select[name='shot_4_1_4']").val(tuple.shot_4_1_4);
+        $("select[name='shot_4_1_5']").val(tuple.shot_4_1_5);
+        $("select[name='shot_4_1_6']").val(tuple.shot_4_1_6);
+        $("select[name='shot_5_1_1']").val(tuple.shot_5_1_1);
+        $("select[name='shot_5_1_2']").val(tuple.shot_5_1_2);
+        $("select[name='shot_5_1_3']").val(tuple.shot_5_1_3);
+        $("select[name='shot_6_1_1']").val(tuple.shot_6_1_1);
+        $("select[name='shot_6_1_2']").val(tuple.shot_6_1_2);
+        $("select[name='shot_6_1_3']").val(tuple.shot_6_1_3);
+        $("select[name='shot_6_1_4']").val(tuple.shot_6_1_4);
+        $("select[name='shot_6_1_5']").val(tuple.shot_6_1_5);
+        $("select[name='shot_7_1_1']").val(tuple.shot_7_1_1);
+        $("select[name='shot_7_1_2']").val(tuple.shot_7_1_2);
+        $("select[name='shot_7_1_3']").val(tuple.shot_7_1_3);
+        $("select[name='shot_7_1_4']").val(tuple.shot_7_1_4);
+        $("select[name='shot_7_1_5']").val(tuple.shot_7_1_5);
+    }
+</script>
+{% endblock %}

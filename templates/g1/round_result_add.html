@@ -1,0 +1,233 @@
+{% extends "common/base.html" %}
+
+{% block css %}
+    <style>
+        td input {
+            width : 32px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5 class="panel-title text-center">라운드 게시</h5>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" id="form" role="form" method="POST" action="{% url 'g1_round_result_add' course.id %}">
+                <div class="row">
+                    <div class="col-xs-12">
+                        라운드 날짜 {{ rrf.date }}
+                    </div>
+                </div>
+                <div class="row col-xs-12">
+                        {{ course.field.name }}
+                </div>
+                <br><br>
+                {% csrf_token %}
+                <div style="overflow-x: auto;">
+                    <table class='table table-condensed'>
+                        <thead>
+                            <tr>
+                                <th>{{ course.hole_name_0 }}</th>
+                                <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th>
+                                <th>Out</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Par</th>
+                                {% for par in course.getpars|slice:":9" %}
+                                    <td>{{ par }}</td>
+                                {% endfor %}
+                                <td>{{ course.get_out_par }}</td>
+                            </tr>
+                            <tr>
+                                <th>Score</th>
+                                {% for field in rrf.field_score|slice:":9" %}
+                                    <td>{{ field }}</td>
+                                {% endfor %}
+                                <td>{{ stat.out_score }}</td>
+                            </tr>
+                            <tr style="border-bottom:3px solid ;">
+                                <th >Putt</th>
+                                {% for field in rrf.field_putt|slice:":9" %}
+                                    <td>{{ field }}</td>
+                                {% endfor %}
+                                <td>{{ stat.out_putt }}</td>
+                            </tr>
+                            <tr>
+                                <th>Fairway Hit</th>
+                                {% for field in rrf.field_fairway_hit|slice:":9" %}
+                                    <td>{{ field }}</td>
+                                {% endfor %}
+                                <td>{{ stat.out_fairway_hit|floatformat:0 }}%</td>
+                            </tr>
+                            <tr>
+                                <th>Bunker</th>
+                                {% for field in rrf.field_bunker|slice:":9" %}
+                                    <td>{{ field }}</td>
+                                {% endfor %}
+                                <td>{{ stat.out_bunker }}</td>
+                            </tr>
+                            <tr>
+                                <th>Penalty</th>
+                                {% for field in rrf.field_penalty|slice:":9" %}
+                                    <td>{{ field }}</td>
+                                {% endfor %}
+                                <td>{{ stat.out_penalty }}</td>
+                            </tr>
+                            <tr>
+                                <th>Proximity(meter)</th>
+                                {% for field in rrf.field_proximity|slice:":9" %}
+                                    <td>{{ field }}</td>
+                                {% endfor %}
+                                <td>{{ stat.out_proximity|floatformat:2 }}</td>
+                            </tr>
+                            <tr>
+                                <th>Driving Distance(meter)</th>
+                                {% for field in rrf.field_driving_distance|slice:":9" %}
+                                    <td>{{ field }}</td>
+                                {% endfor %}
+                                <td>{{ stat.out_driving_distance }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <table class='table table-condensed'>
+                        <thead>
+                            <tr>
+                                <th>{{ course.hole_name_1 }}</th>
+                                <th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th>
+                                <th>In</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Par</th>
+                                {% for par in course.getpars|slice:"9:" %}
+                                    <td>{{ par }}</td>
+                                {% endfor %}
+                                <td>{{ course.get_in_par }}</td>
+                                <td>{{ course.get_total_par }}</td>
+                            </tr>
+
+
+                            <tr>
+                                <th>Score</th>
+                                {% for field in rrf.field_score|slice:"9:" %}
+                                    <td>{{ field }}</td>
+                                {% endfor %}
+                                <td>{{ stat.in_score }}</td>
+                                <td>{{ stat.score }}</td>
+                            </tr>
+
+                            <tr style="border-bottom:3px solid ;">
+                                <th>Putt</th>
+                                {% for field in rrf.field_putt|slice:"9:" %}
+                                    <td>{{ field }}</td>
+                                {% endfor %}
+                                <td>{{ stat.in_putt }}</td>
+                                <td>{{ stat.putt }}</td>
+                            </tr>
+                            <tr>
+                                <th >Fairway Hit</th>
+                                {% for field in rrf.field_fairway_hit|slice:"9:" %}
+                                    <td>{{ field }}</td>
+                                {% endfor %}
+                                <td>{{ stat.in_fairway_hit|floatformat:0 }}%</td>
+                                <td>{{ stat.fairway_hit|floatformat:0 }}%</td>
+                            </tr>
+                            <tr>
+                                <th>Bunker</th>
+                                {% for field in rrf.field_bunker|slice:"9:" %}
+                                    <td>{{ field }}</td>
+                                {% endfor %}
+                                <td>{{ stat.in_bunker }}</td>
+                                <td>{{ stat.bunker }}</td>
+                            </tr>
+                            <tr>
+                                <th>Penalty</th>
+                                {% for field in rrf.field_penalty|slice:"9:" %}
+                                    <td>{{ field }}</td>
+                                {% endfor %}
+                                <td>{{ stat.in_penalty }}</td>
+                                <td>{{ stat.penalty }}</td>
+                            </tr>
+                            <tr>
+                                <th>Proximity(meter)</th>
+                                {% for field in rrf.field_proximity|slice:"9:" %}
+                                    <td>{{ field }}</td>
+                                {% endfor %}
+                                <td>{{ stat.in_proximity|floatformat:2 }}</td>
+                                <td>{{ stat.proximity|floatformat:2 }}</td>
+                            </tr>
+                            <tr>
+                                <th>Driving Distance(meter)</th>
+                                {% for field in rrf.field_driving_distance|slice:"9:" %}
+                                    <td>{{ field }}</td>
+                                {% endfor %}
+                                <td>{{ stat.in_driving_distance }}</td>
+                                <td>{{ stat.driving_distance }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-xs-12" align="right">
+                        <input  class="btn btn-primary" id="submit_button" type='submit' value="제출">
+                        <div id="submit_result">testsetset</div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        Number.prototype.zeroPad = Number.prototype.zeroPad ||
+            function(base){
+                var nr = this, len = (String(base).length - String(nr).length)+1;
+                return len > 0? new Array(len).join('0')+nr : nr;
+            };
+        $(function() {
+            $('.datepicker').datetimepicker({
+                format: 'YYYY-MM-DD',
+                showTodayButton: true,
+                showClose: true
+            });
+        });
+
+        $(document).ready(function(){
+            $('#submit_result').hide();
+        });
+        $('#form').submit(function(event){
+            event.preventDefault();
+            console.log("form submitted!")
+            $.ajax({
+                url : $(this).attr('action'),
+                type : $(this).attr('method'),
+                data : $(this).serialize(),
+
+                success : function(json) {
+                    $('#submit_button').hide();
+                    $('#submit_result').html("제출 성공");
+                    $('#submit_result').show();
+                    console.log(json);
+                    console.log("success");
+                },
+
+                error : function(xhr,errmsg,err) {
+                    $('#submit_button').hide();
+                    $('#submit_result').html("제출 실패: " + errmsg);
+                    $('#submit_result').show();
+                    console.log(xhr.status + ": " + xhr.responseText);
+                }
+            });
+        });
+    </script>
+{% endblock %}

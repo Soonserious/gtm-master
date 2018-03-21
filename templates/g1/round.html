@@ -1,0 +1,201 @@
+{% extends "common/base.html" %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+<style>
+.scroll{
+    max-height:136px;
+    overflow-y : scroll;
+    width:1130px;
+}
+table{
+    width:1107px;
+}
+
+
+</style>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5 class="panel-title text-center">라운드 개요</h5>
+        </div>
+        <div class="panel-body">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h4><b>Student Information</b></h4></div>
+                <table class="table table-bordered" style="width:100%">
+                    <thead class="thead">
+                    <tr>
+                        <th><div align="center">이름</div></th>
+                        <th><div align="center">성별</div></th>
+                        <th><div align="center">생년월일</div></th>
+                        <th><div align="center">핸디캡</div></th>
+                        <th><div align="center">소속</div></th>
+                        <th><div align="center">라운드 수</div></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><div align="center">{{ member_info.name }}</div></td>
+                        <td><div align="center">{{ member_info.sex }}</div></td>
+                        <td><div align="center">{{ member_info.birth }}</div></td>
+                        <td><div align="center">{{ member_info.handicap|floatformat:2 }}</div></td>
+                        <td><div align="center">{{ member_info.association }}</div></td>
+                        <td><div align="center">{{ round_posted }}</div></td>
+                    </tr>
+                </table>
+            </div>
+            <br>
+            <div style="overflow-x: auto;">
+                <table class="scrolltbody table-bordered">
+                    <thead style="width:1106px">
+                    <tr>
+                        <th colspan=12>최근 20라운드 Average</th>
+                    </tr>
+                    <colgroup style="width:1106px">
+                        <col width="10%">
+                        <col width="20%">
+                        <col width="6%">
+                        <col width="7%">
+                        <col width="5%">
+                        <col width="7%">
+                        <col width="9%">
+                        <col width="12%">
+                        <col width="12%">
+                        <col width="5%">
+                        <col width="7%">
+
+                    </colgroup>
+                    <tr>
+                        <th>Date</th><th>Course</th><th>Score</th><th>Fwy (%)</th><th>Putts</th>
+                        <th>GIR (%)</th><th>Putts / GIR</th><th>Up & Down (%)</th><th>Sand Save (%)</th>
+                        <th>Birdies</th><th>Penalty Strokes</th>
+                    </tr>
+                    </thead>
+                </table>
+            <div class="scroll">
+                <table class="scrolltbody table-bordered">
+
+                    <colgroup style="width:1106px">
+                        <col width="10%">
+                        <col width="20%">
+                        <col width="6%">
+                        <col width="7%">
+                        <col width="5%">
+                        <col width="7%">
+                        <col width="9%">
+                        <col width="12%">
+                        <col width="12%">
+                        <col width="5%">
+                        <col width="7%">
+
+                    </colgroup>
+                    <tbody style="width:1106px" id='recent'>
+
+                        {% for r in recent %}
+                            <tr>
+                                <td>{{ r.date|date:"Y-m-d" }}</td>
+                                <td>{{ r.course }}</td>
+                                <td>{{ r.score }}</td>
+                                <td>{{ r.fairway_hit|floatformat:2 }}%</td>
+                                <td>{{ r.putt }}</td>
+                                <td>{{ r.gir|floatformat:2 }}%</td>
+                                <td>{{ r.putt_gir|floatformat:2 }}</td>
+                                <td>{{ r.up_and_down|floatformat:2 }}%</td>
+                                <td>{{ r.sand_save|floatformat:2 }}%</td>
+                                <td>{{ r.birdie }}</td>
+                                <td>{{ r.penalty }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                </div>
+                <table style="width:1107px" class="scrolltbody table-bordered">
+                    <tfoot style="width:1106px">
+
+                    <colgroup style="width:1106px"><col width="10%">
+                        <col width="20%">
+                        <col width="6%">
+                        <col width="7%">
+                        <col width="5%">
+                        <col width="7%">
+                        <col width="9%">
+                        <col width="12%">
+                        <col width="12%">
+                        <col width="5%">
+                        <col width="7%">
+
+                    </colgroup>
+                    <tr>
+                        <th colspan=2>Average</th>
+                        <td>{{ recent_avg.score }}</td>
+                        <td>{{ recent_avg.fairway_hit|floatformat:2 }}%</td>
+                        <td>{{ recent_avg.putt|floatformat:2 }}</td>
+                        <td>{{ recent_avg.gir|floatformat:2 }}%</td>
+                        <td>{{ recent_avg.putt_gir|floatformat:2 }}</td>
+                        <td>{{ recent_avg.up_and_down|floatformat:2 }}%</td>
+                        <td>{{ recent_avg.sand_save|floatformat:2 }}%</td>
+                        <td>{{ recent_avg.birdie|floatformat:2 }}</td>
+                        <td>{{ recent_avg.penalty|floatformat:2 }}</td>
+                    </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+            <br>
+            <div style="overflow-x: auto;">
+                <table class='table-condensed table-striped table-bordered'>
+                    <thead>
+                    <tr>
+                        <th colspan=12>Best 10 라운드 (Net Score)</th>
+                    </tr>
+                    <tr>
+                        <th>Date</th><th>Course</th><th>Score</th><th>Fwy (%)</th><th>Putts</th>
+                        <th>GIR (%)</th><th>Putts / GIR</th><th>Up & Down (%)</th><th>Sand Save (%)</th>
+                        <th>Birdies</th><th>Penalty Stroke</th>
+                    </tr>
+                    </thead>
+                    <tbody id='best_10'>
+                    {% for r in best_10 %}
+                        <tr>
+                            <td>{{ r.date|date:"Y-m-d" }}</td>
+                            <td>{{ r.course }}</td>
+                            <td>{{ r.score }}</td>
+                            <td>{{ r.fairway_hit|floatformat:2 }}%</td>
+                            <td>{{ r.putt }}</td>
+                            <td>{{ r.gir|floatformat:2 }}%</td>
+                            <td>{{ r.putt_gir|floatformat:2 }}</td>
+                            <td>{{ r.up_and_down|floatformat:2 }}%</td>
+                            <td>{{ r.sand_save|floatformat:2 }}%</td>
+                            <td>{{ r.birdie }}</td>
+                            <td>{{ r.penalty }}</td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <th colspan=2>Average</th>
+                        <td>{{ best_10_avg.score }}</td>
+                        <td>{{ best_10_avg.fairway_hit|floatformat:2 }}%</td>
+                        <td>{{ best_10_avg.putt|floatformat:2 }}</td>
+                        <td>{{ best_10_avg.gir|floatformat:2 }}%</td>
+                        <td>{{ best_10_avg.putt_gir|floatformat:2 }}</td>
+                        <td>{{ best_10_avg.up_and_down|floatformat:2 }}%</td>
+                        <td>{{ best_10_avg.sand_save|floatformat:2 }}%</td>
+                        <td>{{ best_10_avg.birdie|floatformat:2 }}</td>
+                        <td>{{ best_10_avg.penalty|floatformat:2 }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        Number.prototype.zeroPad = Number.prototype.zeroPad ||
+            function(base){
+                var nr = this, len = (String(base).length - String(nr).length)+1;
+                return len > 0? new Array(len).join('0')+nr : nr;
+            };
+    </script>
+{% endblock %}

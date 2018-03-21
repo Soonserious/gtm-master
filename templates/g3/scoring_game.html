@@ -1,0 +1,480 @@
+{% extends "common/base.html" %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#tab1"><b>Scoring Game Skill Test</b></a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="tab1" class="tab-pane fade in active">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <form action="{% url 'g3_scoring_game_submit' %}" method="post" id="scoring_game_form">
+                        {% csrf_token %}
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-xs-2">
+                                        <p style="">Date</p>
+                                    </div>
+                                    <div class="col-xs-10">
+                                        <input type='date' required="true" name='date' class="form-control"/>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <br>
+                                <div class="row">
+                                    <h5 class="col-xs-2 panel-title">Putting</h5>
+                                    <h5 class="col-xs-10 panel-title">각 상자에 정확한 스코어를 입력하시오. (Safety zone : 홀을 지난 퍼터길이 이내의 반원)
+                                        <br>2 points : 홀 인 했을 경우
+                                        <br>1 point : Safety zone안에 볼이 들어갔을 경우
+                                        <br>0 point : Safety zone 밖으로 볼이 나갔을 경우
+                                    </h5>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <label class="col-xs-2"></label>
+                                    <div class="row col-xs-10">
+                                        <label class="col-xs-4">Short Putt (5-6 Feet)</label>
+                                        <label class="col-xs-4">Middle Putt (12-20 Feet)</label>
+                                        <label class="col-xs-4">Long Putt (30 Feet)</label>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    {% for label in scoring_game_label1 %}
+                                        <div class="row">
+                                            <label class="col-xs-2 text-right">{{ label }}</label>
+                                            <div class="row col-xs-10">
+                                                <label class="col-xs-4">Point</label>
+                                                <label class="col-xs-4">Point</label>
+                                                <label class="col-xs-4">Point</label>
+                                            </div>
+                                        </div>
+                                        {% for row in "123" %}
+                                            <div class="row">
+                                                <label class="col-xs-2"></label>
+                                                <div class="row col-xs-10">
+                                                    {% for column in "123" %}
+                                                        <div class="col-xs-4">
+                                                            <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                                                {% for point in "012" %}
+                                                                    <label class="btn btn-default">
+                                                                        <input type="radio" required="true"
+                                                                               name="shot_1_{{ forloop.parentloop.parentloop.parentloop.counter }}_{{ forloop.parentloop.parentloop.counter }}_{{ forloop.parentloop.counter }}"
+                                                                               value="{{ point }}"/> {{ point }}
+                                                                    </label>
+                                                                {% endfor %}
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        <br>
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <br>
+                                <div class="row">
+                                    <h5 class="col-xs-2 panel-title">Chipping</h5>
+                                    <h5 class="col-xs-10 panel-title">각 상자에 정확한 스코어를 입력하시오.
+                                        <br>2 points : 홀 인 했을 경우
+                                        <br>1 point : 6 feet 지름 안에 볼이 들어갔을 경우
+                                        <br>0 point : 6 feet 지름 밖으로 볼이 나갔을 경우
+                                    </h5>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <label class="col-xs-2"></label>
+                                    <div class="row col-xs-10">
+                                        <label class="col-xs-4">Short (5~7Yards)</label>
+                                        <label class="col-xs-4">Medium (10~15Yards)</label>
+                                        <label class="col-xs-4">Long (20~25Yards)</label>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    {% for label in scoring_game_label2 %}
+                                        <div class="row">
+                                            <label class="col-xs-2 text-right">{{ label }}</label>
+                                            <div class="row col-xs-10">
+                                                <label class="col-xs-4">Point</label>
+                                                <label class="col-xs-4">Point</label>
+                                                <label class="col-xs-4">Point</label>
+                                            </div>
+                                        </div>
+                                        {% for row in "12345" %}
+                                            <div class="row">
+                                                <label class="col-xs-2"></label>
+                                                <div class="row col-xs-10">
+                                                    {% for column in "123" %}
+                                                        <div class="col-xs-4">
+                                                            <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                                                {% for point in "012" %}
+                                                                    <label class="btn btn-default">
+                                                                        <input type="radio" required="true"
+                                                                               name="shot_2_{{ forloop.parentloop.parentloop.parentloop.counter }}_{{ forloop.parentloop.parentloop.counter }}_{{ forloop.parentloop.counter }}"
+                                                                               value="{{ point }}"/> {{ point }}
+                                                                    </label>
+                                                                {% endfor %}
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        <br>
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <br>
+                                    <h5 class="col-xs-2 panel-title">Pitching</h5>
+                                    <h5 class="col-xs-10 panel-title">각 상자에 정확한 스코어를 입력하시오.
+                                        <br/>2 points : 6 feet 지름 안에 볼이 들어갔을 경우
+                                        <br/>1 point : Golden Eight(10ft) 안에 볼이 떨어졌을 경우
+                                        <br/>0 point : landing area 밖에 볼이 떨어졌을 경우
+                                    </h5>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <label class="col-xs-2"></label>
+                                    <div class="row col-xs-10">
+                                        <label class="col-xs-4">Short (15~30Yards)</label>
+                                        <label class="col-xs-4">Medium (40~50Yards)</label>
+                                        <label class="col-xs-4">Long (60~70Yards)</label>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    {% for label in scoring_game_label3 %}
+                                        <div class="row">
+                                            <label class="col-xs-2 text-right">{{ label }}</label>
+                                            <div class="row col-xs-10">
+                                                <label class="col-xs-4">Point</label>
+                                                <label class="col-xs-4">Point</label>
+                                                <label class="col-xs-4">Point</label>
+                                            </div>
+                                        </div>
+                                        {% for row in "12345" %}
+                                            <div class="row">
+                                                <label class="col-xs-2"></label>
+                                                <div class="row col-xs-10">
+                                                    {% for column in "123" %}
+                                                        <div class="col-xs-4">
+                                                            <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                                                {% for point in "012" %}
+                                                                    <label class="btn btn-default">
+                                                                        <input type="radio" required="true"
+                                                                               name="shot_3_{{ forloop.parentloop.parentloop.parentloop.counter }}_{{ forloop.parentloop.parentloop.counter }}_{{ forloop.parentloop.counter }}"
+                                                                               value="{{ point }}"/> {{ point }}
+                                                                    </label>
+                                                                {% endfor %}
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        <br>
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <br>
+                                    <h5 class="col-xs-2 panel-title">Bunker</h5>
+                                    <h5 class="col-xs-10 panel-title">각 상자에 정확한 스코어를 입력하시오.
+                                        <br/>2 points :Red circle(6 Feet) 안에 볼이 들어갔을 경우
+                                        <br/>1 point : White Circle(홀로부터 10 Feet) 안에 볼이 들어갔을 경우
+                                        <br/>0 point outside net</h5>
+                                </div>
+                                <br><br>
+                                <div class="form-group">
+                                    {% for label in scoring_game_label4 %}
+                                        <div class="row">
+                                            <label class="col-xs-2 text-right">{{ label }}</label>
+                                            <label class="col-xs-10">Point</label>
+                                        </div>
+                                        {% for row in "12345" %}
+                                            <div class="row">
+                                                <label class="col-xs-2"></label>
+                                                <div class="row col-xs-10">
+                                                    {% for column in "1" %}
+                                                        <div class="col-xs-4">
+                                                            <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                                                {% for point in "012" %}
+                                                                    <label class="btn btn-default">
+                                                                        <input type="radio" required="true"
+                                                                               name="shot_4_{{ forloop.parentloop.parentloop.parentloop.counter }}_{{ forloop.parentloop.parentloop.counter }}_{{ forloop.parentloop.counter }}"
+                                                                               value="{{ point }}"/> {{ point }}
+                                                                    </label>
+                                                                {% endfor %}
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        <br>
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-xs-offset-2 col-xs-10">
+                                        <div class="btn-group btn-group-justified" role="group">
+                                            <div class="btn-group" role="group">
+                                                <button type="submit" class="btn btn-primary" id="scoring_game_submit">
+                                                    Submit
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row" id="scoring_game_result">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <td>Your level</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>100%</td>
+                                            <td>Better than most</td>
+                                            <td>A Hot Tour Putter</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>92%</td>
+                                            <td>Tournament level player</td>
+                                            <td>Tour Putter</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>80%</td>
+                                            <td>Competitive level player</td>
+                                            <td>Just Missed the Cut</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>69%</td>
+                                            <td>Weekly level player</td>
+                                            <td>Never will make it in the starting field</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>55%</td>
+                                            <td>Recreational level player</td>
+                                            <td>You will make more money as a caddie</td>
+                                        </tr>
+                                        <tr>
+                                            <td>0</td>
+                                            <td></td>
+                                            <td>Beginning level player</td>
+                                            <td>Never hit another range ball</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row" id="scoring_game_result_value"/>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        $(function () {
+            $('input[name="date"]').datetimepicker({
+                format: 'YYYY-MM-DD',
+                showTodayButton: true,
+                showClose: true
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function(){
+            $('input[value="0"]').attr("checked", true);
+            $('#scoring_game_result').hide();
+            $("input").each(function(){
+                if(localStorage.getItem($(this).attr("name"))){
+                    if($(this).attr("type") == "radio"){
+                        var target = "input:radio[name='"+$(this).attr("name")+"'][value='"+localStorage.getItem($(this).attr("name"))+"']";
+                        $(target).parent().addClass("active");
+                    }else{
+                        $(this).val(localStorage.getItem($(this).attr("name")));
+                    }
+                }
+            })
+        });
+        $('#scoring_game_form').submit(function(event){
+            event.preventDefault();
+            console.log("form submitted!")
+            $.ajax({
+                url : $(this).attr('action'),
+                type : $(this).attr('method'),
+                data : $(this).serialize(),
+
+                success : function(json) {
+                    $('#scoring_game_submit').hide();
+                    console.log(json);
+                    $('#scoring_game_result').show();
+                    $('#scoring_game_result_value').append(
+                        '<div class="alert alert-success col-xs-12">' + '</br>' +
+                        'Your level: ' + json.level + '</div>' +
+                        '<br/>' +
+                        '<div class="alert alert-success col-xs-4">' + '</br>' +
+                        'Your Short Putting level: ' + json.short_putting_level + '</div>' +
+                        '<div class="alert alert-success col-xs-4">' + '</br>' +
+                        'Your Middle Putting level: ' + json.middle_putting_level + '</div>' +
+                        '<div class="alert alert-success col-xs-4">' + '</br>' +
+                        'Your Long Putting level: ' + json.long_putting_level + '</div>' +
+                        '<br/>' +
+                        '<div class="alert alert-success col-xs-4">' + '</br>' +
+                        'Your Chipping level: ' + json.chipping_level + '</div>' +
+                        '<div class="alert alert-success col-xs-4">' + '</br>' +
+                        'Your Pitching level: ' + json.pitching_level + '</div>' +
+                        '<div class="alert alert-success col-xs-4">' + '</br>' +
+                        'Your Bunker level: ' + json.bunker_level + '</div>');
+
+                    $("input").each(function(){
+                        localStorage.removeItem($(this).attr("name"));
+                    })
+                    console.log("success");
+                },
+
+                error : function(xhr,errmsg,err) {
+                    $('#scoring_game_result_value').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+                        " <a href='#' class='close'>&times;</a></div>");
+                    console.log(xhr.status + ": " + xhr.responseText);
+                }
+            });
+        });
+        $("input[name^=date]").on('input',function(){
+        var text = $("li.active").text();
+        console.log(text)
+        $.ajax({
+                    url : "/g3/date_exsist",
+                    type : 'GET',
+                    data : {"date" : $(this).val(),
+                            "text" : text},
+                    success : function(json) {
+                        if(json.result){
+                            changeScoringGame(json.tuple);
+                        }
+                    },
+                    error : function(xhr, errmsg, err) {
+                        console.log(xhr.status + ": " + xhr.responseText);
+                    }
+                });
+
+        })
+
+        $("input").on("input",function(){
+            localStorage.setItem($(this).attr("name"),$(this).val());
+        })
+
+        $("input:radio[name^='shot']").on("select",function(){
+            localStorage.setItem($(this).attr("name"),$(this).val());
+            console.log($(this).attr("name")+ " " + $(this).val())
+        })
+
+
+        function changeScoringGame(tuple){
+
+        $('input:radio[name="shot_1_1_1_1"][value="'+tuple.shot_1_1_1_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_1_1_2"][value="'+tuple.shot_1_1_1_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_1_1_3"][value="'+tuple.shot_1_1_1_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_1_2_1"][value="'+tuple.shot_1_1_2_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_1_2_2"][value="'+tuple.shot_1_1_2_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_1_2_3"][value="'+tuple.shot_1_1_2_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_1_3_1"][value="'+tuple.shot_1_1_3_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_1_3_2"][value="'+tuple.shot_1_1_3_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_1_3_3"][value="'+tuple.shot_1_1_3_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_2_1_1"][value="'+tuple.shot_1_2_1_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_2_1_2"][value="'+tuple.shot_1_2_1_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_2_1_3"][value="'+tuple.shot_1_2_1_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_2_2_1"][value="'+tuple.shot_1_2_2_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_2_2_2"][value="'+tuple.shot_1_2_2_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_2_2_3"][value="'+tuple.shot_1_2_2_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_2_3_1"][value="'+tuple.shot_1_2_3_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_2_3_2"][value="'+tuple.shot_1_2_3_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_2_3_3"][value="'+tuple.shot_1_2_3_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_3_1_1"][value="'+tuple.shot_1_3_1_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_3_1_2"][value="'+tuple.shot_1_3_1_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_3_1_2"][value="'+tuple.shot_1_3_1_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_3_1_3"][value="'+tuple.shot_1_3_1_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_3_2_1"][value="'+tuple.shot_1_3_2_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_3_2_2"][value="'+tuple.shot_1_3_2_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_3_2_3"][value="'+tuple.shot_1_3_2_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_3_3_1"][value="'+tuple.shot_1_3_3_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_3_3_2"][value="'+tuple.shot_1_3_3_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_3_3_3"][value="'+tuple.shot_1_3_3_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_4_1_1"][value="'+tuple.shot_1_4_1_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_4_1_2"][value="'+tuple.shot_1_4_1_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_4_1_3"][value="'+tuple.shot_1_4_1_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_4_2_1"][value="'+tuple.shot_1_4_2_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_4_2_2"][value="'+tuple.shot_1_4_2_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_4_2_3"][value="'+tuple.shot_1_4_2_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_4_3_1"][value="'+tuple.shot_1_4_3_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_4_3_2"][value="'+tuple.shot_1_4_3_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_4_3_3"][value="'+tuple.shot_1_4_3_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_1_1_1"][value="'+tuple.shot_2_1_1_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_1_1_2"][value="'+tuple.shot_2_1_1_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_1_1_3"][value="'+tuple.shot_2_1_1_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_1_2_1"][value="'+tuple.shot_2_1_2_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_1_2_2"][value="'+tuple.shot_2_1_2_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_1_2_3"][value="'+tuple.shot_2_1_2_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_1_3_1"][value="'+tuple.shot_2_1_3_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_1_3_2"][value="'+tuple.shot_2_1_3_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_1_3_3"][value="'+tuple.shot_2_1_3_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_1_4_1"][value="'+tuple.shot_2_1_4_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_1_4_2"][value="'+tuple.shot_2_1_4_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_1_4_3"][value="'+tuple.shot_2_1_4_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_1_5_1"][value="'+tuple.shot_2_1_5_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_1_5_2"][value="'+tuple.shot_2_1_5_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_1_5_3"][value="'+tuple.shot_2_1_5_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_1_1_1"][value="'+tuple.shot_3_1_1_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_1_1_2"][value="'+tuple.shot_3_1_1_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_1_1_3"][value="'+tuple.shot_3_1_1_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_1_2_1"][value="'+tuple.shot_3_1_2_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_1_2_2"][value="'+tuple.shot_3_1_2_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_1_2_3"][value="'+tuple.shot_3_1_2_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_1_3_1"][value="'+tuple.shot_3_1_3_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_1_3_2"][value="'+tuple.shot_3_1_3_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_1_3_3"][value="'+tuple.shot_3_1_3_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_1_1_3"][value="'+tuple.shot_3_1_1_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_1_4_1"][value="'+tuple.shot_3_1_4_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_1_4_2"][value="'+tuple.shot_3_1_4_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_1_4_3"][value="'+tuple.shot_3_1_4_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_1_5_1"][value="'+tuple.shot_3_1_5_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_1_5_2"][value="'+tuple.shot_3_1_5_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_1_5_3"][value="'+tuple.shot_3_1_5_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_4_1_1_1"][value="'+tuple.shot_4_1_1_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_4_1_2_1"][value="'+tuple.shot_4_1_2_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_4_1_3_1"][value="'+tuple.shot_4_1_3_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_4_1_4_1"][value="'+tuple.shot_4_1_4_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_4_1_5_1"][value="'+tuple.shot_4_1_5_1+'"]').parent().addClass("active");
+
+        }
+
+    </script>
+{% endblock %}

@@ -1,0 +1,304 @@
+{% extends "common/base.html" %}
+
+{% block css %}
+    <style>
+        td input {
+            width : 35px;
+        }
+
+        html {
+            -webkit-text-size-adjust:none;
+            -moz-text-size-adjust:none;
+            -ms-text-size-adjust:none;
+            font-size:4px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5 class="panel-title text-center">코스 추가</h5>
+        </div>
+        <div class="panel-body">
+            <div>
+                <form method='POST' action="{% url 'g1_field_add' %}">
+                    {% csrf_token %}
+                    {{ golf_field_form.as_p }}
+                    <input type='submit' value="추가">
+                </form>
+            </div>
+            <hr>
+            <div>
+                <form id="field_info" method="POST" action="{% url 'g1_field_info' %}">
+                    {% csrf_token %}
+                    <label class="col-xs-3 col-sm-4">골프장 이름</label>
+                    &nbsp;
+                    <input id="field_name_find" type="text" class="col-xs-6 col-sm-5 " >
+                    &nbsp;
+                    <input class ="col-xs-2 col-sm-2" type="submit" value="찾기">
+                </form>
+
+            </div>
+            <div id="field_choice" >
+            </div>
+            <br>
+            <div>
+                <form id='course_add' style='display:none; overflow-x:auto; margin-bottom: 10px;width:100%' method='POST' action="/g1/course_add">
+                    <label id="create_or_update" class="row col-xs-12"></label>
+                    <table>
+                        <tr>
+                            <td><label>Course Rating</label></td>
+                            <td>{{ course_form.course_rating }}</td>
+                        </tr>
+                        <tr>
+                            <td><label>Slope Rating</label></td>
+                            <td>{{ course_form.slope_rating }}</td>
+                        </tr>
+                    </table>
+                    <table class='table table-condensed'>
+                        <thead>
+                        <tr>
+                            <th id="hole_name_0">{{ course_form.hole_name_0 }}</th>
+                            <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th>
+                            <th>Out</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th>Yardage(meter)</th>
+                            {% for yard in course_form.field_yards|slice:":9" %}
+                                <td class='out_yard'>{{ yard }}</td>
+                            {% endfor %}
+                            <td id='out_yard'></td>
+                        </tr>
+                        <tr>
+                            <th>Par</th>
+                            {% for par in course_form.field_pars|slice:":9" %}
+                                <td class='out_par'>{{ par }}</td>
+                            {% endfor %}
+                            <td id='out_par'></td>
+                        </tr>
+                        <tr>
+                            <th>Handicap</th>
+                            {% for handicap in course_form.field_handicaps|slice:":9" %}
+                                <td class='out_handicap'>{{ handicap }}</td>
+                            {% endfor %}
+                            <td id='out_handicap'></td>
+                        </tr>
+                        </tbody>
+                        <thead>
+                        <tr>
+                            <th id="hole_name_1"> {{ course_form.hole_name_1 }}</th>
+                            <th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th>
+                            <th>In</th>
+                            <th>Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th>Yardage(meter)</th>
+                            {% for yard in course_form.field_yards|slice:"9:" %}
+                                <td class='in_yard'>{{ yard }}</td>
+                            {% endfor %}
+                            <td id='in_yard'></td>
+                            <td id='total_yard'></td>
+                        </tr>
+                        <tr>
+                            <th>Par</th>
+                            {% for par in course_form.field_pars|slice:"9:" %}
+                                <td class='in_par'>{{ par }}</td>
+                            {% endfor %}
+                            <td id='in_par'></td>
+                            <td id='total_par'></td>
+                        </tr>
+                        <tr>
+                            <th>Handicap</th>
+                            {% for handicap in course_form.field_handicaps|slice:"9:" %}
+                                <td class='in_handicap'>{{ handicap }}</td>
+                            {% endfor %}
+                            <td id='in_handicap'></td>
+                            <td id='total_handicap'></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <input type="hidden" id="form_field_id" name="field_id">
+                    <input type="hidden" id="form_tee_type" name="tee_type">
+                    <input id='submit_button' type='submit' value="추가">
+                    {% csrf_token %}
+                    <br><br>
+                </form>
+                </div>
+            <div id="template" style="display:none">
+                <br>
+                <div class="col-xs-12 col-sm-12 dummy"></div>
+                <label class="col-xs-12 col-sm-12  field_name"></label>
+                <button class="col-xs-3 col-sm-3" tee_type=0 type="button" >Red</button>
+                <button class="col-xs-3 col-sm-3" tee_type=1 type="button" >White</button>
+                <button class="col-xs-3 col-sm-3" tee_type=2 type="button" >Blue</button>
+                <button class="col-xs-3 col-sm-3" tee_type=3 type="button" >Black</button>
+                <br>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function(){
+            $(".temp_save").each(function(){
+                $(this).val( localStorage.getItem($(this).attr("id")));
+                console.log($(this).attr("id"));
+            })
+        })
+        Number.prototype.zeroPad = Number.prototype.zeroPad ||
+            function(base){
+                var nr = this, len = (String(base).length - String(nr).length)+1;
+                return len > 0? new Array(len).join('0')+nr : nr;
+            };
+        var update_val = function(name) {
+            var out_ = 0;
+            var in_ = 0;
+            $('.out_'+name+' > input').each(function() {
+                out_+= parseInt($(this).val())
+            })
+            $('.in_'+name+' > input').each(function() {
+                in_+= parseInt($(this).val())
+            })
+            $('#out_'+name).html(out_)
+            $('#in_'+name).html(in_)
+            $('#total_'+name).html(out_+in_)
+        }
+        $(function() {
+            $('#field_info').on('submit', function(e) {
+                e.preventDefault()
+                var base_url = $(this).attr('action')
+                var query = $(this).find(':text').val()
+                console.log(base_url, query)
+                $.ajax({
+                    url : base_url,
+                    type : 'GET',
+                    data : {"field_name" : $("#field_name_find").val()},
+                     success : function(json) {
+                        console.log(json)
+                        $('#field_choice').html('')
+                        if( $.isEmptyObject(json) )
+                        {
+                            $('#field_choice').text('검색 결과 없음')
+                        }
+                        else
+                        {
+                            for(var key in json) {
+                                var $t = $('#template').clone()
+                                $t.removeAttr('style')
+                                $t.attr('field_id', key)
+                                $t.find('label').html(json[key].name)
+                                $('#field_choice').append($t)
+                            }
+                        }
+                    },
+                    error : function(xhr, errmsg, err) {
+                        console.log(xhr.status + ": " + xhr.responseText);
+                    }
+                });
+            })
+
+            $('#field_choice').on('click', 'button', function(e) {
+                var field_id = $(this).parent().attr('field_id')
+                var tee_type = $(this).attr('tee_type')
+                load_course(field_id, tee_type)
+            })
+            $('.out_yard').on('change',function(e){ update_val('yard');})
+            $('.in_yard').on('change',function(e){ update_val('yard');})
+            $('.out_par').on('change',function(e){ update_val('par');})
+            $('.in_par').on('change',function(e){ update_val('par');})
+            $('.out_handicap').on('change',function(e){update_val('handicap');})
+            $('.in_handicap').on('change',function(e){update_val('handicap');})
+        })
+
+        function load_course(field_id, tee_type) {
+            var base_url = '{% url "g1_course_info" %}';
+            if( field_id !== '' && tee_type !== '') {
+                $.ajax({
+                    url : base_url,
+                    type : 'GET',
+                    data : {"field_id" : field_id,
+                            "tee_type" : tee_type},
+                    success : function(json) {
+                        var base_url = '{% url "g1_course_add" %}';
+
+                        $("#form_field_id").val(field_id);
+                        $("#form_tee_type").val(tee_type);
+                        if( !$.isEmptyObject(json) )
+                        {
+                            if (json.is_staff) {
+                                $('#create_or_update').text("기존 코스 수정");
+                                $('#submit_button').attr("value", "수정");
+                                $('#submit_button').prop("hidden", false);
+                            }
+                            else {
+                                $('#create_or_update').text("기존 코스 수정 불가");
+                                $('#submit_button').prop("hidden", true);
+                            }
+
+                            $('#course_add').find('#id_course_rating').val( json.course_rating );
+                            $('#course_add').find('#id_slope_rating').val( json.slope_rating );
+
+                            $('#course_add').find('#id_hole_name_0').val( json.hole_name_0 );
+                            $('#course_add').find('#id_hole_name_1').val( json.hole_name_1 );
+
+                            for(var i = 1; i <=18; ++i) {
+                                $('#course_add').find('#id_yard_'+(i).zeroPad(10)).val( json.yards[i-1] );
+                                $('#course_add').find('#id_par_'+(i).zeroPad(10)).val( json.pars[i-1] );
+                                $('#course_add').find('#id_handicap_'+(i).zeroPad(10)).val( json.handicaps[i-1] );
+                            }
+                        }
+                        else
+                        {
+                            $('#create_or_update').text("신규 코스 추가");
+                            $('#submit_button').attr("value", "추가");
+                            $('#submit_button').prop("hidden", false);
+
+                            $('#course_add').find('#id_course_rating').val(null);
+                            $('#course_add').find('#id_slope_rating').val(null);
+
+                            $('#course_add').find('#id_hole_name_0').val(null);
+                            $('#course_add').find('#id_hole_name_1').val(null);
+
+                            for(var i = 1; i <=18; ++i) {
+                                $('#course_add').find('#id_yard_'+(i).zeroPad(10)).val(null);
+                                $('#course_add').find('#id_par_'+(i).zeroPad(10)).val(null);
+                                $('#course_add').find('#id_handicap_'+(i).zeroPad(10)).val(null);
+                            }
+                        }
+
+                        $('#course_add').css('display','');
+
+                        update_val('yard');
+                        update_val('par');
+                        update_val('handicap');
+                    },
+                    error : function(xhr,errmsg,err) {
+                        console.log(xhr.status + ": " + xhr.responseText);
+                    }
+                });
+            }
+        }
+
+        $("#submit_button").on('click', function(){
+            $("input").each(function(){
+                localStorage.removeItem($(this).attr('id'))
+            })
+        })
+
+        $("input").on('input',function(){
+        console.log("-----------");
+        localStorage.setItem($(this).attr('id'),$(this).val());
+        })
+
+        function course_form_view(){
+
+        }
+    </script>
+{% endblock %}

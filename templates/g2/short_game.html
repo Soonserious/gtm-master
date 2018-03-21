@@ -1,0 +1,221 @@
+{% extends "common/base.html" %}
+
+{% block css %}
+    <style>
+        .td-contenteditable {
+            height: 1px;
+        }
+
+        .div-contenteditable {
+            height: 100%;
+        }
+
+        .div-contenteditable:after {
+            content:'\0200B';
+        }
+        .table_data_remove_border_line{
+            width:100%;
+            border-style :none;
+
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5 class="panel-title text-center">Short Game</h5>
+        </div>
+        <form>
+        <div class="panel-body">
+            <textarea style="display:none" id="videos_data">{{videos}}</textarea>
+            <table class="table table-bordered" id="video_table">
+                <tr>
+                    <th class="text-center" rowspan="1" colspan="1" style="width: 28%">number</th>
+                    <th class="text-center" rowspan="1" colspan="2" style="width: 36%">address</th>
+                    <th class="text-center" rowspan="1" colspan="2" style="width: 36%">name</th>
+                    <th class="text-center" rowspan="1" colspan="1" style="width: 36%">remove</th>
+                </tr>
+                {% for video in videos %}
+                    <tr class="video_class">
+                        <td colspan="1" class="td-contenteditable" >
+                            <textarea required="required" class="table_data_remove_border_line" name="video_number">{{video.0}}</textarea>
+                        </td>
+                        <td colspan="2" class="td-contenteditable" >
+                            <textarea required="required" class="table_data_remove_border_line" name="video_address">{{video.1 }}</textarea>
+                        </td>
+                        <td colspan="2" class="td-contenteditable" >
+                            <textarea required="required" class="table_data_remove_border_line" name="video_name">{{ video.2 }}</textarea>
+                        </td>
+                        <td colspan="1" class="td-contenteditable" >
+                            <button class="btn btn-primary" onclick="video_remove(this)">remove</button>
+                        </td>
+                    </tr>
+                {% endfor%}
+            </table>
+            <div>
+                <button style="float:right" onclick="video_append()"class="btn btn-primary">append</button>
+            </div>
+        </div>
+
+            <div class="panel-body">
+            <table class="table table-bordered" style="table-layout:fixed; word-break:break-all;">
+                <tr>
+                    <th class="text-center" rowspan="1" colspan="2" style="width: 28%">Check Point</th>
+                    <th class="text-center" rowspan="1" colspan="1" style="width: 36%">Comments</th>
+                    <th class="text-center" rowspan="1" colspan="1" style="width: 36%">Training Drills</th>
+                </tr>
+                {% for first_category in categories %}
+                    <tr>
+                        <th colspan="4">{{ first_category.0 }}</th>
+                    </tr>
+                    {% for second_category in first_category.1 %}
+                        {% for third_category in second_category.1 %}
+                            <tr>
+                                {% if forloop.counter0 == 0 %}
+                                    <td rowspan="{{ second_category.1|length }}" style="vertical-align:middle">{{ second_category.0 }}</td>
+                                {% endif %}
+                                <td>{{ third_category.0 }}</td>
+                                <td class="td-contenteditable" >
+                                    <textarea required="required" class="table_data_remove_border_line" name="comment_{{ forloop.parentloop.parentloop.counter0 }}_{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}">{{ third_category.1 }}</textarea>
+                                </td>
+                                <td class="td-contenteditable" >
+                                    <textarea required="required" class="table_data_remove_border_line" name="drill_{{ forloop.parentloop.parentloop.counter0 }}_{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}">{{ third_category.2 }}</textarea>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
+                {% endfor %}
+            </table>
+
+            <div class="row">
+                <div class="col-xs-10" align="right" id="submit"></div>
+                <div class="col-xs-2" align="right">
+                    <input id="short_game_submit" type="submit" class="btn btn-primary" value=save></input>
+                </div>
+            </div>
+        </div>
+        </form>
+
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+
+
+    $("textarea").each(function(){
+        if(localStorage.getItem($(this).attr("name"))){
+            $(this).val( localStorage.getItem($(this).attr("name")));
+            }
+    })
+    $("textarea").on("input",function(){
+        localStorage.setItem($(this).attr("name"),$(this).val())
+    })
+
+    function video_remove(obj){
+        $(obj).parent().parent().remove();
+    }
+        function video_append(){
+            var video_count = $(".video_class").length;
+            video_count +=1;
+            var tr_html = '<tr class="video_class">';
+            tr_html += '<td colspan="1" class="td-contenteditable" >'
+            tr_html += '<textarea required="required" class="table_data_remove_border_line" name="video_number">'+video_count+'</textarea>'
+            tr_html += '</td>'
+            tr_html += '<td colspan="2" class="td-contenteditable" >'
+            tr_html += '<textarea required="required" class="table_data_remove_border_line" name="video_address_' +video_count+'"></textarea>'
+            tr_html += '</td>'
+            tr_html += '<td colspan="2" class="td-contenteditable" >'
+            tr_html += '<textarea required="required" class="table_data_remove_border_line" name="video_name"></textarea>'
+            tr_html += '</td>'
+            tr_html += '<td colspan="1" class="td-contenteditable" >'
+            tr_html += '<button class="btn btn-primary" onclick="video_remove(this)">remove</button>'
+            tr_html += '</td>'
+            tr_html += '</tr>'
+
+            $("#video_table").append(tr_html);
+        }
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        $(function() { $.ajaxSetup({headers: {"X-CSRFToken": getCookie("csrftoken")}}); });
+
+        $('div[contenteditable="true"]').keypress(function(event) {
+            if (event.which != 13)
+                return true;
+
+            var docFragment = document.createDocumentFragment();
+            var newEle = document.createElement('br');
+            docFragment.appendChild(newEle);
+
+            //make the br replace selection
+            var range = window.getSelection().getRangeAt(0);
+            range.deleteContents();
+            range.insertNode(docFragment);
+
+            //create a new range
+            range = document.createRange();
+            range.setStartAfter(newEle);
+            range.collapse(true);
+
+            //make the cursor there
+            var sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+
+            return false;
+        });
+
+        $("#short_game_submit").on("click", function() {
+             var contents_dict = {};
+            var comments = $("textarea[name^=comment]");
+            var drills = $("textarea[name^=drill]");
+             var videos={};
+            var video = $("textarea[name^=video_address]");
+            for(var i=0; i< video.length; i++){
+                var video_dict = {}
+                video_dict["0"]=$(video[i]).parent().parent().find("textarea[name='video_number']").val();
+                video_dict["1"] = $(video[i]).val();
+                video_dict["2"]=$(video[i]).parent().parent().find("textarea[name='video_name']").val();
+                videos[i] = video_dict;
+            }
+            contents_dict["videos"] = videos;
+            for (var i =0; i < comments.length; ++i) {
+                contents_dict[comments[i].getAttribute("name")] = $(comments[i]).val();
+            }
+
+            for (var i =0; i < drills.length; ++i) {
+                contents_dict[drills[i].getAttribute("name")] = $(drills[i]).val();
+            }
+
+            var data = {"target_user_id": "{{ target_user_id }}", "contents_dict": JSON.stringify(contents_dict)};
+            console.log(data);
+            $.ajax({
+                url: "{% url 'g2_eval_short_game' %}",
+                type: "POST",
+                data: data,
+                dataType: "json",
+                success: function(data) {
+                    $("#submit").html(data['status']);
+                    $("textarea").each(function(){
+                        localStorage.removeItem($(this).attr("name"));
+                    })
+                }
+            });
+
+        });
+    </script>
+{% endblock %}

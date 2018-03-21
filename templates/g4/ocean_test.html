@@ -1,0 +1,138 @@
+{% extends "common/base.html" %}
+
+{% block css %}
+    <style>
+        @media (max-width: 768px) {
+            .btn-responsive {
+                padding:2px 4px;
+                font-size:100%;
+            }
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5 class="panel-title text-center">OCEAN Test (Big5)</h5>
+        </div>
+        <form action="{% url 'g4_ocean_test_submit' %}" method="post" id="form">
+            {% csrf_token %}
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-sm-3 col-xs-5">
+                            <p style="">Date</p>
+                        </div>
+                        <div class="col-sm-9 col-xs-7">
+                            <input type='date' required="true" name='date' class="form-control"/>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item" style="border-left-style:none; border-right-style:none">
+                    </br>
+                    <table class="table table-bordered" align="center">
+                        <tr>
+                            {% for answer_label in answer_labels %}
+                                <td class="col-xs-1" align="center">{{ answer_label }}</td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            {% for score_value in answer_choices %}
+                                <td class="col-xs-1" align="center">{{ score_value }}</td>
+                            {% endfor %}
+                        </tr>
+                    </table>
+                    <div class="form-group" align="center">
+                        {{ form.sex.label_tag }}
+                        {{ form.sex }}
+                    </div>
+                    <textarea id="load_data" style="display:none">{{score}}</textarea>
+                    <table class="table table-bordered" align="center">
+                        <tr>
+                            <td colspan="1" align="center">#</td>
+                            <td colspan="1" style="width: 30%" align="center">문항</td>
+                            <td colspan="1" align="center">점수</td>
+                        </tr>
+                        {% for label in question_labels %}
+                            <tr>
+                                <td colspan="1" align="center">{{ forloop.counter }}</td>
+                                <td colspan="1" align="left">{{ label }}</td>
+                                <td colspan="1" align="center">
+                                    <div class="btn-group">
+                                        {% for score_value in answer_choices %}
+                                            <label class="btn btn-default btn-responsive" id="score_{{forloop.counter}}">
+                                                <input type="radio" required="true" name="score_{{ forloop.parentloop.counter }}" value="{{score_value}}"/>
+                                                        {{ score_value }}
+                                            </label>
+                                        {% endfor %}
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    </br>
+                </li>
+                <li class="list-group-item" id="ocean_test_submit" style="border:none">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="btn-group btn-group-justified" role="group">
+                                <div class="btn-group" role="group">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item" id="submit_success_label" style="border:none">
+                    <div class="row">
+                        <label class="col-xs-12" text-center>
+                            Submit Success!
+                        </label>
+                    </div>
+                </li>
+            </ul>
+        </form>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function(){
+            {#            $('input[value="1"]').attr("checked", true);#}
+            $('#submit_success_label').hide();
+            if($('#load_data').val() != null){
+                var score_list= jQuery.parseJSON($('#load_data').val());
+                console.log(Object.keys(score_list).length);
+                for(i=1; i<Object.keys(score_list).length;i++){
+                    var target = 'input:radio[name="score_'+i+'"][value="' + score_list[i] + '"]';
+                    $(target).prop('checked',true);
+
+                }
+            }
+        });
+
+        $('#form').submit(function(event){
+            event.preventDefault();
+            console.log("form submitted!")
+            $.ajax({
+                url : $(this).attr('action'),
+                type : $(this).attr('method'),
+                data : $(this).serialize(),
+
+                success : function(json) {
+                    $('#ocean_test_submit').hide();
+                    console.log(json);
+                    $('#submit_success_label').show();
+                    console.log("success");
+                },
+
+                error : function(xhr,errmsg,err) {
+                    $('#submit_success_label').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+                        " <a href='#' class='close'>&times;</a></div>");
+                    console.log(xhr.status + ": " + xhr.responseText);
+                }
+            });
+        });
+    </script>
+{% endblock %}

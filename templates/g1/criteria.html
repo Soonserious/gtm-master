@@ -1,0 +1,24 @@
+{% extends "common/base.html" %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+<div>
+  <form method="POST" action="{% url 'g1_criteria' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type='submit'>
+  </form>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+Number.prototype.zeroPad = Number.prototype.zeroPad ||
+  function(base){
+    var nr = this, len = (String(base).length - String(nr).length)+1;
+    return len > 0? new Array(len).join('0')+nr : nr;
+};
+</script>
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends "common/base.html" %}
+
+{% block css %}
+    <style>
+        .positive { color:blue; }
+        .negative { color:red; }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+
+            <div>
+                <form id="field_info" method="POST" action="{% url 'g1_field_info' %}">
+                    {% csrf_token %}
+                    <label class="col-xs-3 col-sm-4">골프장 이름</label>
+                    &nbsp;
+                    <input id="field_name_find" name="field_name" type="text" class="col-xs-6 col-sm-5 " >
+                    &nbsp;
+                    <input class ="col-xs-2 col-sm-2" type="button" value="찾기" onclick="findFieldName()">
+                </form>
+                <div id="field_choice">
+                </div>
+            </div>
+
+            <table class="table table-bordered">
+                <thead class="thead">
+                    <tr>
+                        <th><div align="center">Field Name</div></th>
+                        <th><div align="center">Field Address</div></th>
+                        <th><div align="center">White</div></th>
+                        <th><div align="center">Red</div></th>
+                        <th><div align="center">Blue</div></th>
+                        <th><div align="center">Black</div></th>
+                    </tr>
+                </thead>
+            <tbody>
+                {% for field in fields %}
+                <tr>
+                    <td><div align="center">{{ field.name }}</div></td>
+                    <td><div align="center">{{ field.address }}</div></td>
+                    <td><div align="center"><button onclick="searchCourse('{{ field.id }}',0)">white</button></div></td>
+                    <td><div align="center"><button onclick="searchCourse('{{ field.id }}',1)">red</button></div></td>
+                    <td><div align="center"><button onclick="searchCourse('{{ field.id }}',2)">blue</button></div></td>
+                    <td><div align="center"><button onclick="searchCourse('{{ field.id }}',3)">black</button></div></td>
+                    <td><div><button onclick="removeField({{field.id}})">remove</button></div></td>
+                </tr>
+                {% endfor %}
+            </table>
+            <form target="view_course" id="view_course" action="view_course" method="GET">
+                <input id="view_course_input" name="course_id" type="hidden"/>
+            </form>
+
+    <script>
+        function removeField(field_id){
+            $.ajax({
+                url : "/g1/remove_filed_and_course",
+                type : 'GET',
+                data : {"field_id" : field_id},
+                success : function(json){
+                    if(json.result){
+                        location.href="/g1/field_remove";
+                    }
+                }
+            })
+        }
+        function view_course(){
+            window.open("","view_course","resizable =no",scrollbars ="yes");
+            $("#view_course").submit();
+        }
+
+        function searchCourse(field_id,tee_type){
+            $.ajax({
+                url:"course_info",
+                type: 'GET',
+                data: {"field_id" : field_id,
+                       "tee_type" : tee_type},
+                success : function(json){
+                    if(json.course_id){
+                        $("#view_course_input").val(json.course_id);
+                        console.log(json.course_id);
+                        view_course();
+                    }else{
+                    console.log(json.course_id);
+                        alert("No Course");
+                    }
+                },
+                error : function(){
+                    alert("No Course");
+                    }
+            })
+        }
+
+    </script>
+{% endblock %}

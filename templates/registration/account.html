@@ -1,0 +1,84 @@
+{% extends "common/base.html" %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+<form class="form-horizontal" role="form" action="{% url 'account' %}" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label class="control-label col-xs-2" for="username">User ID</label>
+        <div class="col-xs-10">
+            <input type="text" class="form-control" id="username" name="username" value="{{ user.username}}" disabled>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-2" for="first_name">First name</label>
+        <div class="col-xs-10">
+            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ user.first_name}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-2" for="last_name">Last name</label>
+        <div class="col-xs-10">
+            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ user.last_name}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-2">
+            <button type="button" class="btn btn-default btn-block" id="change_pw_btn" onclick="change_pw_click();">Change password</button>
+        </div>
+    </div>
+    <div class="form-group" id="fg_current_pw" style="display: none;">
+        <label class="control-label col-xs-2" for="current_pw">Current password</label>
+        <div class="col-xs-10">
+            <input type="password" class="form-control" id="current_pw" name="current_pw">
+        </div>
+    </div>
+    <div class="form-group" id="fg_new_pw_1" style="display: none;">
+        <label class="control-label col-xs-2" for="new_pw1">New password</label>
+        <div class="col-xs-10">
+            <input type="password" class="form-control" id="new_pw_1" name="new_pw_1">
+        </div>
+    </div>
+    <div class="form-group" id="fg_new_pw_2" style="display: none;">
+        <label class="control-label col-xs-2" for="new_pw2">Password confirmation</label>
+        <div class="col-xs-10">
+            <input type="password" class="form-control" id="new_pw_2" name="new_pw_2">
+        </div>
+    </div>
+    {% if error %}
+    <div class="row">
+        <div class="col-xs-offset-2 col-xs-10">
+            <p class="bg-danger">{{ message }}</p>
+        </div>
+    </div>
+    {% else %}
+        {% if message %}
+        <div class="row">
+            <div class="col-xs-offset-2 col-xs-10">
+                <p class="bg-danger">{{ message }}</p>
+            </div>
+        </div>
+        {% endif %}
+    {% endif %}
+    <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-2">
+            <button type="submit" class="btn btn-success btn-block">Submit</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+    function change_pw_click() {
+        $("#current_pw").val("");
+        $("#fg_current_pw").toggle();
+        $("#new_pw_1").val("");
+        $("#fg_new_pw_1").toggle();
+        $("#new_pw_2").val("");
+        $("#fg_new_pw_2").toggle();
+    }
+</script>
+{% endblock %}

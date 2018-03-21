@@ -1,0 +1,139 @@
+{% extends "common/base.html" %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h5 class="panel-title text-center">Course Management Evaluation</h5>
+    </div>
+    <form action="{% url 'g4_course_management_submit' %}" method="post" id="form">
+        {% csrf_token %}
+        <ul class="list-group">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-sm-3 col-xs-5">
+                        <p style="">Date</p>
+                    </div>
+                    <div class="col-sm-9 col-xs-7">
+                        <input type='date' required="true" name='date' class="form-control"/>
+                    </div>
+                </div>
+            </li>
+            <li class="list-group-item" style="border-left-style:none; border-right-style:none">
+                <div align="center"><b>Three levels of Course Strategy</b></div>
+                <table class="table table-bordered" align="center">
+                    <tr>
+                        <td class="col-xs-3" align="left">A-Game</td>
+                        <td class="col-xs-9" align="left">
+                            최고의 컨디션으로 플레이 할 때 / 첫 티에서의 신뢰 수준 - 매우 높음
+                            <br/>
+                            전략 : 더욱 의욕적이고 적극적임 / 홀을 직접 겨냥하고 어프로우치 샷을 한다.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-xs-3" align="left">B-Game</td>
+                        <td class="col-xs-9" align="left">
+                            보통의 컨디션 수준으로 플레이 할 때 / 첫 티에서의 신뢰 수준 - 중간 수준
+                            <br/>
+                            전략 : 홀보다 그린 중앙에 가까운 곳을 목표로 하여 어프로우치 샷을 한다.
+                            <br/>
+                            보수적이고 조심스럽게 티샷을 한다.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-xs-3" align="left">C-Game</td>
+                        <td class="col-xs-9" align="left">
+                            안좋은 컨디션 수준으로 플레이 할 때 / 첫 티에서의 신뢰 수준 - 매우 낮음
+                            <br/>
+                            전략 : 모든 샷을 보수적이고 조심스럽게 한다.
+                        </td>
+                    </tr>
+                </table>
+                <table class="table table-bordered" align="center">
+                    <tr>
+                        <td class="col-xs-7" align="center">문항 내용</td>
+                        {% for answer_label in answer_labels %}
+                        <td class="col-xs-1" align="center">{{ answer_label }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% for question_label in question_labels %}
+                    <tr>
+                        <td class="col-xs-7" align="left">{{ question_label }}</td>
+                        {% for answer_choice in answer_choices %}
+                        <td class="col-xs-1" align="center">
+                            <label class="btn btn-default">
+                                <input type="radio" required="true" name="score_{{ forloop.parentloop.counter }}"
+                                       value="{{ answer_choice }}"/> {{ answer_choice }}
+                            </label>
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </table>
+            </li>
+            <li class="list-group-item" id="course_management_submit" style="border:none">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="btn-group btn-group-justified" role="group">
+                            <div class="btn-group" role="group">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="list-group-item" id="submit_success_label" style="border:none">
+                <div class="row">
+                    <label class="col-xs-12" text-center>
+                        Submit Success!
+                    </label>
+                </div>
+            </li>
+        </ul>
+    </form>
+    <textarea id="load_data" style="display:none">{{score}}</textarea>
+</div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function(){
+        {# $('input[value="1"]').attr("checked", true);#}
+            $('#submit_success_label').hide();
+            if($('#load_data').val() != null){
+                var score_list= jQuery.parseJSON($('#load_data').val());
+                console.log(Object.keys(score_list).length);
+                for(i=1; i<Object.keys(score_list).length;i++){
+                    var target = 'input:radio[name="score_'+i+'"][value="' + score_list[i] + '"]';
+                    $(target).prop('checked',true);
+
+                }
+            }
+        });
+
+        $('#form').submit(function(event){
+            event.preventDefault();
+            console.log("form submitted!")
+            $.ajax({
+                url : $(this).attr('action'),
+                type : $(this).attr('method'),
+                data : $(this).serialize(),
+
+                success : function(json) {
+                    $('#course_management_submit').hide();
+                    console.log(json);
+                    $('#submit_success_label').show();
+                    console.log("success");
+                },
+
+                error : function(xhr,errmsg,err) {
+                    $('#submit_success_label').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+                            " <a href='#' class='close'>&times;</a></div>");
+                    console.log(xhr.status + ": " + xhr.responseText);
+                }
+            });
+        });
+    </script>
+{% endblock %}

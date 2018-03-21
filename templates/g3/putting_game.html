@@ -1,0 +1,312 @@
+{% extends "common/base.html" %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#tab1"><b>Hogan Game</b></a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="tab1" class="tab-pane fade in active">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <br/>
+                        <h5 class="col-xs-12 panel-title">Hitting every GIR</h5>
+                    </div>
+                    <div class="row">
+                        <br/>
+                        <h5 class="col-xs-12 panel-title">Par is 72 (36 + 36)</h5>
+                    </div>
+                    <div class="row">
+                        <br/>
+                        <h5 class="col-xs-12 panel-title">각 홀의 총 스트로크 수 + 2를 하여 각 홀의 스코어를 입력한다.</h5>
+                    </div>
+                </div>
+                <form action="{% url 'g3_hogan_game_submit' %}" method="post" id="hogan_game_form">
+                    {% csrf_token %}
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-3 col-xs-5">
+                                    <p style="">Date</p>
+                                </div>
+                                <div class="col-sm-9 col-xs-7">
+                                   <input type='date' required="true" name='date' class="form-control"/>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <label class="col-sm-1 col-xs-2">Short Putting</label>
+                                <label class="col-sm-2 col-xs-3 text-right">3-15 ft.</label>
+                                <label class="col-xs-1">Point</label>
+                            </div>
+
+                            <div class="form-group">
+                                {% for label in hogan_game_label1 %}
+                                <div class="row">
+                                    <label class="col-sm-3 col-xs-5 text-right">{{ label }}</label>
+
+                                    <div class="col-sm-9 col-xs-7">
+                                        <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                            {% for point in "34567" %}
+                                            <label class="btn btn-default">
+                                                <input type="radio" required="true"
+                                                       name="shot_1_{{ forloop.parentloop.counter }}"
+                                                       value="{{ point }}"/> {{ point }}
+                                            </label>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                <br/>
+                            </div>
+
+                            <br/>
+
+                            <div class="row">
+                                <label class="col-sm-1 col-xs-2">Middle Putting</label>
+                                <label class="col-sm-2 col-xs-3 text-right">15-30 ft.</label>
+                                <label class="col-xs-1">Point</label>
+                            </div>
+
+                            <div class="form-group">
+                                {% for label in hogan_game_label2 %}
+                                <div class="row">
+                                    <label class="col-sm-3 col-xs-5 text-right">{{ label }}</label>
+
+                                    <div class="col-sm-9 col-xs-7">
+                                        <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                            {% for point in "34567" %}
+                                            <label class="btn btn-default">
+                                                <input type="radio" required="true"
+                                                       name="shot_2_{{ forloop.parentloop.counter }}"
+                                                       value="{{ point }}"/> {{ point }}
+                                            </label>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                <br/>
+                            </div>
+
+                            <br/>
+
+                            <div class="row">
+                                <label class="col-sm-1 col-xs-2">Long Putting</label>
+                                <label class="col-sm-2 col-xs-3 text-right">35 ft. 이상</label>
+                                <label class="col-xs-1">Point</label>
+                            </div>
+
+                            <div class="form-group">
+                                {% for label in hogan_game_label3 %}
+                                <div class="row">
+                                    <label class="col-sm-3 col-xs-5 text-right">{{ label }}</label>
+
+                                    <div class="col-sm-9 col-xs-7">
+                                        <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                            {% for point in "34567" %}
+                                            <label class="btn btn-default">
+                                                <input type="radio" required="true"
+                                                       name="shot_3_{{ forloop.parentloop.counter }}"
+                                                       value="{{ point }}"/> {{ point }}
+                                            </label>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                <br/>
+                            </div>
+
+                            <br/>
+                            <br/>
+
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3 col-xs-5">
+                                </div>
+                                <div class="col-sm-9 col-xs-7">
+                                    <div class="btn-group btn-group-justified" role="group">
+                                        <div class="btn-group" role="group">
+                                            <button type="submit" class="btn btn-primary" id="hogan_game_submit">
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row" id="hogan_game_result">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <td>Your level</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Better than most</td>
+                                        <td>A Hot Tour Putter</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Tournament level player</td>
+                                        <td>Tour Putter</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Competitive level player</td>
+                                        <td>Just Missed the Cut</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Weekly level player</td>
+                                        <td>Never will make it in the starting field</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Recreational level player</td>
+                                        <td>You will make more money as a caddie</td>
+                                    </tr>
+                                    <tr>
+                                        <td>0</td>
+                                        <td>Beginning level player</td>
+                                        <td>Never hit another range ball</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row" id="hogan_game_result_value"/>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+        $(function () {
+            $('input[name="date"]').datetimepicker({
+                format: 'YYYY-MM-DD',
+                showTodayButton: true,
+                showClose: true
+            });
+        });
+
+</script>
+<script>
+
+        $(document).ready(function(){
+            $('#hogan_game_result').hide();
+            $("input").each(function(){
+                if(localStorage.getItem($(this).attr("name"))){
+                    if($(this).attr("type") == "radio"){
+                        var target = "input:radio[name='"+$(this).attr("name")+"'][value='"+localStorage.getItem($(this).attr("name"))+"']";
+                        $(target).parent().addClass("active");
+                    }else{
+                        $(this).val(localStorage.getItem($(this).attr("name")));
+                    }
+                }
+            })
+        });
+        $('#hogan_game_form').submit(function(event){
+            event.preventDefault();
+            console.log("form submitted!")
+            $.ajax({
+                url : $(this).attr('action'),
+                type : $(this).attr('method'),
+                data : $(this).serialize(),
+
+                success : function(json) {
+                    $('#hogan_game_submit').hide();
+                    console.log(json);
+                    $('#hogan_game_result').show();
+{#                    $('#hogan_game_result_value').append('<div class="alert alert-success" role="alert">Total Score: ' + json.score + '</div>').append('<div class="alert alert-success" role="alert">Your level: ' + json.level + '</div>')#}
+                    $('#hogan_game_result_value').append('<div class="alert alert-success" role="alert">Your level: ' + json.level + '</div>');
+                    console.log("success");
+                    $("input").each(function(){
+                        localStorage.removeItem($(this).attr("name"));
+                    })
+                },
+
+                error : function(xhr,errmsg,err) {
+                    $('#hogan_game_result_value').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+                            " <a href='#' class='close'>&times;</a></div>");
+                    console.log(xhr.status + ": " + xhr.responseText);
+                }
+            });
+        });
+
+        $("input[name^=date]").on('input',function(){
+        var text = $("li.active").text();
+        console.log(text)
+        $.ajax({
+                    url : "/g3/date_exsist",
+                    type : 'GET',
+                    data : {"date" : $(this).val(),
+                            "text" : text},
+                    success : function(json) {
+                        if(json.result){
+                            changePuttingGame(json.tuple);
+
+                        }
+                    },
+                    error : function(xhr, errmsg, err) {
+                        console.log(xhr.status + ": " + xhr.responseText);
+                    }
+                });
+
+        })
+
+        $("input").on("input",function(){
+            localStorage.setItem($(this).attr("name"),$(this).val());
+        })
+
+        $("input:radio[name^='shot']").on("select",function(){
+            localStorage.setItem($(this).attr("name"),$(this).val());
+            console.log($(this).attr("name")+ " " + $(this).val())
+        })
+
+
+        function changePuttingGame(tuple){
+        $('input:radio[name="shot_1_1"][value="'+tuple.shot_1_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_2"][value="'+tuple.shot_1_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_3"][value="'+tuple.shot_1_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_4"][value="'+tuple.shot_1_4+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_5"][value="'+tuple.shot_1_5+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_6"][value="'+tuple.shot_1_6+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_1"][value="'+tuple.shot_2_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_2"][value="'+tuple.shot_2_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_3"][value="'+tuple.shot_2_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_4"][value="'+tuple.shot_2_4+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_5"][value="'+tuple.shot_2_5+'"]').parent().addClass("active");
+        $('input:radio[name="shot_2_6"][value="'+tuple.shot_2_6+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_1"][value="'+tuple.shot_3_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_2"][value="'+tuple.shot_3_2+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_3"][value="'+tuple.shot_3_3+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_4"][value="'+tuple.shot_3_4+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_5"][value="'+tuple.shot_3_5+'"]').parent().addClass("active");
+        $('input:radio[name="shot_3_6"][value="'+tuple.shot_3_6+'"]').parent().addClass("active");
+
+        }
+
+</script>
+{% endblock %}

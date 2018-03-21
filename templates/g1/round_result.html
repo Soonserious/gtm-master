@@ -1,0 +1,107 @@
+{% extends "common/base.html" %}
+
+{% block css %}
+    <style>
+        :disabled {
+            background: #999;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5 class="panel-title text-center">라운드 게시</h5>
+        </div>
+        <div class="panel-body">
+            <div>
+                <form id="field_info" method="POST" action="{% url 'g1_field_info' %}">
+                    {% csrf_token %}
+                    <label>골프장 이름</label>
+                    &nbsp;
+                    <input type="text">
+                    &nbsp;
+                    <input type="submit" value="찾기">
+                </form>
+                <div id="field_choice">
+                </div>
+            </div>
+            <br>
+            <div class="row" id="template" style="display:none">
+                <br>
+                <div class="col-xs-1 dummy"></div>
+                <label class="col-xs-3 field_name"></label>
+                <button class="col-xs-2" tee_type=0 type="button" disabled>Red</button>
+                <button class="col-xs-2" tee_type=1 type="button" disabled>White</button>
+                <button class="col-xs-2" tee_type=2 type="button" disabled>Blue</button>
+                <button class="col-xs-2" tee_type=3 type="button" disabled>Black</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        Number.prototype.zeroPad = Number.prototype.zeroPad ||
+            function(base){
+                var nr = this, len = (String(base).length - String(nr).length)+1;
+                return len > 0? new Array(len).join('0')+nr : nr;
+            };
+        $(function() {
+            $('#field_info').on('submit', function(e) {
+                e.preventDefault();
+                var base_url = $(this).attr('action');
+                var query = $(this).find(':text').val();
+                console.log(base_url, query);
+                $.ajax({
+                    url : base_url,
+                    type : 'GET',
+                    data : {"field_name" : query},
+                    success : function(json) {
+                        console.log(json);
+                        $('#field_choice').html('');
+                        if( $.isEmptyObject(json) )
+                        {
+                            $('#field_choice').text('검색 결과 없음')
+                        }
+                        else
+                        {
+                            for(var key in json) {
+                                var $t = $('#template').clone();
+                                $t.removeAttr('style');
+                                $t.attr('field_id', key);
+                                $t.find('label').html(json[key].name);
+                                for(var i = 0; i < 4; ++i) {
+                                    if( json[key].tee_types.indexOf(i) != -1 )
+                                        $($t.find('button')[i]).removeAttr('disabled')
+                                }
+                                $('#field_choice').append($t)
+                            }
+                        }
+                    },
+                    error : function(xhr, errmsg, err) {
+                        console.log(xhr.status + ": " + xhr.responseText);
+                    }
+                });
+            });
+            $('#field_choice').on('click', 'button', function(e) {
+                var base_url = '{% url "g1_course_info" %}';
+                var field_id = $(this).parent().attr('field_id');
+                var tee_type = $(this).attr('tee_type');
+                $.ajax({
+                    url : base_url,
+                    type : 'GET',
+                    data : {"field_id" : field_id,
+                       "tee_type" : tee_type},
+                    success : function(json) {
+                        console.log(json)
+                        window.location.href = '{% url "g1_round_result" %}' + json.course_id + '/'
+                    },
+                    error : function(xhr, errmsg, err) {
+                        console.log(xhr.status + ": " + xhr.responseText);
+                    }
+                });
+            })
+        })
+    </script>
+{% endblock %}

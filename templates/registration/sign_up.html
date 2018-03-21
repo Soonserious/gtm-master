@@ -1,0 +1,116 @@
+{% extends 'common/base.html' %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xs-12 col-lg-10 col-lg-offset-1">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center"><strong>회원가입</strong></h3>
+            </div>
+            <div class="panel-body">
+                <form action="{% url 'sign_up' %}" method="post">
+                    {% csrf_token %}
+                    <!--아이디: username-->
+                    <div class="form-group">
+                        <label for="id-username">아이디</label>
+                        <input type="text" class="form-control" id="id-username" name="username" required>
+                    </div>
+                    <!--소속: association-->
+                    <div class="form-group">
+                        <label for="id-association-select">소속</label>
+                        <select class="form-control" id="id-association-select" onchange="association_selected(this.value)">
+                            <option disabled selected value> --선택-- </option>
+                            <option value="훈련생">훈련생</option>
+                            <option value="아마추어">아마추어</option>
+                            <option value="KLPGA 투어 프로">KLPGA 투어 프로</option>
+                            <option value="KLPGA 프로">KLPGA 프로</option>
+                            <option value="KPGA 투어 프로">KPGA 투어 프로</option>
+                            <option value="KPGA 프로">KPGA 프로</option>
+                            <option value="">기타 (직접 입력)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="id-association-text" name="association" required>
+                    </div>
+                    <!--비밀번호: password1-->
+                    <div class="form-group">
+                        <label for="id-password1">비밀번호</label>
+                        <input type="password" class="form-control" id="id-password1" name="password1" required>
+                    </div>
+                    <!--비밀번호 확인: password2-->
+                    <div class="form-group">
+                        <label for="id-password2">비밀번호 확인</label>
+                        <input type="password" class="form-control" id="id-password2" name="password2" required>
+                    </div>
+                    <!--이름: full_name-->
+                    <div class="form-group">
+                        <label for="id-full_name">이름</label>
+                        <input type="text" class="form-control" id="id-full_name" name="full_name" required>
+                    </div>
+                    <!--성별: sex-->
+                    <div class="form-group">
+                        <label for="input-sex">성별</label>
+                        <select class="form-control" id="input-sex" name="sex">
+                            <option value="M">남자</option>
+                            <option value="F">여자</option>
+                        </select>
+                    </div>
+                    <!--이메일: email-->
+                    <div class="form-group">
+                        <label for="id-email">이메일 (선택)</label>
+                        <input type="email" class="form-control" id="id-email" name="email">
+                    </div>
+                    <!--생년월일: birth-->
+                    <div class="form-group">
+                        <label for="id-birth">생년월일 (선택)</label>
+                        <input type="text" class="form-control" id="id-birth" name="birth" maxlength="8"
+                               placeholder="YYYYMMDD 형식으로 입력해주세요. (ex: 19800101)" onkeyup="birth_typed(this.value)">
+                    </div>
+                    <!--전화번호: phone_number-->
+                    <div class="form-group">
+                        <label for="id-phone_number">전화번호 (선택)</label>
+                        <input type="tel" class="form-control" id="id-phone_number" name="phone_number" maxlength="12"
+                               placeholder="- 없이 숫자만 입력해주세요. (ex: 01012345678)" onkeyup="phone_number_typed(this.value)">
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-default btn-lg btn-block">가입</button>
+                    {% if error_occurred %}
+                    <div class="panel-footer">{{ error }}</div>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+    function association_selected(value) {
+        var association_text = $("#id-association-text");
+        association_text.val(value);
+    }
+    function birth_typed(value) {
+        var parsed_int = parseInt(value, 10);
+        console.log("value: " + value + " parsed: " + parsed_int);
+        if (value != parsed_int) {
+            if (isNaN(parsed_int)) {
+                parsed_int = "";
+            }
+            $("#id-birth").val(parsed_int);
+        }
+    }
+    function phone_number_typed(value) {
+        var parsed_int = parseInt(value, 10);
+        if (value != parsed_int) {
+            if (isNaN(parsed_int)) {
+                parsed_int = "";
+            }
+            $("#id-phone_number").val(parsed_int);
+        }
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends "common/base.html" %}
+
+{% block css %}
+    <style>
+        .positive { color:blue; }
+        .negative { color:red; }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div style="overflow-x: auto;">
+                    <table class='table table-condensed'>
+                        <thead>
+                            <tr>
+                                <th>{{ course.hole_name_0 }}</th>
+                                <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th>
+                                <th>Out</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Yardage(meter)</th>
+                                {% for yard in course.getyards|slice:":9" %}
+                                    <td>{{ yard }}</td>
+                                {% endfor %}
+                                <td>{{ course.get_out_yards }}</td>
+                            </tr>
+                            <tr>
+                                <th>Par</th>
+                                {% for par in course.getpars|slice:":9" %}
+                                    <td>{{ par }}</td>
+                                {% endfor %}
+                                <td>{{ course.get_out_par }}</td>
+                            </tr>
+                            <tr>
+                                <th>Handicap</th>
+                                {% for handicap in course.gethandicaps|slice:":9" %}
+                                    <td>{{ handicap }}</td>
+                                {% endfor %}
+                                <td>{{ course.get_out_handicaps }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <table class='table table-condensed'>
+                        <thead>
+                            <tr>
+                                <th>{{ course.hole_name_1 }}</th>
+                                <th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th>
+                                <th>In</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Yardage(meter)</th>
+                                {% for yard in course.getyards|slice:"9:" %}
+                                    <td>{{ yard }}</td>
+                                {% endfor %}
+                                <td>{{ course.get_in_yards }}</td>
+                                <td>{{ course.get_total_yards }}</td>
+                            </tr>
+                            <tr>
+                                <th>Par</th>
+                                {% for par in course.getpars|slice:"9:" %}
+                                    <td>{{ par }}</td>
+                                {% endfor %}
+                                <td>{{ course.get_in_par }}</td>
+                                <td>{{ course.get_total_par }}</td>
+                            </tr>
+                            <tr>
+                                <th>Handicap</th>
+                                {% for handicap in course.gethandicaps|slice:"9:" %}
+                                    <td>{{ handicap }}</td>
+                                {% endfor %}
+                                <td>{{ course.get_in_handicaps }}</td>
+                                <td>{{ course.get_total_handicaps }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div align="center"><button style="text-align:center" onclick="removeCourse({{course.id}})">remove</button></div>
+    <script>
+        function removeCourse(course_id){
+               $.ajax({
+                    url : "/g1/course_remove",
+                    type : 'GET',
+                    data : {"course_id" : course_id},
+                    success : function(json) {
+                        if(json.result){
+                            alert("remove");
+                            close();
+                        }
+                    },
+                    error : function(xhr, errmsg, err) {
+                        console.log(xhr.status + ": " + xhr.responseText);
+                    }
+                });
+
+        }
+    </script>
+{% endblock %}

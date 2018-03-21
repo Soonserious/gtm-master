@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <title>Golf Performance Enhancement System</title>
+    <meta charset="UTF-8">
+    <meta id="vp" name="viewport" content="width=device-width">
+    <script>
+        function setViewPort() {
+            var vp = document.getElementById("vp");
+            if (window.matchMedia("(orientation:portrait)").matches && screen.width < 480) {
+                vp.setAttribute("content", "width=480");
+            }
+            else {
+                vp.setAttribute("content", "width=device-width initial-scale=1");
+            }
+        }
+        window.onload = setViewPort;
+        window.addEventListener("orientationchange", setViewPort);
+    </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+    {% block css %}
+    {% endblock %}
+</head>
+<body>
+<div class="container">
+    <div id="test-width1"></div>
+    <div id="test-width2"></div>
+    <div id="test-width3"></div>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{% url 'home' %}">Golf Performance Enhancement System</a>
+                {% if user.is_authenticated %}
+                    {% if user.is_staff %}
+                        <p class="navbar-text">관리자</p>
+                    {% endif %}
+                {% endif %}
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="navbar" class="navbar-collapse collapse in">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            G1 <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% if user.is_staff %}
+                                <li><a href="{% url 'g1_criteria' %}">기준 설정</a></li>
+                                <li><a href="{% url 'g1_field_add' %}">코스 추가</a></li>
+                            {% else %}
+                                <li><a href="{% url 'g1_round' %}">라운드 개요</a></li>
+                                <li><a href="{% url 'g1_round_result' %}">라운드 게시</a></li>
+                            {% endif %}
+
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            G2 <span class="caret"></span>
+                        </a>
+                        {% if user.is_staff %}
+                            <ul class="dropdown-menu">
+                                <li><a>관리자 메뉴 없음</a></li>
+                            </ul>
+                        {% else %}
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'g2_eval_golf_swing' %}">Golf Swing</a></li>
+                                <li><a href="{% url 'g2_eval_short_game' %}">Short Game</a></li>
+                                <li><a href="{% url 'g2_eval_putting' %}">Putting Game</a></li>
+                            </ul>
+                        {% endif %}
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            G3 <span class="caret"></span>
+                        </a>
+                        {% if user.is_staff %}
+                            <ul class="dropdown-menu">
+                                <li><a>관리자 메뉴 없음</a></li>
+                            </ul>
+                        {% else %}
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'g3_shot_challenge' %}">Shot Challenge</a></li>
+                                <li><a href="{% url 'g3_short_game' %}">Short Game</a></li>
+                                <li><a href="{% url 'g3_putting_game' %}">Putting Game</a></li>
+                                <li><a href="{% url 'g3_scoring_game' %}">Scoring Game</a></li>
+                            </ul>
+                        {% endif %}
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            G4 <span class="caret"></span>
+                        </a>
+                        {% if user.is_staff %}
+                            <ul class="dropdown-menu">
+                                <li><a>관리자 메뉴 없음</a></li>
+                            </ul>
+                        {% else %}
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'g4_ocean_test' %}">Ocean Test</a></li>
+                                <li><a href="{% url 'g4_gmet' %}">GMET</a></li>
+                                <li><a href="{% url 'g4_tops' %}">TOPS</a></li>
+                                <li><a href="{% url 'g4_fss' %}">FSS</a></li>
+                                <li><a href="{% url 'g4_acsi' %}">ACSI-28</a></li>
+                                <li><a href="{% url 'g4_course_management' %}">Course Management</a></li>
+                            </ul>
+                        {% endif %}
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            My Page <span class="caret"></span>
+                        </a>
+                        {% if user.is_staff %}
+                            <ul class="dropdown-menu">
+                                <li><a>관리자 메뉴 없음</a></li>
+                            </ul>
+                        {% else %}
+                            <ul class="dropdown-menu">
+                                <li><a href="{% url 'g1_profile' %}">G1 Profile</a></li>
+                                <li><a href="{% url 'g2_profile' %}">G2 Profile</a></li>
+                                <li><a href="{% url 'g3_profile' %}">G3 Profile</a></li>
+                                <li><a href="{% url 'g4_profile' %}">G4 Profile</a></li>
+                                <li><a href="{% url 'mp_preshot_routine' %}">Pre-Shot Routine</a></li>
+                                <li><a href="{% url 'mp_diary' %}">Player Diary</a></li>
+                                <li><a href="{% url 'mp_goal_setting' %}">Goal Setting</a></li>
+                            </ul>
+                        {% endif %}
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_staff %}
+                        <li><a href="{% url 'admin:main_member_changelist' %}">사용자관리</a></li>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'account' %}">내 계정</a></li>
+                        <li><a href="{% url 'sign_out' %}">로그아웃</a></li>
+                    {% else %}
+                        <li><a href="{% url 'sign_in' %}">로그인</a></li>
+                        <li><a href="{% url 'sign_up' %}">회원가입</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    {% include 'common/messages.html' %}
+
+    {% block content %}
+    {% endblock %}
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
+{% block js %}
+{% endblock %}
+
+</body>
+</html>

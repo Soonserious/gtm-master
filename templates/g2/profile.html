@@ -1,0 +1,229 @@
+{% extends "common/base.html" %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h3>G2 Profile</h3>
+    </div>
+
+    <!--Member Information-->
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4><b>Student Information</b></h4></div>
+        <table class="table table-bordered">
+            <thead class="thead">
+            <tr>
+                <th><div align="center">이름</div></th>
+                <th><div align="center">성별</div></th>
+                <th><div align="center">생년월일</div></th>
+                <th><div align="center">핸디캡</div></th>
+                <th><div align="center">소속</div></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><div align="center">{{ member_info.name }}</div></td>
+                <td><div align="center">{{ member_info.sex }}</div></td>
+                <td><div align="center">{{ member_info.birth }}</div></td>
+                <td><div align="center">{{ member_info.handicap|floatformat:2 }}</div></td>
+                <td><div align="center">{{ member_info.association }}</div></td>
+            </tr>
+        </table>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5 class="panel-title text-center">Golf Swing</h5>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered" style="table-layout:fixed; word-break:break-all;">
+                <tr>
+                    <th class="text-center" rowspan="1" colspan="2" style="width: 28%">Check Point</th>
+                    <th class="text-center" rowspan="1" colspan="1" style="width: 36%">Comments</th>
+                    <th class="text-center" rowspan="1" colspan="1" style="width: 36%">Training Drills</th>
+                </tr>
+                {% for first_category in golf_swing %}
+                    <tr>
+                        <th colspan="4">{{ first_category.0 }}</th>
+                    </tr>
+                    {% for second_category in first_category.1 %}
+                        {% for third_category in second_category.1 %}
+                            <tr>
+                                {% if forloop.counter0 == 0 %}
+                                    <td rowspan="{{ second_category.1|length }}" style="vertical-align:middle">{{ second_category.0 }}</td>
+                                {% endif %}
+                                <td>{{ third_category.0 }}</td>
+                                <td name="comment_{{ forloop.parentloop.parentloop.counter0 }}_{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}">
+                                    {{ third_category.1 }}
+                                </td>
+                                <td name="drill_{{ forloop.parentloop.parentloop.counter0 }}_{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}">
+                                    {{ third_category.2 }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
+                {% endfor %}
+            </table>
+            <div>
+                <table class="table table-bordered" id="video_table_swing">
+                <tr>
+                    <th class="text-center" rowspan="1" colspan="1" style="width: 28%">number</th>
+                    <th class="text-center" rowspan="1" colspan="2" style="width: 36%">address</th>
+                    <th class="text-center" rowspan="1" colspan="2" style="width: 36%">name</th>
+                    <th class="text-center" rowspan="1" colspan="1" style="width: 36%">remove</th>
+                </tr>
+                {% for video in videos %}
+                    <tr class="video_class">
+                        <td colspan="1" class="td-contenteditable" >
+                            <textarea required="required" class="table_data_remove_border_line" name="video_number">{{video.0}}</textarea>
+                        </td>
+                        <td colspan="2" class="td-contenteditable" >
+                            <textarea required="required" class="table_data_remove_border_line" name="video_address">{{video.1 }}</textarea>
+                        </td>
+                        <td colspan="2" class="td-contenteditable" >
+                            <textarea required="required" class="table_data_remove_border_line" name="video_name">{{ video.2 }}</textarea>
+                        </td>
+                        <td colspan="1" class="td-contenteditable" >
+                            <button onclick="video_remove()"class="btn btn-primary">remove</button>
+                        </td>
+                    </tr>
+                {% endfor%}
+            </table>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5 class="panel-title text-center">Short Game</h5>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered" style="table-layout:fixed; word-break:break-all;">
+                <tr>
+                    <th class="text-center" rowspan="1" colspan="2" style="width: 28%">Check Point</th>
+                    <th class="text-center" rowspan="1" colspan="1" style="width: 36%">Comments</th>
+                    <th class="text-center" rowspan="1" colspan="1" style="width: 36%">Training Drills</th>
+                </tr>
+                {% for first_category in short_game %}
+                    <tr>
+                        <th colspan="4">{{ first_category.0 }}</th>
+                    </tr>
+                    {% for second_category in first_category.1 %}
+                        {% for third_category in second_category.1 %}
+                            <tr>
+                                {% if forloop.counter0 == 0 %}
+                                    <td rowspan="{{ second_category.1|length }}" style="vertical-align:middle">{{ second_category.0 }}</td>
+                                {% endif %}
+                                <td>{{ third_category.0 }}</td>
+                                <td name="comment_{{ forloop.parentloop.parentloop.counter0 }}_{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}">
+                                    {{ third_category.1 }}
+                                </td>
+                                <td name="drill_{{ forloop.parentloop.parentloop.counter0 }}_{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}">
+                                    {{ third_category.2 }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
+                {% endfor %}
+            </table>
+                <div>
+                     <table class="table table-bordered" id="video_table_short">
+                <tr>
+                    <th class="text-center" rowspan="1" colspan="1" style="width: 28%">number</th>
+                    <th class="text-center" rowspan="1" colspan="2" style="width: 36%">address</th>
+                    <th class="text-center" rowspan="1" colspan="2" style="width: 36%">name</th>
+                    <th class="text-center" rowspan="1" colspan="1" style="width: 36%">remove</th>
+                </tr>
+                {% for video in videos %}
+                    <tr class="video_class">
+                        <td colspan="1" class="td-contenteditable" >
+                            <textarea required="required" class="table_data_remove_border_line" name="video_number">{{video.0}}</textarea>
+                        </td>
+                        <td colspan="2" class="td-contenteditable" >
+                            <textarea required="required" class="table_data_remove_border_line" name="video_address">{{video.1 }}</textarea>
+                        </td>
+                        <td colspan="2" class="td-contenteditable" >
+                            <textarea required="required" class="table_data_remove_border_line" name="video_name">{{ video.2 }}</textarea>
+                        </td>
+                        <td colspan="1" class="td-contenteditable" >
+                            <button onclick="video_remove()"class="btn btn-primary">remove</button>
+                        </td>
+                    </tr>
+                {% endfor%}
+            </table>
+                </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h5 class="panel-title text-center">Putting</h5>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered" style="table-layout:fixed; word-break:break-all;">
+                <tr>
+                    <th class="text-center" rowspan="1" colspan="2" style="width: 28%">Check Point</th>
+                    <th class="text-center" rowspan="1" colspan="1" style="width: 36%">Comments</th>
+                    <th class="text-center" rowspan="1" colspan="1" style="width: 36%">Training Drills</th>
+                </tr>
+                {% for first_category in putting %}
+                    <tr>
+                        <th colspan="4">{{ first_category.0 }}</th>
+                    </tr>
+                    {% for second_category in first_category.1 %}
+                        {% for third_category in second_category.1 %}
+                            <tr>
+                                {% if forloop.counter0 == 0 %}
+                                    <td rowspan="{{ second_category.1|length }}" style="vertical-align:middle">{{ second_category.0 }}</td>
+                                {% endif %}
+                                <td>{{ third_category.0 }}</td>
+                                <td name="comment_{{ forloop.parentloop.parentloop.counter0 }}_{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}">
+                                    {{ third_category.1 }}
+                                </td>
+                                <td name="drill_{{ forloop.parentloop.parentloop.counter0 }}_{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}">
+                                    {{ third_category.2 }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
+                {% endfor %}
+            </table>
+            <div>
+                  <table class="table table-bordered" id="video_table_putting">
+                <tr>
+                    <th class="text-center" rowspan="1" colspan="1" style="width: 28%">number</th>
+                    <th class="text-center" rowspan="1" colspan="2" style="width: 36%">address</th>
+                    <th class="text-center" rowspan="1" colspan="2" style="width: 36%">name</th>
+                </tr>
+                {% for video in short_game_videos %}
+                    <tr class="video_class" onclick="move_video()">
+                        <td colspan="1" class="td-contenteditable" >
+                            <textarea required="required" class="table_data_remove_border_line" name="video_number">{{short_game_videos}}{{video.0}}</textarea>
+                        </td>
+                        <td colspan="2" class="td-contenteditable" >
+                            <textarea required="required" class="table_data_remove_border_line" name="video_address">{{video.1 }}</textarea>
+                        </td>
+                        <td colspan="2" class="td-contenteditable" >
+                            <textarea required="required" class="table_data_remove_border_line" name="video_name">{{ video.2 }}</textarea>
+                        </td>
+
+                    </tr>
+                {% endfor%}
+            </table>
+            <div>
+
+                <button style="float:right" onclick="video_append()"class="btn btn-primary">append</button>
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+       $(".video_class").click(function(){
+        console.log($(this))
+        var url = $(this).find("textarea[name='video_address']").val();
+        window.open(url);
+    })
+    </script>
+}
+{% endblock %}

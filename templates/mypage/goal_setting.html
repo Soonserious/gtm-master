@@ -1,0 +1,459 @@
+{% extends "common/base.html" %}
+
+{% block css %}
+<style>
+    .td-contenteditable {
+        height: 10px;
+    }
+
+    .div-contenteditable {
+        height: 100%;
+    }
+
+    .div-contenteditable:after {
+        content:'\0200B';
+    }
+
+
+    .table_data_remove_border_line{
+            width:100%;
+            border-style :none;
+
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h5 class="panel-title text-center"><strong>목표 설정 및 성취 평가</strong></h5>
+    </div>
+    <div class="panel-body">
+{#        <div class="row">#}
+{#            <div class="col-xs-2 text-center">#}
+{#                <strong>날짜</strong>#}
+{#            </div>#}
+{#            <div class="col-xs-2">#}
+{#                <div class="form-group">#}
+{#                    <input type="date" class="form-control" id="date" name="date">#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="col-xs-8">#}
+{#            </div>#}
+{#        </div>#}
+        <table class="table table-bordered" style="table-layout:fixed; word-break:break-all;">
+            <tr>
+                <th style="vertical-align:middle" colspan="7" class="text-center">내용</th>
+                <th style="vertical-align:middle" colspan="2" class="text-center">목표 날짜</th>
+                <th style="vertical-align:middle" colspan="1" class="text-center">성취</th>
+            </tr>
+            <tr>
+                <th style="vertical-align:middle" colspan="1" class="text-center">장기목표</th>
+                <td style="vertical-align:middle" colspan="6" class="text-center td-contenteditable">
+                    <textarea class="table_data_remove_border_line" id="ltg_content"></textarea>
+                </td>
+                <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
+                        <input type="date" class="form-control" id="ltg_date" name="ltg_date" style="border-style:none;text-align:center">
+                </td>
+                <td style="vertical-align:middle" colspan="1" class="text-center">
+                    <div class="checkbox">
+                        <label>
+                            {% if ltg_achieved %}
+                            <input type="checkbox" id="ltg_achieved" checked>
+                            {% else %}
+                            <input type="checkbox" id="ltg_achieved">
+                            {% endif %}
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th style="vertical-align:middle" colspan="1" class="text-center">목표 단계</th>
+                <th style="vertical-align:middle" colspan="3" class="text-center">결과목표</th>
+                <th style="vertical-align:middle" colspan="3" class="text-center">
+                    수행 및 과정 목표(체력, 기술, 정신력, 전략)
+                </th>
+                <th style="vertical-align:middle" colspan="2" class="text-center">목표 날짜</th>
+                <th style="vertical-align:middle" colspan="1" class="text-center">성취</th>
+            </tr>
+            <tr>
+                <th style="vertical-align:middle" colspan="1" class="text-center">목표 3</th>
+                <td style="vertical-align:middle" colspan="3" class="text-center td-contenteditable">
+                    <textarea class="table_data_remove_border_line" id="g3_rg" name="g3_rg"></textarea>
+                </td>
+                <td style="vertical-align:middle" colspan="3" class="text-center td-contenteditable">
+                    <textarea class="table_data_remove_border_line" id="g3_pg"></textarea>
+
+                </td>
+                <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
+                    <input type="date" class="form-control" id="g3_date" name="g3_date" style="border-style:none;text-align:center">
+                </td>
+                <td style="vertical-align:middle" colspan="1" class="text-center">
+                    <div class="checkbox">
+                        <label>
+                            {% if g3_achieved %}
+                            <input type="checkbox" id="g3_achieved" checked>
+                            {% else %}
+                            <input type="checkbox" id="g3_achieved">
+                            {% endif %}
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th style="vertical-align:middle" colspan="1" class="text-center">목표 2</th>
+                <td style="vertical-align:middle" colspan="3" class="text-center td-contenteditable">
+                    <textarea class="table_data_remove_border_line" id="g2_rg"></textarea>
+                </td>
+                <td style="vertical-align:middle" colspan="3" class="text-center td-contenteditable">
+                    <textarea class="table_data_remove_border_line" id="g2_pg"></textarea>
+                </td>
+                <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
+                    <input type="date" class="form-control" id="g2_date" name="g2_date" style="border-style:none;text-align:center">
+                </td>
+                <td style="vertical-align:middle" colspan="1" class="text-center">
+                    <div class="checkbox">
+                        <label>
+                            {% if g2_achieved %}
+                            <input type="checkbox" id="g2_achieved" checked>
+                            {% else %}
+                            <input type="checkbox" id="g2_achieved">
+                            {% endif %}
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th style="vertical-align:middle" colspan="1" class="text-center">목표 1</th>
+                <td style="vertical-align:middle" colspan="3" class="text-center td-contenteditable">
+                    <textarea class="table_data_remove_border_line" id="g1_rg"></textarea>
+                </td>
+                <td style="vertical-align:middle" colspan="3" class="text-center td-contenteditable">
+                    <textarea class="table_data_remove_border_line" id="g1_pg"></textarea>
+                </td>
+                <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
+                    <input type="date" class="form-control" id="g1_date" name="g1_date" style="border-style:none;text-align:center">
+                </td>
+                <td style="vertical-align:middle" colspan="1" class="text-center">
+                    <div class="checkbox">
+                        <label>
+                            {% if g1_achieved %}
+                            <input type="checkbox" id="g1_achieved" checked>
+                            {% else %}
+                            <input type="checkbox" id="g1_achieved">
+                            {% endif %}
+                        </label>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <div class="row">
+            <div class="col-xs-4 col-xs-offset-4" align="right">
+                <button type="button" class="btn btn-default btn-lg btn-block" onclick="save_ltg_clicked()">저장하기</button>
+            </div>
+            <div class="col-xs-4" align="right" id="ltg_submit"></div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h5 class="panel-title text-center"><strong>일일 연습 목표 설정 및 성취 평가</strong></h5>
+    </div>
+    <div class="panel-body">
+    <table class="table table-bordered" style="table-layout:fixed; word-break:break-all;" id="dg-save-table">
+        <tr>
+            <th style="vertical-align:middle" colspan="2" class="text-center">날짜</th>
+            <th style="vertical-align:middle" colspan="7" class="text-center">금일 연습에서의 목표</th>
+            <th style="vertical-align:middle" colspan="1" class="text-center">create</th>
+        </tr>
+        <tr>
+            <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
+               <center> <input style="width:130px   " type="date" class="table_data_remove_border_line" id="dg_save_date"></center>
+            </td>
+            <td style="vertical-align:middle" colspan="7" class="text-center td-contenteditable">
+                <textarea class="table_data_remove_border_line" id="dg_save_content"></textarea>
+            </td>
+            <td>
+                <center style="margin:auto"><button onclick="dg_create()" class="btn btn-default btn-lg btn-block">save</button></center>
+            </td>
+        </tr>
+    </table>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered" style="table-layout:fixed; word-break:break-all;" id="dg-table">
+            <tr>
+                <th style="vertical-align:middle" colspan="2" class="text-center">날짜</th>
+                <th style="vertical-align:middle" colspan="7" class="text-center">금일 연습에서의 목표</th>
+                <th style="vertical-align:middle" colspan="1" class="text-center">성취</th>
+                <th style="vertical-align:middle" colspan="1" class="text-center">update</th>
+            </tr>
+            {% for idx, date, content, achieved in dg_data %}
+            <tr>
+                <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
+                    <input type="date" id="dg_date_{{ idx }}" name="dg_update_date" value="{{ date }}">
+                </td>
+                <td style="vertical-align:middle" colspan="7" class="text-center td-contenteditable">
+                    <textarea class="dg_update_contents table_data_remove_border_line" id="dg_{{idx}}_content">{{ content }}</textarea>
+                </td>
+                <td style="vertical-align:middle" colspan="1" class="text-center">
+                    <div class="checkbox">
+                        <label>
+                            {% if achieved %}
+                            <input class="dg_update_archieved" type="checkbox" id="dg_{{ idx }}_achieved" checked>
+                            {% else %}
+                            <input class="dg_update_archieved" type="checkbox" id="dg_{{ idx }}_achieved">
+                            {% endif %}
+                        </label>
+                    </div>
+                </td>
+                 <td>
+                <center style="margin:auto"><button onclick="dg_update({{ idx }})" class="btn btn-default btn-lg btn-block">save</button></center>
+                 </td>
+{#                <td style="vertical-align:middle" colspan="1" class="text-center">#}
+{#                    <button type="button" class="btn btn-default btn-block" value="{{ idx }}" onclick="hide_dg_clicked(this)">#}
+{#                        숨기기#}
+{#                    </button>#}
+{#                </td>#}
+            </tr>
+            {% endfor %}
+{#            <tr id="dg-last-tr">#}
+{#                <td colspan="2">#}
+{#                </td>#}
+{#                <td colspan="6">#}
+{#                </td>#}
+{#                <td colspan="1">#}
+{#                </td>#}
+{#                <td style="vertical-align:middle" colspan="1" class="text-center">#}
+{#                    <button type="button" class="btn btn-default btn-block" onclick="add_dg_clicked()">추가하기</button>#}
+{#                </td>#}
+{#            </tr>#}
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+$(function() { $.ajaxSetup({headers: {"X-CSRFToken": getCookie("csrftoken")}}); });
+
+$("input[name='dg_update_date']").on("change",function(){
+
+    $.ajax({
+        url :"/mypage/dg_exsist",
+        type :"GET",
+        data : {"date" : $(this).val()},
+        success : function(json){
+                    $(this).parent().children(".dg_update_contents").val(json.contents);
+                    if(json.archieved == "archieved"){
+                        $(this).parent().children(".dg_update_archieved").prop("checked","checked");
+                    }
+                },
+        error : function(xhr, errmsg, err) {
+                        console.log(xhr.status + ": " + xhr.responseText);
+                    }
+
+
+
+    });
+
+})
+
+$("#ltg_date").on("input",function(){
+    console.log()
+     $.ajax({
+                    url : "/mypage/ltg_date_exsist",
+                    type : 'GET',
+                    data : { "date" : $("#ltg_date").val()},
+                        success : function(json) {
+                        if(json){
+                            changeLtgTable(json);
+                        }
+                    },
+                    error : function(xhr, errmsg, err) {
+                        console.log(xhr.status + ": " + xhr.responseText);
+                    }
+                });
+
+})
+
+
+$('div[contenteditable="true"]').keypress(function(event) {
+    if (event.which != 13)
+        return true;
+
+    var docFragment = document.createDocumentFragment();
+    var newEle = document.createElement('br');
+    docFragment.appendChild(newEle);
+
+    //make the br replace selection
+    var range = window.getSelection().getRangeAt(0);
+    range.deleteContents();
+    range.insertNode(docFragment);
+
+    //create a new range
+    range = document.createRange();
+    range.setStartAfter(newEle);
+    range.collapse(true);
+
+    //make the cursor there
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+
+    return false;
+});
+
+function save_ltg_clicked() {
+    console.log("save long-term goal");
+    var contents = {
+        "ltg_content": $("#ltg_content").val(),
+        "ltg_date": $("#ltg_date").val(),
+        "ltg_achieved": $("#ltg_achieved").prop("checked")
+    };
+    for (var i = 1; i <= 3; ++i) {
+        contents["g" + i + "_rg"] = $("#g" + i + "_rg").val();
+        contents["g" + i + "_pg"] = $("#g" + i + "_pg").val();
+        contents["g" + i + "_date"] = $("#g" + i + "_date").val();
+        contents["g" + i + "_achieved"] = $("#g" + i + "_achieved").prop("checked");
+    }
+    console.log(JSON.stringify(contents));
+    $.ajax({
+        url: "{% url 'mp_ltg_submit' %}",
+        method: "POST",
+        data: {"contents" : JSON.stringify(contents),
+                "ltg_date" : $("#ltg_date").val()},
+        dataType: "json",
+        success: function(data) {
+            console.log("result: " + data["status"]);
+{#            $("#ltg_status").innerText[0].innerText = data["status"];#}
+        }
+    });
+}
+
+function dg_create(){
+
+    dg_date = $('#dg_save_date').val();
+    dg_content = $('#dg_save_content').val();
+    dg_archieved = "";
+    save_dg_clicked(dg_date,dg_content, dg_archieved);
+}
+
+function dg_update(i){
+    dg_date = $("'#dg_date_' + i ").val();
+    dg_content = $("'#dg_' + i+'_content'").val();
+    dg_archeived = $("'#dg_' + i+ 'archeived'").prop("checked");
+    save_dg_clicked(dg_date,dg_content,dg_archeived);
+    }
+
+function save_dg_clicked(dg_date, dg_content, dg_archieved) {
+    console.log("save daily goal");
+    var contents = {};
+    contents['dg_date'] = dg_date;
+    contents['dg_content'] = dg_content;
+    contents['dg_achieved'] = dg_archieved;
+
+    console.log(contents);
+    var data = {contents: JSON.stringify(contents)};
+    $.ajax({
+        url: "{% url 'mp_dg_submit' %}",
+        method: "POST",
+        data: data,
+        dataType: "json",
+        success: function(data) {
+            console.log("result: " + data["status"]);
+        }
+    });
+}
+
+function hide_dg_clicked() {
+    console.log("hide daily goal: " + value);
+}
+
+function add_dg_clicked() {
+    var new_row = "<tr>\
+        <td style=\"vertical-align:middle\" colspan=\"2\" class=\"text-center td-contenteditable\"\
+            id=\"dg_{{ idx }}_date\">\
+            <div class=\"div-contenteditable\" contenteditable=\"true\"></div>\
+        </td>\
+        <td style=\"vertical-align:middle\" colspan=\"6\" class=\"text-center td-contenteditable\"\
+            id=\"dg_{{ idx }}_content\">\
+            <div class=\"div-contenteditable\" contenteditable=\"true\"></div>\
+        </td>\
+        <td style=\"vertical-align:middle\" colspan=\"1\" class=\"text-center\">\
+            <div class=\"checkbox\">\
+                <label>\
+                    <input type=\"checkbox\" id=\"dg_{{ idx }}_achieved\">\
+                </label>\
+            </div>\
+        </td>\
+        <td style=\"vertical-align:middle\" colspan=\"1\" class=\"text-center\">\
+            <button type=\"button\" class=\"btn btn-default btn-block\" value=\"{{ idx }}\" onclick=\"hide_dg_clicked(this)\">숨기기</button>\
+        </td>\
+    </tr>\""
+    $(new_row).insertBefore("#dg-last-tr");
+}
+
+function hide_dg_clicked(self) {
+    var tr = self.parentElement.parentElement;
+    var divs = tr.getElementsByTagName("div");
+    var dg_date = divs[0].innerText;
+    var dg_content = divs[1].innerText;
+    var dg_achieved = $(divs[2].getElementsByTagName("input")).prop("checked");
+    console.log("date: " + dg_date);
+    console.log("content: " + dg_content);
+    console.log("achieved: " + dg_achieved);
+    tr.remove();
+}
+
+function changeLtgTable(result){
+   $("#ltg_content").val(result.ltg_content);
+   $("#g1_rg").val(result.g1_rg);
+   $("#g1_pg").val(result.g1_pg);
+   $("#g1_date").val(result.g1_date);
+   $("#g2_rg").val(result.g2_rg);
+   $("#g2_pg").val(result.g2_pg);
+   $("#g2_date").val(result.g2_date);
+   $("#g3_rg").val(result.g3_rg);
+   $("#g3_pg").val(result.g3_pg);
+   $("#g3_date").val(result.g3_date);
+
+   if(result.ltg_achieved != false){
+        $("#ltg_achieved").prop("checked","checked");
+   }else{
+         $("#ltg_achieved").removeProp("checked");
+   }
+   if(result.g1_achieved != "false"){
+        $("#g1_achieved").prop("checked","checked");
+   }else{
+         $("#g1_achieved").removeProp("checked");
+   }
+   if(result.g2_achieved != false){
+        $("#g2_achieved").prop("checked","checked");
+   }else{
+         $("#g2_achieved").removeProp("checked");
+   }
+   if(result.g3_achieved!= false){
+        $("#g3_achieved").prop("checked","checked");
+   }else{
+         $("#g3_achieved").removeProp("checked");
+   }
+
+};
+</script>
+{% endblock %}
