@@ -210,7 +210,7 @@ class RoundingResult(models.Model):
         return {
             'out_score': sum(self.getscore()[0:9]),
             'in_score': sum(self.getscore()[9:18]),
-            'score': sum(self.getscore()),
+            'score': format.(sum(self.getscore()),'.2f'),
             'out_driving_distance': sum(driving_distance[0:9]) / par4_in_cnt if par4_in_cnt != 0 else 0,
             'in_driving_distance': sum(driving_distance[9:18]) / par4_out_cnt if par4_out_cnt != 0 else 0,
             'driving_distance': sum(driving_distance) / par4_cnt if par4_cnt != 0 else 0,
