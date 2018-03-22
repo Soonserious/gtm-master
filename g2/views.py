@@ -122,11 +122,20 @@ def profile(request):
         target_user = request.user
         context = {}
         for contents_name, model_cls in zip(['golf_swing', 'short_game', 'putting'], [GolfSwing, ShortGame, Putting]):
-            queried = model_cls.objects.filter(user=target_user).order_by('-update_time')
-            if queried.exists():
-                result = queried[0].fill_contents()
-            else:
-                result = model_cls.get_categories()
+            # queried = model_cls.objects.filter(user=target_user).order_by('-update_time')
+            queried = None
+            result= None
+            try :
+                queried = model_cls.objects.get(user=request.user)
+                result = queried.fill_contents()
+            except ObjectDoesNotExist:
+                queried = model_cls()
+                result = queried.get_categories()
+
+            # if queried.exists():
+            #     result = queried[0].fill_contents()
+            # else:
+            #     result = model_cls.get_categories()
 
 
             # 비어있는 third category 제거
@@ -137,13 +146,13 @@ def profile(request):
                                             in third_categories
                                             if comment or drill]
                     result[i][1][j][1] = new_third_categories
-            if queried[0].video:
-                json_videos = json.loads(queried[0].video)
+            if queried.video:
+                json_videos = json.loads(queried.video)
                 videos = []
                 for key in json_videos:
                     videos.append(json.loads(json_videos.get(key)))
                 context[contents_name+"_videos"]=videos
-                print(context[contents_name+"_videos"])
+                print(contents_name)
             context[contents_name] = result
 
         target_member = Member.objects.get(user=target_user)

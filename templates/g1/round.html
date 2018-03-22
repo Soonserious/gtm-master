@@ -128,7 +128,7 @@ table{
                     </colgroup>
                     <tr>
                         <th colspan=2>Average</th>
-                        <td>{{ recent_avg.score }}</td>
+                        <td>{{ recent_avg.score|floatformat:2 }}</td>
                         <td>{{ recent_avg.fairway_hit|floatformat:2 }}%</td>
                         <td>{{ recent_avg.putt|floatformat:2 }}</td>
                         <td>{{ recent_avg.gir|floatformat:2 }}%</td>
@@ -160,7 +160,7 @@ table{
                         <tr>
                             <td>{{ r.date|date:"Y-m-d" }}</td>
                             <td>{{ r.course }}</td>
-                            <td>{{ r.score }}</td>
+                            <td>{{ r.score|floatformat:2 }}</td>
                             <td>{{ r.fairway_hit|floatformat:2 }}%</td>
                             <td>{{ r.putt }}</td>
                             <td>{{ r.gir|floatformat:2 }}%</td>
@@ -173,7 +173,7 @@ table{
                     {% endfor %}
                     <tr>
                         <th colspan=2>Average</th>
-                        <td>{{ best_10_avg.score }}</td>
+                        <td>{{ best_10_avg.score|floatformat:2  }}</td>
                         <td>{{ best_10_avg.fairway_hit|floatformat:2 }}%</td>
                         <td>{{ best_10_avg.putt|floatformat:2 }}</td>
                         <td>{{ best_10_avg.gir|floatformat:2 }}%</td>

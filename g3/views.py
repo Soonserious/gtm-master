@@ -398,7 +398,7 @@ def profile(request):
                     ]
             ):
                 queried = model_cls.objects.filter(user=target_user,
-                                                   date=[standardTime, datetime.datetime.now()]).order_by(
+                                                   date__gte=standardTime).order_by(
                     '-date').distinct()
                 distinct_records = []
                 dates = []

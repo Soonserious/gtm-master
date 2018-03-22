@@ -70,21 +70,18 @@
                     <th class="text-center" rowspan="1" colspan="1" style="width: 28%">number</th>
                     <th class="text-center" rowspan="1" colspan="2" style="width: 36%">address</th>
                     <th class="text-center" rowspan="1" colspan="2" style="width: 36%">name</th>
-                    <th class="text-center" rowspan="1" colspan="1" style="width: 36%">remove</th>
+
                 </tr>
-                {% for video in videos %}
+                {% for video in golf_swing_videos %}
                     <tr class="video_class">
                         <td colspan="1" class="td-contenteditable" >
-                            <textarea required="required" class="table_data_remove_border_line" name="video_number">{{video.0}}</textarea>
+                            {{video.0}}
                         </td>
                         <td colspan="2" class="td-contenteditable" >
                             <textarea required="required" class="table_data_remove_border_line" name="video_address">{{video.1 }}</textarea>
                         </td>
                         <td colspan="2" class="td-contenteditable" >
                             <textarea required="required" class="table_data_remove_border_line" name="video_name">{{ video.2 }}</textarea>
-                        </td>
-                        <td colspan="1" class="td-contenteditable" >
-                            <button onclick="video_remove()"class="btn btn-primary">remove</button>
                         </td>
                     </tr>
                 {% endfor%}
@@ -131,21 +128,18 @@
                     <th class="text-center" rowspan="1" colspan="1" style="width: 28%">number</th>
                     <th class="text-center" rowspan="1" colspan="2" style="width: 36%">address</th>
                     <th class="text-center" rowspan="1" colspan="2" style="width: 36%">name</th>
-                    <th class="text-center" rowspan="1" colspan="1" style="width: 36%">remove</th>
+
                 </tr>
-                {% for video in videos %}
+                {% for video in short_game_videos %}
                     <tr class="video_class">
                         <td colspan="1" class="td-contenteditable" >
-                            <textarea required="required" class="table_data_remove_border_line" name="video_number">{{video.0}}</textarea>
+                            {{video.0}}
                         </td>
                         <td colspan="2" class="td-contenteditable" >
                             <textarea required="required" class="table_data_remove_border_line" name="video_address">{{video.1 }}</textarea>
                         </td>
                         <td colspan="2" class="td-contenteditable" >
                             <textarea required="required" class="table_data_remove_border_line" name="video_name">{{ video.2 }}</textarea>
-                        </td>
-                        <td colspan="1" class="td-contenteditable" >
-                            <button onclick="video_remove()"class="btn btn-primary">remove</button>
                         </td>
                     </tr>
                 {% endfor%}
@@ -193,10 +187,10 @@
                     <th class="text-center" rowspan="1" colspan="2" style="width: 36%">address</th>
                     <th class="text-center" rowspan="1" colspan="2" style="width: 36%">name</th>
                 </tr>
-                {% for video in short_game_videos %}
+                {% for video in putting_videos %}
                     <tr class="video_class" onclick="move_video()">
                         <td colspan="1" class="td-contenteditable" >
-                            <textarea required="required" class="table_data_remove_border_line" name="video_number">{{short_game_videos}}{{video.0}}</textarea>
+                            {{video.0}}
                         </td>
                         <td colspan="2" class="td-contenteditable" >
                             <textarea required="required" class="table_data_remove_border_line" name="video_address">{{video.1 }}</textarea>

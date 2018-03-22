@@ -111,29 +111,30 @@ def handicap(rrs):
 @login_required
 @user_passes_test(has_permission_g1, "G1 이용 권한이 없습니다.")
 def round(request):
-    target_user_id = request.user.username
-    target_user = User.objects.get(username=target_user_id)
-    target_member = Member.objects.get(user=target_user)
-    member_info = {
-        'name': target_member.full_name,
-        'sex': '남자' if target_member.sex == 'M' else '여자',
-        'birth': target_member.birth or '-',
-        'handicap': target_member.handicap if target_member.handicap is not None else '-',
-        'association': target_member.association,
-    }
+    try :
+        target_user_id = request.user.username
+        target_user = User.objects.get(username=target_user_id)
+        target_member = Member.objects.get(user=target_user)
+        member_info = {
+            'name': target_member.full_name,
+            'sex': '남자' if target_member.sex == 'M' else '여자',
+            'birth': target_member.birth or '-',
+            'handicap': target_member.handicap if target_member.handicap is not None else '-',
+            'association': target_member.association,
+        }
 
-    round_posted = RoundingResult.objects.filter(user=request.user).count()
-    rrs = RoundingResult.objects.filter(user=request.user).order_by('-date', '-create_time')[:20]
-    best_10 = sorted(rrs, key=lambda rr: sum(rr.getscore()))[:10]
-
-    return render(request, 'g1/round.html', {'member_info': member_info,
-                                                          'recent': [info(rr) for rr in rrs],
-                                                          'recent_avg': average(rrs),
-                                                          'best_10': [info(rr) for rr in best_10],
-                                                          'best_10_avg': average(best_10),
-                                                          'round_posted': round_posted,
-                                             'handicap': handicap(rrs)})
-
+        round_posted = RoundingResult.objects.filter(user=request.user).count()
+        rrs = RoundingResult.objects.filter(user=request.user).order_by('-date', '-create_time')[:20]
+        best_10 = sorted(rrs, key=lambda rr: sum(rr.getscore()))[:10]
+        return render(request, 'g1/round.html', {'member_info': member_info,
+                                                 'recent': [info(rr) for rr in rrs],
+                                                 'recent_avg': average(rrs),
+                                                 'best_10': [info(rr) for rr in best_10],
+                                                 'best_10_avg': average(best_10),
+                                                 'round_posted': round_posted,
+                                                 'handicap': handicap(rrs)})
+    except Exception as ex:
+        print(ex)
 
 @login_required
 @user_passes_test(has_permission_mypage, "My Page 이용 권한이 없습니다.")

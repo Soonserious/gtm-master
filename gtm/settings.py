@@ -85,15 +85,15 @@ WSGI_APPLICATION = 'gtm.wsgi.application'
 
 DATABASES = {
     'default':{
-        'ENGINE' : 'django.db.backends.sqlite3',
-        'NAME' : os.path.join(BASE_DIR,'db_sqlite3'),
+        # 'ENGINE' : 'django.db.backends.sqlite3',
+        # 'NAME' : os.path.join(BASE_DIR,'db_sqlite3'),
 
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': 'pgtest',
-        # 'USER': 'postgres',
-        # 'PASSWORD': 'ekscn123',
-        # 'HOST': 'localhost',
-        # 'PORT': '',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'pgtest',
+        'USER': 'postgres',
+        'PASSWORD': 'ekscn123',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 #
