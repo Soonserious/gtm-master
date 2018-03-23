@@ -798,9 +798,14 @@ $(document).ready(function(){
     $('#tee_shot_result').hide();
     $(".save_temp_select_parent").each(function(){
         if(localStorage.getItem($(this).attr("name")) !=null){
-            $(this).val(localStorage.getItem($(this).attr("name")));
+                 if($(this).attr("type") == "radio"){
+                        var target = "input:radio[name='"+$(this).attr("name")+"'][value='"+localStorage.getItem($(this).attr("name"))+"']";
+                        $(target).parent().addClass("active");
+                    }else{
+                        $(this).val(localStorage.getItem($(this).attr("name")));
+                    }
         }
-        console.log(localStorage.getItem($(this).attr("name")));
+
     });
 });
 </script>
@@ -850,7 +855,7 @@ $(document).ready(function(){
             localStorage.setItem($(this).attr("name"),$(this).val());
         })
 
-        $("input:radio[name^='shot']").on("select",function(){
+        $("input:radio[name^='shot']").on("click",function(){
             localStorage.setItem($(this).attr("name"),$(this).val());
             console.log($(this).attr("name")+ " " + $(this).val())
         })
@@ -916,11 +921,21 @@ $(document).ready(function(){
 
 </script>
 <script type='text/javascript'>
-    $(".save_temp_select_parent").on('input',function(){
-        localStorage.setItem($(this).attr("name"),$(this).val());
-        console.log(localStorage.getItem($(this).attr("name")));
-        console.log($(this).attr("name"));
-    })
+
+     $(document).ready(function(){
+        $('input[value="0"]').attr("checked", true);
+        $('#nine_hole_result').hide();
+        $("input").each(function(){
+                if(localStorage.getItem($(this).attr("name"))){
+                    if($(this).attr("type") == "radio"){
+                        var target = "input:radio[name='"+$(this).attr("name")+"'][value='"+localStorage.getItem($(this).attr("name"))+"']";
+                        $(target).parent().addClass("active");
+                    }else{
+                        $(this).val(localStorage.getItem($(this).attr("name")));
+                    }
+                }
+            })
+    });
 
     $("input[name^=date]").on('input',function(){
         var text = $("li.active").text();
@@ -950,6 +965,15 @@ $(document).ready(function(){
                 });
 
     })
+
+    $("input:radio[name^='shot']").on("click",function(){
+            localStorage.setItem($(this).attr("name"),$(this).val());
+            console.log($(this).attr("name")+ " " + $(this).val())
+        })
+     $("input").on("input",function(){
+            localStorage.setItem($(this).attr("name"),$(this).val());
+        })
+
 
     function selection_remove(){
         var selection = $('input:radio[name^=shot]').parent();

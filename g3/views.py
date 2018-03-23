@@ -444,7 +444,7 @@ def profile(request):
             latest_dates = [[] for _ in range(len(attr_names))]
             oldest_levels = [[] for _ in range(len(attr_names))]
             oldest_scores = [[] for _ in range(len(attr_names))]
-            queried = ScoringGame.objects.filter(user=target_user).order_by('-date', '-create_time')
+            queried = ScoringGame.objects.filter(user=target_user, date__gte=standardTime).order_by('-date', '-create_time')
             distinct_records = []
             dates = []
             for record in queried:
@@ -478,7 +478,7 @@ def profile(request):
                 level_history[pi][ti].append({'levels': latest_levels[ai][::-1], 'dates': latest_dates[ai][::-1]})
 
             for model_cls in [PowerGameAnalysis, ScoringGameAnalysis]:
-                queried = model_cls.objects.filter(user=target_user).order_by('-update_time')
+                queried = model_cls.objects.filter(user=target_user, update_time__gte=standardTime).order_by('-update_time')
                 if queried.exists():
                     comments.append(queried[0].comment)
                     strategies.append(queried[0].comment)

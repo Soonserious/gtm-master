@@ -113,7 +113,7 @@
                                         <div class="btn-group btn-group-justified" data-toggle="buttons">
                                             {% for point in "34567" %}
                                             <label class="btn btn-default">
-                                                <input type="radio" required="true"
+                                                <input  type="radio" required="true"
                                                        name="shot_3_{{ forloop.parentloop.counter }}"
                                                        value="{{ point }}"/> {{ point }}
                                             </label>
@@ -280,9 +280,9 @@
             localStorage.setItem($(this).attr("name"),$(this).val());
         })
 
-        $("input:radio[name^='shot']").on("select",function(){
+       $("input:radio[name^='shot']").on("change",function(){
             localStorage.setItem($(this).attr("name"),$(this).val());
-            console.log($(this).attr("name")+ " " + $(this).val())
+            console.log($(this).attr("name")+ " " + $(this).val());
         })
 
 
