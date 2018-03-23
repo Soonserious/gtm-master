@@ -253,26 +253,26 @@ function getCookie(name) {
 $(function() { $.ajaxSetup({headers: {"X-CSRFToken": getCookie("csrftoken")}}); });
 
 $("input[name='dg_update_date']").on("change",function(){
-
+    var me = this
     $.ajax({
         url :"/mypage/dg_exsist",
         type :"GET",
         data : {"date" : $(this).val()},
         success : function(json){
-                    $(this).parent().children(".dg_update_contents").val(json.contents);
+                   console.log($(me).parent().parent().find(".dg_update_contents").val());
+                   $(me).parent().parent().find(".dg_update_contents").val(json.contents);
                     if(json.archieved == "archieved"){
-                        $(this).parent().children(".dg_update_archieved").prop("checked","checked");
+                        $(me).parent().find(".dg_update_archieved").prop("checked","checked");
                     }
                 },
         error : function(xhr, errmsg, err) {
                         console.log(xhr.status + ": " + xhr.responseText);
                     }
 
-
-
     });
 
 })
+
 
 $("#ltg_date").on("input",function(){
     console.log()

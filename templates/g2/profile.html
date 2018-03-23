@@ -1,6 +1,18 @@
 {% extends "common/base.html" %}
 
 {% block css %}
+       <style>
+        .table_remove_borderline{
+            boder-collapse:collapse;
+            boder:solid 1px;
+        }
+
+        .table_data_remove_border_line{
+            width:100%;
+            border-style :none;
+
+        }
+        </style>
 {% endblock %}
 
 {% block content %}
@@ -65,7 +77,7 @@
                 {% endfor %}
             </table>
             <div>
-                <table class="table table-bordered" id="video_table_swing">
+                <table class="table table-bordered table_remove_borderline" id="video_table_swing">
                 <tr>
                     <th class="text-center" rowspan="1" colspan="1" style="width: 28%">number</th>
                     <th class="text-center" rowspan="1" colspan="2" style="width: 36%">address</th>
@@ -94,7 +106,7 @@
             <h5 class="panel-title text-center">Short Game</h5>
         </div>
         <div class="panel-body">
-            <table class="table table-bordered" style="table-layout:fixed; word-break:break-all;">
+            <table class="table table-bordered " style="table-layout:fixed; word-break:break-all;">
                 <tr>
                     <th class="text-center" rowspan="1" colspan="2" style="width: 28%">Check Point</th>
                     <th class="text-center" rowspan="1" colspan="1" style="width: 36%">Comments</th>
@@ -123,7 +135,7 @@
                 {% endfor %}
             </table>
                 <div>
-                     <table class="table table-bordered" id="video_table_short">
+                     <table class="table table-bordered table_remove_borderline" id="video_table_short">
                 <tr>
                     <th class="text-center" rowspan="1" colspan="1" style="width: 28%">number</th>
                     <th class="text-center" rowspan="1" colspan="2" style="width: 36%">address</th>
@@ -136,10 +148,10 @@
                             {{video.0}}
                         </td>
                         <td colspan="2" class="td-contenteditable" >
-                            <textarea required="required" class="table_data_remove_border_line" name="video_address">{{video.1 }}</textarea>
+                           {{video.1 }}
                         </td>
                         <td colspan="2" class="td-contenteditable" >
-                            <textarea required="required" class="table_data_remove_border_line" name="video_name">{{ video.2 }}</textarea>
+                            {{ video.2 }}
                         </td>
                     </tr>
                 {% endfor%}
@@ -181,7 +193,7 @@
                 {% endfor %}
             </table>
             <div>
-                  <table class="table table-bordered" id="video_table_putting">
+                  <table class="table table-bordered table_remove_borderline" id="video_table_putting">
                 <tr>
                     <th class="text-center" rowspan="1" colspan="1" style="width: 28%">number</th>
                     <th class="text-center" rowspan="1" colspan="2" style="width: 36%">address</th>
@@ -193,19 +205,15 @@
                             {{video.0}}
                         </td>
                         <td colspan="2" class="td-contenteditable" >
-                            <textarea required="required" class="table_data_remove_border_line" name="video_address">{{video.1 }}</textarea>
+                          {{video.1 }}
                         </td>
                         <td colspan="2" class="td-contenteditable" >
-                            <textarea required="required" class="table_data_remove_border_line" name="video_name">{{ video.2 }}</textarea>
+                            {{ video.2 }}
                         </td>
 
                     </tr>
                 {% endfor%}
             </table>
-            <div>
-
-                <button style="float:right" onclick="video_append()"class="btn btn-primary">append</button>
-            </div>
             </div>
         </div>
     </div>

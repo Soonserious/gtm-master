@@ -135,19 +135,23 @@ def goal_setting(request):
 
 
 def ltg_submit(request):
-    if request.method == 'GET':
-        return
-    dumped_contents = request.POST['contents']
-    model = None
-    try :
-        model = LongTermGoals(user=request.user, update_date=request.POST["ltg_date"])
-    except ObjectDoesNotExist:
-        model = LongTermGoals()
-    model.update_time = request.POST["ltg_date"]
-    model.user = request.user
-    model.dumped_contents = dumped_contents
-    model.save()
-    return JsonResponse({'status': '목표 설정 및 성취 평가 저장 완료'})
+    try:
+        if request.method == 'GET':
+            return
+        dumped_contents = request.POST['contents']
+        model = None
+        try:
+            model = LongTermGoals.objects.get(user=request.user, update_time=request.POST["ltg_date"])
+        except ObjectDoesNotExist:
+            model = LongTermGoals()
+        model.update_time = request.POST["ltg_date"]
+        print(model)
+        model.user = request.user
+        model.dumped_contents = dumped_contents
+        model.save()
+        return JsonResponse({'status': '목표 설정 및 성취 평가 저장 완료'})
+    except Exception as ex:
+        print(ex)
 
 def dg_submit(request):
     try:
@@ -156,7 +160,6 @@ def dg_submit(request):
         dumped_contents = request.POST['contents']
         date = json.loads(dumped_contents)
         date = date["dg_date"]
-        print(date)
         model = None
         try:
             model = DailyGoals.objects.get(user=request.user, update_time=date)
@@ -177,6 +180,7 @@ def ltg_date_exsist(request):
         try:
             ltg_term_goal = LongTermGoals.objects.get(user=request.user, update_time=date)
             json =  ltg_term_goal.getDumpedContents()
+            print(json)
             return JsonResponse(json)
         except ObjectDoesNotExist:
             return JsonResponse({})
@@ -190,8 +194,8 @@ def dg_date_exsist(request):
             model = DailyGoals.objects.get(user=request.user,update_time = date)
             dumped_contents = json.loads(model.dumped_contents)
             print(dumped_contents)
-            print(dumped_contents["dg_contents".format()])
-            return JsonResponse({"contents": dumped_contents["dg_contents".format()],
+            print(dumped_contents["dg_content".format()])
+            return JsonResponse({"contents": dumped_contents["dg_content".format()],
                                  "archieved": dumped_contents['dg_achieved'.format()]})
 
         except ObjectDoesNotExist:
