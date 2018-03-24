@@ -89,11 +89,11 @@
                         <td colspan="1" class="td-contenteditable" >
                             {{video.0}}
                         </td>
-                        <td colspan="2" class="td-contenteditable" >
-                            <textarea required="required" class="table_data_remove_border_line" name="video_address">{{video.1 }}</textarea>
+                        <td colspan="2" class="td-contenteditable" class="video_address" >
+                            {{video.1 }}
                         </td>
                         <td colspan="2" class="td-contenteditable" >
-                            <textarea required="required" class="table_data_remove_border_line" name="video_name">{{ video.2 }}</textarea>
+                            {{ video.2 }}
                         </td>
                     </tr>
                 {% endfor%}
@@ -147,7 +147,7 @@
                         <td colspan="1" class="td-contenteditable" >
                             {{video.0}}
                         </td>
-                        <td colspan="2" class="td-contenteditable" >
+                        <td colspan="2" class="td-contenteditable" class="video_address">
                            {{video.1 }}
                         </td>
                         <td colspan="2" class="td-contenteditable" >
@@ -204,7 +204,7 @@
                         <td colspan="1" class="td-contenteditable" >
                             {{video.0}}
                         </td>
-                        <td colspan="2" class="td-contenteditable" >
+                        <td colspan="2" class="td-contenteditable" class="video_address">
                           {{video.1 }}
                         </td>
                         <td colspan="2" class="td-contenteditable" >
@@ -223,7 +223,7 @@
     <script>
        $(".video_class").click(function(){
         console.log($(this))
-        var url = $(this).find("textarea[name='video_address']").val();
+        var url = $(this).find("td[class='video_address']").val();
         window.open(url);
     })
     </script>
