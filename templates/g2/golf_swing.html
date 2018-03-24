@@ -79,9 +79,9 @@
                         {% for third_category in second_category.1 %}
                             <tr>
                                 {% if forloop.counter0 == 0 %}
-                                    <td rowspan="{{ second_category.1|length }}" style="vertical-align:middle">{{ second_category.0 }}</td>
+                                    <td rowspan="{{ second_category.1|length }}" style="vertical-align:middle;overflow:hidden;word-wrap:break-word">{{ second_category.0 }}</td>
                                 {% endif %}
-                                <td>{{ third_category.0 }}</td>
+                                <td style="overflow:hidden;word-wrap:break-word">{{ third_category.0 }}</td>
                                 <td class="td-contenteditable" >
                                     <textarea class="table_data_remove_border_line" name="comment_{{ forloop.parentloop.parentloop.counter0 }}_{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}">{{third_category.1}}</textarea>
                                 </td>
@@ -101,9 +101,9 @@
                         {% for third_category in second_category.1 %}
                             <tr>
                                 {% if forloop.counter0 == 0 %}
-                                    <td rowspan="{{ second_category.1|length }}" style="vertical-align:middle">{{ second_category.0 }}</td>
+                                    <td rowspan="{{ second_category.1|length }}" style="vertical-align:middle;overflow:hidden;word-wrap:break-word">{{ second_category.0 }}</td>
                                 {% endif %}
-                                <td>{{ third_category.0 }}</td>
+                                <td style="overflow:hidden;word-wrap:break-word">{{ third_category.0 }}</td>
                                 <td class="td-contenteditable" >
                                     <textarea required="required" class="table_data_remove_border_line" name="comment_{{ forloop.parentloop.parentloop.counter0 }}_{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}" >{{third_category.1}}</textarea>
                                 </td>
