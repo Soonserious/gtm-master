@@ -54,7 +54,7 @@
                                     <div class="col-sm-9 col-xs-7">
                                         <div class="btn-group btn-group-justified" data-toggle="buttons">
                                             {% for point in "34567" %}
-                                            <label class="btn btn-default">
+                                            <label onclick="temp_save_radio_click(this)" class="btn btn-default">
                                                 <input type="radio" required="true"
                                                        name="shot_1_{{ forloop.parentloop.counter }}"
                                                        value="{{ point }}"/> {{ point }}
@@ -83,7 +83,7 @@
                                     <div class="col-sm-9 col-xs-7">
                                         <div class="btn-group btn-group-justified" data-toggle="buttons">
                                             {% for point in "34567" %}
-                                            <label class="btn btn-default">
+                                            <label onclick="temp_save_radio_click(this)" class="btn btn-default">
                                                 <input type="radio" required="true"
                                                        name="shot_2_{{ forloop.parentloop.counter }}"
                                                        value="{{ point }}"/> {{ point }}
@@ -112,7 +112,7 @@
                                     <div class="col-sm-9 col-xs-7">
                                         <div class="btn-group btn-group-justified" data-toggle="buttons">
                                             {% for point in "34567" %}
-                                            <label class="btn btn-default">
+                                            <label onclick="temp_save_radio_click(this)" class="btn btn-default">
                                                 <input  type="radio" required="true"
                                                        name="shot_3_{{ forloop.parentloop.counter }}"
                                                        value="{{ point }}"/> {{ point }}
@@ -221,6 +221,7 @@
                     if($(this).attr("type") == "radio"){
                         var target = "input:radio[name='"+$(this).attr("name")+"'][value='"+localStorage.getItem($(this).attr("name"))+"']";
                         $(target).parent().addClass("active");
+                        $(target).prop("checked",true);
                     }else{
                         $(this).val(localStorage.getItem($(this).attr("name")));
                     }
@@ -264,6 +265,10 @@
                     data : {"date" : $(this).val(),
                             "text" : text},
                     success : function(json) {
+                    $(input:radio).each(function(){
+                            $(this).parent().removeClass("active");
+                            $(this).prop("checked",false)
+                        })
                         if(json.result){
                             changePuttingGame(json.tuple);
 
@@ -280,11 +285,10 @@
             localStorage.setItem($(this).attr("name"),$(this).val());
         })
 
-       $("input:radio[name^='shot']").on("change",function(){
-            localStorage.setItem($(this).attr("name"),$(this).val());
-            console.log($(this).attr("name")+ " " + $(this).val());
-        })
 
+    function temp_save_radio_click(obj){
+        localStorage.setItem($(obj).find("input").attr("name"),$(obj).find("input").val())
+    }
 
         function changePuttingGame(tuple){
         $('input:radio[name="shot_1_1"][value="'+tuple.shot_1_1+'"]').parent().addClass("active");

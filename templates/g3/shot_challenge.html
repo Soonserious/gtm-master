@@ -62,16 +62,16 @@
                                     <label class="col-xs-1">{{ shot_num }}</label>
                                     <div class="col-xs-9">
                                         <div class="btn-group btn-group-justified" data-toggle="buttons">
-                                            <label class="btn btn-default">
-                                                <input type="radio" required="" name="shot_{{ shot_num }}"
+                                            <label class="btn btn-default" onclick="temp_save_radio_click(this)" >
+                                                <input id="tee_shot_shot_{{shot_num}}_minus_2" type="radio" required="true" name="shot_{{ shot_num }}"
                                                        value="-2"/> -2
                                             </label>
-                                            <label class="btn btn-default">
-                                                <input type="radio"  name="shot_{{ shot_num }}"
+                                            <label class="btn btn-default " onclick="temp_save_radio_click(this)">
+                                                <input id="tee_shot_shot_{{shot_num}}_0" type="radio" required="true"  name="shot_{{ shot_num }}"
                                                        value="0"/> 0
                                             </label>
-                                            <label class="btn btn-default">
-                                                <input type="radio"  name="shot_{{ shot_num }}"
+                                            <label class="btn btn-default radio_click" onclick="temp_save_radio_click(this)">
+                                                <input id="tee_shot_shout_{{shot_num}}_1" type="radio" required="true"  name="shot_{{ shot_num }}"
                                                        value="1"/> +1
                                             </label>
                                         </div>
@@ -100,16 +100,16 @@
                                     <label class="col-xs-1">{{ shot_num }}</label>
                                     <div class="col-xs-9">
                                         <div class="btn-group btn-group-justified" data-toggle="buttons">
-                                            <label class="btn btn-default">
-                                                <input type="radio" required="true" name="shot_{{ shot_num }}"
+                                            <label class="btn btn-default" onclick="temp_save_radio_click(this)">
+                                                <input id="tee_shot_shot_{{shot_num}}_minus_4" type="radio" required="true" name="shot_{{ shot_num }}"
                                                        value="-4"/> -4
                                             </label>
-                                            <label class="btn btn-default">
-                                                <input type="radio" name="shot_{{ shot_num }}"
+                                            <label class="btn btn-default" onclick="temp_save_radio_click(this)">
+                                                <input id="tee_shot_shot_{{shot_num}}_0" type="radio" required="true" name="shot_{{ shot_num }}"
                                                        value="0"/> 0
                                             </label>
-                                            <label class="btn btn-default">
-                                                <input type="radio"name="shot_{{ shot_num }}"
+                                            <label class="btn btn-default" onclick="temp_save_radio_click(this)">
+                                                <input id="tee_shot_shot_{{shot_num}}_2" required="true" type="radio"name="shot_{{ shot_num }}"
                                                        value="2"/> +2
                                             </label>
                                         </div>
@@ -138,16 +138,16 @@
                                     <label class="col-xs-1">{{ forloop.counter|add:13 }}</label>
                                     <div class="col-xs-9">
                                         <div class="btn-group btn-group-justified" data-toggle="buttons">
-                                            <label class="btn btn-default">
-                                                <input type="radio" required="true" name="shot_{{ shot_num }}"
+                                            <label class="btn btn-default" onclick="temp_save_radio_click(this)">
+                                                <input id="tee_shot_shot_{{shot_num}}_minus_6" type="radio" required="true" name="shot_{{ shot_num }}"
                                                        value="-6"/> -6
                                             </label>
-                                            <label class="btn btn-default">
-                                                <input type="radio"  name="shot_{{ shot_num }}"
+                                            <label class="btn btn-default" onclick="temp_save_radio_click(this)">
+                                                <input id="tee_shot_shot_{{shot_num}}_0" type="radio" required="true"  name="shot_{{ shot_num }}"
                                                        value="0"/> 0
                                             </label>
-                                            <label class="btn btn-default">
-                                                <input  type="radio"  name="shot_{{ shot_num }}"
+                                            <label class="btn btn-default" onclick="temp_save_radio_click(this)">
+                                                <input id="tee_shot_shot_{{shot_num}}_minus_3" type="radio" required="true"  name="shot_{{ shot_num }}"
                                                        value="3"/> +3
                                             </label>
                                         </div>
@@ -164,7 +164,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-xs-3">
-                                </div>
+                                </div>radio_click
                                 <div class="col-xs-9">
                                     <div class="btn-group btn-group-justified" role="group">
                                         <div class="btn-group" role="group">
@@ -271,15 +271,15 @@
                                     <div class="col-xs-9">
                                         <div class="btn-group btn-group-justified" data-toggle="buttons">
                                             <label class="btn btn-default">
-                                                <input type="radio" required="true" name="shot_{{ forloop.counter }}"
+                                                <input id="approach_shot_shot_{{forloop.counter}}_2" type="radio" required="true" name="shot_{{ forloop.counter }}"
                                                        value="2"/> +2
                                             </label>
                                             <label class="btn btn-default">
-                                                <input type="radio" required="true" name="shot_{{ forloop.counter }}"
+                                                <input id="approach_shot_shot_{{forloop.counter}}_1" type="radio" required="true" name="shot_{{ forloop.counter }}"
                                                        value="1"/> +1
                                             </label>
                                             <label class="btn btn-default">
-                                                <input type="radio" required="true" name="shot_{{ forloop.counter }}"
+                                                <input id="approach_shot_shot_{{forloop.counter}}_minus_2" type="radio" required="true" name="shot_{{ forloop.counter }}"
                                                        value="-2"/> -2
                                             </label>
                                         </div>
@@ -308,15 +308,15 @@
                                     <div class="col-xs-9">
                                         <div class="btn-group btn-group-justified" data-toggle="buttons">
                                             <label class="btn btn-default">
-                                                <input type="radio" required="true"
+                                                <input id="approach_shot_shot_{{forloop.counter}}_3" type="radio" required="true"
                                                        name="shot_{{ forloop.counter|add:10 }}" value="3"/> +3
                                             </label>
                                             <label class="btn btn-default">
-                                                <input type="radio" required="true"
+                                                <input id="approach_shot_shot_{{forloop.counter}}_1" type="radio" required="true"
                                                        name="shot_{{ forloop.counter|add:10 }}" value="1"/> +1
                                             </label>
                                             <label class="btn btn-default">
-                                                <input type="radio" required="true"
+                                                <input id="approach_shot_shot_{{forloop.counter}}_minus_4" type="radio" required="true"
                                                        name="shot_{{ forloop.counter|add:10 }}" value="-4"/> -4
                                             </label>
                                         </div>
@@ -346,15 +346,15 @@
                                     <div class="col-xs-9">
                                         <div class="btn-group btn-group-justified" data-toggle="buttons">
                                             <label class="btn btn-default">
-                                                <input type="radio" required="true"
+                                                <input id="approach_shot_shot_{{forloop.counter}}_4" type="radio" required="true"
                                                        name="shot_{{ forloop.counter|add:13 }}" value="4"/> +4
                                             </label>
                                             <label class="btn btn-default">
-                                                <input type="radio" required="true"
+                                                <input id="approach_shot_shot_{{forloop.counter}}_1" type="radio" required="true"
                                                        name="shot_{{ forloop.counter|add:13 }}" value="1"/> +1
                                             </label>
                                             <label class="btn btn-default">
-                                                <input type="radio" required="true"
+                                                <input id="approach_shot_shot_{{forloop.counter}}_minus_6" type="radio" required="true"
                                                        name="shot_{{ forloop.counter|add:13 }}" value="-6"/> -6
                                             </label>
                                         </div>
@@ -525,11 +525,11 @@
                                         <label class="col-xs-2 btn-select-dropdown">
                                             <select required="true" class="input-sm"
                                                     name="shot_2_{{ forloop.parentloop.counter }}_{{ forloop.counter }}">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
+                                                <option value="1" class="save_temp_select">1</option>
+                                                <option value="2" class="save_temp_select">2</option>
+                                                <option value="3" class="save_temp_select">3</option>
+                                                <option value="4" class="save_temp_select">4</option>
+                                                <option value="5" class="save_temp_select">5</option>
                                             </select>
                                         </label>
                                         {% endfor %}
@@ -561,11 +561,11 @@
                                         <label class="col-xs-2 btn-select-dropdown">
                                             <select required="true" class="input-sm"
                                                     name="shot_3_{{ forloop.parentloop.counter }}_{{ forloop.counter }}">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
+                                                <option value="1" class="save_temp_select">1</option>
+                                                <option value="2" class="save_temp_select">2</option>
+                                                <option value="3" class="save_temp_select">3</option>
+                                                <option value="4" class="save_temp_select">4</option>
+                                                <option value="5" class="save_temp_select">5</option>
                                             </select>
                                         </label>
                                         {% endfor %}
@@ -597,11 +597,11 @@
                                         <label class="col-xs-2 btn-select-dropdown">
                                             <select required="true" class="input-sm"
                                                     name="shot_4_{{ forloop.parentloop.counter }}_{{ forloop.counter }}">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
+                                                <option value="1" class="save_temp_select">1</option>
+                                                <option value="2" class="save_temp_select">2</option>
+                                                <option value="3" class="save_temp_select">3</option>
+                                                <option value="4" class="save_temp_select">4</option>
+                                                <option value="5" class="save_temp_select">5</option>
                                             </select>
                                         </label>
                                         {% endfor %}
@@ -633,11 +633,11 @@
                                             <label class="col-xs-2 btn-select-dropdown">
                                             <select required="true" class="input-sm"
                                                     name="shot_5_{{ forloop.parentloop.counter }}_{{ forloop.counter }}">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
+                                                <option value="1" class="save_temp_select">1</option>
+                                                <option value="2" class="save_temp_select">2</option>
+                                                <option value="3" class="save_temp_select">3</option>
+                                                <option value="4" class="save_temp_select">4</option>
+                                                <option value="5" class="save_temp_select">5</option>
                                             </select>
                                         </label>
                                         {% endfor %}
@@ -669,11 +669,11 @@
                                         <label class="col-xs-2 btn-select-dropdown">
                                             <select required="true" class="input-sm"
                                                     name="shot_6_{{ forloop.parentloop.counter }}_{{ forloop.counter }}">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
+                                                <option value="1" class="save_temp_select">1</option>
+                                                <option value="2" class="save_temp_select">2</option>
+                                                <option value="3" class="save_temp_select">3</option>
+                                                <option value="4" class="save_temp_select">4</option>
+                                                <option value="5" class="save_temp_select">5</option>
                                             </select>
                                         </label>
                                         {% endfor %}
@@ -705,11 +705,11 @@
                                         <label class="col-xs-2 btn-select-dropdown">
                                             <select required="true" class="input-sm"
                                                     name="shot_7_{{ forloop.parentloop.counter }}_{{ forloop.counter }}">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
+                                                <option value="1" class="save_temp_select">1</option>
+                                                <option value="2" class="save_temp_select">2</option>
+                                                <option value="3" class="save_temp_select">3</option>
+                                                <option value="4" class="save_temp_select">4</option>
+                                                <option value="5" class="save_temp_select">5</option>
                                             </select>
                                         </label>
                                         {% endfor %}
@@ -818,6 +818,7 @@ $(document).ready(function(){
                     if($(this).attr("type") == "radio"){
                         var target = "input:radio[name='"+$(this).attr("name")+"'][value='"+localStorage.getItem($(this).attr("name"))+"']";
                         $(target).parent().addClass("active");
+                        $(target).prop("checked",true);
                     }else{
                         $(this).val(localStorage.getItem($(this).attr("name")));
                     }
@@ -838,6 +839,9 @@ $(document).ready(function(){
                 $('#approach_shot_submit').hide();
                 console.log(json);
                 $('#approach_shot_result').show();
+                $("input:radio[id^='approach']").each(function(){
+                    localStorage.removeItem($(this).attr("id"))
+                })
 {#                $('#approach_shot_result_value').append('<div class="alert alert-success" role="alert">Total Score: ' + json.score + '</div>').append('<div class="alert alert-success" role="alert">Your level: ' + json.level + '</div>')#}
                 $('#approach_shot_result_value').append('<div class="alert alert-success" role="alert">Your level: ' + json.level + '</div>')
                 console.log("success");
@@ -874,6 +878,9 @@ $('#tee_shot_form').submit(function(event){
             $('#tee_shot_submit').hide();
             console.log(json);
             $('#tee_shot_result').show();
+            $("input:radio[id^='tee_shot']").each(function(){
+                    localStorage.removeItem($(this).attr("id"))
+                })
             $('#tee_shot_result_value')
 {#                .append('<div class="alert alert-success" role="alert">Total Score: ' + json.score + '</div>')#}
                 .append('<div class="alert alert-success" role="alert">Your level: ' + json.level + '</div>')
@@ -923,13 +930,13 @@ $(document).ready(function(){
 <script type='text/javascript'>
 
      $(document).ready(function(){
-        $('input[value="0"]').attr("checked", true);
         $('#nine_hole_result').hide();
         $("input").each(function(){
-                if(localStorage.getItem($(this).attr("name"))){
+                if(localStorage.getItem($(this).attr("id"))){
                     if($(this).attr("type") == "radio"){
-                        var target = "input:radio[name='"+$(this).attr("name")+"'][value='"+localStorage.getItem($(this).attr("name"))+"']";
+                        var target = "input:radio[id='"+$(this).attr("id")+"'][value='"+localStorage.getItem($(this).attr("id"))+"']";
                         $(target).parent().addClass("active");
+                        $(target).prop("checked", true);
                     }else{
                         $(this).val(localStorage.getItem($(this).attr("name")));
                     }
@@ -966,10 +973,10 @@ $(document).ready(function(){
 
     })
 
-    $("input:radio[name^='shot']").on("click",function(){
-            localStorage.setItem($(this).attr("name"),$(this).val());
-            console.log($(this).attr("name")+ " " + $(this).val())
-        })
+    function temp_save_radio_click(obj){
+        localStorage.setItem($(obj).find("input").attr("id"),$(obj).find("input").val())
+    }
+
      $("input").on("input",function(){
             localStorage.setItem($(this).attr("name"),$(this).val());
         })

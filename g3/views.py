@@ -144,7 +144,7 @@ def fifty_four_shot_submit(request):
             fifty_four_shot_model = FiftyFourShot.objects.get(user=request.user,date=request.POST["date"])
             for filed in fifty_four_shot_model._meta.get_fields():
                 filed_name = str(filed)
-                filed_name = filed_name.replace("g3.ApproachShot.", "")
+                filed_name = filed_name.replace("g3.FiftyFourShot.", "")
                 if filed_name == "id":
                     continue
                 if filed_name == "user":
@@ -203,7 +203,7 @@ def seve_game_submit(request):
             seve_game_model = SeveGame.objects.get(user=request.user ,date=request.POST['date'])
             for filed in seve_game_model._meta.get_fields():
                 filed_name = str(filed)
-                filed_name = filed_name.replace("g3.ApproachShot.", "")
+                filed_name = filed_name.replace("g3.SeveGame.", "")
                 if filed_name == "id":
                     continue
                 if filed_name == "user":
@@ -214,6 +214,7 @@ def seve_game_submit(request):
         except ObjectDoesNotExist:
             seve_game_model = seve_game_form.save(commit=False)
             seve_game_model.user = request.user
+            seve_game_model.date= request.POST["date"]
 
         seve_game_model.save()
         return seve_game_model.result()
@@ -226,32 +227,38 @@ def seve_game_submit(request):
 
 def nine_hole_submit(request):
     # Check validity and save the input data
-    nine_hole_form = NineHoleForm(request.POST)
-    if nine_hole_form.is_valid():
-        nine_hole_model = None
-        try:
-            nine_hole_model = NineHole.objects.get(user = request.user, date=request.POST["date"])
-            for filed in nine_hole_model._meta.get_fields():
-                filed_name = str(filed)
-                filed_name = filed_name.replace("g3.ApproachShot.", "")
-                if filed_name == "id":
-                    continue
-                if filed_name == "user":
-                    continue
-                if filed_name == "create_time":
-                    continue
-                filed = nine_hole_form.cleaned_data[filed_name]
+    try:
+        nine_hole_form = NineHoleForm(request.POST)
+        if nine_hole_form.is_valid():
 
-        except ObjectDoesNotExist:
-            nine_hole_model = nine_hole_form.save(commit=False)
-            nine_hole_model.user = request.user
-        nine_hole_model.save()
-    else:
-        print(nine_hole_form.errors)
-        return None
+            nine_hole_model = None
+            try:
+                nine_hole_model = NineHole.objects.get(user=request.user, date=request.POST["date"])
+                for filed in nine_hole_model._meta.get_fields():
+                    filed_name = str(filed)
+                    print(filed_name)
+                    filed_name = filed_name.replace("g3.NineHole.", "")
+                    if filed_name == "id":
+                        continue
+                    if filed_name == "user":
+                        continue
+                    if filed_name == "create_time":
+                        continue
+                    filed = nine_hole_form.cleaned_data[filed_name]
+            except ObjectDoesNotExist:
+                date = None;
+                nine_hole_model = nine_hole_form.save(commit=False)
+                nine_hole_model.user = request.user
+                nine_hole_model.date = request.POST["date"]
 
-    return nine_hole_model.result()
+            nine_hole_model.save()
+        else:
+            print(nine_hole_form.errors)
+            return None
 
+        return nine_hole_model.result()
+    except Exception as ex:
+        print(ex)
 
 @login_required
 @user_passes_test(has_permission_g3, "G3 이용 권한이 없습니다.")
@@ -275,7 +282,7 @@ def hogan_game_submit(request):
             hogan_game_model = HoganGame.objects.get(user=request.user, date=request.POST["date"])
             for filed in hogan_game_model._meta.get_fields():
                 filed_name = str(filed)
-                filed_name = filed_name.replace("g3.ApproachShot.", "")
+                filed_name = filed_name.replace("g3.HoganGame.", "")
                 if filed_name == "id":
                     continue
                 if filed_name == "user":
@@ -287,6 +294,7 @@ def hogan_game_submit(request):
         except:
             hogan_game_model = hogan_game_form.save(commit=False)
             hogan_game_model.user = request.user
+            hogan_game_form.date = request.POST["date"]
         hogan_game_model.save()
     else:
         print(hogan_game_form.errors)
@@ -319,18 +327,20 @@ def scoring_game_submit(request):
             scoring_game_model = ScoringGame.objects.get(user=request.user, date=request.POST["date"])
             for filed in scoring_game_model._meta.get_fields():
                 filed_name = str(filed)
-                filed_name = filed_name.replace("g3.ApproachShot.", "")
+                filed_name = filed_name.replace("g3.ScoringGame.", "")
                 if filed_name == "id":
                     continue
                 if filed_name == "user":
                     continue
                 if filed_name == "create_time":
                     continue
+                if filed_name == "date":
+                    continue
                 filed = scoring_game_form.cleaned_data[filed_name]
         except ObjectDoesNotExist:
             scoring_game_model = scoring_game_form.save(commit=False)
             scoring_game_model.user = request.user
-
+            scoring_game_model.date = request.POST["date"]
         scoring_game_model.save()
     else:
         print(scoring_game_form.errors)
@@ -565,6 +575,7 @@ def date_exsist(request):
         elif text =='9 Hole Scoring Aility Test' :
             try:
                 result = NineHole.objects.get(user=target_user, date=date)
+                print(result)
             except:
                 result = None
         elif text =='Seve Game':
