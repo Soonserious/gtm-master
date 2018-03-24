@@ -85,16 +85,17 @@
 
                 </tr>
                 {% for video in golf_swing_videos %}
-                    <tr class="video_class">
+                    <tr class="video_class" onclick="move_video(this)">
                         <td colspan="1" class="td-contenteditable" >
-                            {{video.0}}
-                        </td>
-                        <td colspan="2" class="td-contenteditable" class="video_address" >
-                            {{video.1 }}
+                            <p>{{video.0}}</p>
                         </td>
                         <td colspan="2" class="td-contenteditable" >
-                            {{ video.2 }}
+                            <p class="video_address">{{video.1 }}</p>
                         </td>
+                        <td colspan="2" class="td-contenteditable" >
+                            <p>{{ video.2 }}</p>
+                        </td>
+
                     </tr>
                 {% endfor%}
             </table>
@@ -143,16 +144,17 @@
 
                 </tr>
                 {% for video in short_game_videos %}
-                    <tr class="video_class">
+                    <tr class="video_class" onclick="move_video(this)">
                         <td colspan="1" class="td-contenteditable" >
-                            {{video.0}}
-                        </td>
-                        <td colspan="2" class="td-contenteditable" class="video_address">
-                           {{video.1 }}
+                            <p>{{video.0}}</p>
                         </td>
                         <td colspan="2" class="td-contenteditable" >
-                            {{ video.2 }}
+                            <p class="video_address">{{video.1 }}</p>
                         </td>
+                        <td colspan="2" class="td-contenteditable" >
+                            <p>{{ video.2 }}</p>
+                        </td>
+
                     </tr>
                 {% endfor%}
             </table>
@@ -200,15 +202,15 @@
                     <th class="text-center" rowspan="1" colspan="2" style="width: 36%">name</th>
                 </tr>
                 {% for video in putting_videos %}
-                    <tr class="video_class" onclick="move_video()">
+                    <tr class="video_class" onclick="move_video(this)">
                         <td colspan="1" class="td-contenteditable" >
-                            {{video.0}}
+                            <p>{{video.0}}</p>
                         </td>
-                        <td colspan="2" class="td-contenteditable" class="video_address">
-                          {{video.1 }}
+                        <td colspan="2" class="td-contenteditable " >
+                            <p class="video_address">{{video.1 }}</p>
                         </td>
                         <td colspan="2" class="td-contenteditable" >
-                            {{ video.2 }}
+                            <p>{{ video.2 }}</p>
                         </td>
 
                     </tr>
@@ -221,11 +223,11 @@
 
 {% block js %}
     <script>
-       $(".video_class").click(function(){
-        console.log($(this))
-        var url = $(this).find("td[class='video_address']").val();
+     function move_video(obj){
+        console.log($(obj).find("p[class='video_address']").text());
+        var url = $(obj).find("p[class='video_address']").text();
         window.open(url);
-    })
+    }
     </script>
 }
 {% endblock %}
