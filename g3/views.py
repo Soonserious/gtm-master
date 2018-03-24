@@ -224,15 +224,15 @@ def nine_hole_submit(request):
             try:
                 nine_hole_model = NineHole.objects.get(user=request.user, date=request.POST["date"])
                 for filed in nine_hole_model._meta.get_fields():
-                    filed_name = str(filed)
-                    print(filed_name)
-                    filed_name = filed_name.replace("g3.NineHole.", "")
-                    if filed_name == "id":
-                        continue
-                    if filed_name == "user":
-                        continue
-                    if filed_name == "create_time":
-                        continue
+                    # filed_name = str(filed)
+                    # print(filed_name)
+                    # filed_name = filed_name.replace("g3.NineHole.", "")
+                    # if filed_name == "id":
+                    #     continue
+                    # if filed_name == "user":
+                    #     continue
+                    # if filed_name == "create_time":
+                    #     continue
                     filed = nine_hole_form.cleaned_data[filed_name]
             except ObjectDoesNotExist:
                 date = None;
@@ -270,13 +270,13 @@ def hogan_game_submit(request):
             hogan_game_model = HoganGame.objects.get(user=request.user, date=request.POST["date"])
             for filed in hogan_game_model._meta.get_fields():
                 filed_name = str(filed)
-                filed_name = filed_name.replace("g3.HoganGame.", "")
-                if filed_name == "id":
-                    continue
-                if filed_name == "user":
-                    continue
-                if filed_name == "create_time":
-                    continue
+                # filed_name = filed_name.replace("g3.HoganGame.", "")
+                # if filed_name == "id":
+                #     continue
+                # if filed_name == "user":
+                #     continue
+                # if filed_name == "create_time":
+                #     continue
                 filed = hogan_game_form.cleaned_data[filed_name]
 
         except:
@@ -315,15 +315,15 @@ def scoring_game_submit(request):
             scoring_game_model = ScoringGame.objects.get(user=request.user, date=request.POST["date"])
             for filed in scoring_game_model._meta.get_fields():
                 filed_name = str(filed)
-                filed_name = filed_name.replace("g3.ScoringGame.", "")
-                if filed_name == "id":
-                    continue
-                if filed_name == "user":
-                    continue
-                if filed_name == "create_time":
-                    continue
-                if filed_name == "date":
-                    continue
+                # filed_name = filed_name.replace("g3.ScoringGame.", "")
+                # if filed_name == "id":
+                #     continue
+                # if filed_name == "user":
+                #     continue
+                # if filed_name == "create_time":
+                #     continue
+                # if filed_name == "date":
+                #     continue
                 filed = scoring_game_form.cleaned_data[filed_name]
         except ObjectDoesNotExist:
             scoring_game_model = scoring_game_form.save(commit=False)

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7ffb48f-e980-4226-9c41-3f17ddb5b9f7" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/g2/profile.html" afterPath="$PROJECT_DIR$/templates/g2/profile.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/g3/views.py" afterPath="$PROJECT_DIR$/g3/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,11 +19,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/g3/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3672">
-              <caret line="218" column="42" lean-forward="false" selection-start-line="218" selection-start-column="42" selection-end-line="218" selection-end-column="42" />
+            <state relative-caret-position="414">
+              <caret line="97" column="9" lean-forward="true" selection-start-line="97" selection-start-column="9" selection-end-line="97" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -93,7 +93,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="profile.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="profile.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/g2/profile.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="726">
@@ -211,12 +211,12 @@
         <option value="$PROJECT_DIR$/mypage/views.py" />
         <option value="$PROJECT_DIR$/templates/mypage/goal_setting.html" />
         <option value="$PROJECT_DIR$/g3/urls.py" />
-        <option value="$PROJECT_DIR$/g3/views.py" />
         <option value="$PROJECT_DIR$/templates/g3/short_game.html" />
         <option value="$PROJECT_DIR$/templates/g3/shot_challenge.html" />
         <option value="$PROJECT_DIR$/templates/g3/scoring_game.html" />
         <option value="$PROJECT_DIR$/templates/g3/putting_game.html" />
         <option value="$PROJECT_DIR$/templates/g2/profile.html" />
+        <option value="$PROJECT_DIR$/g3/views.py" />
       </list>
     </option>
   </component>
@@ -915,14 +915,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/g3/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3672">
-          <caret line="218" column="42" lean-forward="false" selection-start-line="218" selection-start-column="42" selection-end-line="218" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/g4/tops.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="915">
@@ -967,6 +959,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="726">
           <caret line="225" column="40" lean-forward="false" selection-start-line="225" selection-start-column="40" selection-end-line="225" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/g3/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="97" column="9" lean-forward="true" selection-start-line="97" selection-start-column="9" selection-end-line="97" selection-end-column="9" />
           <folding />
         </state>
       </provider>
