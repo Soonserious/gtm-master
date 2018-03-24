@@ -50,7 +50,7 @@
                                         <div class="btn-group btn-group-justified" data-toggle="buttons">
                                             {% for point in "12345" %}
                                             <label onclick="temp_save_radio_click(this)" class="btn btn-default">
-                                                <input id="nine_shot_{{forloop.parentloop.counter}}_{{point}}" type="radio" required="true"
+                                                <input class="nine_shot_{{forloop.parentloop.counter}}" type="radio" required="true"
                                                        name="shot_{{ forloop.parentloop.counter }}"
                                                        value="{{ point }}"/> {{ point }}
                                             </label>
@@ -185,7 +185,7 @@
                                         <div class="btn-group btn-group-justified" data-toggle="buttons">
                                             {% for point in "34567" %}
                                             <label onclick="temp_save_radio_click(this)" class="btn btn-default">
-                                                <input id="seve_game_shot_1_{{forloop.parentloop.counter}}_{{point}}" type="radio" required="true"
+                                                <input class="seve_game_shot_1_{{forloop.parentloop.counter}}" type="radio" required="true"
                                                        name="shot_1_{{ forloop.parentloop.counter }}"
                                                        value="{{ point }}"/> {{ point }}
                                             </label>
@@ -214,7 +214,7 @@
                                         <div class="btn-group btn-group-justified" data-toggle="buttons">
                                             {% for point in "34567" %}
                                             <label onclick="temp_save_radio_click(this)" class="btn btn-default">
-                                                <input id="seve_game_shot_2_{{forloop.parentloop.counter}}_{{point}}" type="radio" required="true"
+                                                <input class="seve_game_shot_2_{{forloop.parentloop.counter}}" type="radio" required="true"
                                                        name="shot_2_{{ forloop.parentloop.counter }}"
                                                        value="{{ point }}"/> {{ point }}
                                             </label>
@@ -243,7 +243,7 @@
                                         <div class="btn-group btn-group-justified" data-toggle="buttons">
                                             {% for point in "34567" %}
                                             <label onclick="temp_save_radio_click(this)" class="btn btn-default">
-                                                <input id="seve_game_shot_3_{{forloop.parentloop.counter}}_{{point}}" type="radio" required="true"
+                                                <input type="radio" required="true"
                                                        name="shot_3_{{ forloop.parentloop.counter }}"
                                                        value="{{ point }}"/> {{ point }}
                                             </label>
@@ -271,8 +271,8 @@
                                     <div class="col-sm-9 col-xs-7">
                                         <div class="btn-group btn-group-justified" data-toggle="buttons">
                                             {% for point in "34567" %}
-                                            <label onclick="temp_save_radio_click(this)" class="btn btn-default">
-                                                <input id="seve_game_shot_4_{{forloop.parentloop.counter}}_{{point}}" type="radio" required="true"
+                                            <label onclick="temp_save_radio_click(this)" class="btn btn-default" >
+                                                <input class="seve_game_shot_4_{{forloop.parentloop.counter}}" type="radio" required="true"
                                                        name="shot_4_{{ forloop.parentloop.counter }}"
                                                        value="{{ point }}"/> {{ point }}
                                             </label>
@@ -300,8 +300,8 @@
                                     <div class="col-sm-9 col-xs-7">
                                         <div class="btn-group btn-group-justified" data-toggle="buttons">
                                             {% for point in "34567" %}
-                                            <label onclick="temp_save_radio_click(this)" class="btn btn-default">
-                                                <input id="seve_game_shot_5_{{forloop.parentloop.counter}}_{{point}}" type="radio" required="true"
+                                            <label onclick="temp_save_radio_click(this)" class="btn btn-default" >
+                                                <input class="seve_game_shot_5_{{forloop.parentloop.counter}}" type="radio" required="true"
                                                        name="shot_5_{{ forloop.parentloop.counter }}"
                                                        value="{{ point }}"/> {{ point }}
                                             </label>
@@ -330,7 +330,7 @@
                                         <div class="btn-group btn-group-justified" data-toggle="buttons">
                                             {% for point in "34567" %}
                                             <label onclick="temp_save_radio_click(this)" class="btn btn-default">
-                                                <input id="seve_game_shot_6_{{forloop.parentloop.counter}}_{{point}}" type="radio" required="true"
+                                                <input class="seve_game_shot_6_{{forloop.parentloop.counter}}" type="radio" required="true"
                                                        name="shot_6_{{ forloop.parentloop.counter }}"
                                                        value="{{ point }}"/> {{ point }}
                                             </label>
@@ -420,20 +420,13 @@
 
 {% block js %}
 <script type="text/javascript">
-    $(function () {
-        $('input[name="date"]').datetimepicker({
-            format: 'YYYY-MM-DD',
-            showTodayButton: true,
-            showClose: true
-        });
-    });
 
     $(document).ready(function(){
         $('#seve_game_result').hide();
         $("input").each(function(){
-                if(localStorage.getItem($(this).attr("id"))){
+                if(localStorage.getItem($(this).attr("class"))){
                     if($(this).attr("type") == "radio"){
-                        var target = "input:radio[id='"+$(this).attr("id")+"'][value='"+localStorage.getItem($(this).attr("id"))+"']";
+                        var target = "input:radio[class='"+$(this).attr("class")+"'][value='"+localStorage.getItem($(this).attr("class"))+"']";
                         $(target).parent().addClass("active");
                         $(target).prop("checked",true);
                     }else{
@@ -454,8 +447,8 @@
             success : function(json) {
                 $('#seve_game_submit').hide();
                 console.log(json);
-                $("input:radio[id^='']").each(function(){
-                    localStorage.removeItem($(this).attr("id"))
+                $("input:radio[class^='seve_game']").each(function(){
+                    localStorage.removeItem($(this).attr("class"))
                 })
                 $('#seve_game_result').show();
 {#                    $('#seve_game_result_value').append('<div class="alert alert-success" role="alert">Total Score: ' + json.score + '</div>').append('<div class="alert alert-success" role="alert">Your level: ' + json.level + '</div>')#}
@@ -477,12 +470,11 @@
     });
     $('#nine_hole_form').submit(function(event){
         event.preventDefault();
-        console.log($(this));
+        console.log($(this).attr("action"));
         $.ajax({
-            url : $(this).attr('action'),
-            type : $(this).attr('method'),
+            url : $(this).attr("action"),
+            type : $(this).attr("method"),
             data : $(this).serialize(),
-
             success : function(json) {
                 $('#nine_hole_submit').hide();
                 console.log(json);
@@ -490,8 +482,9 @@
 {#                    $('#nine_hole_result_value').append('<div class="alert alert-success" role="alert">Total Score: ' + json.score + '</div>').append('<div class="alert alert-success" role="alert">Your level: ' + json.level + '</div>')#}
                 $('#nine_hole_result_value').append('<div class="alert alert-success" role="alert">Your level: ' + json.level + '</div>')
                 console.log("success");
-                $("input").each(function(){
-                        localStorage.removeItem($(this).attr("id"));
+                $("input:radio[class^='nine_shot']").each(function(){
+                        console.log($(this).attr("class"))
+                        localStorage.removeItem($(this).attr("class"));
                     })
             },
 
@@ -515,7 +508,7 @@
                     data : {"date" : $(this).val(),
                             "text" : text},
                     success : function(json) {
-                        $(input:radio).each(function(){
+                        $("input:radio").each(function(){
                             $(this).parent().removeClass("active");
                             $(this).prop("checked",false)
                         })
@@ -537,7 +530,8 @@
     })
 
     function temp_save_radio_click(obj){
-        localStorage.setItem($(obj).find("input").attr("id"),$(obj).find("input").val());
+        console.log($(obj).find("input").attr("class"));
+        localStorage.setItem($(obj).find("input").attr("class"),$(obj).find("input").val());
 
     }
 

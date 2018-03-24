@@ -14,10 +14,8 @@ urlpatterns = [
 
     url(r'^seve_game_submit/$', views.seve_game_submit, name='g3_seve_game_submit'),
     url(r'^nine_hole_submit/$', views.nine_hole_submit, name='g3_nine_hole_submit'),
-
     url(r'^hogan_game_submit/$', views.hogan_game_submit, name='g3_hogan_game_submit'),
     url(r'^scoring_game_submit/$', views.scoring_game_submit, name='g3_scoring_game_submit'),
-
     # Profile
     url(r'^profile/$', views.profile, name='g3_profile'),
     url(r'^update/$', views.update, name='g3_update'),

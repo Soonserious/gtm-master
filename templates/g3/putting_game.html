@@ -265,7 +265,7 @@
                     data : {"date" : $(this).val(),
                             "text" : text},
                     success : function(json) {
-                    $(input:radio).each(function(){
+                    $("input:radio").each(function(){
                             $(this).parent().removeClass("active");
                             $(this).prop("checked",false)
                         })

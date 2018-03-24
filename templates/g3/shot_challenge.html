@@ -63,15 +63,15 @@
                                     <div class="col-xs-9">
                                         <div class="btn-group btn-group-justified" data-toggle="buttons">
                                             <label class="btn btn-default" onclick="temp_save_radio_click(this)" >
-                                                <input id="tee_shot_shot_{{shot_num}}_minus_2" type="radio" required="true" name="shot_{{ shot_num }}"
+                                                <input class="tee_shot_shot_{{shot_num}}" type="radio" required="true" name="shot_{{ shot_num }}"
                                                        value="-2"/> -2
                                             </label>
                                             <label class="btn btn-default " onclick="temp_save_radio_click(this)">
-                                                <input id="tee_shot_shot_{{shot_num}}_0" type="radio" required="true"  name="shot_{{ shot_num }}"
+                                                <input class="tee_shot_shot_{{shot_num}}" type="radio" required="true"  name="shot_{{ shot_num }}"
                                                        value="0"/> 0
                                             </label>
                                             <label class="btn btn-default radio_click" onclick="temp_save_radio_click(this)">
-                                                <input id="tee_shot_shout_{{shot_num}}_1" type="radio" required="true"  name="shot_{{ shot_num }}"
+                                                <input class="tee_shot_shot_{{shot_num}}" type="radio" required="true"  name="shot_{{ shot_num }}"
                                                        value="1"/> +1
                                             </label>
                                         </div>
@@ -101,15 +101,15 @@
                                     <div class="col-xs-9">
                                         <div class="btn-group btn-group-justified" data-toggle="buttons">
                                             <label class="btn btn-default" onclick="temp_save_radio_click(this)">
-                                                <input id="tee_shot_shot_{{shot_num}}_minus_4" type="radio" required="true" name="shot_{{ shot_num }}"
+                                                <input class="tee_shot_shot_{{shot_num}}" type="radio" required="true" name="shot_{{ shot_num }}"
                                                        value="-4"/> -4
                                             </label>
                                             <label class="btn btn-default" onclick="temp_save_radio_click(this)">
-                                                <input id="tee_shot_shot_{{shot_num}}_0" type="radio" required="true" name="shot_{{ shot_num }}"
+                                                <input class="tee_shot_shot_{{shot_num}}" type="radio" required="true" name="shot_{{ shot_num }}"
                                                        value="0"/> 0
                                             </label>
                                             <label class="btn btn-default" onclick="temp_save_radio_click(this)">
-                                                <input id="tee_shot_shot_{{shot_num}}_2" required="true" type="radio"name="shot_{{ shot_num }}"
+                                                <input class="tee_shot_shot_{{shot_num}}" required="true" type="radio"name="shot_{{ shot_num }}"
                                                        value="2"/> +2
                                             </label>
                                         </div>
@@ -139,15 +139,15 @@
                                     <div class="col-xs-9">
                                         <div class="btn-group btn-group-justified" data-toggle="buttons">
                                             <label class="btn btn-default" onclick="temp_save_radio_click(this)">
-                                                <input id="tee_shot_shot_{{shot_num}}_minus_6" type="radio" required="true" name="shot_{{ shot_num }}"
+                                                <input class="tee_shot_shot_{{shot_num}}" type="radio" required="true" name="shot_{{ shot_num }}"
                                                        value="-6"/> -6
                                             </label>
                                             <label class="btn btn-default" onclick="temp_save_radio_click(this)">
-                                                <input id="tee_shot_shot_{{shot_num}}_0" type="radio" required="true"  name="shot_{{ shot_num }}"
+                                                <input class="tee_shot_shot_{{shot_num}}" type="radio" required="true"  name="shot_{{ shot_num }}"
                                                        value="0"/> 0
                                             </label>
                                             <label class="btn btn-default" onclick="temp_save_radio_click(this)">
-                                                <input id="tee_shot_shot_{{shot_num}}_minus_3" type="radio" required="true"  name="shot_{{ shot_num }}"
+                                                <input class="tee_shot_shot_{{shot_num}}" type="radio" required="true"  name="shot_{{ shot_num }}"
                                                        value="3"/> +3
                                             </label>
                                         </div>
@@ -270,16 +270,16 @@
                                     <label class="col-xs-1">{{ forloop.counter }}</label>
                                     <div class="col-xs-9">
                                         <div class="btn-group btn-group-justified" data-toggle="buttons">
-                                            <label class="btn btn-default">
-                                                <input id="approach_shot_shot_{{forloop.counter}}_2" type="radio" required="true" name="shot_{{ forloop.counter }}"
+                                            <label class="btn btn-default" onclick="temp_save_radio_click(this)">
+                                                <input class="approach_shot_shot_{{forloop.counter}}" type="radio" required="true" name="shot_{{ forloop.counter }}"
                                                        value="2"/> +2
                                             </label>
-                                            <label class="btn btn-default">
-                                                <input id="approach_shot_shot_{{forloop.counter}}_1" type="radio" required="true" name="shot_{{ forloop.counter }}"
+                                            <label class="btn btn-default" onclick="temp_save_radio_click(this)">
+                                                <input class="approach_shot_shot_{{forloop.counter}}" type="radio" required="true" name="shot_{{ forloop.counter }}"
                                                        value="1"/> +1
                                             </label>
-                                            <label class="btn btn-default">
-                                                <input id="approach_shot_shot_{{forloop.counter}}_minus_2" type="radio" required="true" name="shot_{{ forloop.counter }}"
+                                            <label class="btn btn-default" onclick="temp_save_radio_click(this)">
+                                                <input class="approach_shot_shot_{{forloop.counter}}" type="radio" required="true" name="shot_{{ forloop.counter }}"
                                                        value="-2"/> -2
                                             </label>
                                         </div>
@@ -307,16 +307,16 @@
                                     <label class="col-xs-1">{{ forloop.counter|add:10 }}</label>
                                     <div class="col-xs-9">
                                         <div class="btn-group btn-group-justified" data-toggle="buttons">
-                                            <label class="btn btn-default">
-                                                <input id="approach_shot_shot_{{forloop.counter}}_3" type="radio" required="true"
+                                            <label class="btn btn-default" onclick="temp_save_radio_click(this)">
+                                                <input class="approach_shot_shot_{{forloop.counter}}" type="radio" required="true"
                                                        name="shot_{{ forloop.counter|add:10 }}" value="3"/> +3
                                             </label>
-                                            <label class="btn btn-default">
-                                                <input id="approach_shot_shot_{{forloop.counter}}_1" type="radio" required="true"
+                                            <label class="btn btn-default" onclick="temp_save_radio_click(this)">
+                                                <input class="approach_shot_shot_{{forloop.counter}}" type="radio" required="true"
                                                        name="shot_{{ forloop.counter|add:10 }}" value="1"/> +1
                                             </label>
-                                            <label class="btn btn-default">
-                                                <input id="approach_shot_shot_{{forloop.counter}}_minus_4" type="radio" required="true"
+                                            <label class="btn btn-default" onclick="temp_save_radio_click(this)">
+                                                <input class="approach_shot_shot_{{forloop.counter}}" type="radio" required="true"
                                                        name="shot_{{ forloop.counter|add:10 }}" value="-4"/> -4
                                             </label>
                                         </div>
@@ -345,16 +345,16 @@
                                     <label class="col-xs-1">{{ forloop.counter|add:13 }}</label>
                                     <div class="col-xs-9">
                                         <div class="btn-group btn-group-justified" data-toggle="buttons">
-                                            <label class="btn btn-default">
-                                                <input id="approach_shot_shot_{{forloop.counter}}_4" type="radio" required="true"
+                                            <label class="btn btn-default" onclick="temp_save_radio_click(this)">
+                                                <input class="approach_shot_shot_{{forloop.counter}}" type="radio" required="true"
                                                        name="shot_{{ forloop.counter|add:13 }}" value="4"/> +4
                                             </label>
-                                            <label class="btn btn-default">
-                                                <input id="approach_shot_shot_{{forloop.counter}}_1" type="radio" required="true"
+                                            <label class="btn btn-default" onclick="temp_save_radio_click(this)">
+                                                <input class="approach_shot_shot_{{forloop.counter}}" type="radio" required="true"
                                                        name="shot_{{ forloop.counter|add:13 }}" value="1"/> +1
                                             </label>
-                                            <label class="btn btn-default">
-                                                <input id="approach_shot_shot_{{forloop.counter}}_minus_6" type="radio" required="true"
+                                            <label class="btn btn-default" onclick="temp_save_radio_click(this)">
+                                                <input class="approach_shot_shot_{{forloop.counter}}" type="radio" required="true"
                                                        name="shot_{{ forloop.counter|add:13 }}" value="-6"/> -6
                                             </label>
                                         </div>
@@ -796,17 +796,6 @@
 <script>
 $(document).ready(function(){
     $('#tee_shot_result').hide();
-    $(".save_temp_select_parent").each(function(){
-        if(localStorage.getItem($(this).attr("name")) !=null){
-                 if($(this).attr("type") == "radio"){
-                        var target = "input:radio[name='"+$(this).attr("name")+"'][value='"+localStorage.getItem($(this).attr("name"))+"']";
-                        $(target).parent().addClass("active");
-                    }else{
-                        $(this).val(localStorage.getItem($(this).attr("name")));
-                    }
-        }
-
-    });
 });
 </script>
 
@@ -839,8 +828,8 @@ $(document).ready(function(){
                 $('#approach_shot_submit').hide();
                 console.log(json);
                 $('#approach_shot_result').show();
-                $("input:radio[id^='approach']").each(function(){
-                    localStorage.removeItem($(this).attr("id"))
+                $("input:radio[class^='approach']").each(function(){
+                    localStorage.removeItem($(this).attr("class"))
                 })
 {#                $('#approach_shot_result_value').append('<div class="alert alert-success" role="alert">Total Score: ' + json.score + '</div>').append('<div class="alert alert-success" role="alert">Your level: ' + json.level + '</div>')#}
                 $('#approach_shot_result_value').append('<div class="alert alert-success" role="alert">Your level: ' + json.level + '</div>')
@@ -859,11 +848,6 @@ $(document).ready(function(){
             localStorage.setItem($(this).attr("name"),$(this).val());
         })
 
-        $("input:radio[name^='shot']").on("click",function(){
-            localStorage.setItem($(this).attr("name"),$(this).val());
-            console.log($(this).attr("name")+ " " + $(this).val())
-        })
-
 
 $('#tee_shot_form').submit(function(event){
     event.preventDefault();
@@ -878,8 +862,9 @@ $('#tee_shot_form').submit(function(event){
             $('#tee_shot_submit').hide();
             console.log(json);
             $('#tee_shot_result').show();
-            $("input:radio[id^='tee_shot']").each(function(){
-                    localStorage.removeItem($(this).attr("id"))
+            $("input:radio[class^='tee_shot']").each(function(){
+                    console.log($(this).attr("class"))
+                    localStorage.removeItem($(this).attr("class"))
                 })
             $('#tee_shot_result_value')
 {#                .append('<div class="alert alert-success" role="alert">Total Score: ' + json.score + '</div>')#}
@@ -900,7 +885,7 @@ $('#fifty_four_shot_form').submit(
     $.ajax({
         url: $(this).attr('action'),
         type: $(this).attr('method'),
-        data: $(this).serialize(),
+        data: {"data" : $(this).serialize()},
         success: function(json) {
             $('#fifty_four_shot_submit').hide();
             console.log(json);
@@ -909,8 +894,8 @@ $('#fifty_four_shot_form').submit(
             $('#fifty_four_shot_result_value').append('<div class="alert alert-success" role="alert">Your level: ' + json.level + '</div>')
             console.log("success");
             $("input").each(function(){
-                        localStorage.removeItem($(this).attr("name"));
-                    })
+                    localStorage.removeItem($(this).attr("name"));
+              })
         },
         error: function(xhr,errmsg,err) {
             $('#fifty_four_shot_result_value').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
@@ -928,13 +913,12 @@ $(document).ready(function(){
 
 </script>
 <script type='text/javascript'>
-
      $(document).ready(function(){
         $('#nine_hole_result').hide();
         $("input").each(function(){
-                if(localStorage.getItem($(this).attr("id"))){
+                if(localStorage.getItem($(this).attr("class"))){
                     if($(this).attr("type") == "radio"){
-                        var target = "input:radio[id='"+$(this).attr("id")+"'][value='"+localStorage.getItem($(this).attr("id"))+"']";
+                        var target = "input:radio[class='"+$(this).attr("class")+"'][value='"+localStorage.getItem($(this).attr("class"))+"']";
                         $(target).parent().addClass("active");
                         $(target).prop("checked", true);
                     }else{
@@ -974,7 +958,8 @@ $(document).ready(function(){
     })
 
     function temp_save_radio_click(obj){
-        localStorage.setItem($(obj).find("input").attr("id"),$(obj).find("input").val())
+        console.log($(obj).find("input").attr("class"));
+        localStorage.setItem($(obj).find("input").attr("class"),$(obj).find("input").val())
     }
 
      $("input").on("input",function(){
