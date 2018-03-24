@@ -189,21 +189,20 @@
 
 {% block js %}
     <script>
+        $("input").on("input",function(){
+            localStorage.setItem($(this).attr("id"),$(this).val())
+        })
         Number.prototype.zeroPad = Number.prototype.zeroPad ||
             function(base){
                 var nr = this, len = (String(base).length - String(nr).length)+1;
                 return len > 0? new Array(len).join('0')+nr : nr;
             };
-        $(function() {
-            $('.datepicker').datetimepicker({
-                format: 'YYYY-MM-DD',
-                showTodayButton: true,
-                showClose: true
-            });
-        });
 
         $(document).ready(function(){
             $('#submit_result').hide();
+            $("input").each(function(){
+                $(this).val(localStorage.getItem($(this).attr("id")));
+            })
         });
         $('#form').submit(function(event){
             event.preventDefault();
@@ -219,6 +218,9 @@
                     $('#submit_result').show();
                     console.log(json);
                     console.log("success");
+                    $("input").each(function(){
+                        localStorage.removeItem($(this).attr("id"));
+                    })
                 },
 
                 error : function(xhr,errmsg,err) {

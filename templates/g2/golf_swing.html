@@ -44,13 +44,13 @@
                 {% for video in videos %}
                     <tr class="video_class">
                         <td colspan="1" class="td-contenteditable" >
-                            <textarea required="required" class="table_data_remove_border_line" name="video_number">{{video.0}}</textarea>
+                            <textarea required="true" class="table_data_remove_border_line" name="video_number">{{video.0}}</textarea>
                         </td>
                         <td colspan="2" class="td-contenteditable" >
-                            <textarea required="required" class="table_data_remove_border_line" name="video_address">{{video.1 }}</textarea>
+                            <textarea required="true" class="table_data_remove_border_line" name="video_address">{{video.1 }}</textarea>
                         </td>
                         <td colspan="2" class="td-contenteditable" >
-                            <textarea required="required" class="table_data_remove_border_line" name="video_name">{{ video.2 }}</textarea>
+                            <textarea required="true" class="table_data_remove_border_line" name="video_name">{{ video.2 }}</textarea>
                         </td>
                         <td colspan="1" class="td-contenteditable" >
                             <button class="btn btn-primary" onclick="video_remove(this)">remove</button>
@@ -83,10 +83,10 @@
                                 {% endif %}
                                 <td style="overflow:hidden;word-wrap:break-word">{{ third_category.0 }}</td>
                                 <td class="td-contenteditable" >
-                                    <textarea class="table_data_remove_border_line" name="comment_{{ forloop.parentloop.parentloop.counter0 }}_{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}">{{third_category.1}}</textarea>
+                                    <textarea   class="table_data_remove_border_line" name="comment_{{ forloop.parentloop.parentloop.counter0 }}_{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}">{{third_category.1}}</textarea>
                                 </td>
                                 <td class="td-contenteditable" >
-                                    <textarea class="table_data_remove_border_line" name="drill_{{ forloop.parentloop.parentloop.counter0 }}_{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}">{{third_category.2}}</textarea>
+                                    <textarea  class="table_data_remove_border_line" name="drill_{{ forloop.parentloop.parentloop.counter0 }}_{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}">{{third_category.2}}</textarea>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -105,10 +105,10 @@
                                 {% endif %}
                                 <td style="overflow:hidden;word-wrap:break-word">{{ third_category.0 }}</td>
                                 <td class="td-contenteditable" >
-                                    <textarea required="required" class="table_data_remove_border_line" name="comment_{{ forloop.parentloop.parentloop.counter0 }}_{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}" >{{third_category.1}}</textarea>
+                                    <textarea  class="table_data_remove_border_line" name="comment_{{ forloop.parentloop.parentloop.counter0 }}_{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}" >{{third_category.1}}</textarea>
                                 </td>
                                 <td class="td-contenteditable" >
-                                    <textarea required="required" class="table_data_remove_border_line" name="drill_{{ forloop.parentloop.parentloop.counter0 }}_{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}">{{third_category.2}}</textarea>
+                                    <textarea  class="table_data_remove_border_line" name="drill_{{ forloop.parentloop.parentloop.counter0 }}_{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}">{{third_category.2}}</textarea>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -134,19 +134,7 @@
 {% block js %}
     <script>
 
-    $("textarea").each(function(){
-        var temp_flag = 1;
-        if(localStorage.getItem($(this).attr("name"))){
-            $(this).val( localStorage.getItem($(this).attr("name")));
-            temp_flag =2;
-            }
-        if(temp_flag == 2){
-            alert("temp exsist!");
-        }
-    })
-    $("textarea").on("input",function(){
-        localStorage.setItem($(this).attr("name"),$(this).val())
-    })
+
     function video_remove(obj){
         $(obj).parent().parent().remove();
     }
@@ -216,7 +204,7 @@
             var contents_dict = {};
             var comments = $("textarea[name^=comment]");
             var drills = $("textarea[name^=drill]");
-var videos={};
+            var videos={};
             var video = $("textarea[name^=video_address]");
             for(var i=0; i< video.length; i++){
                 var video_dict = {}

@@ -803,9 +803,9 @@ $(document).ready(function(){
     $(document).ready(function(){
         $('#approach_shot_result').hide();
         $("input").each(function(){
-                if(localStorage.getItem($(this).attr("name"))){
+                if(localStorage.getItem($(this).attr("class"))||localStorage.getItem($(this).attr("name"))){
                     if($(this).attr("type") == "radio"){
-                        var target = "input:radio[name='"+$(this).attr("name")+"'][value='"+localStorage.getItem($(this).attr("name"))+"']";
+                        var target = "input:radio[class='"+$(this).attr("class")+"'][value='"+localStorage.getItem($(this).attr("class"))+"']";
                         $(target).parent().addClass("active");
                         $(target).prop("checked",true);
                     }else{
@@ -815,9 +815,6 @@ $(document).ready(function(){
             })
     });
     $('#approach_shot_form').submit(function(event){
-        $(".save_temp_select_parent").each(function(){
-            localStorage.removeItem($(this).attr("name"));
-        })
         event.preventDefault();
         console.log("form submitted!")
         $.ajax({
@@ -844,7 +841,8 @@ $(document).ready(function(){
         });
     });
 
-        $("input").on("input",function(){
+        $("select").on("change",function(){
+            console.log("change")
             localStorage.setItem($(this).attr("name"),$(this).val());
         })
 
@@ -893,7 +891,7 @@ $('#fifty_four_shot_form').submit(
 {#            $('#fifty_four_shot_result_value').append('<div class="alert alert-success" role="alert">Total Score: ' + json.score + '</div>').append('<div class="alert alert-success" role="alert">Your level: ' + json.level + '</div>')#}
             $('#fifty_four_shot_result_value').append('<div class="alert alert-success" role="alert">Your level: ' + json.level + '</div>')
             console.log("success");
-            $("input").each(function(){
+            $("select").each(function(){
                     localStorage.removeItem($(this).attr("name"));
               })
         },
@@ -926,6 +924,11 @@ $(document).ready(function(){
                     }
                 }
             })
+           $("select").each(function(){
+                if(localStorage.getItem($(this).attr("name"))){
+                    $(this).val(localStorage.getItem($(this).attr("name")))
+                }
+           })
     });
 
     $("input[name^=date]").on('input',function(){
