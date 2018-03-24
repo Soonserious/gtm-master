@@ -166,16 +166,16 @@
         <tr>
             <th style="vertical-align:middle" colspan="2" class="text-center">날짜</th>
             <th style="vertical-align:middle" colspan="7" class="text-center">금일 연습에서의 목표</th>
-            <th style="vertical-align:middle" colspan="1" class="text-center">create</th>
+            <th style="vertical-align:middle" colspan="2" class="text-center">create</th>
         </tr>
         <tr>
             <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
-               <center> <input style="width:130px   " type="date" class="table_data_remove_border_line" id="dg_save_date"></center>
+               <center> <input style="width:100% " type="date" class="table_data_remove_border_line" id="dg_save_date"></center>
             </td>
             <td style="vertical-align:middle" colspan="7" class="text-center td-contenteditable">
                 <textarea class="table_data_remove_border_line" id="dg_save_content"></textarea>
             </td>
-            <td>
+            <td colspan="2">
                 <center style="margin:auto"><button onclick="dg_create()" class="btn btn-default btn-lg btn-block">save</button></center>
             </td>
         </tr>
@@ -187,12 +187,12 @@
                 <th style="vertical-align:middle" colspan="2" class="text-center">날짜</th>
                 <th style="vertical-align:middle" colspan="7" class="text-center">금일 연습에서의 목표</th>
                 <th style="vertical-align:middle" colspan="1" class="text-center">성취</th>
-                <th style="vertical-align:middle" colspan="1" class="text-center">update</th>
+                <th style="vertical-align:middle" colspan="2" class="text-center">update</th>
             </tr>
             {% for idx, date, content, achieved in dg_data %}
             <tr>
                 <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
-                    <input type="date" id="dg_date_{{ idx }}" name="dg_update_date" value="{{ date }}">
+                    <input style="width:100%" type="date" id="dg_date_{{ idx }}" name="dg_update_date" value="{{ date }}">
                 </td>
                 <td style="vertical-align:middle" colspan="7" class="text-center td-contenteditable">
                     <textarea class="dg_update_contents table_data_remove_border_line" id="dg_{{idx}}_content">{{ content }}</textarea>
@@ -208,24 +208,21 @@
                         </label>
                     </div>
                 </td>
-                 <td>
-                <center style="margin:auto"><button onclick="dg_update({{ idx }})" class="btn btn-default btn-lg btn-block">save</button></center>
+                 <td colspan="2" style="width:100%">
+                <!--<center style="width:100%;height:100%">-->
+                    <button type="submit" onclick="dg_update({{ idx }})" style="width:100%;height:100%"class="btn btn-default btn-lg btn-block">save</button>
+                <!--</center>-->
                  </td>
-{#                <td style="vertical-align:middle" colspan="1" class="text-center">#}
-{#                    <button type="button" class="btn btn-default btn-block" value="{{ idx }}" onclick="hide_dg_clicked(this)">#}
-{#                        숨기기#}
-{#                    </button>#}
-{#                </td>#}
             </tr>
             {% endfor %}
 {#            <tr id="dg-last-tr">#}
 {#                <td colspan="2">#}
 {#                </td>#}
-{#                <td colspan="6">#}
+{#                <td colspan="5">#}
 {#                </td>#}
 {#                <td colspan="1">#}
 {#                </td>#}
-{#                <td style="vertical-align:middle" colspan="1" class="text-center">#}
+{#                <td style="vertical-align:middle" colspan="2" class="text-center">#}
 {#                    <button type="button" class="btn btn-default btn-block" onclick="add_dg_clicked()">추가하기</button>#}
 {#                </td>#}
 {#            </tr>#}

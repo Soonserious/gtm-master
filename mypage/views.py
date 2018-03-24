@@ -148,6 +148,7 @@ def ltg_submit(request):
         print(model)
         model.user = request.user
         model.dumped_contents = dumped_contents
+
         model.save()
         return JsonResponse({'status': '목표 설정 및 성취 평가 저장 완료'})
     except Exception as ex:
