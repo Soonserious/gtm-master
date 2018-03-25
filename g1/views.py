@@ -13,7 +13,7 @@ from .forms import *
 from .models import *
 from main.models import Member
 from main.views import user_passes_test, has_permission_g1, has_permission_mypage
-
+from django.core.exceptions import ObjectDoesNotExist
 
 def info(rr):
     stat = rr.get_stat()
@@ -459,3 +459,61 @@ def remove_filed_and_course(request):
     except:
 
         return JsonResponse()
+
+def AVG_bride(request):
+    try:
+        return render(request, 'g1/AVG_bride.html')
+    except Exception as ex:
+        print(ex)
+
+def play_rythm(request):
+   try:
+       json = {}
+       try:
+           quried = RoundingResult.objects.filter(user=request.user).order_by("-date")
+           size = min(len(quried),10)
+           part_one = {}
+           part_two = {}
+           part_three = {}
+           for i in range(1,19):
+               part_one["part_one_"+str(i)]=0
+           for i in range(1,7):
+               part_two["part_two_"+str(i)]=0
+           for i in range(1,3):
+               part_three["part_three_"+str(i)]=0
+           for roundingResult in quried:
+                for score, par, round in zip(roundingResult.getscore(),roundingResult.course.getpars(),range(1,19)):
+                    part_one["part_one_" + str(round)] += (par-score)
+                round_step_result=0
+                for score, par, round in zip(roundingResult.getscore(),roundingResult.course.getpars(),range(1,19)):
+                        round_step_result += (par-score)
+                        if(round%3 == 0):
+                            # print(round_step_result/3)
+                            part_two["part_two_"+str(round/3)] += round_step_result/3
+                            round_step_result = 0
+                round_step_result = 0
+                for score, par, round in zip(roundingResult.getscore(),roundingResult.course.getpars(),range(1,19)):
+                        round_step_result += (par-score)
+                        if(round%9 == 0):
+                            # print(round_step_result/3)
+                            part_three["part_three_"+str(round/9)] += round_step_result/9
+                            round_step_result = 0
+           one = []
+           two =[]
+           three =[]
+           for i in range(1, 19):
+               one.append( part_one["part_one_" + str(i)] / size)
+
+           for i in range(1, 7):
+               two.append(part_two["part_two_" + str(i)] /size)
+
+           for i in range(1, 3):
+               three.append(part_three["part_three_" + str(i)]/size)
+
+       except ObjectDoesNotExist:
+           print()
+       return render(request, 'g1/play_rythm.html' , {"part_one" : one,
+                                                      "part_two" : two,
+                                                      "part_three" : three})
+   except Exception as ex:
+       print(ex)

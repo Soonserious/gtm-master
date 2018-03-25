@@ -1,0 +1,206 @@
+{% extends "common/base.html" %}
+
+{% block css %}
+    <style>
+        .positive { color:blue; }
+        .negative { color:red; }
+    </style>
+{% endblock %}
+
+{% block content %}
+        <div class="page-header">
+            <h3>One</h3>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <canvas id="one-chart" height="240"></canvas>
+            </div>
+        </div>
+
+    <div class="page-header">
+            <h3>two</h3>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <canvas id="two-chart" height="240"></canvas>
+            </div>
+        </div>
+
+    <div class="page-header">
+            <h3>Three</h3>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <canvas id="three-chart" height="240"></canvas>
+            </div>
+        </div>
+
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <script>
+    function popUpPlayRythm(){
+        var url = "/g1/play_rythm";
+        window.open(url);
+    }
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    $(function() { $.ajaxSetup({headers: {"X-CSRFToken": getCookie("csrftoken")}}); });
+    Chart.defaults.global.responsive = true;
+    Chart.defaults.global.maintainAspectRatio = false;
+
+    Number.prototype.zeroPad = Number.prototype.zeroPad ||
+        function(base){
+            var nr = this, len = (String(base).length - String(nr).length)+1;
+            return len > 0? new Array(len).join('0')+nr : nr;
+        };
+
+    $('.differential').each(function() {
+        this.innerText.match("^-")? $(this).addClass("negative"): $(this).addClass("positive");
+    });
+
+    $(function() {
+        console.log("target_user_id: " + "{{ target_user_id }}");
+
+        // Bar charts
+        red_bg = "rgba(255, 99, 132, 0.2)";
+        red_bd = "rgba(255, 99, 132, 1.0)";
+        blue_bg = "rgba(54, 162, 235, 0.2)";
+        blue_bd = "rgba(54, 162, 235, 1.0)";
+
+        var ctx = $("#one-chart");
+        var data = {
+            labels: [
+                ["par1"],
+                ["par2"],
+                ["par3"],
+                ["par4"],
+                ["par5"],
+                ["par6"],
+                ["par7"],
+                ["par8"],
+                ["par9"],
+                ["par10"],
+                ["par11"],
+                ["par12"],
+                ["par13"],
+                ["par14"],
+                ["par15"],
+                ["par16"],
+                ["par17"],
+                ["par18"],
+            ],
+            datasets: [{
+                label: "PGA Tour 상위 10%",
+                backgroundColor: red_bg,
+                borderColor: red_bd,
+                borderWidth: 1,
+                data: {{part_one}}
+
+        }]
+        };
+        var options = {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: -10,
+                        max: 10,
+                        stepSize: 2
+                    }
+                }]
+            }
+        };
+        new Chart(ctx, {type: "line", data: data, options: options});
+
+         var ctx = $("#two-chart");
+        var data = {
+            labels: [
+                ["par1,2,3"],
+                ["par4,5,6"],
+                ["par7,8,9"],
+                ["par10,11,12"],
+                ["par13,14,15"],
+                ["par16,17,18"],
+            ],
+            datasets: [{
+                label: "PGA Tour 상위 10%",
+                backgroundColor: red_bg,
+                borderColor: red_bd,
+                borderWidth: 1,
+                data: {{part_one}}
+
+        }]
+        };
+        var options = {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: -10,
+                        max: 10,
+                        stepSize: 2
+                    }
+                }]
+            }
+        };
+        new Chart(ctx, {type: "line", data: data, options: options});
+
+         var ctx = $("#three-chart");
+        var data = {
+            labels: [
+                ["first-half"],
+                ["half-second"],
+
+            ],
+            datasets: [{
+                label: "PGA Tour 상위 10%",
+                backgroundColor: red_bg,
+                borderColor: red_bd,
+                borderWidth: 1,
+                data: {{part_three}}
+
+        }]
+        };
+        var options = {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        min: -10,
+                        max: 10,
+                        stepSize: 2
+                    }
+                }]
+            }
+        };
+        new Chart(ctx, {type: "line", data: data, options: options});
+    })
+
+    function save_comment_clicked() {
+        var comment = $("#comment").val();
+        $.ajax({
+            url: "{% url 'g1_update' %}",
+            type: "POST",
+            data: {"target_user_id": "{{ target_user_id }}", "comment": comment},
+            dataType: "json",
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    }
+    </script>
+{% endblock %}

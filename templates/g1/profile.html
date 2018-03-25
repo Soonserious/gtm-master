@@ -10,7 +10,10 @@
 {% block content %}
     <div class="page-header">
         <h3>G1 Profile</h3>
+
     </div>
+
+
 
     <div class="panel panel-default">
         <div class="panel-heading"><h4><b>Student Information</b></h4></div>
@@ -31,6 +34,9 @@
                 <td><div align="center">{{ member_info.birth }}</div></td>
                 <td><div align="center">{{ member_info.handicap|floatformat:2 }}</div></td>
                 <td><div align="center">{{ member_info.association }}</div></td>
+            </tr>
+            <tr>
+                <td colspan="12"><button class="btn btn-default btn-block" onclick="popUpPlayRythm()">Play Rythm</button></td>
             </tr>
         </table>
     </div>
@@ -163,20 +169,24 @@
                     </tr>
                     <tr>
                         <th>Hole</th>
+                        <th>Administrator</th>
                         <th>Average Strokes</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <th>Par 3</th>
+                        <td>{{par3_administrator|floatformat:2 }}</td>
                         <td>{{ par3|floatformat:2 }}</td>
                     </tr>
                     <tr>
                         <th>Par 4</th>
+                        <td>{{par4_administrator|floatformat:2 }}</td>
                         <td>{{ par4|floatformat:2 }}</td>
                     </tr>
                     <tr>
                         <th>Par 5</th>
+                        <td>{{par5_administrator|floatformat:2 }}</td>
                         <td>{{ par5|floatformat:2 }}</td>
                     </tr>
                     </tbody>
@@ -196,24 +206,29 @@
                     </tr>
                     <tr>
                         <th>Stroke</th>
+                        <th>Administrator</th>
                         <th>Average Percentage</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <th>Birdie</th>
+                        <td>{{bride_administrator|floatformat:2 }}</td>
                         <td>{{ birdie|floatformat:2 }}%</td>
                     </tr>
                     <tr>
                         <th>Par</th>
+                        <td>{{par_administrator|floatformat:2 }}</td>
                         <td>{{ par|floatformat:2 }}%</td>
                     </tr>
                     <tr>
                         <th>Bogey</th>
+                        <td>{{bogey_administrator|floatformat:2 }}</td>
                         <td>{{ bogey|floatformat:2 }}%</td>
                     </tr>
                     <tr>
                         <th>Double Bogey or More</th>
+                        <td>{{double_bogey_administrator|floatformat:2 }}</td>
                         <td>{{ double_bogey_or_more|floatformat:2 }}%</td>
                     </tr>
                     </tbody>
@@ -248,6 +263,10 @@
 {% block js %}
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
     <script>
+    function popUpPlayRythm(){
+        var url = "/g1/play_rythm";
+        window.open(url);
+    }
     function getCookie(name) {
         var cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -412,9 +431,17 @@
         var data = {
             labels: ["Par 3", "Par 4", "Par 5"],
             datasets: [{
+                label: "Average Stroke for adminstrator",
+                backgroundColor: red_bg,
+                borderColor: red_bd,
+                borderWidth: 1,
+                hoverBackgroundColor: "rgba(255,99,132,0.4)",
+                hoverBorderColor: "rgba(255,99,132,1)",
+                data: [{{ par3_administrator|floatformat:2 }},{{ par4_administrator|floatformat:2 }},{{ par5_administrator|floatformat:2 }}]
+            },{
                 label: "Average Stroke",
-                backgroundColor: "rgba(255,99,132,0.2)",
-                borderColor: "rgba(255,99,132,1)",
+                backgroundColor: blue_bg,
+                borderColor: blue_bd,
                 borderWidth: 1,
                 hoverBackgroundColor: "rgba(255,99,132,0.4)",
                 hoverBorderColor: "rgba(255,99,132,1)",

@@ -190,8 +190,23 @@
 {% block js %}
     <script>
         $("input").on("input",function(){
-            localStorage.setItem($(this).attr("id"),$(this).val())
+
+            if($(this).attr("type") != 'checkbox'){
+                localStorage.setItem($(this).attr("id"),$(this).val())
+            }
+
         })
+        $("input:checkbox").on("click",function(){
+            console.log($(this).attr("id"));
+            if(localStorage.getItem($(this).attr("id"))){
+                localStorage.removeItem($(this).attr("id"));
+                console.log("remove");
+            }
+            else{
+                localStorage.setItem($(this).attr("id"),1);
+            }
+        });
+
         Number.prototype.zeroPad = Number.prototype.zeroPad ||
             function(base){
                 var nr = this, len = (String(base).length - String(nr).length)+1;
@@ -202,7 +217,14 @@
             $('#submit_result').hide();
             $("input").each(function(){
                 $(this).val(localStorage.getItem($(this).attr("id")));
-            })
+            });
+            $("input:checkbox").each(function(){
+                if(localStorage.getItem($(this).attr("id"))){
+                    console.log($(this).attr("id"))
+                    $(this).prop("checked",true);
+                }
+            });
+
         });
         $('#form').submit(function(event){
             event.preventDefault();

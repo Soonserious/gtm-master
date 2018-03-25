@@ -24,4 +24,6 @@ urlpatterns = [
     url(r'^course_remove/$', views.course_remove),
     url(r'^remove_filed_and_course/$',views.remove_filed_and_course),
     url(r'^remove_filed_and_course/(?P<field_id>\d+)/$', views.remove_filed_and_course),
+    url(r'^AVG_bride/$', views.AVG_bride),
+    url(r'^play_rythm/$',views.play_rythm),
 ]

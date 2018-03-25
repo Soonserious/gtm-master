@@ -140,8 +140,15 @@ def fifty_four_shot_submit(request):
         try :
             fifty_four_shot_model = FiftyFourShot.objects.get(user=request.user,date=request.POST["date"])
             for filed in fifty_four_shot_model._meta.get_fields():
-                filed = fifty_four_shot_model.cleaned_data[filed_name]
-
+                filed_name = str(filed)
+                filed_name = filed_name.replace("g3.FiftyFourShot.", "")
+                if filed_name == "id":
+                    continue
+                if filed_name == "user":
+                    continue
+                if filed_name == "create_time":
+                    continue
+                filed = approach_shot_form.cleaned_data[filed_name]
         except ObjectDoesNotExist :
             fifty_four_shot_model = fifty_four_shot_form.save(commit=False)
             fifty_four_shot_model.user = request.user
