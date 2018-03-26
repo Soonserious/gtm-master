@@ -5,7 +5,8 @@ from . import views
 urlpatterns = [
     url(r'^round/$', views.round, name='g1_round'),
     url(r'^round_result/$', views.round_result, name='g1_round_result'),
-    url(r'^round_result/(?P<course_id>\d+)/$', views.round_result_add, name='g1_round_result_add'),
+    url(r'^round_result_add/$', views.round_result_add, name='g1_round_result_add'),
+    url(r'^round_result_add_submit/$', views.round_result_add_submit, name='g1_round_result_add_submit'),
     url(r'^field_info/$', views.field_info, name='g1_field_info'),   # for name only.
     url(r'^field_info/(?P<field_name>\d+)/$', views.field_info),
     url(r'^field_add/$', views.field_add, name='g1_field_add'),

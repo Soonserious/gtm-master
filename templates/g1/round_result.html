@@ -38,6 +38,9 @@
             </div>
         </div>
     </div>
+    <form action="/g1/round_result_add" type="POST" id="course_submit" >
+        <input type="hidden" id="course_id" name="course_id">
+    </form>
 {% endblock %}
 
 {% block js %}
@@ -94,8 +97,8 @@
                     data : {"field_id" : field_id,
                        "tee_type" : tee_type},
                     success : function(json) {
-                        console.log(json)
-                        window.location.href = '{% url "g1_round_result" %}' + json.course_id + '/'
+                        $("#course_id").val(json.course_id);
+                        $("#course_submit").submit();
                     },
                     error : function(xhr, errmsg, err) {
                         console.log(xhr.status + ": " + xhr.responseText);

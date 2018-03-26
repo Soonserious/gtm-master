@@ -14,6 +14,9 @@ from .models import *
 from main.models import Member
 from main.views import user_passes_test, has_permission_g1, has_permission_mypage
 from django.core.exceptions import ObjectDoesNotExist
+from django.views.decorators.csrf import csrf_exempt
+
+
 
 def info(rr):
     stat = rr.get_stat()
@@ -251,55 +254,64 @@ def round_result(request):
 
 @login_required
 @user_passes_test(has_permission_g1, "G1 이용 권한이 없습니다.")
-def round_result_add(request, course_id):
-    course = get_object_or_404(Course, id=course_id)
-
-    if request.method == 'POST':
-        rrf = RoundingResultForm(request.POST)
-        if not rrf.is_valid():
-            print(rrf.errors)
-            raise Http404('form is not valid')
-
-        # rr = RoundingResult.objects.filter(user=request.user, course=course, time=rrf.cleaned_data['time']).first()
-        rr = rrf.save(commit=False)
-        rr.user = request.user
-        rr.course = course
-        rr.setscore(rrf.score())
-        rr.setdriving_distance(rrf.driving_distance())
-        rr.setfairway_hit(rrf.fairway_hit())
-        rr.setputt(rrf.putt())
-        rr.setbunker(rrf.bunker())
-        rr.setpenalty(rrf.penalty())
-        rr.setproximity(rrf.proximity())
-        rr.save()
-
-        initial = {}
-        for x in range(1, 19):
-            initial['score_%02d' % x] = rr.getscore()[x - 1]
-            initial['fairway_hit_%02d' % x] = rr.getfairway_hit()[x - 1]
-            initial['putt_%02d' % x] = rr.getputt()[x - 1]
-            initial['bunker_%02d' % x] = rr.getbunker()[x - 1]
-
-            initial['driving_distance_%02d' % x] = rr.getdriving_distance()[x - 1]
-            initial['penalty_%02d' % x] = rr.getpenalty()[x - 1]
-            initial['proximity_%02d' % x] = rr.getproximity()[x - 1]
-        stat = rr.get_stat()
-
-        user = User.objects.get(username=request.user.username)
-        member = Member.objects.get(user=user)
-        rrs = RoundingResult.objects.filter(user=request.user).order_by('-date', '-create_time')[:20]
-        member.handicap = handicap(rrs)
-        member.save()
-    else:
-        initial = {'date': datetime.datetime.now()}
-        rrf = RoundingResultForm(initial=initial)
+def round_result_add(request):
+    print(request)
+    try:
+        course = get_object_or_404(Course, id=request.GET["course_id"])
+        rrf = RoundingResultForm()
         rr = None
         stat = None
+        return render(request,
+                      'g1/round_result_add.html',
+                      {'course': course, 'rrf': rrf, 'rr': rr, 'stat': stat})
+    except Exception as ex:
+        print(ex)
 
-    return render(request,
-                  'g1/round_result_add.html',
-                  {'course': course, 'rrf': rrf, 'rr': rr, 'stat': stat})
+@login_required
+@user_passes_test(has_permission_g1, "G1 이용 권한이 없습니다.")
 
+def round_result_add_submit(request):
+    try:
+        if request.method == 'POST':
+            rrf = RoundingResultForm(request.POST["data"])
+            if not rrf.is_valid():
+                print(rrf.errors)
+                raise Http404('form is not valid')
+
+            # rr = RoundingResult.objects.filter(user=request.user, course=course, time=rrf.cleaned_data['time']).first()
+            rr = rrf.save(commit=False)
+            rr.user = request.user
+            rr.course = course
+            rr.setscore(rrf.score())
+            rr.setdriving_distance(rrf.driving_distance())
+            rr.setfairway_hit(rrf.fairway_hit())
+            rr.setputt(rrf.putt())
+            rr.setbunker(rrf.bunker())
+            rr.setpenalty(rrf.penalty())
+            rr.setproximity(rrf.proximity())
+            rr.save()
+
+            initial = {}
+            for x in range(1, 19):
+                initial['score_%02d' % x] = rr.getscore()[x - 1]
+                initial['fairway_hit_%02d' % x] = rr.getfairway_hit()[x - 1]
+                initial['putt_%02d' % x] = rr.getputt()[x - 1]
+                initial['bunker_%02d' % x] = rr.getbunker()[x - 1]
+
+                initial['driving_distance_%02d' % x] = rr.getdriving_distance()[x - 1]
+                initial['penalty_%02d' % x] = rr.getpenalty()[x - 1]
+                initial['proximity_%02d' % x] = rr.getproximity()[x - 1]
+            stat = rr.get_stat()
+
+            user = User.objects.get(username=request.user.username)
+            member = Member.objects.get(user=user)
+            rrs = RoundingResult.objects.filter(user=request.user).order_by('-date', '-create_time')[:20]
+            member.handicap = handicap(rrs)
+            member.save()
+
+        return JsonResponse({"result" : "save"})
+    except Exception as ex:
+        print(ex)
 
 def field_info(request):
     try:
@@ -472,6 +484,7 @@ def play_rythm(request):
        try:
            quried = RoundingResult.objects.filter(user=request.user).order_by("-date")
            size = min(len(quried),10)
+           quired = quired[:size]
            part_one = {}
            part_two = {}
            part_three = {}

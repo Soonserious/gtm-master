@@ -14,10 +14,10 @@
             <h5 class="panel-title text-center">라운드 게시</h5>
         </div>
         <div class="panel-body">
-            <form class="form-horizontal" id="form" role="form" method="POST" action="{% url 'g1_round_result_add' course.id %}">
+            <form class="form-horizontal" id="form" role="form" method="POST" action="/g1/round_result_add_submit">
                 <div class="row">
                     <div class="col-xs-12">
-                        라운드 날짜 {{ rrf.date }}
+                       <input type='date' required="true" name='date' class="form-control"/>
                     </div>
                 </div>
                 <div class="row col-xs-12">
@@ -182,6 +182,7 @@
                         <div id="submit_result">testsetset</div>
                     </div>
                 </div>
+                         <input type="hidden" name="course_id" id="course_id" value='{{course_id}'>
             </form>
         </div>
     </div>
@@ -230,9 +231,11 @@
             event.preventDefault();
             console.log("form submitted!")
             $.ajax({
-                url : $(this).attr('action'),
+                url : "/g1/round_result_add/",
                 type : $(this).attr('method'),
-                data : $(this).serialize(),
+                data : { "date" : $("#date").val().
+
+                         "data" :  $(this).serialize()},
 
                 success : function(json) {
                     $('#submit_button').hide();
