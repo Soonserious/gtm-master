@@ -14,14 +14,15 @@
             <h5 class="panel-title text-center">라운드 게시</h5>
         </div>
         <div class="panel-body">
+
             <form class="form-horizontal" id="form" role="form" method="POST" action="/g1/round_result_add_submit">
+                 <input type='date' required="true" name='date' class="form-control"/>
                 <div class="row">
                     <div class="col-xs-12">
-                       <input type='date' required="true" name='date' class="form-control"/>
+
                     </div>
                 </div>
                 <div class="row col-xs-12">
-                        {{ course.field.name }}
                 </div>
                 <br><br>
                 {% csrf_token %}
@@ -176,14 +177,16 @@
                     </table>
                 </div>
                 <br>
+
                 <div class="row">
                     <div class="col-xs-12" align="right">
                         <input  class="btn btn-primary" id="submit_button" type='submit' value="제출">
                         <div id="submit_result">testsetset</div>
                     </div>
                 </div>
-                         <input type="hidden" name="course_id" id="course_id" value='{{course_id}'>
+                   <input type="hidden" name="course_id" id="course_id" value='{{course_id}}'>
             </form>
+
         </div>
     </div>
 {% endblock %}
@@ -224,18 +227,21 @@
                     console.log($(this).attr("id"))
                     $(this).prop("checked",true);
                 }
+
             });
+            $("#course_id").val({{course_id}});
 
         });
         $('#form').submit(function(event){
             event.preventDefault();
             console.log("form submitted!")
+            console.log($(this).serialize());
             $.ajax({
-                url : "/g1/round_result_add/",
-                type : $(this).attr('method'),
-                data : { "date" : $("#date").val().
+                url : "/g1/round_result_add_submit/",
+                type : "POST",
+                data : $(this).serialize(),
 
-                         "data" :  $(this).serialize()},
+
 
                 success : function(json) {
                     $('#submit_button').hide();

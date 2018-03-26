@@ -127,6 +127,8 @@ class CourseForm(ModelForm):
 
 
 class RoundingResultForm(ModelForm):
+    date = forms.DateInput()
+
     score_01 = forms.IntegerField()
     score_02 = forms.IntegerField()
     score_03 = forms.IntegerField()
@@ -259,7 +261,7 @@ class RoundingResultForm(ModelForm):
     proximity_16 = forms.IntegerField(required=False)
     proximity_17 = forms.IntegerField(required=False)
     proximity_18 = forms.IntegerField(required=False)
-
+    course_id = forms.IntegerField()
     class Meta:
         model = RoundingResult
         fields = ['date']
