@@ -263,7 +263,9 @@
                         if(json.result){
                             changePuttingGame(json.tuple);
 
-                        }
+                        }else{
+                        $(this).val(localStorage.getItem($(this).attr("name")));
+                    }
                     },
                     error : function(xhr, errmsg, err) {
                         console.log(xhr.status + ": " + xhr.responseText);

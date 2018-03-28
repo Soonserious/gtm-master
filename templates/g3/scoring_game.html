@@ -312,9 +312,9 @@
                         var target = "input:radio[class='"+$(this).attr("class")+"'][value='"+localStorage.getItem($(this).attr("class"))+"']";
                         $(target).parent().addClass("active");
                         $(target).prop("checked",true);
-                    }else{
-                        $(this).val(localStorage.getItem($(this).attr("name")));
                     }
+                }else{
+                   $(this).val(localStorage.getItem($(this).attr("name")));
                 }
             })
         });
@@ -381,6 +381,8 @@
                         })
                         if(json.result){
                             changeScoringGame(json.tuple);
+                        }else{
+                           localStorage.setItem(obj.attr("name"),obj.val());
                         }
                     },
                     error : function(xhr, errmsg, err) {
