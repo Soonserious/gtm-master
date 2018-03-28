@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7ffb48f-e980-4226-9c41-3f17ddb5b9f7" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtm/settings.py" afterPath="$PROJECT_DIR$/gtm/settings.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/g3/putting_game.html" afterPath="$PROJECT_DIR$/templates/g3/putting_game.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/g3/scoring_game.html" afterPath="$PROJECT_DIR$/templates/g3/scoring_game.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/g3/short_game.html" afterPath="$PROJECT_DIR$/templates/g3/short_game.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/mypage/diary.html" afterPath="$PROJECT_DIR$/templates/mypage/diary.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/g3/shot_challenge.html" afterPath="$PROJECT_DIR$/templates/g3/shot_challenge.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -45,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="shot_challenge.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="shot_challenge.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/g3/shot_challenge.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="952" column="0" lean-forward="true" selection-start-line="952" selection-start-column="0" selection-end-line="952" selection-end-column="0" />
+            <state relative-caret-position="478">
+              <caret line="944" column="45" lean-forward="true" selection-start-line="944" selection-start-column="45" selection-end-line="944" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -58,18 +57,18 @@
       <file leaf-file-name="scoring_game.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/g3/scoring_game.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
-              <caret line="319" column="11" lean-forward="true" selection-start-line="319" selection-start-column="11" selection-end-line="319" selection-end-column="11" />
+            <state relative-caret-position="384">
+              <caret line="387" column="41" lean-forward="false" selection-start-line="387" selection-start-column="41" selection-end-line="387" selection-end-column="41" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="putting_game.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="putting_game.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/g3/putting_game.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="478">
-              <caret line="177" column="23" lean-forward="false" selection-start-line="177" selection-start-column="23" selection-end-line="177" selection-end-column="23" />
+            <state relative-caret-position="1504">
+              <caret line="272" column="26" lean-forward="true" selection-start-line="272" selection-start-column="26" selection-end-line="272" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -88,8 +87,8 @@
       <file leaf-file-name="short_game.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/g3/short_game.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="658">
-              <caret line="524" column="25" lean-forward="true" selection-start-line="524" selection-start-column="25" selection-end-line="526" selection-end-column="25" />
+            <state relative-caret-position="888">
+              <caret line="572" column="41" lean-forward="true" selection-start-line="572" selection-start-column="41" selection-end-line="572" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -216,12 +215,12 @@
         <option value="$PROJECT_DIR$/g1/forms.py" />
         <option value="$PROJECT_DIR$/templates/g1/round_result_add.html" />
         <option value="$PROJECT_DIR$/g1/views.py" />
-        <option value="$PROJECT_DIR$/templates/g3/shot_challenge.html" />
         <option value="$PROJECT_DIR$/gtm/settings.py" />
         <option value="$PROJECT_DIR$/templates/mypage/diary.html" />
-        <option value="$PROJECT_DIR$/templates/g3/short_game.html" />
-        <option value="$PROJECT_DIR$/templates/g3/scoring_game.html" />
         <option value="$PROJECT_DIR$/templates/g3/putting_game.html" />
+        <option value="$PROJECT_DIR$/templates/g3/scoring_game.html" />
+        <option value="$PROJECT_DIR$/templates/g3/short_game.html" />
+        <option value="$PROJECT_DIR$/templates/g3/shot_challenge.html" />
       </list>
     </option>
   </component>
@@ -911,34 +910,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/g3/short_game.html">
+    <entry file="file://$PROJECT_DIR$/templates/g3/putting_game.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="658">
-          <caret line="524" column="25" lean-forward="true" selection-start-line="524" selection-start-column="25" selection-end-line="526" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/g3/shot_challenge.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="952" column="0" lean-forward="true" selection-start-line="952" selection-start-column="0" selection-end-line="952" selection-end-column="0" />
+        <state relative-caret-position="1504">
+          <caret line="272" column="26" lean-forward="true" selection-start-line="272" selection-start-column="26" selection-end-line="272" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/g3/scoring_game.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="319" column="11" lean-forward="true" selection-start-line="319" selection-start-column="11" selection-end-line="319" selection-end-column="11" />
+        <state relative-caret-position="384">
+          <caret line="387" column="41" lean-forward="false" selection-start-line="387" selection-start-column="41" selection-end-line="387" selection-end-column="41" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/g3/putting_game.html">
+    <entry file="file://$PROJECT_DIR$/templates/g3/short_game.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="888">
+          <caret line="572" column="41" lean-forward="true" selection-start-line="572" selection-start-column="41" selection-end-line="572" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/g3/shot_challenge.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="478">
-          <caret line="177" column="23" lean-forward="false" selection-start-line="177" selection-start-column="23" selection-end-line="177" selection-end-column="23" />
+          <caret line="944" column="45" lean-forward="true" selection-start-line="944" selection-start-column="45" selection-end-line="944" selection-end-column="45" />
           <folding />
         </state>
       </provider>

@@ -306,7 +306,10 @@
         $(document).ready(function(){
 
             $('#scoring_game_result').hide();
-            $("input").each(function(){
+            getTempSave();
+        });
+    function getTempSave(){
+                $("input").each(function(){
                 if(localStorage.getItem($(this).attr("class"))){
                     if($(this).attr("type") == "radio"){
                         var target = "input:radio[class='"+$(this).attr("class")+"'][value='"+localStorage.getItem($(this).attr("class"))+"']";
@@ -317,8 +320,7 @@
                    $(this).val(localStorage.getItem($(this).attr("name")));
                 }
             })
-        });
-
+    }
     function temp_save_radio_click(obj){
         localStorage.setItem($(obj).find("input").attr("id"),$(obj).find("input").val())
     }
@@ -383,6 +385,7 @@
                             changeScoringGame(json.tuple);
                         }else{
                            localStorage.setItem(obj.attr("name"),obj.val());
+                           getTempSave();
                         }
                     },
                     error : function(xhr, errmsg, err) {
