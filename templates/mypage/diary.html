@@ -159,7 +159,25 @@
         $("#id-competition_name").val("{{ competition_name }}");
     }
 })();
-
+$("#id-date").on("input",function(){
+     console.log("competition input")
+    $.ajax({
+        url: "/mypage/diary_exsist",
+        type: "GET",
+        data: {"date" : $("#id-date").val(),
+                "competition_level" : $("#id-competition_level").val()},
+        dataType: "json",
+        success: function(data) {
+            if(data.dumped_contents){
+                for(i=0; i<Object.keys(data.dumped_contents).length;i++){
+                    var target = "content_" + i;
+                    $("textarea[name="+target+"]").val(data.dumped_contents[target]);
+                    console.log(data.dumped_contents[target]);
+                }
+            }
+        }
+    })
+})
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
