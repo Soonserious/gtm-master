@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7ffb48f-e980-4226-9c41-3f17ddb5b9f7" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtm/settings.py" afterPath="$PROJECT_DIR$/gtm/settings.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/g3/shot_challenge.html" afterPath="$PROJECT_DIR$/templates/g3/shot_challenge.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,11 +30,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="shot_challenge.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="shot_challenge.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/g3/shot_challenge.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="467">
-              <caret line="951" column="23" lean-forward="false" selection-start-line="951" selection-start-column="23" selection-end-line="951" selection-end-column="23" />
+            <state relative-caret-position="658">
+              <caret line="976" column="42" lean-forward="false" selection-start-line="976" selection-start-column="42" selection-end-line="976" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -79,11 +80,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gtm/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="429">
-              <caret line="102" column="9" lean-forward="false" selection-start-line="102" selection-start-column="9" selection-end-line="102" selection-end-column="9" />
+            <state relative-caret-position="141">
+              <caret line="89" column="0" lean-forward="true" selection-start-line="87" selection-start-column="52" selection-end-line="89" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -130,7 +131,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>input</find>
       <find>ninehole</find>
       <find>foreach</find>
       <find>each</find>
@@ -160,6 +160,7 @@
       <find>fif</find>
       <find>stu</find>
       <find>pga</find>
+      <find>getTemp</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -215,8 +216,8 @@
         <option value="$PROJECT_DIR$/templates/mypage/goal_setting.html" />
         <option value="$PROJECT_DIR$/templates/g1/round_result_add.html" />
         <option value="$PROJECT_DIR$/templates/g2/profile.html" />
-        <option value="$PROJECT_DIR$/gtm/settings.py" />
         <option value="$PROJECT_DIR$/templates/g3/shot_challenge.html" />
+        <option value="$PROJECT_DIR$/gtm/settings.py" />
       </list>
     </option>
   </component>
@@ -1007,18 +1008,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gtm/settings.py">
+    <entry file="file://$PROJECT_DIR$/templates/g3/shot_challenge.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="102" column="9" lean-forward="false" selection-start-line="102" selection-start-column="9" selection-end-line="102" selection-end-column="9" />
+        <state relative-caret-position="658">
+          <caret line="976" column="42" lean-forward="false" selection-start-line="976" selection-start-column="42" selection-end-line="976" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/g3/shot_challenge.html">
+    <entry file="file://$PROJECT_DIR$/gtm/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="467">
-          <caret line="951" column="23" lean-forward="false" selection-start-line="951" selection-start-column="23" selection-end-line="951" selection-end-column="23" />
+        <state relative-caret-position="141">
+          <caret line="89" column="0" lean-forward="true" selection-start-line="87" selection-start-column="52" selection-end-line="89" selection-end-column="0" />
           <folding />
         </state>
       </provider>

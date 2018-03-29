@@ -803,6 +803,9 @@ $(document).ready(function(){
 <script>
     $(document).ready(function(){
         $('#approach_shot_result').hide();
+        getTempSave();
+    });
+    function getTempSave(){
         $("input").each(function(){
                 if(localStorage.getItem($(this).attr("class"))){
                     if($(this).attr("type") == "radio"){
@@ -823,10 +826,8 @@ $(document).ready(function(){
             }
 
         })
-        $("select:selected").each(function(){
-            console.log($(this).attr("name") + " " + $(this).val());
-        })
-    });
+
+    }
     $('#approach_shot_form').submit(function(event){
         event.preventDefault();
         console.log("form submitted!")
@@ -973,6 +974,7 @@ $(document).ready(function(){
                         }else{
                             console.log(obj.attr("name"));
                             localStorage.setItem(obj.attr("name"),obj.val());
+                            getTempSave();
                         }
 
                     },
