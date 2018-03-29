@@ -14,6 +14,7 @@ import numpy as np
 from django.forms.models import model_to_dict
 from django.core.exceptions import ObjectDoesNotExist
 import datetime
+from django.views.decorators.csrf import csrf_exempt
 
 
 class StringManager:
@@ -131,7 +132,7 @@ def approach_shot_submit(request):
 
     return None
 
-
+@csrf_exempt
 def fifty_four_shot_submit(request):
     # Check validity and save the input data
     fifty_four_shot_form = FiftyFourShotForm(request.POST)

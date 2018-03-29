@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7ffb48f-e980-4226-9c41-3f17ddb5b9f7" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db_sqlite3" afterPath="$PROJECT_DIR$/db_sqlite3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/g3/views.py" afterPath="$PROJECT_DIR$/g3/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gtm/settings.py" afterPath="$PROJECT_DIR$/gtm/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/g3/putting_game.html" afterPath="$PROJECT_DIR$/templates/g3/putting_game.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/g3/scoring_game.html" afterPath="$PROJECT_DIR$/templates/g3/scoring_game.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/g3/short_game.html" afterPath="$PROJECT_DIR$/templates/g3/short_game.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/g1/round_result_add.html" afterPath="$PROJECT_DIR$/templates/g1/round_result_add.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/g3/shot_challenge.html" afterPath="$PROJECT_DIR$/templates/g3/shot_challenge.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,30 +26,28 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/g1/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4770">
-              <caret line="280" column="35" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="532" selection-end-column="16" />
-              <folding>
-                <element signature="e#22#37#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="shot_challenge.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/g3/shot_challenge.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="514">
-              <caret line="1106" column="1" lean-forward="false" selection-start-line="1106" selection-start-column="1" selection-end-line="1106" selection-end-column="1" />
+            <state relative-caret-position="288">
+              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="52" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="shot_challenge.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/g3/shot_challenge.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="425">
+              <caret line="896" column="31" lean-forward="false" selection-start-line="896" selection-start-column="31" selection-end-line="896" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gtm/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="501">
-              <caret line="88" column="53" lean-forward="false" selection-start-line="87" selection-start-column="8" selection-end-line="88" selection-end-column="53" />
+            <state relative-caret-position="69">
+              <caret line="85" column="13" lean-forward="true" selection-start-line="85" selection-start-column="13" selection-end-line="85" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -80,9 +76,11 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/g3/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="10044">
-              <caret line="572" column="19" lean-forward="true" selection-start-line="572" selection-start-column="19" selection-end-line="572" selection-end-column="19" />
-              <folding />
+            <state relative-caret-position="198">
+              <caret line="137" column="58" lean-forward="false" selection-start-line="137" selection-start-column="58" selection-end-line="137" selection-end-column="58" />
+              <folding>
+                <element signature="e#24#59#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -90,8 +88,8 @@
       <file leaf-file-name="round_result_add.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/g1/round_result_add.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3618">
-              <caret line="201" column="10" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="266" selection-end-column="0" />
+            <state relative-caret-position="546">
+              <caret line="225" column="49" lean-forward="true" selection-start-line="225" selection-start-column="49" selection-end-line="225" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -120,8 +118,8 @@
       <file leaf-file-name="short_game.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/g3/short_game.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="567" column="87" lean-forward="true" selection-start-line="567" selection-start-column="65" selection-end-line="567" selection-end-column="87" />
+            <state relative-caret-position="462">
+              <caret line="539" column="41" lean-forward="true" selection-start-line="539" selection-start-column="41" selection-end-line="539" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -153,7 +151,6 @@
       <find>hide</find>
       <find>approachshot</find>
       <find>tee_shot_su</find>
-      <find>fif</find>
       <find>seve_ga</find>
       <find>hogan</find>
       <find>ScoringGame</find>
@@ -168,6 +165,7 @@
       <find>get</find>
       <find>9 Hole Scoring Aility Test</find>
       <find>temp_save_radio</find>
+      <find>fif</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -215,15 +213,15 @@
         <option value="$PROJECT_DIR$/templates/g1/round_result.html" />
         <option value="$PROJECT_DIR$/g1/urls.py" />
         <option value="$PROJECT_DIR$/g1/forms.py" />
-        <option value="$PROJECT_DIR$/templates/g1/round_result_add.html" />
         <option value="$PROJECT_DIR$/g1/views.py" />
         <option value="$PROJECT_DIR$/templates/mypage/diary.html" />
-        <option value="$PROJECT_DIR$/g3/views.py" />
         <option value="$PROJECT_DIR$/templates/g3/putting_game.html" />
         <option value="$PROJECT_DIR$/templates/g3/short_game.html" />
         <option value="$PROJECT_DIR$/templates/g3/scoring_game.html" />
-        <option value="$PROJECT_DIR$/templates/g3/shot_challenge.html" />
+        <option value="$PROJECT_DIR$/templates/g1/round_result_add.html" />
         <option value="$PROJECT_DIR$/gtm/settings.py" />
+        <option value="$PROJECT_DIR$/g3/views.py" />
+        <option value="$PROJECT_DIR$/templates/g3/shot_challenge.html" />
       </list>
     </option>
   </component>
@@ -396,6 +394,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="gtm" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gpesys" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gpesys" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="g4" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -896,32 +908,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/g1/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4770">
-          <caret line="280" column="35" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="532" selection-end-column="16" />
-          <folding>
-            <element signature="e#22#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/g3/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10044">
-          <caret line="572" column="19" lean-forward="true" selection-start-line="572" selection-start-column="19" selection-end-line="572" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/g1/round_result_add.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3618">
-          <caret line="201" column="10" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="266" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/g1/round_result.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="576">
@@ -946,26 +932,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/g3/short_game.html">
+    <entry file="file://$PROJECT_DIR$/templates/g1/round_result_add.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="567" column="87" lean-forward="true" selection-start-line="567" selection-start-column="65" selection-end-line="567" selection-end-column="87" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/g3/shot_challenge.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="514">
-          <caret line="1106" column="1" lean-forward="false" selection-start-line="1106" selection-start-column="1" selection-end-line="1106" selection-end-column="1" />
+        <state relative-caret-position="546">
+          <caret line="225" column="49" lean-forward="true" selection-start-line="225" selection-start-column="49" selection-end-line="225" selection-end-column="49" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gtm/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="501">
-          <caret line="88" column="53" lean-forward="false" selection-start-line="87" selection-start-column="8" selection-end-line="88" selection-end-column="53" />
+        <state relative-caret-position="69">
+          <caret line="85" column="13" lean-forward="true" selection-start-line="85" selection-start-column="13" selection-end-line="85" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/g1/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/g3/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="137" column="58" lean-forward="false" selection-start-line="137" selection-start-column="58" selection-end-line="137" selection-end-column="58" />
+          <folding>
+            <element signature="e#24#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/g3/short_game.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="539" column="41" lean-forward="true" selection-start-line="539" selection-start-column="41" selection-end-line="539" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/g3/shot_challenge.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="896" column="31" lean-forward="false" selection-start-line="896" selection-start-column="31" selection-end-line="896" selection-end-column="31" />
           <folding />
         </state>
       </provider>

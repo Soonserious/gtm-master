@@ -194,11 +194,9 @@
 {% block js %}
     <script>
         $("input").on("input",function(){
-
             if($(this).attr("type") != 'checkbox'){
                 localStorage.setItem($(this).attr("id"),$(this).val())
             }
-
         })
         $("input:checkbox").on("click",function(){
             console.log($(this).attr("id"));

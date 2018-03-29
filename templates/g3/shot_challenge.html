@@ -489,7 +489,7 @@
                                         <label class="col-xs-2 btn-select-dropdown">
                                             <select required="true" class="input-sm save_temp_select_parent"
                                                     name="shot_1_{{ forloop.parentloop.counter }}_{{ forloop.counter }}">
-                                                <option value="1" class="save_temp_select">1</option>
+                                                <option value="1" class="save_temp_select" selected>1</option>
                                                 <option value="2" class="save_temp_select">2</option>
                                                 <option value="3" class="save_temp_select">3</option>
                                                 <option value="4" class="save_temp_select">4</option>
@@ -525,7 +525,7 @@
                                         <label class="col-xs-2 btn-select-dropdown">
                                             <select required="true" class="input-sm"
                                                     name="shot_2_{{ forloop.parentloop.counter }}_{{ forloop.counter }}">
-                                                <option value="1" class="save_temp_select">1</option>
+                                                <option value="1" class="save_temp_select" selected>1</option>
                                                 <option value="2" class="save_temp_select">2</option>
                                                 <option value="3" class="save_temp_select">3</option>
                                                 <option value="4" class="save_temp_select">4</option>
@@ -561,7 +561,7 @@
                                         <label class="col-xs-2 btn-select-dropdown">
                                             <select required="true" class="input-sm"
                                                     name="shot_3_{{ forloop.parentloop.counter }}_{{ forloop.counter }}">
-                                                <option value="1" class="save_temp_select">1</option>
+                                                <option value="1" class="save_temp_select" selected>1</option>
                                                 <option value="2" class="save_temp_select">2</option>
                                                 <option value="3" class="save_temp_select">3</option>
                                                 <option value="4" class="save_temp_select">4</option>
@@ -597,7 +597,7 @@
                                         <label class="col-xs-2 btn-select-dropdown">
                                             <select required="true" class="input-sm"
                                                     name="shot_4_{{ forloop.parentloop.counter }}_{{ forloop.counter }}">
-                                                <option value="1" class="save_temp_select">1</option>
+                                                <option value="1" class="save_temp_select" selected>1</option>
                                                 <option value="2" class="save_temp_select">2</option>
                                                 <option value="3" class="save_temp_select">3</option>
                                                 <option value="4" class="save_temp_select">4</option>
@@ -633,7 +633,7 @@
                                             <label class="col-xs-2 btn-select-dropdown">
                                             <select required="true" class="input-sm"
                                                     name="shot_5_{{ forloop.parentloop.counter }}_{{ forloop.counter }}">
-                                                <option value="1" class="save_temp_select">1</option>
+                                                <option value="1" class="save_temp_select" selected>1</option>
                                                 <option value="2" class="save_temp_select">2</option>
                                                 <option value="3" class="save_temp_select">3</option>
                                                 <option value="4" class="save_temp_select">4</option>
@@ -669,7 +669,7 @@
                                         <label class="col-xs-2 btn-select-dropdown">
                                             <select required="true" class="input-sm"
                                                     name="shot_6_{{ forloop.parentloop.counter }}_{{ forloop.counter }}">
-                                                <option value="1" class="save_temp_select">1</option>
+                                                <option value="1" class="save_temp_select" selected>1</option>
                                                 <option value="2" class="save_temp_select">2</option>
                                                 <option value="3" class="save_temp_select">3</option>
                                                 <option value="4" class="save_temp_select">4</option>
@@ -705,7 +705,7 @@
                                         <label class="col-xs-2 btn-select-dropdown">
                                             <select required="true" class="input-sm"
                                                     name="shot_7_{{ forloop.parentloop.counter }}_{{ forloop.counter }}">
-                                                <option value="1" class="save_temp_select">1</option>
+                                                <option value="1" class="save_temp_select" selected>1</option>
                                                 <option value="2" class="save_temp_select">2</option>
                                                 <option value="3" class="save_temp_select">3</option>
                                                 <option value="4" class="save_temp_select">4</option>
@@ -803,16 +803,28 @@ $(document).ready(function(){
     $(document).ready(function(){
         $('#approach_shot_result').hide();
         $("input").each(function(){
-                if(localStorage.getItem($(this).attr("class"))||localStorage.getItem($(this).attr("name"))){
+                if(localStorage.getItem($(this).attr("class"))){
                     if($(this).attr("type") == "radio"){
                         var target = "input:radio[class='"+$(this).attr("class")+"'][value='"+localStorage.getItem($(this).attr("class"))+"']";
                         $(target).parent().addClass("active");
                         $(target).prop("checked",true);
-                    }else{
-                        $(this).val(localStorage.getItem($(this).attr("name")));
                     }
-                }
+                }else if(localStorage.getItem($(this).attr("name"))){
+                        $(this).val(localStorage.getItem($(this).attr("name")));
+                  }
             })
+        $("select").each(function(){
+            if(localStorage.getItem($(this).attr("name"))){
+                  console.log($(this).attr("name"));
+                 $(this).val(localStorage.getItem($(this).attr("name"))).prop("selected",true);
+            }else{
+                $(this).val("1").prop("selected",true);
+            }
+
+        })
+        $("select:selected").each(function(){
+            console.log($(this).attr("name") + " " + $(this).val());
+        })
     });
     $('#approach_shot_form').submit(function(event){
         event.preventDefault();
@@ -842,7 +854,6 @@ $(document).ready(function(){
     });
 
         $("select").on("change",function(){
-            console.log("change")
             localStorage.setItem($(this).attr("name"),$(this).val());
         })
 
@@ -883,7 +894,7 @@ $('#fifty_four_shot_form').submit(
     $.ajax({
         url: $(this).attr('action'),
         type: $(this).attr('method'),
-        data: {"data" : $(this).serialize()},
+        data: $(this).serialize(),
         success: function(json) {
             $('#fifty_four_shot_submit').hide();
             console.log(json);
@@ -894,6 +905,7 @@ $('#fifty_four_shot_form').submit(
             $("select").each(function(){
                     localStorage.removeItem($(this).attr("name"));
               })
+             localStorage.removeItem("date")
         },
         error: function(xhr,errmsg,err) {
             $('#fifty_four_shot_result_value').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
@@ -913,28 +925,8 @@ $(document).ready(function(){
 <script type='text/javascript'>
      $(document).ready(function(){
         $('#nine_hole_result').hide();
-        getTempSave();
+
     });
-
-    function getTempSave(){
-            $("input").each(function(){
-                if(localStorage.getItem($(this).attr("class"))){
-                    if($(this).attr("type") == "radio"){
-                        var target = "input:radio[class='"+$(this).attr("class")+"'][value='"+localStorage.getItem($(this).attr("class"))+"']";
-                        $(target).parent().addClass("active");
-                        $(target).prop("checked", true);
-                    }else if(localStorage.getItem($(this).attr("name"))){
-                        $(this).val(localStorage.getItem($(this).attr("name")));
-
-                    }
-                }
-            })
-           $("select").each(function(){
-                if(localStorage.getItem($(this).attr("name"))){
-                    $(this).val(localStorage.getItem($(this).attr("name")))
-                }
-           })
-    }
 
     function checkedFalse(){
 
@@ -947,13 +939,16 @@ $(document).ready(function(){
                  }
              })
         }
+     function selectedFalse(){
+        $("select:selected").each(function(){
+            $(this).prop("selected",false);
+        })
+     }
 
 
     $("input[name^=date]").on('input',function(){
         var text = $("li.active").text();
-
-        console.log(text);
-        selection_remove();
+        var obj = $(this);
         $.ajax({
                     url : "/g3/date_exsist",
                     type : 'GET',
@@ -961,9 +956,11 @@ $(document).ready(function(){
                             "text" : text},
                     success : function(json) {
                         if(json.result){
-                            chekedFalse();
+                            checkedFalse();
+                            selectedFalse();
                             if(text == 'Tee Shot Challenge'){
                                 changeTeeShot(json.tuple);
+                                localStorage.remove("")
                             }else if(text == 'Approach Shot Challenge'){
                                 changeApproachShot(json.tuple);
                             }else if(text == '54 Shot Challenge'){
@@ -971,7 +968,11 @@ $(document).ready(function(){
                                 changeFifty(json.tuple);
                             }
 
+                        }else{
+                            console.log(obj.attr("name"));
+                            localStorage.setItem(obj.attr("name"),obj.val());
                         }
+
                     },
                     error : function(xhr, errmsg, err) {
                         console.log(xhr.status + ": " + xhr.responseText);
@@ -986,7 +987,9 @@ $(document).ready(function(){
     }
 
      $("input").on("input",function(){
+            if($(this).attr("type") != 'radio'){
             localStorage.setItem($(this).attr("name"),$(this).val());
+            }
 
         })
 
