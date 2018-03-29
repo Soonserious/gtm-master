@@ -180,7 +180,7 @@
 
                 <div class="row">
                     <div class="col-xs-12" align="right">
-                        <input  class="btn btn-primary" id="submit_button" type='submit' value="제출">
+                        <input class="btn btn-primary" id="submit_button" type='submit' value="제출">
                         <div id="submit_result">testsetset</div>
                     </div>
                 </div>
@@ -202,10 +202,11 @@
             console.log($(this).attr("id"));
             if(localStorage.getItem($(this).attr("id"))){
                 localStorage.removeItem($(this).attr("id"));
-                console.log("remove");
+                $(this).prop("checked",false);
             }
             else{
                 localStorage.setItem($(this).attr("id"),1);
+                $(this).prop("checked",true);
             }
         });
 
@@ -218,11 +219,12 @@
         $(document).ready(function(){
             $('#submit_result').hide();
             $("input").each(function(){
-                $(this).val(localStorage.getItem($(this).attr("id")));
+                if($(this).attr("type") != 'checkbox'){
+                    $(this).val(localStorage.getItem($(this).attr("id")));
+                 }
             });
             $("input:checkbox").each(function(){
                 if(localStorage.getItem($(this).attr("id"))){
-                    console.log($(this).attr("id"))
                     $(this).prop("checked",true);
                 }
 
