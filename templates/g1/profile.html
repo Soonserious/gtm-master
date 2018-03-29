@@ -16,7 +16,7 @@
 
 
     <div class="panel panel-default">
-        <div class="panel-heading"><h4><b>Student Information</b></h4></div>
+        <div class="panel-heading"><h4><b>Member Information</b></h4></div>
         <table class="table table-bordered">
             <thead class="thead">
             <tr>
@@ -47,7 +47,7 @@
             <thead>
             <tr>
                 <th>골프통계분석</th>
-                <th>PGA Tour 상위 10%</th>
+                <th>Target Value</th>
                 <th>Average</th>
                 <th>Differential</th>
             </tr>
@@ -84,7 +84,7 @@
                 <td class="differential">{{ minus.putt_gir|floatformat:2 }}</td>
             </tr>
             <tr>
-                <th>Recovery (Up and Down %)</th>
+                <th>Up and Down %</th>
                 <td>{{ cr.up_and_down|floatformat:2 }}%</td>
                 <td>{{ avg.up_and_down|floatformat:2 }}%</td>
                 <td class="differential">{{ minus.up_and_down|floatformat:2 }}%</td>
@@ -165,12 +165,12 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th colspan="2">Average Strokes for Par 3, 4, 5</th>
+                        <th colspan="2">Par 3, 4, 5 홀 평균타수</th>
                     </tr>
                     <tr>
                         <th>Hole</th>
                         <th>Administrator</th>
-                        <th>Average Strokes</th>
+                        <th>평균타수</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -202,12 +202,12 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th colspan="2">Stroke Analysis</th>
+                        <th colspan="2">스트로크(타수) 비율 분석</th>
                     </tr>
                     <tr>
                         <th>Stroke</th>
                         <th>Administrator</th>
-                        <th>Average Percentage</th>
+                        <th>평균비율(%)</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -314,7 +314,7 @@
                 ["Bounce", "Back"]
             ],
             datasets: [{
-                label: "PGA Tour 상위 10%",
+                label: "Target Value",
                 backgroundColor: red_bg,
                 borderColor: red_bd,
                 borderWidth: 1,
@@ -356,7 +356,7 @@
         var data = {
             labels: [["Scoring", "Average"], ["Putts", "per", "Round"], ["Proximity"]],
             datasets: [{
-                label: "PGA Tour 상위 10%",
+                label: "Target Value",
                 backgroundColor: red_bg,
                 borderColor: red_bd,
                 borderWidth: 1,
@@ -394,7 +394,7 @@
         var data = {
             labels: [["Putts", "per", "GIR"], ["Sand", "Greenside", "(bunker)"], ["Penalty"]],
             datasets: [{
-                label: "PGA Tour 상위 10%",
+                label: "Target Value",
                 backgroundColor: red_bg,
                 borderColor: red_bd,
                 borderWidth: 1,

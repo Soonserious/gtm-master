@@ -109,7 +109,7 @@ def goal_setting(request):
         queried = LongTermGoals.objects.filter(user=request.user).order_by('-update_time')
         if queried.exists():
             model = queried[0]
-            context.update(json.loads(model.dumped_contents))
+            context["ltg_goal"] = json.loads(model.dumped_contents)
 
         queried = DailyGoals.objects.filter(user=request.user).order_by('-update_time')
         if queried.exists():

@@ -50,15 +50,15 @@
             <tr>
                 <th style="vertical-align:middle" colspan="1" class="text-center">장기목표</th>
                 <td style="vertical-align:middle" colspan="6" class="text-center td-contenteditable">
-                    <textarea class="table_data_remove_border_line" id="ltg_content"></textarea>
+                    <textarea class="table_data_remove_border_line" id="ltg_content">{{ltg_goal.ltg_content}}</textarea>
                 </td>
                 <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
-                        <input type="date" class="form-control" id="ltg_date" name="ltg_date" style="border-style:none;text-align:center">
+                    <input type="date" class="form-control" id="ltg_date" name="ltg_date" style="border-style:none;text-align:center" value="{{ltg_goal.ltg_date}}">
                 </td>
                 <td style="vertical-align:middle" colspan="1" class="text-center">
                     <div class="checkbox">
                         <label>
-                            {% if ltg_achieved %}
+                            {% if ltg_goal.ltg_achieved %}
                             <input type="checkbox" id="ltg_achieved" checked>
                             {% else %}
                             <input type="checkbox" id="ltg_achieved">
@@ -79,19 +79,19 @@
             <tr>
                 <th style="vertical-align:middle" colspan="1" class="text-center">목표 3</th>
                 <td style="vertical-align:middle" colspan="3" class="text-center td-contenteditable">
-                    <textarea class="table_data_remove_border_line" id="g3_rg" name="g3_rg"></textarea>
+                    <textarea class="table_data_remove_border_line" id="g3_rg" name="g3_rg">{{ltg_goal.g3_rg}}</textarea>
                 </td>
                 <td style="vertical-align:middle" colspan="3" class="text-center td-contenteditable">
-                    <textarea class="table_data_remove_border_line" id="g3_pg"></textarea>
+                    <textarea class="table_data_remove_border_line" id="g3_pg" name="g3_pg">{{ltg_goal.g3_pg}}</textarea>
 
                 </td>
                 <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
-                    <input type="date" class="form-control" id="g3_date" name="g3_date" style="border-style:none;text-align:center">
+                    <input type="date" class="form-control" id="g3_date" name="g3_date" style="border-style:none;text-align:center" value="{{ltg_goal.g3_date}}">
                 </td>
                 <td style="vertical-align:middle" colspan="1" class="text-center">
                     <div class="checkbox">
                         <label>
-                            {% if g3_achieved %}
+                            {% if ltg_goal.g3_achieved %}
                             <input type="checkbox" id="g3_achieved" checked>
                             {% else %}
                             <input type="checkbox" id="g3_achieved">
@@ -103,18 +103,18 @@
             <tr>
                 <th style="vertical-align:middle" colspan="1" class="text-center">목표 2</th>
                 <td style="vertical-align:middle" colspan="3" class="text-center td-contenteditable">
-                    <textarea class="table_data_remove_border_line" id="g2_rg"></textarea>
+                    <textarea class="table_data_remove_border_line" id="g2_rg" name="g2_rg">{{ltg_goal.g2_rg}}</textarea>
                 </td>
                 <td style="vertical-align:middle" colspan="3" class="text-center td-contenteditable">
-                    <textarea class="table_data_remove_border_line" id="g2_pg"></textarea>
+                    <textarea class="table_data_remove_border_line" id="g2_pg">{{ltg_goal.g2_pg}}</textarea>
                 </td>
                 <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
-                    <input type="date" class="form-control" id="g2_date" name="g2_date" style="border-style:none;text-align:center">
+                    <input type="date" class="form-control" id="g2_date" name="g2_date" style="border-style:none;text-align:center" value="{{ltg_goal.g2_date}}">
                 </td>
                 <td style="vertical-align:middle" colspan="1" class="text-center">
                     <div class="checkbox">
                         <label>
-                            {% if g2_achieved %}
+                            {% if ltg_goal.g2_achieved %}
                             <input type="checkbox" id="g2_achieved" checked>
                             {% else %}
                             <input type="checkbox" id="g2_achieved">
@@ -126,18 +126,18 @@
             <tr>
                 <th style="vertical-align:middle" colspan="1" class="text-center">목표 1</th>
                 <td style="vertical-align:middle" colspan="3" class="text-center td-contenteditable">
-                    <textarea class="table_data_remove_border_line" id="g1_rg"></textarea>
+                    <textarea class="table_data_remove_border_line" id="g1_rg" name="g1_rg">{{ltg_goal.g1_rg}}</textarea>
                 </td>
                 <td style="vertical-align:middle" colspan="3" class="text-center td-contenteditable">
-                    <textarea class="table_data_remove_border_line" id="g1_pg"></textarea>
+                    <textarea class="table_data_remove_border_line" id="g1_pg" name="g1_pg">{{ltg_goal.g1_pg}}</textarea>
                 </td>
                 <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
-                    <input type="date" class="form-control" id="g1_date" name="g1_date" style="border-style:none;text-align:center">
+                    <input type="date" class="form-control" id="g1_date" name="g1_date" style="border-style:none;text-align:center" value="{{ltg_goal.g1_date}}">
                 </td>
                 <td style="vertical-align:middle" colspan="1" class="text-center">
                     <div class="checkbox">
                         <label>
-                            {% if g1_achieved %}
+                            {% if ltg_goal.g1_achieved %}
                             <input type="checkbox" id="g1_achieved" checked>
                             {% else %}
                             <input type="checkbox" id="g1_achieved">
