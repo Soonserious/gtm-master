@@ -949,6 +949,7 @@ $(document).ready(function(){
 
     $("input[name^=date]").on('input',function(){
         var text = $("li.active").text();
+        checkedFalse();
         var obj = $(this);
         $.ajax({
                     url : "/g3/date_exsist",
@@ -957,7 +958,7 @@ $(document).ready(function(){
                             "text" : text},
                     success : function(json) {
                         if(json.result){
-                            checkedFalse();
+
                             selectedFalse();
                             if(text == 'Tee Shot Challenge'){
                                 changeTeeShot(json.tuple);
