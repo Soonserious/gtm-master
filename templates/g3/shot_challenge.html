@@ -923,8 +923,9 @@ $(document).ready(function(){
                         var target = "input:radio[class='"+$(this).attr("class")+"'][value='"+localStorage.getItem($(this).attr("class"))+"']";
                         $(target).parent().addClass("active");
                         $(target).prop("checked", true);
-                    }else{
+                    }else if(localStorage.getItem($(this).attr("name"))){
                         $(this).val(localStorage.getItem($(this).attr("name")));
+
                     }
                 }
             })
@@ -935,8 +936,22 @@ $(document).ready(function(){
            })
     }
 
+    function checkedFalse(){
+
+            $("input:checked").each(function(){
+                 if($(this).is(":checked")){
+                    $(this).parent().removeClass("active");
+                     $(this).prop("checked",false);
+                     console.log($(this).parent().attr("id"));
+
+                 }
+             })
+        }
+
+
     $("input[name^=date]").on('input',function(){
         var text = $("li.active").text();
+
         console.log(text);
         selection_remove();
         $.ajax({
@@ -946,6 +961,7 @@ $(document).ready(function(){
                             "text" : text},
                     success : function(json) {
                         if(json.result){
+                            chekedFalse();
                             if(text == 'Tee Shot Challenge'){
                                 changeTeeShot(json.tuple);
                             }else if(text == 'Approach Shot Challenge'){
@@ -979,6 +995,7 @@ $(document).ready(function(){
         var selection = $('input:radio[name^=shot]').parent();
         selection.each(function(){
             $(this).removeClass("active");
+            $(this).prop("checked",false);
         })
     }
 
@@ -998,6 +1015,20 @@ $(document).ready(function(){
         $('input:radio[name="shot_12"][value="'+tuple.shot_12+'"]').parent().addClass("active");
         $('input:radio[name="shot_13"][value="'+tuple.shot_13+'"]').parent().addClass("active");
         $('input:radio[name="shot_14"][value="'+tuple.shot_14+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1"][value="'+tuple.shot_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_2"][value="'+tuple.shot_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_3"][value="'+tuple.shot_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_4"][value="'+tuple.shot_4+'"]').prop("checked",true);
+        $('input:radio[name="shot_5"][value="'+tuple.shot_5+'"]').prop("checked",true);
+        $('input:radio[name="shot_6"][value="'+tuple.shot_6+'"]').prop("checked",true);
+        $('input:radio[name="shot_7"][value="'+tuple.shot_7+'"]').prop("checked",true);
+        $('input:radio[name="shot_8"][value="'+tuple.shot_8+'"]').prop("checked",true);
+        $('input:radio[name="shot_9"][value="'+tuple.shot_9+'"]').prop("checked",true);
+        $('input:radio[name="shot_10"][value="'+tuple.shot_10+'"]').prop("checked",true);
+        $('input:radio[name="shot_11"][value="'+tuple.shot_11+'"]').prop("checked",true);
+        $('input:radio[name="shot_12"][value="'+tuple.shot_12+'"]').prop("checked",true);
+        $('input:radio[name="shot_13"][value="'+tuple.shot_13+'"]').prop("checked",true);
+        $('input:radio[name="shot_14"][value="'+tuple.shot_14+'"]').prop("checked",true);
     }
 
     function changeApproachShot(tuple){
@@ -1015,6 +1046,20 @@ $(document).ready(function(){
         $('input:radio[name="shot_12"][value="'+tuple.shot_12+'"]').parent().addClass("active");
         $('input:radio[name="shot_13"][value="'+tuple.shot_13+'"]').parent().addClass("active");
         $('input:radio[name="shot_14"][value="'+tuple.shot_14+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1"][value="'+tuple.shot_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_2"][value="'+tuple.shot_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_3"][value="'+tuple.shot_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_4"][value="'+tuple.shot_4+'"]').prop("checked",true);
+        $('input:radio[name="shot_5"][value="'+tuple.shot_5+'"]').prop("checked",true);
+        $('input:radio[name="shot_6"][value="'+tuple.shot_6+'"]').prop("checked",true);
+        $('input:radio[name="shot_7"][value="'+tuple.shot_7+'"]').prop("checked",true);
+        $('input:radio[name="shot_8"][value="'+tuple.shot_8+'"]').prop("checked",true);
+        $('input:radio[name="shot_9"][value="'+tuple.shot_9+'"]').prop("checked",true);
+        $('input:radio[name="shot_10"][value="'+tuple.shot_10+'"]').prop("checked",true);
+        $('input:radio[name="shot_11"][value="'+tuple.shot_11+'"]').prop("checked",true);
+        $('input:radio[name="shot_12"][value="'+tuple.shot_12+'"]').prop("checked",true);
+        $('input:radio[name="shot_13"][value="'+tuple.shot_13+'"]').prop("checked",true);
+        $('input:radio[name="shot_14"][value="'+tuple.shot_14+'"]').prop("checked",true);
     }
 
     function changeFifty(tuple){
@@ -1071,6 +1116,7 @@ $(document).ready(function(){
         $("select[name='shot_7_1_3']").val(tuple.shot_7_1_3);
         $("select[name='shot_7_1_4']").val(tuple.shot_7_1_4);
         $("select[name='shot_7_1_5']").val(tuple.shot_7_1_5);
+
     }
 </script>
 {% endblock %}

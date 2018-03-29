@@ -211,13 +211,14 @@
         });
 
         function getTempSave(){
+
             $("input").each(function(){
                 if(localStorage.getItem($(this).attr("name"))){
                     if($(this).attr("type") == "radio"){
                         var target = "input:radio[name='"+$(this).attr("name")+"'][value='"+localStorage.getItem($(this).attr("name"))+"']";
                         $(target).parent().addClass("active");
                         $(target).prop("checked",true);
-                    }else{
+                    }else if(localStorage.getItem($(this).attr("name"))){
                         $(this).val(localStorage.getItem($(this).attr("name")));
                     }
                 }
@@ -252,8 +253,19 @@
             });
         });
 
+        function checkedFalse(){
+            $("input:radio").each(function(){
+                            if($(this).is(":checked")){
+                                $(this).parent().removeClass("active");
+                                $(this).prop("checked",false)
+
+                 }
+             })
+        }
+
         $("input[name^=date]").on('input',function(){
         var text = $("li.active").text();
+        checkedFalse()
         console.log(text)
         $.ajax({
                     url : "/g3/date_exsist",
@@ -261,16 +273,16 @@
                     data : {"date" : $(this).val(),
                             "text" : text},
                     success : function(json) {
-                    $("input:radio").each(function(){
-                            $(this).parent().removeClass("active");
-                            $(this).prop("checked",false)
-                        })
+
                         if(json.result){
                             changePuttingGame(json.tuple);
 
                         }else{
+
                         $(this).val(localStorage.getItem($(this).attr("name")));
                           getTempSave();
+
+
                     }
                     },
                     error : function(xhr, errmsg, err) {

@@ -243,7 +243,7 @@
                                         <div class="btn-group btn-group-justified" data-toggle="buttons">
                                             {% for point in "34567" %}
                                             <label onclick="temp_save_radio_click(this)" class="btn btn-default">
-                                                <input type="radio" required="true"
+                                                <input class="seve_game_shot_3_{{forloop.parentloop.counter}}" type="radio" required="true"
                                                        name="shot_3_{{ forloop.parentloop.counter }}"
                                                        value="{{ point }}"/> {{ point }}
                                             </label>
@@ -434,7 +434,7 @@
                         $(target).parent().addClass("active");
                         $(target).prop("checked",true);
                     }
-                }else{
+                }else if(localStorage.getItem($(this).attr("name"))){
                         $(this).val(localStorage.getItem($(this).attr("name")));
 
                     }
@@ -491,6 +491,9 @@
                         console.log($(this).attr("class"))
                         localStorage.removeItem($(this).attr("class"));
                     })
+                $("input").each(function(){
+                    localStorage.removeItem($(this).attr("name"));
+                })
             },
 
             error : function(xhr,errmsg,err) {
@@ -500,24 +503,30 @@
             }
         });
     });
+     function checkedFalse(){
+
+            $("input:checked").each(function(){
+                 if($(this).is(":checked")){
+                    $(this).parent().removeClass("active");
+                     $(this).prop("checked",false);
+                     console.log($(this).parent().attr("id"));
+
+                 }
+             })
+        }
 
     $("input[name^=date]").on('input',function(){
-        $("input:radio").each(function(){
-            $(this).parent().removeClass("active");
-        })
+
+        var text =$("li.active").text();
         var obj = $(this);
-        var text = $("li.active").text();
-        console.log(text)
+        console.log(text);
         $.ajax({
                     url : "/g3/date_exsist",
                     type : 'GET',
                     data : {"date" : $(this).val(),
                             "text" : text},
                     success : function(json) {
-                        $("input:radio").each(function(){
-                            $(this).parent().removeClass("active");
-                            $(this).prop("checked",false)
-                        })
+                        checkedFalse();
                         if(json.result){
                           if(text == '9 Hole Scoring Aility Test'){
                                 changeScoringNineHole(json.tuple);
@@ -526,8 +535,10 @@
                             }
 
                         }else{
+                            console.log("getTempsave start")
                            localStorage.setItem(obj.attr("name"),obj.val());
                            getTempSave();
+                           console.log("getTempsave end")
                         }
                     },
                     error : function(xhr, errmsg, err) {
@@ -538,9 +549,8 @@
     })
 
     function temp_save_radio_click(obj){
-        console.log($(obj).find("input").attr("class"));
+        console.log($(obj).find("input").attr("class"))
         localStorage.setItem($(obj).find("input").attr("class"),$(obj).find("input").val());
-
     }
 
 
@@ -555,6 +565,15 @@
         $('input:radio[name="shot_7"][value="'+tuple.shot_7+'"]').parent().addClass("active");
         $('input:radio[name="shot_8"][value="'+tuple.shot_8+'"]').parent().addClass("active");
         $('input:radio[name="shot_9"][value="'+tuple.shot_9+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1"][value="'+tuple.shot_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_2"][value="'+tuple.shot_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_3"][value="'+tuple.shot_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_4"][value="'+tuple.shot_4+'"]').prop("checked",true);
+        $('input:radio[name="shot_5"][value="'+tuple.shot_5+'"]').prop("checked",true);
+        $('input:radio[name="shot_6"][value="'+tuple.shot_6+'"]').prop("checked",true);
+        $('input:radio[name="shot_7"][value="'+tuple.shot_7+'"]').prop("checked",true);
+        $('input:radio[name="shot_8"][value="'+tuple.shot_8+'"]').prop("checked",true);
+        $('input:radio[name="shot_9"][value="'+tuple.shot_9+'"]').prop("checked",true);
     }
 
     function changeSeveGame(tuple){
@@ -577,6 +596,24 @@
         $('input:radio[name="shot_4_4"][value="'+tuple.shot_4_4+'"]').parent().addClass("active");
         $('input:radio[name="shot_5_1"][value="'+tuple.shot_5_1+'"]').parent().addClass("active");
         $('input:radio[name="shot_6_1"][value="'+tuple.shot_6_1+'"]').parent().addClass("active");
+        $('input:radio[name="shot_1_1"][value="'+tuple.shot_1_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_2"][value="'+tuple.shot_1_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_3"][value="'+tuple.shot_1_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_4"][value="'+tuple.shot_1_4+'"]').prop("checked",true);
+        $('input:radio[name="shot_2_1"][value="'+tuple.shot_2_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_2_2"][value="'+tuple.shot_2_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_2_3"][value="'+tuple.shot_2_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_2_4"][value="'+tuple.shot_2_4+'"]').prop("checked",true);
+        $('input:radio[name="shot_3_1"][value="'+tuple.shot_3_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_3_2"][value="'+tuple.shot_3_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_3_3"][value="'+tuple.shot_3_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_3_4"][value="'+tuple.shot_3_4+'"]').prop("checked",true);
+        $('input:radio[name="shot_4_1"][value="'+tuple.shot_4_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_4_2"][value="'+tuple.shot_4_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_4_3"][value="'+tuple.shot_4_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_4_4"][value="'+tuple.shot_4_4+'"]').prop("checked",true);
+        $('input:radio[name="shot_5_1"][value="'+tuple.shot_5_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_6_1"][value="'+tuple.shot_6_1+'"]').prop("checked",true);
 
     }
 

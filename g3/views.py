@@ -570,7 +570,6 @@ def date_exsist(request):
         elif text =='9 Hole Scoring Aility Test' :
             try:
                 result = NineHole.objects.get(user=target_user, date=date)
-                print(result)
             except:
                 result = None
         elif text =='Seve Game':

@@ -316,9 +316,10 @@
                         $(target).parent().addClass("active");
                         $(target).prop("checked",true);
                     }
-                }else{
-                   $(this).val(localStorage.getItem($(this).attr("name")));
-                }
+                }else if(localStorage.getItem($(this).attr("name"))){
+                        $(this).val(localStorage.getItem($(this).attr("name")));
+
+                    }
             })
     }
     function temp_save_radio_click(obj){
@@ -368,7 +369,24 @@
                 }
             });
         });
+
+        function checkedFalse(){
+           $("input:checked").each(function(){
+                 if($(this).is(":checked")){
+                    $(this).parent().removeClass("active");
+                     $(this).prop("checked",false);
+                     console.log($(this).parent().attr("id"));
+
+                 }
+             })
+        }
+
         $("input[name^=date]").on('input',function(){
+        var obj = $(this);
+        $("input:radio").each(function(){
+            $(this).parent().removeClass("active");
+            $(this).prop("checked",false);
+        })
         var text = $("li.active").text();
         console.log(text)
         $.ajax({
@@ -377,15 +395,14 @@
                     data : {"date" : $(this).val(),
                             "text" : text},
                     success : function(json) {
-                    $("input:radio").each(function(){
-                            $(this).parent().removeClass("active");
-                            $(this).prop("checked",false)
-                        })
+                        checkedFalse();
                         if(json.result){
                             changeScoringGame(json.tuple);
                         }else{
+                        console.log("tempsave start")
                            localStorage.setItem(obj.attr("name"),obj.val());
                            getTempSave();
+                           console.log("tempsave end")
                         }
                     },
                     error : function(xhr, errmsg, err) {
@@ -480,6 +497,79 @@
         $('input:radio[name="shot_4_1_3_1"][value="'+tuple.shot_4_1_3_1+'"]').parent().addClass("active");
         $('input:radio[name="shot_4_1_4_1"][value="'+tuple.shot_4_1_4_1+'"]').parent().addClass("active");
         $('input:radio[name="shot_4_1_5_1"][value="'+tuple.shot_4_1_5_1+'"]').parent().addClass("active");
+         $('input:radio[name="shot_1_1_1_1"][value="'+tuple.shot_1_1_1_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_1_1_2"][value="'+tuple.shot_1_1_1_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_1_1_3"][value="'+tuple.shot_1_1_1_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_1_2_1"][value="'+tuple.shot_1_1_2_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_1_2_2"][value="'+tuple.shot_1_1_2_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_1_2_3"][value="'+tuple.shot_1_1_2_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_1_3_1"][value="'+tuple.shot_1_1_3_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_1_3_2"][value="'+tuple.shot_1_1_3_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_1_3_3"][value="'+tuple.shot_1_1_3_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_2_1_1"][value="'+tuple.shot_1_2_1_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_2_1_2"][value="'+tuple.shot_1_2_1_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_2_1_3"][value="'+tuple.shot_1_2_1_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_2_2_1"][value="'+tuple.shot_1_2_2_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_2_2_2"][value="'+tuple.shot_1_2_2_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_2_2_3"][value="'+tuple.shot_1_2_2_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_2_3_1"][value="'+tuple.shot_1_2_3_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_2_3_2"][value="'+tuple.shot_1_2_3_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_2_3_3"][value="'+tuple.shot_1_2_3_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_3_1_1"][value="'+tuple.shot_1_3_1_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_3_1_2"][value="'+tuple.shot_1_3_1_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_3_1_2"][value="'+tuple.shot_1_3_1_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_3_1_3"][value="'+tuple.shot_1_3_1_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_3_2_1"][value="'+tuple.shot_1_3_2_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_3_2_2"][value="'+tuple.shot_1_3_2_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_3_2_3"][value="'+tuple.shot_1_3_2_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_3_3_1"][value="'+tuple.shot_1_3_3_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_3_3_2"][value="'+tuple.shot_1_3_3_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_3_3_3"][value="'+tuple.shot_1_3_3_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_4_1_1"][value="'+tuple.shot_1_4_1_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_4_1_2"][value="'+tuple.shot_1_4_1_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_4_1_3"][value="'+tuple.shot_1_4_1_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_4_2_1"][value="'+tuple.shot_1_4_2_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_4_2_2"][value="'+tuple.shot_1_4_2_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_4_2_3"][value="'+tuple.shot_1_4_2_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_4_3_1"][value="'+tuple.shot_1_4_3_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_4_3_2"][value="'+tuple.shot_1_4_3_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_1_4_3_3"][value="'+tuple.shot_1_4_3_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_2_1_1_1"][value="'+tuple.shot_2_1_1_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_2_1_1_2"][value="'+tuple.shot_2_1_1_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_2_1_1_3"][value="'+tuple.shot_2_1_1_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_2_1_2_1"][value="'+tuple.shot_2_1_2_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_2_1_2_2"][value="'+tuple.shot_2_1_2_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_2_1_2_3"][value="'+tuple.shot_2_1_2_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_2_1_3_1"][value="'+tuple.shot_2_1_3_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_2_1_3_2"][value="'+tuple.shot_2_1_3_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_2_1_3_3"][value="'+tuple.shot_2_1_3_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_2_1_4_1"][value="'+tuple.shot_2_1_4_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_2_1_4_2"][value="'+tuple.shot_2_1_4_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_2_1_4_3"][value="'+tuple.shot_2_1_4_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_2_1_5_1"][value="'+tuple.shot_2_1_5_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_2_1_5_2"][value="'+tuple.shot_2_1_5_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_2_1_5_3"][value="'+tuple.shot_2_1_5_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_3_1_1_1"][value="'+tuple.shot_3_1_1_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_3_1_1_2"][value="'+tuple.shot_3_1_1_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_3_1_1_3"][value="'+tuple.shot_3_1_1_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_3_1_2_1"][value="'+tuple.shot_3_1_2_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_3_1_2_2"][value="'+tuple.shot_3_1_2_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_3_1_2_3"][value="'+tuple.shot_3_1_2_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_3_1_3_1"][value="'+tuple.shot_3_1_3_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_3_1_3_2"][value="'+tuple.shot_3_1_3_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_3_1_3_3"][value="'+tuple.shot_3_1_3_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_3_1_1_3"][value="'+tuple.shot_3_1_1_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_3_1_4_1"][value="'+tuple.shot_3_1_4_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_3_1_4_2"][value="'+tuple.shot_3_1_4_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_3_1_4_3"][value="'+tuple.shot_3_1_4_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_3_1_5_1"][value="'+tuple.shot_3_1_5_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_3_1_5_2"][value="'+tuple.shot_3_1_5_2+'"]').prop("checked",true);
+        $('input:radio[name="shot_3_1_5_3"][value="'+tuple.shot_3_1_5_3+'"]').prop("checked",true);
+        $('input:radio[name="shot_4_1_1_1"][value="'+tuple.shot_4_1_1_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_4_1_2_1"][value="'+tuple.shot_4_1_2_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_4_1_3_1"][value="'+tuple.shot_4_1_3_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_4_1_4_1"][value="'+tuple.shot_4_1_4_1+'"]').prop("checked",true);
+        $('input:radio[name="shot_4_1_5_1"][value="'+tuple.shot_4_1_5_1+'"]').prop("checked",true);
 
         }
 
