@@ -79,7 +79,7 @@
                                 {% endfor %}
                                 <td>{{ stat.out_penalty }}</td>
                             </tr>
-                            <tr>
+                            <tr style="border-bottom:3px solid ;">
                                 <th>Proximity(meter)</th>
                                 {% for field in rrf.field_proximity|slice:":9" %}
                                     <td>{{ field }}</td>
@@ -157,7 +157,7 @@
                                 <td>{{ stat.in_penalty }}</td>
                                 <td>{{ stat.penalty }}</td>
                             </tr>
-                            <tr>
+                            <tr style="border-bottom:3px solid ;">
                                 <th>Proximity(meter)</th>
                                 {% for field in rrf.field_proximity|slice:"9:" %}
                                     <td>{{ field }}</td>
