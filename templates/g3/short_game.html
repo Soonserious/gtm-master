@@ -34,7 +34,7 @@
                                     <p style="">Date</p>
                                 </div>
                                 <div class="col-xs-10">
-                                    <input type='date' required="true" name='date' class="form-control"/>
+                                    <input type='text' required="true" name='date' class="form-control"/>
                                 </div>
                             </div>
                         </li>
@@ -167,7 +167,7 @@
                                     <p style="">Date</p>
                                 </div>
                                 <div class="col-sm-9 col-xs-7">
-                                    <input type='date' required="true" name='date' class="form-control"/>
+                                    <input type='text' required="true" name='date' class="form-control"/>
                                 </div>
                             </div>
                         </li>
@@ -422,7 +422,13 @@
 
 {% block js %}
 <script type="text/javascript">
-
+      $(function () {
+            $('input[name="date"]').datetimepicker({
+                format: 'YYYY-MM-DD',
+                showTodayButton: true,
+                showClose: true
+            });
+        });
     $(document).ready(function(){
         $('#seve_game_result').hide();
         getTempSave();
@@ -517,8 +523,8 @@
              })
         }
 
-    $("input[name^=date]").on('input',function(){
-
+     $("input[name^=date]").on("dp.change",function(dateText){
+        $(this).val(dateText.date.format('YYYY-MM-DD'));
         var text =$("li.active").text();
         var obj = $(this);
         console.log(text);

@@ -40,7 +40,7 @@
                                     <p style="">Date</p>
                                 </div>
                                 <div class="col-xs-9">
-                                    <input type='date' required="true" name='date' class="form-control"/>
+                                    <div style="position:relative;"><input type='text' required="true" name='date' class="form-control"/></div>
                                 </div>
                             </div>
                         </li>
@@ -250,7 +250,7 @@
                                     <p style="">Date</p>
                                 </div>
                                 <div class="col-xs-9">
-                                    <input type='date' required="true" name='date' class="form-control"/>
+                                    <div style="position:relative;"><input type='text' required="true" name='date' class="form-control"/></div>
                                 </div>
                             </div>
                         </li>
@@ -463,7 +463,7 @@
                                     <p style="">Date</p>
                                 </div>
                                 <div class="col-xs-9">
-                                    <input type='date' required="true" name='date' class="form-control"/>
+                                    <div style="position:relative;"><input type='text' required="true" name='date' class="form-control"/></div>
                                 </div>
                             </div>
                         </li>
@@ -925,6 +925,14 @@ $(document).ready(function(){
 
 </script>
 <script type='text/javascript'>
+     $(function () {
+            $('input[name="date"]').datetimepicker({
+                format: 'YYYY-MM-DD',
+                showTodayButton: true,
+                showClose: true
+            });
+        });
+
      $(document).ready(function(){
         $('#nine_hole_result').hide();
 
@@ -948,7 +956,8 @@ $(document).ready(function(){
      }
 
 
-    $("input[name^=date]").on('input',function(){
+    $("input[name^=date]").on("dp.change",function(dateText){
+        $(this).val(dateText.date.format('YYYY-MM-DD'));
         var text = $("li.active").text();
         checkedFalse();
         var obj = $(this);
@@ -963,7 +972,6 @@ $(document).ready(function(){
                             selectedFalse();
                             if(text == 'Tee Shot Challenge'){
                                 changeTeeShot(json.tuple);
-                                localStorage.remove("")
                             }else if(text == 'Approach Shot Challenge'){
                                 changeApproachShot(json.tuple);
                             }else if(text == '54 Shot Challenge'){

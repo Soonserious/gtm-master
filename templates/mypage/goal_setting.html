@@ -35,7 +35,7 @@
 {#            </div>#}
 {#            <div class="col-xs-2">#}
 {#                <div class="form-group">#}
-{#                    <input type="date" class="form-control" id="date" name="date">#}
+{#                    <input type="text" class="form-control" id="date" name="date">#}
 {#                </div>#}
 {#            </div>#}
 {#            <div class="col-xs-8">#}
@@ -53,7 +53,7 @@
                     <textarea class="table_data_remove_border_line" id="ltg_content">{{ltg_goal.ltg_content}}</textarea>
                 </td>
                 <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
-                    <input type="date" class="form-control" id="ltg_date" name="ltg_date" style="border-style:none;text-align:center" value="{{ltg_goal.ltg_date}}">
+                    <div style="position:relative;"><input type="text" class="date form-control" id="ltg_date" name="ltg_date" style="border-style:none;text-align:center" value="{{ltg_goal.ltg_date}}"></div>
                 </td>
                 <td style="vertical-align:middle" colspan="1" class="text-center">
                     <div class="checkbox">
@@ -86,7 +86,7 @@
 
                 </td>
                 <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
-                    <input type="date" class="form-control" id="g3_date" name="g3_date" style="border-style:none;text-align:center" value="{{ltg_goal.g3_date}}">
+                    <div style="position:relative;"><input type="text" class="date form-control" id="g3_date" name="g3_date" style="border-style:none;text-align:center" value="{{ltg_goal.g3_date}}"></div>
                 </td>
                 <td style="vertical-align:middle" colspan="1" class="text-center">
                     <div class="checkbox">
@@ -109,7 +109,7 @@
                     <textarea class="table_data_remove_border_line" id="g2_pg">{{ltg_goal.g2_pg}}</textarea>
                 </td>
                 <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
-                    <input type="date" class="form-control" id="g2_date" name="g2_date" style="border-style:none;text-align:center" value="{{ltg_goal.g2_date}}">
+                    <div style="position:relative;"><input type="text" class="date form-control" id="g2_date" name="g2_date" style="border-style:none;text-align:center" value="{{ltg_goal.g2_date}}"></div>
                 </td>
                 <td style="vertical-align:middle" colspan="1" class="text-center">
                     <div class="checkbox">
@@ -132,7 +132,7 @@
                     <textarea class="table_data_remove_border_line" id="g1_pg" name="g1_pg">{{ltg_goal.g1_pg}}</textarea>
                 </td>
                 <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
-                    <input type="date" class="form-control" id="g1_date" name="g1_date" style="border-style:none;text-align:center" value="{{ltg_goal.g1_date}}">
+                    <div style="position:relative;"><input type="text" class="date form-control" id="g1_date" name="g1_date" style="border-style:none;text-align:center" value="{{ltg_goal.g1_date}}"></div>
                 </td>
                 <td style="vertical-align:middle" colspan="1" class="text-center">
                     <div class="checkbox">
@@ -170,7 +170,7 @@
         </tr>
         <tr>
             <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
-               <center> <input style="width:100% " type="date" class="table_data_remove_border_line" id="dg_save_date"></center>
+                <center> <div style="position:relative;"><input style="width:100% " type="text" class="date table_data_remove_border_line" id="dg_save_date"></div></center>
             </td>
             <td style="vertical-align:middle" colspan="7" class="text-center td-contenteditable">
                 <textarea class="table_data_remove_border_line" id="dg_save_content"></textarea>
@@ -192,7 +192,7 @@
             {% for idx, date, content, achieved in dg_data %}
             <tr>
                 <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
-                    <input style="width:100%" type="date" id="dg_date_{{ idx }}" name="dg_update_date" value="{{ date }}">
+                    <div style="position:relative;"><input style="width:100%" class="date " type="text" id="dg_date_{{ idx }}" name="dg_update_date" value="{{ date }}"></div>
                 </td>
                 <td style="vertical-align:middle" colspan="7" class="text-center td-contenteditable">
                     <textarea class="dg_update_contents table_data_remove_border_line" id="dg_{{idx}}_content">{{ content }}</textarea>
@@ -200,7 +200,7 @@
                 <td style="vertical-align:middle" colspan="1" class="text-center">
                     <div class="checkbox">
                         <label>
-                            {% if achieved %}
+                            {% if achieved == 1 %}
                             <input class="dg_update_archieved" type="checkbox" id="dg_{{ idx }}_achieved" checked>
                             {% else %}
                             <input class="dg_update_archieved" type="checkbox" id="dg_{{ idx }}_achieved">
@@ -232,7 +232,25 @@
 {% endblock %}
 
 {% block js %}
-<script>
+<script type='text/javascript'>
+
+$(document).ready(function(){
+    $("#ltg_date").datetimepicker({
+                format: 'YYYY-MM-DD',
+                showTodayButton: true,
+                showClose: true
+                });
+       $(".date").each(function(){
+                console.log("datetimepicer")
+                $(this).datetimepicker({
+                format: 'YYYY-MM-DD',
+                showTodayButton: true,
+                showClose: true
+            });
+        });
+
+    });
+
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -249,17 +267,19 @@ function getCookie(name) {
 }
 $(function() { $.ajaxSetup({headers: {"X-CSRFToken": getCookie("csrftoken")}}); });
 
-$("input[name='dg_update_date']").on("change",function(){
+$("input[name='dg_update_date']").on("dp.change",function(dateText){
+        $(this).val(dateText.date.format('YYYY-MM-DD'));
+        console.log($(this).val());
     var me = this
     $.ajax({
         url :"/mypage/dg_exsist",
         type :"GET",
         data : {"date" : $(this).val()},
         success : function(json){
-                   console.log($(me).parent().parent().find(".dg_update_contents").val());
-                   $(me).parent().parent().find(".dg_update_contents").val(json.contents);
+                   console.log($(me).parent().parent().parent().find(".dg_update_contents").val());
+                   $(me).parent().parent().parent().find(".dg_update_contents").val(json.contents);
                     if(json.archieved == "archieved"){
-                        $(me).parent().find(".dg_update_archieved").prop("checked","checked");
+                        $(me).parent().parent().find(".dg_update_archieved").prop("checked","checked");
                     }
                 },
         error : function(xhr, errmsg, err) {
@@ -270,9 +290,14 @@ $("input[name='dg_update_date']").on("change",function(){
 
 })
 
+$("#dg_save_date").on("dp.change",function(dateText){
+        $(this).val(dateText.date.format('YYYY-MM-DD'));
+        });
 
-$("#ltg_date").on("input",function(){
-    console.log()
+
+$("#ltg_date").on("dp.change",function(dateText){
+        $(this).val(dateText.date.format('YYYY-MM-DD'));
+        console.log($(this).val());
      $.ajax({
                     url : "/mypage/ltg_date_exsist",
                     type : 'GET',
@@ -352,9 +377,12 @@ function dg_create(){
 }
 
 function dg_update(i){
-    dg_date = $("'#dg_date_' + i ").val();
-    dg_content = $("'#dg_' + i+'_content'").val();
-    dg_archeived = $("'#dg_' + i+ 'archeived'").prop("checked");
+    dg_date = $("#dg_date_" + i ).val();
+    dg_content = $('#dg_' + i+'_content').val();
+    dg_archeived = 0;
+    if($('#dg_' + i+ '_achieved').prop("checked")){
+        dg_archeived=1;
+    }
     save_dg_clicked(dg_date,dg_content,dg_archeived);
     }
 

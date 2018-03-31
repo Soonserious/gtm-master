@@ -103,36 +103,38 @@ def diary(request):
 @login_required
 @user_passes_test(has_permission_mypage, "My Page 이용 권한이 없습니다.")
 def goal_setting(request):
-    if request.method == 'GET':
-        context = {}
+    try:
+        if request.method == 'GET':
+            context = {}
 
-        queried = LongTermGoals.objects.filter(user=request.user).order_by('-update_time')
-        if queried.exists():
-            model = queried[0]
-            context["ltg_goal"] = json.loads(model.dumped_contents)
+            queried = LongTermGoals.objects.filter(user=request.user).order_by('-update_time')
+            if queried.exists():
+                model = queried[0]
+                context["ltg_goal"] = json.loads(model.dumped_contents)
 
-        queried = DailyGoals.objects.filter(user=request.user).order_by('-update_time')
-        if queried.exists():
-            dg_data = []
-            i = 1
-            for query in queried.iterator():
-                if i == 11:
-                    break;
-                dumped_contents = json.loads(query.dumped_contents)
+            queried = DailyGoals.objects.filter(user=request.user).order_by('-update_time')
+            if queried.exists():
+                dg_data = []
+                i = 1
+                for query in queried.iterator():
+                    if i == 11:
+                        break;
+                    dumped_contents = json.loads(query.dumped_contents)
 
-                dg_data.append([i,
-                                dumped_contents['dg_date'.format(i)],
-                                dumped_contents['dg_content'.format(i)],
-                                dumped_contents['dg_achieved'.format(i)]])
-                i += 1
+                    dg_data.append([i,
+                                    dumped_contents['dg_date'.format(i)],
+                                    dumped_contents['dg_content'.format(i)],
+                                    dumped_contents['dg_achieved'.format(i)]])
+                    i += 1
+            else:
+                dg_data = list(zip(list(range(10)), [''] * 10, [''] * 10, [False] * 10))
+            context['dg_data'] = dg_data
+            print(dg_data)
+            return render(request, 'mypage/goal_setting.html', context=context)
         else:
-            dg_data = list(zip(list(range(10)), [''] * 10, [''] * 10, [False] * 10))
-        context['dg_data'] = dg_data
-        print(dg_data)
-        return render(request, 'mypage/goal_setting.html', context=context)
-    else:
-        pass
-
+            pass
+    except Exception as ex :
+        print(ex)
 
 def ltg_submit(request):
     try:

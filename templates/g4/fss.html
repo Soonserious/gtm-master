@@ -17,7 +17,7 @@
                             <p style="">Date</p>
                         </div>
                         <div class="col-sm-9 col-xs-7">
-                            <input type='date' required="true" name='date' class="form-control"/>
+                            <div style="position:relative;"><input type='text' required="true" name='date' class="form-control"/></div>
                         </div>
                     </div>
                 </li>
@@ -88,7 +88,7 @@
         $(document).ready(function(){
             {# $('input[value="1"]').attr("checked", true); #}
             $('#submit_success_label').hide();
-            if($('#load_data').val() != null){
+            if($('#load_data').val()){
                 var score_list= jQuery.parseJSON($('#load_data').val());
                 console.log(Object.keys(score_list).length);
                 for(i=1; i<Object.keys(score_list).length;i++){
@@ -118,5 +118,15 @@
                 }
             });
         });
+         $(function () {
+            $('input[name="date"]').datetimepicker({
+                format: 'YYYY-MM-DD',
+                showTodayButton: true,
+                showClose: true
+            });
+        });
+        $('input[name="date"]').on("dp.change",function(dateText){
+            $(this).val(dateText.date.format('YYYY-MM-DD'));
+          });
     </script>
 {% endblock %}

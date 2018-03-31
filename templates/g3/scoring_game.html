@@ -21,7 +21,7 @@
                                         <p style="">Date</p>
                                     </div>
                                     <div class="col-xs-10">
-                                        <input type='date' required="true" name='date' class="form-control"/>
+                                        <input type='text' required="true" name='date' class="form-control"/>
                                     </div>
                                 </div>
                             </li>
@@ -309,6 +309,13 @@
             $('#scoring_game_result').hide();
             getTempSave();
         });
+         $(function () {
+            $('input[name="date"]').datetimepicker({
+                format: 'YYYY-MM-DD',
+                showTodayButton: true,
+                showClose: true
+            });
+        });
     function getTempSave(){
                 $("input").each(function(){
                 if(localStorage.getItem($(this).attr("class"))){
@@ -382,7 +389,8 @@
              })
         }
 
-        $("input[name^=date]").on('input',function(){
+        $("input[name^=date]").on("dp.change",function(dateText){
+        $(this).val(dateText.date.format('YYYY-MM-DD'));
         var obj = $(this);
         $("input:radio").each(function(){
             $(this).parent().removeClass("active");

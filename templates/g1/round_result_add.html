@@ -16,7 +16,7 @@
         <div class="panel-body">
 
             <form class="form-horizontal" id="form" role="form" method="POST" action="/g1/round_result_add_submit">
-                 <input type='date' required="true" name='date' class="form-control"/>
+                 <input type='text' required="true" name='date' class="form-control"/>
                 <div class="row">
                     <div class="col-xs-12">
 
@@ -192,6 +192,17 @@
 
 {% block js %}
     <script>
+    $(function () {
+            $('input[name="date"]').datetimepicker({
+                format: 'YYYY-MM-DD',
+                showTodayButton: true,
+                showClose: true
+            });
+        });
+        $("input[name^=date]").on("dp.change",function(dateText){
+            $(this).val(dateText.date.format('YYYY-MM-DD'));
+            localSorage.setItem($(this).attr("id"),$(this).val())
+            })
         $("input").on("input",function(){
             if($(this).attr("type") != 'checkbox'){
                 localStorage.setItem($(this).attr("id"),$(this).val())

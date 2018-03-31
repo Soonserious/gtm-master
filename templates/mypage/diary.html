@@ -33,7 +33,7 @@
             </div>
             <div class="col-sm-2 col-xs-8">
                 <div class="form-group">
-                    <input type='date' required="true" name='date' class="form-control" id='id-date'/>
+                    <input type='text' required="true" name='date' class="form-control" id='id-date'/>
                 </div>
             </div>
             <div class="col-sm-1 col-sm-offset-1 col-xs-4 text-center">
@@ -151,7 +151,20 @@
 {% endblock %}
 
 {% block js %}
-<script>
+
+
+
+
+<script type='text/javascript'>
+
+ $(function () {
+            $('input[name="date"]').datetimepicker({
+                format: 'YYYY-MM-DD',
+                showTodayButton: true,
+                showClose: true
+            });
+        });
+
 (function () {
     if ({{ record_exists }}) {
         $("#id-date").val("{{ date }}");
@@ -159,9 +172,11 @@
         $("#id-competition_name").val("{{ competition_name }}");
     }
 })();
-$("#id-date").on("input",function(){
-     console.log("competition input")
-    $.ajax({
+
+$("#id-date").on("dp.change",function(dateText){
+        $(this).val(dateText.date.format('YYYY-MM-DD'));
+        console.log($(this).val());
+        $.ajax({
         url: "/mypage/diary_exsist",
         type: "GET",
         data: {"date" : $("#id-date").val(),
@@ -181,7 +196,32 @@ $("#id-date").on("input",function(){
             }
         }
     })
-})
+
+});
+<!--$("#id-date").datepicker({onSelect:function(dateText){-->
+    <!--$(this).val(dateText);-->
+    <!--console.log($(this).val());-->
+    <!--$.ajax({-->
+        <!--url: "/mypage/diary_exsist",-->
+        <!--type: "GET",-->
+        <!--data: {"date" : $("#id-date").val(),-->
+                <!--"competition_level" : $("#id-competition_level").val()},-->
+        <!--dataType: "json",-->
+        <!--success: function(data) {-->
+            <!--if(data.dumped_contents){-->
+                <!--for(i=0; i<Object.keys(data.dumped_contents).length;i++){-->
+                    <!--var target = "content_" + i;-->
+                    <!--$("textarea[name="+target+"]").val(data.dumped_contents[target]);-->
+                    <!--console.log(data.dumped_contents[target]);-->
+                <!--}-->
+            <!--}else{-->
+                <!--$("textarea").each(function(){-->
+                    <!--$(this).val(" ");-->
+                <!--})-->
+            <!--}-->
+        <!--}-->
+    <!--})-->
+<!--})-->
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
