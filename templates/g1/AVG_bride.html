@@ -1,10 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "common/base.html" %}
 
-</body>
-</html>
+{% block css %}
+{% endblock %}
+
+{% block content %}
+  <form method="POST" action="/g1/administrator_par_input">
+    {% csrf_token %}
+        <div class="row">
+            <div class="col-xs-6">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th colspan="2">Par 3, 4, 5 홀 평균타수</th>
+                    </tr>
+                    <tr>
+                        <th>Par 3</th>
+                        <th>Par 4</th>
+                        <th>Par 5</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><input type="text" name="par3" id="par3"></td>
+                        <td><input type="text" name="par4" id="par4"></td>
+                        <td><input type="text" name="par5" id="par5"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <input type='submit'>
+  </form>
+
+    <form method="POST" action="/g1/AVG_Stroke">
+    {% csrf_token %}
+        <div class="row">
+            <div class="col-xs-6">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th colspan="2">AVG_Stroke</th>
+                    </tr>
+                    <tr>
+                        <th>Birdie</th>
+                        <th>Par</th>
+                        <th>Bogey</th>
+                        <th>Double Bogey or More</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><input type="text" name="birdie" id="birdie"></td>
+                        <td><input type="text" name="par" id="par"></td>
+                        <td><input type="text" name="bogey" id="bogey"></td>
+                        <td><input type="text" name="doublebogey" id="doublebogey"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <input type='submit'>
+  </form>
+
+{% endblock %}
+
+{% block js %}
+<script>
+     $(document).ready(function(){
+            var success = {{ success }}
+            if(success){
+                alert("success")
+            }
+        });
+</script>
+{% endblock %}

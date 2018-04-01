@@ -90,7 +90,7 @@ DATABASES = {
 
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'pgamazone',
+        'NAME': 'pgbackup',
         'USER': 'postgres',
         'PASSWORD': 'ekscn123',
         'HOST': 'localhost',

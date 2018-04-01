@@ -251,3 +251,11 @@ class RoundingResult(models.Model):
             'in_bounce_back': sum(self.bounce_back()[9:18]),
             'bounce_back': sum(self.bounce_back()),
         }
+
+class AVG_Stroke(models.Model):
+    birdie = models.FloatField()
+    par = models.FloatField()
+    bogey = models.FloatField()
+    double = models.FloatField()
+
+

@@ -181,7 +181,6 @@ def profile(request):
                 current_evaluations.append(StringManager.NO_RECORD)
                 comments.append(StringManager.NO_COMMENT)
         is_admin = 1 if request.user.is_staff else 0
-
         return JsonResponse({'is_admin': is_admin,
                              'target_user_id': target_user_id,
                              'titles': titles,
@@ -194,24 +193,30 @@ def profile(request):
 
 @login_required
 def update(request):
-    if request.method == 'GET':
-        pass
-    elif request.method == 'POST':
-        target_user_id = request.POST['target_user_id']
-        idx = int(request.POST['idx'])
-        comment = request.POST['comment']
-        strategy = request.POST['strategy']
-        target_user = User.objects.get(username=target_user_id)
-        model_cls = [OceanTest, Gmet, Tops, Fss, Acsi, CourseManagement][idx]
-        queried = model_cls.objects.filter(user=target_user).order_by('-update_time')
-        if queried.exists():
-            latest_instance = queried[0]
-            latest_instance.comment = comment
-            latest_instance.strategy = strategy
-            latest_instance.save()
-            status = 'success'
-        else:
-            status = 'no matching record instances'
-        return JsonResponse({
-            'status': status
-        })
+    try:
+        if request.method == 'GET':
+            pass
+        elif request.method == 'POST':
+            target_user_id = request.POST['target_user_id']
+            idx = int(request.POST['idx'])
+            comment = request.POST['comment']
+            # if request.POST["strategy"]:
+            #     strategy = request.POST['strategy']
+            target_user = User.objects.get(username=target_user_id)
+            model_cls = [OceanTest, Gmet, Tops, Fss, Acsi, CourseManagement][idx]
+            queried = model_cls.objects.filter(user=target_user).order_by('-update_time')
+            if queried.exists():
+                print(len(queried))
+                latest_instance = queried[0]
+                latest_instance.comment = comment
+                if isinstance(latest_instance,Acsi) or isinstance(latest_instance,CourseManagement):
+                    latest_instance.strategy = request.POST["strategy"]
+                latest_instance.save()
+                status = 'success'
+            else:
+                status = 'no matching record instances'
+            return JsonResponse({
+                'status': status
+            })
+    except Exception as ex:
+        print(ex)

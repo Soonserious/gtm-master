@@ -74,8 +74,8 @@ def diary(request):
                 context.update(contents)
                 context['date'] = model.date.isoformat()
                 context['competition_level'] = model.competition_level
-                if model.competition_level == 2:
-                    context['competition_name'] = model.competition_name
+                context['competition_name'] = model.competition_name
+
             else:
                 context['record_exists'] = 0
             return render(request, 'mypage/diary.html', context=context)
@@ -91,7 +91,9 @@ def diary(request):
                     return HttpResponse(form.errors)
                 model.user = request.user
                 model.competition_level = competition_level
+
                 model.date = request.POST["date"]
+            model.competition_name = request.POST["competition_name"]
             contents = extract_contents_from_post(request.POST)
             model.dumped_contents = json.dumps(contents)
             model.save()
@@ -212,7 +214,8 @@ def diary_exsist(request):
         try:
             model = Diary.objects.get(user=request.user, date=request.GET["date"],
                                       competition_level=request.GET["competition_level"])
-            return JsonResponse({"dumped_contents": json.loads(model.dumped_contents)})
+            return JsonResponse({"dumped_contents": json.loads(model.dumped_contents),
+                                 "competition_name":model.competition_name})
         except ObjectDoesNotExist:
             return JsonResponse({})
     except Exception as ex:

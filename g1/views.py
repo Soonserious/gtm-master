@@ -140,95 +140,121 @@ def round(request):
         print(ex)
 
 @login_required
-@user_passes_test(has_permission_mypage, "My Page 이용 권한이 없습니다.")
 def profile(request):
-    cr = Criteria.objects.first()
-    if not cr:
-        cr = Criteria()
+    try:
+        cr = Criteria.objects.first()
+        if not cr:
+            cr = Criteria()
 
-    if request.user.is_staff:
-        is_admin = 1
-        target_user_id = request.GET['target_user_id']
-    else:
-        is_admin = 0
-        target_user_id = request.user.username
+        if request.user.is_staff:
+            is_admin = 1
+            target_user_id = request.GET['target_user_id']
+        else:
+            is_admin = 0
+            target_user_id = request.user.username
 
-    target_user = User.objects.get(username=target_user_id)
-    target_member = Member.objects.get(user=target_user)
-    member_info = {
-        'name': target_member.full_name,
-        'sex': '남자' if target_member.sex == 'M' else '여자',
-        'birth': target_member.birth or '-',
-        'handicap': target_member.handicap if target_member.handicap is not None else '-',
-        'association': target_member.association,
-    }
+        target_user = User.objects.get(username=target_user_id)
+        target_member = Member.objects.get(user=target_user)
+        member_info = {
+            'name': target_member.full_name,
+            'sex': '남자' if target_member.sex == 'M' else '여자',
+            'birth': target_member.birth or '-',
+            'handicap': target_member.handicap if target_member.handicap is not None else '-',
+            'association': target_member.association,
+        }
 
-    round_posted = RoundingResult.objects.filter(user=target_user).count()
-    if round_posted == 0:
-        return render(request,
-                      'g1/profile.html',
-                      {'member_info': member_info, 'round_posted': round_posted})
+        round_posted = RoundingResult.objects.filter(user=target_user).count()
+        if round_posted == 0:
+            return render(request,
+                          'g1/profile.html',
+                          {'member_info': member_info, 'round_posted': round_posted})
 
-    rrs = RoundingResult.objects.filter(user=target_user).order_by('-date', '-create_time')[:20]
-    avg = average(rrs)
+        rrs = RoundingResult.objects.filter(user=target_user).order_by('-date', '-create_time')[:20]
+        avg = average(rrs)
 
-    queried = RoundingResult.objects.filter(user=target_user).order_by('-date', '-create_time')
-    if queried.exists():
-        comment = queried[0].comment
-    else:
-        comment = ''
+        queried = RoundingResult.objects.filter(user=target_user).order_by('-date', '-create_time')
+        if queried.exists():
+            comment = queried[0].comment
+        else:
+            comment = ''
 
-    par3_score = 0
-    par3_count = 0
-    par4_score = 0
-    par4_count = 0
-    par5_score = 0
-    par5_count = 0
+        par3_score = 0
+        par3_count = 0
+        par4_score = 0
+        par4_count = 0
+        par5_score = 0
+        par5_count = 0
 
-    holes = 0
-    birdie_count = 0
-    par_count = 0
-    bogey_count = 0
-    double_bogey_or_more_count = 0
-    for rr in rrs:
-        pars = rr.course.getpars()
-        score = rr.getscore()
+        holes = 0
+        birdie_count = 0
+        par_count = 0
+        bogey_count = 0
+        double_bogey_or_more_count = 0
+        for rr in rrs:
+            pars = rr.course.getpars()
+            score = rr.getscore()
 
-        par3 = list(map(operator.eq, pars, [3] * len(pars)))
-        par3_score += sum(map(operator.mul, par3, score))
-        par3_count += sum(par3)
-        par4 = list(map(operator.eq, pars, [4] * len(pars)))
-        par4_score += sum(map(operator.mul, par4, score))
-        par4_count += sum(par4)
-        par5 = list(map(operator.eq, pars, [5] * len(pars)))
-        par5_score += sum(map(operator.mul, par5, score))
-        par5_count += sum(par5)
+            par3 = list(map(operator.eq, pars, [3] * len(pars)))
+            par3_score += sum(map(operator.mul, par3, score))
+            par3_count += sum(par3)
+            par4 = list(map(operator.eq, pars, [4] * len(pars)))
+            par4_score += sum(map(operator.mul, par4, score))
+            par4_count += sum(par4)
+            par5 = list(map(operator.eq, pars, [5] * len(pars)))
+            par5_score += sum(map(operator.mul, par5, score))
+            par5_count += sum(par5)
 
-        birdie_count += sum(map(operator.gt, pars, score))
-        par_count += sum(map(operator.eq, pars, score))
-        bogey_count += sum(map(operator.eq, [par + 1 for par in pars], score))
-        double_bogey_or_more_count += sum(map(operator.le, [par + 2 for par in pars], score))
-        holes += len(pars)
+            birdie_count += sum(map(operator.gt, pars, score))
+            par_count += sum(map(operator.eq, pars, score))
+            bogey_count += sum(map(operator.eq, [par + 1 for par in pars], score))
+            double_bogey_or_more_count += sum(map(operator.le, [par + 2 for par in pars], score))
+            holes += len(pars)
+        avg_seven_ret = avg_seven_make(target_user);
+        ret = {
+                          'member_info': member_info,
+                          'handicap': handicap(rrs),
+                          'cr': cr,
+                          'avg': avg,
+                          'minus': minus(cr, avg),
+                          'round_posted': round_posted,
+                          'par3': 1.0 * par3_score / par3_count if par3_count != 0 else 0,
+                          'par4': 1.0 * par4_score / par4_count if par4_count != 0 else 0,
+                          'par5': 1.0 * par5_score / par5_count if par5_count != 0 else 0,
+                          'birdie': 100.0 * birdie_count / holes if holes != 0 else 0,
+                          'par': 100.0 * par_count / holes if holes != 0 else 0,
+                          'bogey': 100.0 * bogey_count / holes if holes != 0 else 0,
+                          'double_bogey_or_more': 100.0 * double_bogey_or_more_count / holes if holes != 0 else 0,
+                          'target_user_id': target_user_id,
+                          'comment': comment,
+                          'is_admin': is_admin,
+                          'avg_seven' : json.dumps(avg_seven_ret)
+                      }
+        # for key in avg_seven_ret:
+        #     ret[key] = avg_seven_ret[key]
 
-    return render(request, 'g1/profile.html',
-                  {
-                      'member_info': member_info,
-                      'handicap': handicap(rrs),
-                      'cr': cr,
-                      'avg': avg,
-                      'minus': minus(cr, avg),
-                      'round_posted': round_posted,
-                      'par3': 1.0 * par3_score / par3_count if par3_count != 0 else 0,
-                      'par4': 1.0 * par4_score / par4_count if par4_count != 0 else 0,
-                      'par5': 1.0 * par5_score / par5_count if par5_count != 0 else 0,
-                      'birdie': 100.0 * birdie_count / holes if holes != 0 else 0,
-                      'par': 100.0 * par_count / holes if holes != 0 else 0,
-                      'bogey': 100.0 * bogey_count / holes if holes != 0 else 0,
-                      'double_bogey_or_more': 100.0 * double_bogey_or_more_count / holes if holes != 0 else 0,
-                      'target_user_id': target_user_id,
-                      'comment': comment,
-                      'is_admin': is_admin
-                  })
+        return render(request, 'g1/profile.html', ret)
+    except Exception as ex:
+        print(ex)
+
+def avg_seven_make(target_user):
+    queried = RoundingResult.objects.filter(user=target_user).order_by("-date")
+    size = min(len(queried), 7)
+    queried = queried[:size]
+    avg_seven = average(queried)
+    ret = {}
+    ret["avg_seven"] = avg_seven
+    ret["size"] = size
+
+    for key in avg_seven:
+        ret[key+"_seven"] = []
+
+    for query in queried:
+        one_query_list = [query]
+        avg_query = average(one_query_list)
+        for key in avg_seven:
+            data_list = ret[key+"_seven"]
+            data_list.append(avg_query[key])
+    return ret
 
 
 def update(request):
@@ -238,7 +264,8 @@ def update(request):
         target_user_id = request.POST['target_user_id']
         target_user = User.objects.get(username=target_user_id)
         comment = request.POST['comment']
-        queried = RoundingResult.objects.filter(user=target_user).order_by('-create_time')
+        queried = RoundingResult.objects.filter(user=target_user).order_by('-date')
+        print(comment)
         if queried.exists():
             last_instance = queried[0]
             last_instance.comment = comment
@@ -484,7 +511,7 @@ def play_rythm(request):
        json = {}
        try:
            quried = RoundingResult.objects.filter(user=request.user).order_by("-date")
-           size = min(len(quried),10)
+           size = min(len(quried),20)
            quried = quried[:size]
            part_one = {}
            part_two = {}
@@ -497,17 +524,17 @@ def play_rythm(request):
                part_three["part_three_"+str(i)]=0
            for roundingResult in quried:
                 for score, par, round in zip(roundingResult.getscore(),roundingResult.course.getpars(),range(1,19)):
-                    part_one["part_one_" + str(round)] += (par-score)
+                    part_one["part_one_" + str(round)] += (score-par)
                 round_step_result=0
                 for score, par, round in zip(roundingResult.getscore(),roundingResult.course.getpars(),range(1,19)):
-                        round_step_result += (par-score)
+                        round_step_result += (score-par)
                         if(round%3 == 0):
                             # print(round_step_result/3)
                             part_two["part_two_"+str(round/3)] += round_step_result/3
                             round_step_result = 0
                 round_step_result = 0
                 for score, par, round in zip(roundingResult.getscore(),roundingResult.course.getpars(),range(1,19)):
-                        round_step_result += (par-score)
+                        round_step_result += (score-par)
                         if(round%9 == 0):
                             # print(round_step_result/3)
                             part_three["part_three_"+str(round/9)] += round_step_result/9
@@ -531,3 +558,20 @@ def play_rythm(request):
                                                       "part_three" : three})
    except Exception as ex:
        print(ex)
+
+def administrator_par_input(request):
+    if request.method == 'POST':
+        quried = AVG_Stroke.objects.get.all()
+        avg_stroke = None;
+        if(quried.exists()):
+            avg_stroke = quried[0]
+        else:
+            avg_stroke = AVG_Storke()
+
+        avg_stroke.birdie = request.POST["birdie"]
+        avg_stroke.par = request.POST["par"]
+        avg_stroke.bogey = request.POST["bogey"]
+        avg_stroke.double = request.POST["doublebogey"]
+        avg_stroke.save()
+
+    return render(request, "g1/AVG_bride",{"success" : "success"});

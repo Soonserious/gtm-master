@@ -164,15 +164,15 @@
     <div class="panel-body">
     <table class="table table-bordered" style="table-layout:fixed; word-break:break-all;" id="dg-save-table">
         <tr>
-            <th style="vertical-align:middle" colspan="2" class="text-center">날짜</th>
-            <th style="vertical-align:middle" colspan="7" class="text-center">금일 연습에서의 목표</th>
+            <th style="vertical-align:middle" colspan="4" class="text-center">날짜</th>
+            <th style="vertical-align:middle" colspan="5" class="text-center">금일 연습에서의 목표</th>
             <th style="vertical-align:middle" colspan="2" class="text-center">create</th>
         </tr>
         <tr>
-            <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
+            <td style="vertical-align:middle" colspan="4" class="text-center td-contenteditable">
                 <center> <div style="position:relative;"><input style="width:100% " type="text" class="date table_data_remove_border_line" id="dg_save_date"></div></center>
             </td>
-            <td style="vertical-align:middle" colspan="7" class="text-center td-contenteditable">
+            <td style="vertical-align:middle" colspan="5" class="text-center td-contenteditable">
                 <textarea class="table_data_remove_border_line" id="dg_save_content"></textarea>
             </td>
             <td colspan="2">
@@ -184,17 +184,17 @@
     <div class="panel-body">
         <table class="table table-bordered" style="table-layout:fixed; word-break:break-all;" id="dg-table">
             <tr>
-                <th style="vertical-align:middle" colspan="2" class="text-center">날짜</th>
-                <th style="vertical-align:middle" colspan="7" class="text-center">금일 연습에서의 목표</th>
+                <th style="vertical-align:middle" colspan="4" class="text-center">날짜</th>
+                <th style="vertical-align:middle" colspan="5" class="text-center">금일 연습에서의 목표</th>
                 <th style="vertical-align:middle" colspan="1" class="text-center">성취</th>
                 <th style="vertical-align:middle" colspan="2" class="text-center">update</th>
             </tr>
             {% for idx, date, content, achieved in dg_data %}
             <tr>
-                <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
+                <td style="vertical-align:middle" colspan="4" class="text-center td-contenteditable">
                     <div style="position:relative;"><input style="width:100%" class="date " type="text" id="dg_date_{{ idx }}" name="dg_update_date" value="{{ date }}"></div>
                 </td>
-                <td style="vertical-align:middle" colspan="7" class="text-center td-contenteditable">
+                <td style="vertical-align:middle" colspan="5" class="text-center td-contenteditable">
                     <textarea class="dg_update_contents table_data_remove_border_line" id="dg_{{idx}}_content">{{ content }}</textarea>
                 </td>
                 <td style="vertical-align:middle" colspan="1" class="text-center">
@@ -463,7 +463,7 @@ function changeLtgTable(result){
    }else{
          $("#ltg_achieved").removeProp("checked");
    }
-   if(result.g1_achieved != "false"){
+   if(result.g1_achieved != false){
         $("#g1_achieved").prop("checked","checked");
    }else{
          $("#g1_achieved").removeProp("checked");

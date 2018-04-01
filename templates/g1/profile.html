@@ -36,7 +36,7 @@
                 <td><div align="center">{{ member_info.association }}</div></td>
             </tr>
             <tr>
-                <td colspan="12"><button class="btn btn-default btn-block" onclick="popUpPlayRythm()">Play Rythm</button></td>
+                <td colspan="12"><button class="btn btn-default btn-block" onclick="popUpPlayRythm()">Super STATs</button></td>
             </tr>
         </table>
     </div>
@@ -159,6 +159,79 @@
                 <canvas id="chart-large" height="240"></canvas>
             </div>
         </div>
+        <div>
+            <h4>Recent 7 Round</h4>
+             <div class="row">
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-putt" height="240"></canvas>
+            </div>
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-sand_save" height="240"></canvas>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-gir" height="240"></canvas>
+            </div>
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-fairway_hit" height="240"></canvas>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-proximity" height="240"></canvas>
+            </div>
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-double_bogey_or_more" height="240"></canvas>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-bounce_back" height="240"></canvas>
+            </div>
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-bogey" height="240"></canvas>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-penalty" height="240"></canvas>
+            </div>
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-score" height="240"></canvas>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-bunker" height="240"></canvas>
+            </div>
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-up_and_down" height="240"></canvas>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-driving_distance" height="240"></canvas>
+            </div>
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-putt_gir" height="240"></canvas>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-birdie" height="240"></canvas>
+            </div>
+        </div>
+        <textarea style="display:none" id="avg_seven">
+            {{avg_seven}}
+        </textarea>
+        </div>
         <br><hr><br>
         <div class="row">
             <div class="col-xs-6">
@@ -213,7 +286,7 @@
                     <tbody>
                     <tr>
                         <th>Birdie</th>
-                        <td>{{bride_administrator|floatformat:2 }}</td>
+                        <td>{{cr.birdie|floatformat:2 }}</td>
                         <td>{{ birdie|floatformat:2 }}%</td>
                     </tr>
                     <tr>
@@ -223,12 +296,12 @@
                     </tr>
                     <tr>
                         <th>Bogey</th>
-                        <td>{{bogey_administrator|floatformat:2 }}</td>
+                        <td>{{cr.bogey|floatformat:2 }}</td>
                         <td>{{ bogey|floatformat:2 }}%</td>
                     </tr>
                     <tr>
                         <th>Double Bogey or More</th>
-                        <td>{{double_bogey_administrator|floatformat:2 }}</td>
+                        <td>{{cr.double_bogey_or_more|floatformat:2 }}</td>
                         <td>{{ double_bogey_or_more|floatformat:2 }}%</td>
                     </tr>
                     </tbody>
@@ -239,30 +312,121 @@
             </div>
         </div>
         <br><br>
-        <div class="row">
+          <div class="row">
             <div class="col-sm-1" align="center">코멘트</div>
             <div class="col-sm-11">
-                {% if is_admin %}
+            {% if is_admin %}
                 <textarea id="comment" class="form-control" rows="5">{{ comment }}</textarea>
-                {% else %}
+            {% else %}
                 <div class="well well-sm" id="comment" align="justify">{{ comment }}</div>
-                {% endif %}
+            {% endif %}
             </div>
         </div>
+
         {% if is_admin %}
-            <br>
+        <br>
             <div class="row">
                 <div class="col-sm-12" align="right">
                     <button type="button" class="btn btn-primary" onclick="save_comment_clicked()">저장하기</button>
                 </div>
             </div>
         {% endif %}
+
+
+
     {% endif %}
 {% endblock %}
 
 {% block js %}
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.js"></script>
     <script>
+     $(document).ready(function(){
+                                              if($("#avg_seven")){
+                                                        var avg_seven = jQuery.parseJSON($("#avg_seven").val());
+            console.log(avg_seven);
+            canvas_avg_seven(avg_seven);
+
+        }
+
+
+     });
+
+    function canvas_avg_seven(avg_seven){
+        var keys = Object.keys(avg_seven["avg_seven"]);
+        var avg = avg_seven["avg_seven"]
+        console.log(keys)
+        var labels = [];
+        for(var i=1; i<avg_seven["size"]+1; i++){
+            var label = [];
+            label[0] = i;
+            labels[i-1] = label;
+        }
+
+        for(var key in keys){
+            console.log(key)
+            red_bg = "rgba(255, 99, 132, 0.2)";
+            red_bd = "rgba(255, 99, 132, 1.0)";
+            blue_bg = "rgba(54, 162, 235, 0.2)";
+            blue_bd = "rgba(54, 162, 235, 1.0)";
+
+            var ctx = $("#chart-percentage-"+keys[key]);
+
+            var data = {
+                labels: labels,
+                datasets: [{
+                    label: "My Score",
+                    backgroundColor: red_bg,
+                    borderColor: red_bd,
+                    borderWidth: 1,
+                    fill: false,
+                    data: avg_seven[keys[key]+"_seven"]
+                }]
+            };
+
+            var options = {
+                responsive: true,
+                title: {
+                display: true,
+                text: keys[key]
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: true
+                },
+                annotation: {
+                    annotations: [{
+                    type: 'line',
+                    mode: 'horizontal',
+                    scaleID: 'y-axis-0',
+                    value : avg[keys[key]],
+                    borderColor: 'rgb(75, 192, 192)',
+                    borderWidth: 1,
+                    label: {
+                        enabled: false,
+                        content: 'Average'
+                    }
+                    }]
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            min: avg[keys[key]]-20,
+                            max: avg[keys[key]]+20,
+                            stepSize: 10
+
+                        }
+                    }]
+                }
+            };
+
+
+
+        new Chart(ctx, {type: "line", data: data, options: options});
+
+        }
+    }
+
     function popUpPlayRythm(){
         var url = "/g1/play_rythm";
         window.open(url);
@@ -470,10 +634,10 @@
             datasets: [
                 {
                     data: [
-                        {{ birdie|floatformat:2 }},
+                        {{ cr.birdie|floatformat:2 }},
                         {{ par|floatformat:2 }},
-                        {{ bogey|floatformat:2 }},
-                        {{ double_bogey_or_more|floatformat:2 }},
+                        {{ cr.bogey|floatformat:2 }},
+                        {{ cr.double_bogey_or_more|floatformat:2 }},
                     ],
                     backgroundColor: [
                         "rgba(255, 30, 30, 0.4)",

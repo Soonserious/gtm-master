@@ -37,13 +37,13 @@
                 </div>
             </div>
             <div class="col-sm-1 col-sm-offset-1 col-xs-4 text-center">
-                <strong>유형</strong>
+                <!--<strong>유형</strong>-->
             </div>
-            <div class="col-sm-2 col-xs-8">
+            <div class="col-sm-2 col-xs-8" style="display:none">
                 <div class="form-group">
                     <select class="form-control" id="id-competition_level">
                         <option value="0">연습</option>
-                        <option value="1">연습경기</option>
+                        <option value="1" selected>연습경기</option>
                         <option value="2">대회</option>
                     </select>
                 </div>
@@ -184,14 +184,18 @@ $("#id-date").on("dp.change",function(dateText){
         dataType: "json",
         success: function(data) {
             if(data.dumped_contents){
+                console.log(data.dumped_contents)
+
                 for(i=0; i<Object.keys(data.dumped_contents).length;i++){
                     var target = "content_" + i;
                     $("textarea[name="+target+"]").val(data.dumped_contents[target]);
                     console.log(data.dumped_contents[target]);
                 }
+                $("#id-competition_name").val(data.competition_name);
             }else{
                 $("textarea").each(function(){
                     $(this).val(" ");
+                    $("#id-competition_name").val(" ");
                 })
             }
         }
@@ -304,9 +308,8 @@ $(".btn").on("click", function() {
     contents_dict["date"] = $("#id-date").val();
     var competition_level = $("#id-competition_level").val();
     contents_dict["competition_level"] = competition_level;
-    if (competition_level == 2) {
-        contents_dict["competition_name"] = $("#id-competition_name").val();
-    }
+    contents_dict["competition_name"] = $("#id-competition_name").val();
+
     console.log(contents_dict);
     $.ajax({
         url: "{% url 'mp_diary' %}",

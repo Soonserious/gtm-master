@@ -144,6 +144,7 @@ class MemberAdmin(admin.ModelAdmin):
 
     list_display = ('user', 'full_name', 'association', 'comment_link',
                     'permission_g1', 'permission_g2', 'permission_g3', 'permission_g4', 'permission_mypage')
+    list_editable = ('permission_g1', 'permission_g2', 'permission_g3', 'permission_g4', 'permission_mypage')
     list_filter = ['association']
     search_fields = ['user__username', 'full_name', 'association']
     actions = [allow_g1, allow_g2, allow_g3, allow_g4, allow_mypage,

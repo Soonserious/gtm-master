@@ -76,7 +76,7 @@
                                placeholder="- 없이 숫자만 입력해주세요. (ex: 01012345678)" onkeyup="phone_number_typed(this.value)">
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-default btn-lg btn-block">가입</button>
+                    <button id="form_submit" type="submit" class="btn btn-default btn-lg btn-block">가입</button>
                     {% if error_occurred %}
                     <div class="panel-footer">{{ error }}</div>
                     {% endif %}
@@ -112,5 +112,6 @@
             $("#id-phone_number").val(parsed_int);
         }
     }
+
 </script>
 {% endblock %}
