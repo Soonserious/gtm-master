@@ -249,17 +249,17 @@
                     <tbody>
                     <tr>
                         <th>Par 3</th>
-                        <td>{{par3_administrator|floatformat:2 }}</td>
+                        <td>{{ cr.par3|floatformat:2 }}</td>
                         <td>{{ par3|floatformat:2 }}</td>
                     </tr>
                     <tr>
                         <th>Par 4</th>
-                        <td>{{par4_administrator|floatformat:2 }}</td>
+                        <td>{{ cr.par4|floatformat:2 }}</td>
                         <td>{{ par4|floatformat:2 }}</td>
                     </tr>
                     <tr>
                         <th>Par 5</th>
-                        <td>{{par5_administrator|floatformat:2 }}</td>
+                        <td>{{ cr.par5|floatformat:2 }}</td>
                         <td>{{ par5|floatformat:2 }}</td>
                     </tr>
                     </tbody>
@@ -291,7 +291,7 @@
                     </tr>
                     <tr>
                         <th>Par</th>
-                        <td>{{par_administrator|floatformat:2 }}</td>
+                        <td>{{cr.birdie|floatformat:2 }}</td>
                         <td>{{ par|floatformat:2 }}%</td>
                     </tr>
                     <tr>
@@ -601,7 +601,7 @@
                 borderWidth: 1,
                 hoverBackgroundColor: "rgba(255,99,132,0.4)",
                 hoverBorderColor: "rgba(255,99,132,1)",
-                data: [{{ par3_administrator|floatformat:2 }},{{ par4_administrator|floatformat:2 }},{{ par5_administrator|floatformat:2 }}]
+                data: [{{ cr.par3|floatformat:2 }},{{ cr.par4|floatformat:2 }},{{ cr.par5|floatformat:2 }}]
             },{
                 label: "Average Stroke",
                 backgroundColor: blue_bg,

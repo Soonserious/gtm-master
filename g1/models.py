@@ -24,6 +24,10 @@ class Criteria(models.Model):
     bounce_back = models.FloatField(default=60)
     penalty = models.FloatField(default=1)
     driving_distance = models.FloatField(default=288.6)
+    Par=models.FloatField(default=0.0)
+    par3=models.FloatField(default=0.0)
+    par4=models.FloatField(default=0.0)
+    par5=models.FloatField(default=0.0)
 
 
 class GolfField(models.Model):
