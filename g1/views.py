@@ -85,6 +85,10 @@ def average(rrs):
 
     non_gir_sum = 18 * len(x) - gir_sum
     ret['putt_gir'] = putt_gir_sum / gir_sum if gir_sum != 0 else 0
+    print("putt_gir_sum/gir_sum")
+    print(putt_gir_sum/gir_sum if gir_sum != 0 else 0)
+    print("prut_gir" )
+    print(ret["putt_gir"])
     ret['up_and_down'] = 100.0 * up_and_down_sum / non_gir_sum if non_gir_sum != 0 else 0
     ret['sand_save'] = 100.0 * sand_save_sum / bunker_sum if bunker_sum != 0 else 0
     ret['bounce_back'] = 100.0 * bounce_back_sum / bogey_or_more_sum if bogey_or_more_sum != 0 else 0
@@ -140,6 +144,7 @@ def round(request):
         print(ex)
 
 @login_required
+@user_passes_test(has_permission_g1, "G1 이용 권한이 없습니다.")
 def profile(request):
     try:
         cr = Criteria.objects.first()
@@ -209,7 +214,6 @@ def profile(request):
             bogey_count += sum(map(operator.eq, [par + 1 for par in pars], score))
             double_bogey_or_more_count += sum(map(operator.le, [par + 2 for par in pars], score))
             holes += len(pars)
-        avg_seven_ret = avg_seven_make(target_user);
         ret = {
                           'member_info': member_info,
                           'handicap': handicap(rrs),
@@ -227,7 +231,6 @@ def profile(request):
                           'target_user_id': target_user_id,
                           'comment': comment,
                           'is_admin': is_admin,
-                          'avg_seven' : json.dumps(avg_seven_ret)
                       }
         # for key in avg_seven_ret:
         #     ret[key] = avg_seven_ret[key]
@@ -236,23 +239,23 @@ def profile(request):
     except Exception as ex:
         print(ex)
 
-def avg_seven_make(target_user):
+def avg_twenty_make(target_user):
     queried = RoundingResult.objects.filter(user=target_user).order_by("-date")
-    size = min(len(queried), 7)
+    size = min(len(queried), 20)
     queried = queried[:size]
     avg_seven = average(queried)
     ret = {}
-    ret["avg_seven"] = avg_seven
+    ret["avg_twenty"] = avg_seven
     ret["size"] = size
 
     for key in avg_seven:
-        ret[key+"_seven"] = []
+        ret[key+"_twenty"] = []
 
     for query in queried:
         one_query_list = [query]
         avg_query = average(one_query_list)
         for key in avg_seven:
-            data_list = ret[key+"_seven"]
+            data_list = ret[key+"_twenty"]
             data_list.append(avg_query[key])
     return ret
 
@@ -508,9 +511,9 @@ def AVG_bride(request):
 
 def play_rythm(request):
    try:
-       json = {}
        try:
-           quried = RoundingResult.objects.filter(user=request.user).order_by("-date")
+           target_user = User.objects.get(username=request.GET["target_user_id"])
+           quried = RoundingResult.objects.filter(user= target_user).order_by("-date")
            size = min(len(quried),20)
            quried = quried[:size]
            part_one = {}
@@ -530,32 +533,36 @@ def play_rythm(request):
                         round_step_result += (score-par)
                         if(round%3 == 0):
                             # print(round_step_result/3)
-                            part_two["part_two_"+str(round/3)] += round_step_result/3
+                            part_two["part_two_"+str(round/3)] += float(round_step_result/3)
                             round_step_result = 0
                 round_step_result = 0
                 for score, par, round in zip(roundingResult.getscore(),roundingResult.course.getpars(),range(1,19)):
                         round_step_result += (score-par)
                         if(round%9 == 0):
                             # print(round_step_result/3)
-                            part_three["part_three_"+str(round/9)] += round_step_result/9
+                            part_three["part_three_"+str(round/9)] += float(round_step_result/9)
                             round_step_result = 0
            one = []
            two =[]
            three =[]
            for i in range(1, 19):
-               one.append( part_one["part_one_" + str(i)] / size)
+               one.append( float(part_one["part_one_" + str(i)] / size))
 
            for i in range(1, 7):
-               two.append(part_two["part_two_" + str(i)] /size)
+               two.append(float(part_two["part_two_" + str(i)] /size))
 
            for i in range(1, 3):
-               three.append(part_three["part_three_" + str(i)]/size)
+               three.append(float(part_three["part_three_" + str(i)]/size))
 
        except ObjectDoesNotExist:
-           print()
+           one = []
+           tow = []
+           three =[]
+       avg_twenty = avg_twenty_make(target_user)
        return render(request, 'g1/play_rythm.html' , {"part_one" : one,
                                                       "part_two" : two,
-                                                      "part_three" : three})
+                                                      "part_three" : three,
+                                                      "avg_twenty" : json.dumps(avg_twenty)})
    except Exception as ex:
        print(ex)
 

@@ -8,8 +8,9 @@
 {% endblock %}
 
 {% block content %}
+    <h4>Play Rythm</h4>
         <div class="page-header">
-            <h3>One</h3>
+            <h3>홀별 플레이 리듬</h3>
         </div>
 
         <div class="row">
@@ -19,7 +20,7 @@
         </div>
 
     <div class="page-header">
-            <h3>two</h3>
+            <h3>3홀별 플레이 리듬</h3>
         </div>
 
         <div class="row">
@@ -29,7 +30,7 @@
         </div>
 
     <div class="page-header">
-            <h3>Three</h3>
+            <h3>9홀별 플레이 리듬</h3>
         </div>
 
         <div class="row">
@@ -37,43 +38,93 @@
                 <canvas id="three-chart" height="240"></canvas>
             </div>
         </div>
+    <h4>평균값 20 라운드</h4>
 
+        <div>
+            <h4>Recent 7 Round</h4>
+             <div class="row">
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-putt" height="240"></canvas>
+            </div>
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-sand_save" height="240"></canvas>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-gir" height="240"></canvas>
+            </div>
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-fairway_hit" height="240"></canvas>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-proximity" height="240"></canvas>
+            </div>
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-double_bogey_or_more" height="240"></canvas>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-bounce_back" height="240"></canvas>
+            </div>
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-bogey" height="240"></canvas>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-penalty" height="240"></canvas>
+            </div>
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-score" height="240"></canvas>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-bunker" height="240"></canvas>
+            </div>
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-up_and_down" height="240"></canvas>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-driving_distance" height="240"></canvas>
+            </div>
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-putt_gir" height="240"></canvas>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-birdie" height="240"></canvas>
+            </div>
+        </div>
+             <textarea style="display:none" id="avg_twenty">
+            {{avg_twenty}}
+        </textarea>
 {% endblock %}
 
 {% block js %}
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.js"></script>
     <script>
-    function popUpPlayRythm(){
-        var url = "/g1/play_rythm";
-        window.open(url);
-    }
-    function getCookie(name) {
-        var cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = jQuery.trim(cookies[i]);
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
+    $(document).ready(function(){
+        if($("#avg_twenty")){
+            var avg_twenty = jQuery.parseJSON($("#avg_twenty").val());
+            canvas_avg_twenty(avg_twenty);
+
         }
-        return cookieValue;
-    }
-    $(function() { $.ajaxSetup({headers: {"X-CSRFToken": getCookie("csrftoken")}}); });
-    Chart.defaults.global.responsive = true;
-    Chart.defaults.global.maintainAspectRatio = false;
-
-    Number.prototype.zeroPad = Number.prototype.zeroPad ||
-        function(base){
-            var nr = this, len = (String(base).length - String(nr).length)+1;
-            return len > 0? new Array(len).join('0')+nr : nr;
-        };
-
-    $('.differential').each(function() {
-        this.innerText.match("^-")? $(this).addClass("negative"): $(this).addClass("positive");
-    });
+    })
 
     $(function() {
         console.log("target_user_id: " + "{{ target_user_id }}");
@@ -201,6 +252,81 @@
                 console.log(data);
             }
         });
+    }
+
+     function canvas_avg_twenty(avg_twenty){
+        var keys = Object.keys(avg_twenty["avg_twenty"]);
+        var avg = avg_twenty["avg_twenty"]
+
+        var labels = [];
+        for(var i=1; i<avg_twenty["size"]+1; i++){
+            var label = [];
+            label[0] = i;
+            labels[i-1] = label;
+        }
+
+        for(var key in keys){
+
+            red_bg = "rgba(255, 99, 132, 0.2)";
+            red_bd = "rgba(255, 99, 132, 1.0)";
+            blue_bg = "rgba(54, 162, 235, 0.2)";
+            blue_bd = "rgba(54, 162, 235, 1.0)";
+
+            var ctx = $("#chart-percentage-"+keys[key]);
+            console.log(avg_twenty[keys[key]+"_twenty"]);
+            var data = {
+                labels: labels,
+                datasets: [{
+                    label: "My Score",
+                    backgroundColor: red_bg,
+                    borderColor: red_bd,
+                    borderWidth: 1,
+                    fill: false,
+                    data: avg_twenty[keys[key]+"_twenty"]
+                }]
+            };
+
+            var options = {
+                responsive: true,
+                title: {
+                display: true,
+                text: keys[key]
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: true
+                },
+                annotation: {
+                    annotations: [{
+                    type: 'line',
+                    mode: 'horizontal',
+                    scaleID: 'y-axis-0',
+                    value : avg[keys[key]],
+                    borderColor: 'rgb(75, 192, 192)',
+                    borderWidth: 1,
+                    label: {
+                        enabled: false,
+                        content: 'Average'
+                    }
+                    }]
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            min: avg[keys[key]]-20,
+                            max: avg[keys[key]]+20,
+                            stepSize: 10
+
+                        }
+                    }]
+                }
+            };
+
+
+
+        new Chart(ctx, {type: "line", data: data, options: options});
+
+        }
     }
     </script>
 {% endblock %}

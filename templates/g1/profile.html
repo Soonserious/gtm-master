@@ -47,7 +47,7 @@
             <thead>
             <tr>
                 <th>골프통계분석</th>
-                <th>Target Value</th>
+                <th>PGA Tour 상위 10%</th>
                 <th>Average</th>
                 <th>Differential</th>
             </tr>
@@ -159,78 +159,7 @@
                 <canvas id="chart-large" height="240"></canvas>
             </div>
         </div>
-        <div>
-            <h4>Recent 7 Round</h4>
-             <div class="row">
-            <div class="col-xs-6">
-                <canvas id="chart-percentage-putt" height="240"></canvas>
-            </div>
-            <div class="col-xs-6">
-                <canvas id="chart-percentage-sand_save" height="240"></canvas>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-6">
-                <canvas id="chart-percentage-gir" height="240"></canvas>
-            </div>
-            <div class="col-xs-6">
-                <canvas id="chart-percentage-fairway_hit" height="240"></canvas>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-xs-6">
-                <canvas id="chart-percentage-proximity" height="240"></canvas>
-            </div>
-            <div class="col-xs-6">
-                <canvas id="chart-percentage-double_bogey_or_more" height="240"></canvas>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-6">
-                <canvas id="chart-percentage-bounce_back" height="240"></canvas>
-            </div>
-            <div class="col-xs-6">
-                <canvas id="chart-percentage-bogey" height="240"></canvas>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-6">
-                <canvas id="chart-percentage-penalty" height="240"></canvas>
-            </div>
-            <div class="col-xs-6">
-                <canvas id="chart-percentage-score" height="240"></canvas>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-6">
-                <canvas id="chart-percentage-bunker" height="240"></canvas>
-            </div>
-            <div class="col-xs-6">
-                <canvas id="chart-percentage-up_and_down" height="240"></canvas>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-6">
-                <canvas id="chart-percentage-driving_distance" height="240"></canvas>
-            </div>
-            <div class="col-xs-6">
-                <canvas id="chart-percentage-putt_gir" height="240"></canvas>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-6">
-                <canvas id="chart-percentage-birdie" height="240"></canvas>
-            </div>
-        </div>
-        <textarea style="display:none" id="avg_seven">
-            {{avg_seven}}
-        </textarea>
         </div>
         <br><hr><br>
         <div class="row">
@@ -242,7 +171,7 @@
                     </tr>
                     <tr>
                         <th>Hole</th>
-                        <th>Administrator</th>
+                        <th>PGA Tour 10%</th>
                         <th>평균타수</th>
                     </tr>
                     </thead>
@@ -279,7 +208,7 @@
                     </tr>
                     <tr>
                         <th>Stroke</th>
-                        <th>Administrator</th>
+                        <th>PGA Tour 10%</th>
                         <th>평균비율(%)</th>
                     </tr>
                     </thead>
@@ -291,7 +220,7 @@
                     </tr>
                     <tr>
                         <th>Par</th>
-                        <td>{{cr.birdie|floatformat:2 }}</td>
+                        <td>{{cr.Par|floatformat:2 }}</td>
                         <td>{{ par|floatformat:2 }}%</td>
                     </tr>
                     <tr>
@@ -307,10 +236,12 @@
                     </tbody>
                 </table>
             </div>
+
             <div class="col-xs-6">
                 <canvas id="stroke_anal" height="200"></canvas>
             </div>
         </div>
+
         <br><br>
           <div class="row">
             <div class="col-sm-1" align="center">코멘트</div>
@@ -332,7 +263,10 @@
             </div>
         {% endif %}
 
+         <form action="/g1/play_rythm" method="GET" id="play_rythm">
 
+            <input type="hidden" id="play_rythm_target_user_id" name="target_user_id" value="{{target_user_id}}">
+        </form>
 
     {% endif %}
 {% endblock %}
@@ -341,95 +275,9 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.js"></script>
     <script>
-     $(document).ready(function(){
-                                              if($("#avg_seven")){
-                                                        var avg_seven = jQuery.parseJSON($("#avg_seven").val());
-            console.log(avg_seven);
-            canvas_avg_seven(avg_seven);
-
-        }
-
-
-     });
-
-    function canvas_avg_seven(avg_seven){
-        var keys = Object.keys(avg_seven["avg_seven"]);
-        var avg = avg_seven["avg_seven"]
-        console.log(keys)
-        var labels = [];
-        for(var i=1; i<avg_seven["size"]+1; i++){
-            var label = [];
-            label[0] = i;
-            labels[i-1] = label;
-        }
-
-        for(var key in keys){
-            console.log(key)
-            red_bg = "rgba(255, 99, 132, 0.2)";
-            red_bd = "rgba(255, 99, 132, 1.0)";
-            blue_bg = "rgba(54, 162, 235, 0.2)";
-            blue_bd = "rgba(54, 162, 235, 1.0)";
-
-            var ctx = $("#chart-percentage-"+keys[key]);
-
-            var data = {
-                labels: labels,
-                datasets: [{
-                    label: "My Score",
-                    backgroundColor: red_bg,
-                    borderColor: red_bd,
-                    borderWidth: 1,
-                    fill: false,
-                    data: avg_seven[keys[key]+"_seven"]
-                }]
-            };
-
-            var options = {
-                responsive: true,
-                title: {
-                display: true,
-                text: keys[key]
-                },
-                tooltips: {
-                    mode: 'index',
-                    intersect: true
-                },
-                annotation: {
-                    annotations: [{
-                    type: 'line',
-                    mode: 'horizontal',
-                    scaleID: 'y-axis-0',
-                    value : avg[keys[key]],
-                    borderColor: 'rgb(75, 192, 192)',
-                    borderWidth: 1,
-                    label: {
-                        enabled: false,
-                        content: 'Average'
-                    }
-                    }]
-                },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            min: avg[keys[key]]-20,
-                            max: avg[keys[key]]+20,
-                            stepSize: 10
-
-                        }
-                    }]
-                }
-            };
-
-
-
-        new Chart(ctx, {type: "line", data: data, options: options});
-
-        }
-    }
 
     function popUpPlayRythm(){
-        var url = "/g1/play_rythm";
-        window.open(url);
+        $("#play_rythm").submit();
     }
     function getCookie(name) {
         var cookieValue = null;
@@ -445,6 +293,7 @@
         }
         return cookieValue;
     }
+
     $(function() { $.ajaxSetup({headers: {"X-CSRFToken": getCookie("csrftoken")}}); });
     Chart.defaults.global.responsive = true;
     Chart.defaults.global.maintainAspectRatio = false;
@@ -478,7 +327,7 @@
                 ["Bounce", "Back"]
             ],
             datasets: [{
-                label: "Target Value",
+                label: "PGA Tour 상위 10%",
                 backgroundColor: red_bg,
                 borderColor: red_bd,
                 borderWidth: 1,
@@ -520,7 +369,7 @@
         var data = {
             labels: [["Scoring", "Average"], ["Putts", "per", "Round"], ["Proximity"]],
             datasets: [{
-                label: "Target Value",
+                label: "PGA Tour 상위 10%",
                 backgroundColor: red_bg,
                 borderColor: red_bd,
                 borderWidth: 1,
@@ -558,7 +407,7 @@
         var data = {
             labels: [["Putts", "per", "GIR"], ["Sand", "Greenside", "(bunker)"], ["Penalty"]],
             datasets: [{
-                label: "Target Value",
+                label: "PGA Tour 상위 10%",
                 backgroundColor: red_bg,
                 borderColor: red_bd,
                 borderWidth: 1,
@@ -635,7 +484,7 @@
                 {
                     data: [
                         {{ cr.birdie|floatformat:2 }},
-                        {{ par|floatformat:2 }},
+                        {{ cr.Par|floatformat:2 }},
                         {{ cr.bogey|floatformat:2 }},
                         {{ cr.double_bogey_or_more|floatformat:2 }},
                     ],

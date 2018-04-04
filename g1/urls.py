@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^remove_filed_and_course/(?P<field_id>\d+)/$', views.remove_filed_and_course),
     url(r'^AVG_bride/$', views.AVG_bride),
     url(r'^play_rythm/$',views.play_rythm),
+    url(r'^play_rythm/(?P<target_user_id>\d+)/$',views.play_rythm),
     url(r'^AVG_Stroke/$',views.AVG_Stroke),
     url(r'^administrator_par_input/$',views.administrator_par_input),
 ]
