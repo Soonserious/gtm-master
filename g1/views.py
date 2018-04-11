@@ -1,6 +1,8 @@
 #-*- coding:utf-8 -*-
 import datetime
-
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.http import JsonResponse, Http404
@@ -62,7 +64,7 @@ def average(rrs):
         _sum = 0.0
         for r in x:
             _sum += r[key]
-        ret[key] = _sum / len(x)
+        ret[key] = float(_sum) / len(x)
 
     # 해당 홀의 평균
     putt_gir_sum = 0
@@ -85,10 +87,6 @@ def average(rrs):
 
     non_gir_sum = 18 * len(x) - gir_sum
     ret['putt_gir'] = putt_gir_sum / gir_sum if gir_sum != 0 else 0
-    print("putt_gir_sum/gir_sum")
-    print(putt_gir_sum/gir_sum if gir_sum != 0 else 0)
-    print("prut_gir" )
-    print(ret["putt_gir"])
     ret['up_and_down'] = 100.0 * up_and_down_sum / non_gir_sum if non_gir_sum != 0 else 0
     ret['sand_save'] = 100.0 * sand_save_sum / bunker_sum if bunker_sum != 0 else 0
     ret['bounce_back'] = 100.0 * bounce_back_sum / bogey_or_more_sum if bogey_or_more_sum != 0 else 0
@@ -116,7 +114,6 @@ def handicap(rrs):
 
 
 @login_required
-@user_passes_test(has_permission_g1, "G1 이용 권한이 없습니다.")
 def round(request):
     try :
         target_user_id = request.user.username
@@ -144,7 +141,7 @@ def round(request):
         print(ex)
 
 @login_required
-@user_passes_test(has_permission_g1, "G1 이용 권한이 없습니다.")
+@user_passes_test(has_permission_mypage, "My Page 이용 권한이 없습니다.")
 def profile(request):
     try:
         cr = Criteria.objects.first()
@@ -277,13 +274,11 @@ def update(request):
 
 
 @login_required
-@user_passes_test(has_permission_g1, "G1 이용 권한이 없습니다.")
 def round_result(request):
     return render(request, 'g1/round_result.html', {})
 
 
 @login_required
-@user_passes_test(has_permission_g1, "G1 이용 권한이 없습니다.")
 def round_result_add(request):
     print(request)
     try:
@@ -298,7 +293,6 @@ def round_result_add(request):
         print(ex)
 
 @login_required
-@user_passes_test(has_permission_g1, "G1 이용 권한이 없습니다.")
 @csrf_exempt
 def round_result_add_submit(request):
     try:
@@ -533,26 +527,26 @@ def play_rythm(request):
                         round_step_result += (score-par)
                         if(round%3 == 0):
                             # print(round_step_result/3)
-                            part_two["part_two_"+str(round/3)] += float(round_step_result/3)
+                            part_two["part_two_"+str(round/3)] += float(round_step_result)/3
                             round_step_result = 0
                 round_step_result = 0
                 for score, par, round in zip(roundingResult.getscore(),roundingResult.course.getpars(),range(1,19)):
                         round_step_result += (score-par)
                         if(round%9 == 0):
                             # print(round_step_result/3)
-                            part_three["part_three_"+str(round/9)] += float(round_step_result/9)
+                            part_three["part_three_"+str(round/9)] += float(round_step_result)/9
                             round_step_result = 0
            one = []
            two =[]
            three =[]
            for i in range(1, 19):
-               one.append( float(part_one["part_one_" + str(i)] / size))
+               one.append( float(part_one["part_one_" + str(i)]) / size)
 
            for i in range(1, 7):
-               two.append(float(part_two["part_two_" + str(i)] /size))
+               two.append(float(part_two["part_two_" + str(i)]) /size)
 
            for i in range(1, 3):
-               three.append(float(part_three["part_three_" + str(i)]/size))
+               three.append(float(part_three["part_three_" + str(i)])/size)
 
        except ObjectDoesNotExist:
            one = []
