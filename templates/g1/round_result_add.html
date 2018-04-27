@@ -45,49 +45,49 @@
                                 <td>{{ course.get_out_par }}</td>
                             </tr>
                             <tr>
-                                <th>Score</th>
+                                <th>스코어</th>
                                 {% for field in rrf.field_score|slice:":9" %}
                                     <td>{{ field }}</td>
                                 {% endfor %}
                                 <td>{{ stat.out_score }}</td>
                             </tr>
                             <tr style="border-bottom:2px solid ;">
-                                <th >Putt</th>
+                                <th >퍼팅수</th>
                                 {% for field in rrf.field_putt|slice:":9" %}
                                     <td>{{ field }}</td>
                                 {% endfor %}
                                 <td>{{ stat.out_putt }}</td>
                             </tr>
                             <tr>
-                                <th>Fairway Hit</th>
+                                <th>페어웨이 안착</th>
                                 {% for field in rrf.field_fairway_hit|slice:":9" %}
                                     <td>{{ field }}</td>
                                 {% endfor %}
                                 <td>{{ stat.out_fairway_hit|floatformat:0 }}%</td>
                             </tr>
                             <tr>
-                                <th>Bunker</th>
+                                <th>벙커</th>
                                 {% for field in rrf.field_bunker|slice:":9" %}
                                     <td>{{ field }}</td>
                                 {% endfor %}
                                 <td>{{ stat.out_bunker }}</td>
                             </tr>
                             <tr style="border-bottom:2px solid ;">
-                                <th>Penalty</th>
+                                <th>벌타</th>
                                 {% for field in rrf.field_penalty|slice:":9" %}
                                     <td>{{ field }}</td>
                                 {% endfor %}
                                 <td>{{ stat.out_penalty }}</td>
                             </tr>
                             <tr>
-                                <th>Proximity(meter)</th>
+                                <th>홀 접근 거리(Proximity: meter)</th>
                                 {% for field in rrf.field_proximity|slice:":9" %}
                                     <td>{{ field }}</td>
                                 {% endfor %}
                                 <td>{{ stat.out_proximity|floatformat:2 }}</td>
-                            </tr>
+                            </tr>r
                             <tr>
-                                <th>Driving Distance(meter)</th>
+                                <th>드라이빙 거리(meter)</th>
                                 {% for field in rrf.field_driving_distance|slice:":9" %}
                                     <td>{{ field }}</td>
                                 {% endfor %}
@@ -117,7 +117,7 @@
 
 
                             <tr>
-                                <th>Score</th>
+                                <th>스코어</th>
                                 {% for field in rrf.field_score|slice:"9:" %}
                                     <td>{{ field }}</td>
                                 {% endfor %}
@@ -126,7 +126,7 @@
                             </tr>
 
                             <tr style="border-bottom:2px solid ;">
-                                <th>Putt</th>
+                                <th>퍼팅수</th>
                                 {% for field in rrf.field_putt|slice:"9:" %}
                                     <td>{{ field }}</td>
                                 {% endfor %}
@@ -134,7 +134,7 @@
                                 <td>{{ stat.putt }}</td>
                             </tr>
                             <tr>
-                                <th >Fairway Hit</th>
+                                <th >페어웨이 안착</th>
                                 {% for field in rrf.field_fairway_hit|slice:"9:" %}
                                     <td>{{ field }}</td>
                                 {% endfor %}
@@ -142,7 +142,7 @@
                                 <td>{{ stat.fairway_hit|floatformat:0 }}%</td>
                             </tr>
                             <tr>
-                                <th>Bunker</th>
+                                <th>벙커</th>
                                 {% for field in rrf.field_bunker|slice:"9:" %}
                                     <td>{{ field }}</td>
                                 {% endfor %}
@@ -150,7 +150,7 @@
                                 <td>{{ stat.bunker }}</td>
                             </tr>
                             <tr style="border-bottom:2px solid ;">
-                                <th>Penalty</th>
+                                <th>벌타</th>
                                 {% for field in rrf.field_penalty|slice:"9:" %}
                                     <td>{{ field }}</td>
                                 {% endfor %}
@@ -158,7 +158,7 @@
                                 <td>{{ stat.penalty }}</td>
                             </tr>
                             <tr >
-                                <th>Proximity(meter)</th>
+                                <th>홀 접근 거리(Proximity: meter)</th>
                                 {% for field in rrf.field_proximity|slice:"9:" %}
                                     <td>{{ field }}</td>
                                 {% endfor %}
@@ -166,7 +166,7 @@
                                 <td>{{ stat.proximity|floatformat:2 }}</td>
                             </tr>
                             <tr>
-                                <th>Driving Distance(meter)</th>
+                                <th>드라이빙 거리(meter)</th>
                                 {% for field in rrf.field_driving_distance|slice:"9:" %}
                                     <td>{{ field }}</td>
                                 {% endfor %}

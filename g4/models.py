@@ -521,11 +521,16 @@ class CourseManagement(models.Model):
                                      '5. 표적 샷은 솔직하고 공정하게 스스로를 평가하여 성공 자신이 있는 신뢰구역으로 한다.',
                                      '6. 그린 위에서는 홀에 가까울수록 더 공격적이고 대담하게 플레이하고, 홀에서 멀리 있을수록 더 신중하고 조심스럽게 플레이 한다.',
                                      '7. 트러블 샷은 성공이 상당히 확실할 때를 제외하고는 모험을 하지 않고 볼을 플레이 할 수 있는 곳에 되돌려 놓는다.'])
-    result_labels = ['Basic',
-                     'Game plan',
-                     'Decision-making process',
-                     'Stroke-saver system',
-                     'Stratigies for getting your game under control']
+    # result_labels = ['Basic',
+    #                  'Game plan',
+    #                  'Decision-making process',
+    #                  'Stroke-saver system',
+    #                  'Game Control Strategies']
+    result_labels = ['Basic(기초정보이용)',
+                     'Game plan(경기계획)',
+                     'Decision-making process(의사결정과정)',
+                     'Stroke-saver system(다수관리시스템)',
+                     'Game Control Strategies(경기조절전략)']
     partition = [[i + 1 for i in range(7)],
                  [i + 8 for i in range(12)],
                  [i + 20 for i in range(4)],
