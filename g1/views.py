@@ -90,7 +90,6 @@ def average(rrs):
     ret['up_and_down'] = 100.0 * up_and_down_sum / non_gir_sum if non_gir_sum != 0 else 0
     ret['sand_save'] = 100.0 * sand_save_sum / bunker_sum if bunker_sum != 0 else 0
     ret['bounce_back'] = 100.0 * bounce_back_sum / bogey_or_more_sum if bogey_or_more_sum != 0 else 0
-
     return ret
 
 
@@ -237,17 +236,16 @@ def profile(request):
         print(ex)
 
 def avg_twenty_make(target_user):
-    queried = RoundingResult.objects.filter(user=target_user).order_by("-date")
+    queried = RoundingResult.objects.filter(user=target_user).order_by("create_time")
     size = min(len(queried), 20)
     queried = queried[:size]
     avg_seven = average(queried)
     ret = {}
     ret["avg_twenty"] = avg_seven
+    size=min(len(queried),10)
     ret["size"] = size
-
     for key in avg_seven:
         ret[key+"_twenty"] = []
-
     for query in queried:
         one_query_list = [query]
         avg_query = average(one_query_list)
@@ -550,7 +548,7 @@ def play_rythm(request):
 
        except ObjectDoesNotExist:
            one = []
-           tow = []
+           two = []
            three =[]
        avg_twenty = avg_twenty_make(target_user)
        return render(request, 'g1/play_rythm.html' , {"part_one" : one,

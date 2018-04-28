@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-    <h4>Play Rythm</h4>
+    <h4>플레이 리듬(Play Rythm)</h4>
         <div class="page-header">
             <h3>홀별 플레이 리듬</h3>
         </div>
@@ -38,16 +38,16 @@
                 <canvas id="three-chart" height="240"></canvas>
             </div>
         </div>
-    <h4>평균값 20 라운드</h4>
 
         <div>
-            <h4>Recent 7 Round</h4>
+            <h4>최근 10 라운드 추이</h4>
+            <h6>평균값: 최근 20 라운드 평균</h6>
              <div class="row">
             <div class="col-xs-6">
-                <canvas id="chart-percentage-putt" height="240"></canvas>
+                <canvas id="chart-percentage-score" height="240"></canvas>
             </div>
             <div class="col-xs-6">
-                <canvas id="chart-percentage-sand_save" height="240"></canvas>
+                <canvas id="chart-percentage-fairway_hit" height="240"></canvas>
             </div>
         </div>
         <div class="row">
@@ -55,13 +55,40 @@
                 <canvas id="chart-percentage-gir" height="240"></canvas>
             </div>
             <div class="col-xs-6">
-                <canvas id="chart-percentage-fairway_hit" height="240"></canvas>
+                <canvas id="chart-percentage-putt" height="240"></canvas>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-putt_gir" height="240"></canvas>
+            </div>
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-up_and_down" height="240"></canvas>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-bunker" height="240"></canvas>
+            </div>
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-sand_save" height="240"></canvas>
             </div>
         </div>
 
         <div class="row">
             <div class="col-xs-6">
                 <canvas id="chart-percentage-proximity" height="240"></canvas>
+            </div>
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-birdie" height="240"></canvas>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-6">
+                <canvas id="chart-percentage-bogey" height="240"></canvas>
             </div>
             <div class="col-xs-6">
                 <canvas id="chart-percentage-double_bogey_or_more" height="240"></canvas>
@@ -73,40 +100,13 @@
                 <canvas id="chart-percentage-bounce_back" height="240"></canvas>
             </div>
             <div class="col-xs-6">
-                <canvas id="chart-percentage-bogey" height="240"></canvas>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-6">
                 <canvas id="chart-percentage-penalty" height="240"></canvas>
-            </div>
-            <div class="col-xs-6">
-                <canvas id="chart-percentage-score" height="240"></canvas>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-6">
-                <canvas id="chart-percentage-bunker" height="240"></canvas>
-            </div>
-            <div class="col-xs-6">
-                <canvas id="chart-percentage-up_and_down" height="240"></canvas>
             </div>
         </div>
 
         <div class="row">
             <div class="col-xs-6">
                 <canvas id="chart-percentage-driving_distance" height="240"></canvas>
-            </div>
-            <div class="col-xs-6">
-                <canvas id="chart-percentage-putt_gir" height="240"></canvas>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-6">
-                <canvas id="chart-percentage-birdie" height="240"></canvas>
             </div>
         </div>
              <textarea style="display:none" id="avg_twenty">
@@ -138,27 +138,27 @@
         var ctx = $("#one-chart");
         var data = {
             labels: [
-                ["1번 홀"],
-                ["2번 홀"],
-                ["3번 홀"],
-                ["4번 홀"],
-                ["5번 홀"],
-                ["6번 홀"],
-                ["7번 홀"],
-                ["8번 홀"],
-                ["9번 홀"],
-                ["10번 홀"],
-                ["11번 홀"],
-                ["12번 홀"],
-                ["13번 홀"],
-                ["14번 홀"],
-                ["15번 홀"],
-                ["16번 홀"],
-                ["17번 홀"],
-                ["18번 홀"],
+                ["1번"],
+                ["2번"],
+                ["3번"],
+                ["4번"],
+                ["5번"],
+                ["6번"],
+                ["7번"],
+                ["8번"],
+                ["9번"],
+                ["10번"],
+                ["11번"],
+                ["12번"],
+                ["13번"],
+                ["14번"],
+                ["15번"],
+                ["16번"],
+                ["17번"],
+                ["18번"],
             ],
             datasets: [{
-                label: "PGA Tour 상위 10%",
+                label: "My Score",
                 backgroundColor: red_bg,
                 borderColor: red_bd,
                 borderWidth: 1,
@@ -170,8 +170,8 @@
             scales: {
                 yAxes: [{
                     ticks: {
-                        min: -10,
-                        max: 10,
+                        min: -4,
+                        max: 4,
                         stepSize: 2
                     }
                 }]
@@ -182,15 +182,15 @@
          var ctx = $("#two-chart");
         var data = {
             labels: [
-                ["1,2,3번 홀 평균"],
-                ["4,5,6번 홀 평균"],
-                ["7,8,9번 홀 평균"],
-                ["10,11,12번 홀 평균"],
-                ["13,14,15번 홀 평균"],
-                ["16,17,18번 홀 평균"],
+                ["1,2,3번 평균"],
+                ["4,5,6번 평균"],
+                ["7,8,9번 평균"],
+                ["10,11,12번 평균"],
+                ["13,14,15번 평균"],
+                ["16,17,18번 평균"],
             ],
             datasets: [{
-                label: "PGA Tour 상위 10%",
+                label: "My Score",
                 backgroundColor: red_bg,
                 borderColor: red_bd,
                 borderWidth: 1,
@@ -200,10 +200,17 @@
         };
         var options = {
             scales: {
+                xAxes:[{
+                    ticks:{
+                        autoSkip:false
+                    }
+
+                }],
+
                 yAxes: [{
                     ticks: {
-                        min: -10,
-                        max: 10,
+                        min: -4,
+                        max: 4,
                         stepSize: 2
                     }
                 }]
@@ -219,7 +226,7 @@
 
             ],
             datasets: [{
-                label: "PGA Tour 상위 10%",
+                label: "My Score",
                 backgroundColor: red_bg,
                 borderColor: red_bd,
                 borderWidth: 1,
@@ -231,8 +238,8 @@
             scales: {
                 yAxes: [{
                     ticks: {
-                        min: -10,
-                        max: 10,
+                        min: -4,
+                        max: 4,
                         stepSize: 2
                     }
                 }]
@@ -256,8 +263,25 @@
 
      function canvas_avg_twenty(avg_twenty){
         var keys = Object.keys(avg_twenty["avg_twenty"]);
-        var avg = avg_twenty["avg_twenty"]
+        <!--['score','fairway_hit','gir','putt','putt_gir',-->
+        <!--'up_and_down','bunker','sand_save','proximity','birdie',-->
+        <!--'bogey','double_bogey_or_more','bounce_back','penalty','driving_distance']-->
 
+        var trans=['스코어 (Score)','페어웨이 % (Driving Accuracy)',
+        '그린적중률 % (GIR %)','퍼팅수 (Putts/Round)',
+        'GIR 평균 팅수 (Putting Average)',
+        '스크램블링 % (Scrambling)',
+        '벙커 (Greenside bunker)',
+        '벙커 스크램블링 % (Scrambling from Sand)',
+        '홀 접근 거리 (Proximity: meter)',
+        '버디이하 홀수 (Birdies/Round)',
+        '보기 홀수 (Bogey/Round)',
+        '더블보기이상 홀수(Double bogey)',
+        '회복률 %(Bounce Back)',
+        '벌타 (Penalty strokes/Round)',
+        '드라이빙 거리(Driving Distance: meter)'
+        ];
+        var avg = avg_twenty["avg_twenty"]
         var labels = [];
         for(var i=1; i<avg_twenty["size"]+1; i++){
             var label = [];
@@ -266,7 +290,6 @@
         }
 
         for(var key in keys){
-
             red_bg = "rgba(255, 99, 132, 0.2)";
             red_bd = "rgba(255, 99, 132, 1.0)";
             blue_bg = "rgba(54, 162, 235, 0.2)";
@@ -285,12 +308,11 @@
                     data: avg_twenty[keys[key]+"_twenty"]
                 }]
             };
-
             var options = {
                 responsive: true,
                 title: {
                 display: true,
-                text: keys[key]
+                text: trans[key]
                 },
                 tooltips: {
                     mode: 'index',
@@ -313,15 +335,19 @@
                 scales: {
                     yAxes: [{
                         ticks: {
-                            min: avg[keys[key]]-20,
-                            max: avg[keys[key]]+20,
+                            min: avg[keys[key]]-10,
+                            max: avg[keys[key]]+10,
                             stepSize: 10
 
                         }
                     }]
                 }
             };
+            if(keys[key]=='putt_gir'){
+                options.scales.yAxes[0].ticks.min=avg[keys[key]]-2;
+                options.scales.yAxes[0].ticks.max=avg[keys[key]]+2;
 
+            }
 
 
         new Chart(ctx, {type: "line", data: data, options: options});

@@ -18,28 +18,31 @@
             border-style :none;
 
     }
+    .top-padd{
+        padding-top:7px;
+    }
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h5 class="panel-title text-center">선수일지</h5>
+        <h5 class="panel-title text-center">골프일지</h5>
     </div>
     <div class="panel-body">
         <div class="row">
-            <div class="col-sm-1 col-xs-4 text-center">
+            <div class="col-xs-2 text-center top-padd">
                 <strong>날짜</strong>
             </div>
-            <div class="col-sm-2 col-xs-8">
+            <div class="col-xs-4">
                 <div class="form-group">
                     <input type='text' required="true" name='date' class="form-control" id='id-date'/>
                 </div>
             </div>
-            <div class="col-sm-1 col-sm-offset-1 col-xs-4 text-center">
-                <!--<strong>유형</strong>-->
-            </div>
-            <div class="col-sm-2 col-xs-8" style="display:none">
+            <!--<div class="col-xs-4 text-center">-->
+                <!--&lt;!&ndash;<strong>유형</strong>&ndash;&gt;-->
+            <!--</div>-->
+            <div class="col-xs-12" style="display:none">
                 <div class="form-group">
                     <select class="form-control" id="id-competition_level">
                         <option value="0">연습</option>
@@ -48,10 +51,10 @@
                     </select>
                 </div>
             </div>
-            <div class="col-sm-1 col-xs-4 text-center">
+            <div class="col-xs-2 text-center top-padd">
                 <strong>대회명</strong>
             </div>
-            <div class="col-sm-4 col-xs-8">
+            <div class="col-xs-4">
                 <div class="form-group">
                     <input type="text" class="form-control" id="id-competition_name" name="competition_name">
                 </div>

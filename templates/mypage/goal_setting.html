@@ -43,16 +43,16 @@
 {#        </div>#}
         <table class="table table-bordered" style="table-layout:fixed; word-break:break-all;">
             <tr>
-                <th style="vertical-align:middle" colspan="7" class="text-center">내용</th>
-                <th style="vertical-align:middle" colspan="2" class="text-center">목표 날짜</th>
+                <th style="vertical-align:middle" colspan="6" class="text-center">내용</th>
+                <th style="vertical-align:middle" colspan="3" class="text-center">목표 날짜</th>
                 <th style="vertical-align:middle" colspan="1" class="text-center">성취</th>
             </tr>
             <tr>
                 <th style="vertical-align:middle" colspan="1" class="text-center">장기목표</th>
-                <td style="vertical-align:middle" colspan="6" class="text-center td-contenteditable">
+                <td style="vertical-align:middle" colspan="5" class="text-center td-contenteditable">
                     <textarea class="table_data_remove_border_line" id="ltg_content">{{ltg_goal.ltg_content}}</textarea>
                 </td>
-                <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
+                <td style="vertical-align:middle" colspan="3" class="text-center td-contenteditable">
                     <div style="position:relative;"><input type="text" class="date form-control" id="ltg_date" name="ltg_date" style="border-style:none;text-align:center" value="{{ltg_goal.ltg_date}}"></div>
                 </td>
                 <td style="vertical-align:middle" colspan="1" class="text-center">
@@ -69,23 +69,23 @@
             </tr>
             <tr>
                 <th style="vertical-align:middle" colspan="1" class="text-center">목표 단계</th>
-                <th style="vertical-align:middle" colspan="3" class="text-center">결과목표</th>
+                <th style="vertical-align:middle" colspan="2" class="text-center">결과목표</th>
                 <th style="vertical-align:middle" colspan="3" class="text-center">
                     수행 및 과정 목표(체력, 기술, 정신력, 전략)
                 </th>
-                <th style="vertical-align:middle" colspan="2" class="text-center">목표 날짜</th>
+                <th style="vertical-align:middle" colspan="3" class="text-center">목표 날짜</th>
                 <th style="vertical-align:middle" colspan="1" class="text-center">성취</th>
             </tr>
             <tr>
                 <th style="vertical-align:middle" colspan="1" class="text-center">목표 3</th>
-                <td style="vertical-align:middle" colspan="3" class="text-center td-contenteditable">
+                <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
                     <textarea class="table_data_remove_border_line" id="g3_rg" name="g3_rg">{{ltg_goal.g3_rg}}</textarea>
                 </td>
                 <td style="vertical-align:middle" colspan="3" class="text-center td-contenteditable">
                     <textarea class="table_data_remove_border_line" id="g3_pg" name="g3_pg">{{ltg_goal.g3_pg}}</textarea>
 
                 </td>
-                <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
+                <td style="vertical-align:middle" colspan="3" class="text-center td-contenteditable">
                     <div style="position:relative;"><input type="text" class="date form-control" id="g3_date" name="g3_date" style="border-style:none;text-align:center" value="{{ltg_goal.g3_date}}"></div>
                 </td>
                 <td style="vertical-align:middle" colspan="1" class="text-center">
@@ -102,13 +102,13 @@
             </tr>
             <tr>
                 <th style="vertical-align:middle" colspan="1" class="text-center">목표 2</th>
-                <td style="vertical-align:middle" colspan="3" class="text-center td-contenteditable">
+                <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
                     <textarea class="table_data_remove_border_line" id="g2_rg" name="g2_rg">{{ltg_goal.g2_rg}}</textarea>
                 </td>
                 <td style="vertical-align:middle" colspan="3" class="text-center td-contenteditable">
                     <textarea class="table_data_remove_border_line" id="g2_pg">{{ltg_goal.g2_pg}}</textarea>
                 </td>
-                <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
+                <td style="vertical-align:middle" colspan="3" class="text-center td-contenteditable">
                     <div style="position:relative;"><input type="text" class="date form-control" id="g2_date" name="g2_date" style="border-style:none;text-align:center" value="{{ltg_goal.g2_date}}"></div>
                 </td>
                 <td style="vertical-align:middle" colspan="1" class="text-center">
@@ -125,13 +125,13 @@
             </tr>
             <tr>
                 <th style="vertical-align:middle" colspan="1" class="text-center">목표 1</th>
-                <td style="vertical-align:middle" colspan="3" class="text-center td-contenteditable">
+                <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
                     <textarea class="table_data_remove_border_line" id="g1_rg" name="g1_rg">{{ltg_goal.g1_rg}}</textarea>
                 </td>
                 <td style="vertical-align:middle" colspan="3" class="text-center td-contenteditable">
                     <textarea class="table_data_remove_border_line" id="g1_pg" name="g1_pg">{{ltg_goal.g1_pg}}</textarea>
                 </td>
-                <td style="vertical-align:middle" colspan="2" class="text-center td-contenteditable">
+                <td style="vertical-align:middle" colspan="3" class="text-center td-contenteditable">
                     <div style="position:relative;"><input type="text" class="date form-control" id="g1_date" name="g1_date" style="border-style:none;text-align:center" value="{{ltg_goal.g1_date}}"></div>
                 </td>
                 <td style="vertical-align:middle" colspan="1" class="text-center">
@@ -164,18 +164,18 @@
     <div class="panel-body">
     <table class="table table-bordered" style="table-layout:fixed; word-break:break-all;" id="dg-save-table">
         <tr>
-            <th style="vertical-align:middle" colspan="4" class="text-center">날짜</th>
+            <th style="vertical-align:middle" colspan="3" class="text-center">날짜</th>
             <th style="vertical-align:middle" colspan="5" class="text-center">금일 연습에서의 목표</th>
-            <th style="vertical-align:middle" colspan="2" class="text-center">create</th>
+            <th style="vertical-align:middle" colspan="3" class="text-center">create</th>
         </tr>
         <tr>
-            <td style="vertical-align:middle" colspan="4" class="text-center td-contenteditable">
+            <td style="vertical-align:middle" colspan="3" class="text-center td-contenteditable">
                 <center> <div style="position:relative;"><input style="width:100% " type="text" class="date table_data_remove_border_line" id="dg_save_date"></div></center>
             </td>
             <td style="vertical-align:middle" colspan="5" class="text-center td-contenteditable">
                 <textarea class="table_data_remove_border_line" id="dg_save_content"></textarea>
             </td>
-            <td colspan="2">
+            <td colspan="3">
                 <center style="margin:auto"><button onclick="dg_create()" class="btn btn-default btn-lg btn-block">save</button></center>
             </td>
         </tr>
@@ -184,14 +184,14 @@
     <div class="panel-body">
         <table class="table table-bordered" style="table-layout:fixed; word-break:break-all;" id="dg-table">
             <tr>
-                <th style="vertical-align:middle" colspan="4" class="text-center">날짜</th>
+                <th style="vertical-align:middle" colspan="3" class="text-center">날짜</th>
                 <th style="vertical-align:middle" colspan="5" class="text-center">금일 연습에서의 목표</th>
                 <th style="vertical-align:middle" colspan="1" class="text-center">성취</th>
-                <th style="vertical-align:middle" colspan="2" class="text-center">update</th>
+                <th style="vertical-align:middle" colspan="3" class="text-center">update</th>
             </tr>
             {% for idx, date, content, achieved in dg_data %}
             <tr>
-                <td style="vertical-align:middle" colspan="4" class="text-center td-contenteditable">
+                <td style="vertical-align:middle" colspan="3" class="text-center td-contenteditable">
                     <div style="position:relative;"><input style="width:100%" class="date " type="text" id="dg_date_{{ idx }}" name="dg_update_date" value="{{ date }}"></div>
                 </td>
                 <td style="vertical-align:middle" colspan="5" class="text-center td-contenteditable">
@@ -208,7 +208,7 @@
                         </label>
                     </div>
                 </td>
-                 <td colspan="2" style="width:100%">
+                 <td colspan="3" style="width:100%">
                 <!--<center style="width:100%;height:100%">-->
                     <button type="submit" onclick="dg_update({{ idx }})" style="width:100%;height:100%"class="btn btn-default btn-lg btn-block">save</button>
                 <!--</center>-->

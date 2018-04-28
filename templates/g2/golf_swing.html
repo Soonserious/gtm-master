@@ -33,13 +33,14 @@
             <h5 class="panel-title text-center">Golf Swing</h5>
         </div>
         <form>
+
         <div class="panel-body">
             <table class="table table-bordered" id="video_table">
                 <tr>
                     <th class="text-center" rowspan="1" colspan="1" style="width: 28%">number</th>
-                    <th class="text-center" rowspan="1" colspan="2" style="width: 36%">address</th>
-                    <th class="text-center" rowspan="1" colspan="2" style="width: 36%">name</th>
-                    <th class="text-center" rowspan="1" colspan="1" style="width: 36%">remove</th>
+                    <th class="text-center" rowspan="1" colspan="2" style="width: 36%">URL 주소</th>
+                    <th class="text-center" rowspan="1" colspan="2" style="width: 36%">이름</th>
+                    <th class="text-center" rowspan="1" colspan="1" style="width: 36%">삭제</th>
                 </tr>
                 {% for video in videos %}
                     <tr class="video_class">
@@ -53,13 +54,13 @@
                             <textarea required="true" class="table_data_remove_border_line" name="video_name">{{ video.2 }}</textarea>
                         </td>
                         <td colspan="1" class="td-contenteditable" >
-                            <button class="btn btn-primary" onclick="video_remove(this)">remove</button>
+                            <button class="btn btn-primary" onclick="video_remove(this)">삭제</button>
                         </td>
                     </tr>
                 {% endfor%}
             </table>
             <div>
-                <button style="float:right" onclick="video_append()"class="btn btn-primary">append</button>
+                <button style="float:right" onclick="video_append()"class="btn btn-primary">동영상 링크 추가</button>
             </div>
         </div>
 
@@ -101,7 +102,7 @@
                         {% for third_category in second_category.1 %}
                             <tr>
                                 {% if forloop.counter0 == 0 %}
-                                    <td rowspan="{{ second_category.1|length }}" style="vertical-align:middle;overflow:hidden;word-wrap:break-word">{{ second_category.0 }}</td>
+                                    <td rowspan="{{ second_category.1|length }}" style="vertical-align:middle   ;overflow:hidden;word-wrap:break-word">{{ second_category.0|linebreaksbr }}</td>
                                 {% endif %}
                                 <td style="overflow:hidden;word-wrap:break-word">{{ third_category.0 }}</td>
                                 <td class="td-contenteditable" >

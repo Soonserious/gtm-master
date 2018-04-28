@@ -1,6 +1,8 @@
 {% extends "common/base.html" %}
+{% load staticfiles %}
 
 {% block css %}
+<link rel="stylesheet" type="text/css" href="{%static 'admin/css/g1/round.css' %}"/>
 {% endblock %}
 
 {% block content %}
@@ -13,7 +15,6 @@
 table{
     width:1107px;
 }
-
 
 </style>
     <div class="panel panel-default">
@@ -67,9 +68,9 @@ table{
 
                     </colgroup>
                     <tr>
-                        <th>Date</th><th>Course</th><th>Score</th><th>Fwy (%)</th><th>Putts</th>
-                        <th>GIR (%)</th><th>Putts / GIR</th><th>Up & Down (%)</th><th>Sand Save (%)</th>
-                        <th>Birdies</th><th>Penalty Strokes</th>
+                        <th>Date</th><th>Course</th><th>스코어</th><th>페어웨이(%)</th><th>퍼팅수</th>
+                        <th>그린적중률(%)</th><th>GIR 평균퍼팅수</th><th>스크램블링(%)</th><th>벙커 스크램블링</th>
+                        <th>버디이하 홀수</th><th>벌타</th>
                     </tr>
                     </thead>
                 </table>
@@ -127,7 +128,7 @@ table{
                         <col width="7%">
 
                     </colgroup>
-                    <tr>
+                    <tr class="AvgBold">
                         <th colspan=2>Average</th>
                         <td>{{ recent_avg.score|floatformat:2 }}</td>
                         <td>{{ recent_avg.fairway_hit|floatformat:2 }}%</td>
@@ -172,7 +173,7 @@ table{
                             <td>{{ r.penalty }}</td>
                         </tr>
                     {% endfor %}
-                    <tr>
+                    <tr class="AvgBold">
                         <th colspan=2>Average</th>
                         <td>{{ best_10_avg.score|floatformat:2  }}</td>
                         <td>{{ best_10_avg.fairway_hit|floatformat:2 }}%</td>

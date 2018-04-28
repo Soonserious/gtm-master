@@ -36,7 +36,7 @@
                 <td><div align="center">{{ member_info.association }}</div></td>
             </tr>
             <tr>
-                <td colspan="12"><button class="btn btn-default btn-block" onclick="popUpPlayRythm()">Super STATs</button></td>
+                <td colspan="12"><button class="btn btn-info btn-block" onclick="popUpPlayRythm()">Super STATs</button></td>
             </tr>
         </table>
     </div>
@@ -48,97 +48,97 @@
             <tr>
                 <th>골프통계분석</th>
                 <th>PGA Tour 상위 10%</th>
-                <th>Average</th>
-                <th>Differential</th>
+                <th>평균 (Average)</th>
+                <th>차이값 (Differential)</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-                <th>Scoring Average</th>
+                <th>평균 스코어 (Scoring Average)</th>
                 <td>{{ cr.score|floatformat:2 }}</td>
                 <td>{{ avg.score|floatformat:2 }}</td>
                 <td class="differential">{{ minus.score|floatformat:2 }}</td>
             </tr>
             <tr>
-                <th>Driving Accuracy (Fairway Hit %)</th>
+                <th>페어웨이 % (Driving Accuracy)</th>
                 <td>{{ cr.fairway_hit|floatformat:2 }}%</td>
                 <td>{{ avg.fairway_hit|floatformat:2 }}%</td>
                 <td class="differential">{{ minus.fairway_hit|floatformat:2 }}%</td>
             </tr>
             <tr>
-                <th>Greens In Regulations (GIR %)</th>
+                <th>그린적중률 % (GIR %)</th>
                 <td>{{ cr.gir|floatformat:2 }}%</td>
                 <td>{{ avg.gir|floatformat:2 }}%</td>
                 <td class="differential">{{ minus.gir|floatformat:2 }}%</td>
             </tr>
             <tr>
-                <th>Putts per Round</th>
+                <th>퍼팅수 (Putts/Round)</th>
                 <td>{{ cr.putt|floatformat:2 }}</td>
                 <td>{{ avg.putt|floatformat:2 }}</td>
                 <td class="differential">{{ minus.putt|floatformat:2 }}</td>
             </tr>
             <tr>
-                <th>Putts per GIR</th>
+                <th>GIR 평균 퍼팅수 (Putting Average)</th>
                 <td>{{ cr.putt_gir|floatformat:2 }}</td>
                 <td>{{ avg.putt_gir|floatformat:2 }}</td>
                 <td class="differential">{{ minus.putt_gir|floatformat:2 }}</td>
             </tr>
             <tr>
-                <th>Up and Down %</th>
+                <th>스크램블링 % (Scrambling)</th>
                 <td>{{ cr.up_and_down|floatformat:2 }}%</td>
                 <td>{{ avg.up_and_down|floatformat:2 }}%</td>
                 <td class="differential">{{ minus.up_and_down|floatformat:2 }}%</td>
             </tr>
             <tr>
-                <th>Sand Greenside (bunker)</th>
+                <th>벙커 (Greenside bunker)</th>
                 <td>{{ cr.bunker|floatformat:2 }}</td>
                 <td>{{ avg.bunker|floatformat:2 }}</td>
                 <td class="differential">{{ minus.bunker|floatformat:2 }}</td>
             </tr>
             <tr>
-                <th>Sand Saves %</th>
+                <th>벙커 스크램블링 % (Scrambling from Sand) %</th>
                 <td>{{ cr.sand_save|floatformat:2 }}%</td>
                 <td>{{ avg.sand_save|floatformat:2 }}%</td>
                 <td class="differential">{{ minus.sand_save|floatformat:2 }}%</td>
             </tr>
             <tr>
-                <th>Proximity(meter)</th>
+                <th>홀 접근 거리 (Proximity: meter)</th>
                 <td>{{ cr.proximity|floatformat:2 }}</td>
                 <td>{{ avg.proximity|floatformat:2 }}</td>
                 <td class="differential">{{ minus.proximity|floatformat:2 }}</td>
             </tr>
             <tr>
-                <th>Birdies per round</th>
+                <th>버디이하 홀수 (Birdies/Round)</th>
                 <td>{{ cr.birdie|floatformat:2 }}</td>
                 <td>{{ avg.birdie|floatformat:2 }}</td>
                 <td class="differential">{{ minus.birdie|floatformat:2 }}</td>
             </tr>
             <tr>
-                <th>Bogey per round</th>
+                <th>보기 홀수 (Bogey/Round)</th>
                 <td>{{ cr.bogey|floatformat:2 }}</td>
                 <td>{{ avg.bogey|floatformat:2 }}</td>
                 <td class="differential">{{ minus.bogey|floatformat:2 }}</td>
             </tr>
             <tr>
-                <th>Double bogey or more per round</th>
+                <th>더블보기이상 홀수(Double bogey)</th>
                 <td>{{ cr.double_bogey_or_more|floatformat:2 }}</td>
                 <td>{{ avg.double_bogey_or_more|floatformat:2 }}</td>
                 <td class="differential">{{ minus.double_bogey_or_more|floatformat:2 }}</td>
             </tr>
             <tr>
-                <th>Bounce Back %</th>
+                <th>회복률 %(Bounce Back)</th>
                 <td>{{ cr.bounce_back|floatformat:2 }}%</td>
                 <td>{{ avg.bounce_back|floatformat:2 }}%</td>
                 <td class="differential">{{ minus.bounce_back|floatformat:2 }}%</td>
             </tr>
             <tr>
-                <th>Penalty strokes per round</th>
+                <th>벌타 (Penalty strokes/Round)</th>
                 <td>{{ cr.penalty|floatformat:2 }}</td>
                 <td>{{ avg.penalty|floatformat:2 }}</td>
                 <td class="differential">{{ minus.penalty|floatformat:2 }}</td>
             </tr>
             <tr>
-                <th>Driving Distance(meter)</th>
+                <th>드라이빙 거리(Driving Distance: meter)</th>
                 <td>{{ cr.driving_distance|floatformat:2 }}</td>
                 <td>{{ avg.driving_distance|floatformat:2 }}</td>
                 <td class="differential">{{ minus.driving_distance|floatformat:2 }}</td>
@@ -194,7 +194,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-5 col-xs-offset-1">
                 <canvas id="avg_stroke" height="200"></canvas>
             </div>
         </div>
@@ -208,28 +208,28 @@
                     </tr>
                     <tr>
                         <th>Stroke</th>
-                        <th>PGA Tour 10%</th>
+                        <th>% 값</th>
                         <th>평균비율(%)</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <th>Birdie</th>
+                        <th>버디이하</th>
                         <td>{{cr.birdie|floatformat:2 }}</td>
                         <td>{{ birdie|floatformat:2 }}%</td>
                     </tr>
                     <tr>
-                        <th>Par</th>
+                        <th>파</th>
                         <td>{{cr.Par|floatformat:2 }}</td>
                         <td>{{ par|floatformat:2 }}%</td>
                     </tr>
                     <tr>
-                        <th>Bogey</th>
+                        <th>보기</th>
                         <td>{{cr.bogey|floatformat:2 }}</td>
                         <td>{{ bogey|floatformat:2 }}%</td>
                     </tr>
                     <tr>
-                        <th>Double Bogey or More</th>
+                        <th>더블보기이상</th>
                         <td>{{cr.double_bogey_or_more|floatformat:2 }}</td>
                         <td>{{ double_bogey_or_more|floatformat:2 }}%</td>
                     </tr>
@@ -320,11 +320,11 @@
         var ctx = $("#chart-percentage");
         var data = {
             labels: [
-                ["Driving", "Accuracy"],
-                ["GIR"],
-                ["Recovery"],
-                ["Sand", "Saves"],
-                ["Bounce", "Back"]
+                ["페어웨이 %"],
+                ["그린적중률 %"],
+                ["스크램블링 %"],
+                ["샌드","스크램블링 %"],
+                ["회복률 %"]
             ],
             datasets: [{
                 label: "PGA Tour 상위 10%",
@@ -367,7 +367,7 @@
 
         var ctx = $("#chart-large");
         var data = {
-            labels: [["Scoring", "Average"], ["Putts", "per", "Round"], ["Proximity"]],
+            labels: [["평균", "스코어"], ["퍼팅수"], ["홀","접근","거리"]],
             datasets: [{
                 label: "PGA Tour 상위 10%",
                 backgroundColor: red_bg,
@@ -405,7 +405,7 @@
 
         var ctx = $("#chart-small");
         var data = {
-            labels: [["Putts", "per", "GIR"], ["Sand", "Greenside", "(bunker)"], ["Penalty"]],
+            labels: [["GIR", "평균", "퍼팅수"], ["벙커"], ["벌타"]],
             datasets: [{
                 label: "PGA Tour 상위 10%",
                 backgroundColor: red_bg,
@@ -439,12 +439,12 @@
                 }]
             }
         }
-        new Chart(ctx, {type: "bar", data: data, options: options});
 
+        new Chart(ctx, {type: "bar", data: data, options: options});
         var data = {
             labels: ["Par 3", "Par 4", "Par 5"],
             datasets: [{
-                label: "Average Stroke for adminstrator",
+                label: "PGA Tour 상위 10%",
                 backgroundColor: red_bg,
                 borderColor: red_bd,
                 borderWidth: 1,
@@ -479,14 +479,14 @@
         });
 
         var data = {
-            labels: ["Birdie", "Par", "Bogey", "Double Bogey or More"],
+            labels: ["버디이하", "파", "보기", "더블보기이상"],
             datasets: [
                 {
                     data: [
-                        {{ cr.birdie|floatformat:2 }},
-                        {{ cr.Par|floatformat:2 }},
-                        {{ cr.bogey|floatformat:2 }},
-                        {{ cr.double_bogey_or_more|floatformat:2 }},
+                        {{ birdie|floatformat:2 }},
+                        {{ Par|floatformat:2 }},
+                        {{ bogey|floatformat:2 }},
+                        {{ double_bogey_or_more|floatformat:2 }},
                     ],
                     backgroundColor: [
                         "rgba(255, 30, 30, 0.4)",

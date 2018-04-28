@@ -48,7 +48,6 @@ def render_eval_page(request, template_name, model_cls):
             context["videos"] = videos
     except ObjectDoesNotExist:
         context["categories"] = model_cls.get_categories()
-
     return render(request, template_name, context)
 
 
