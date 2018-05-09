@@ -38,10 +38,15 @@
                 <canvas id="three-chart" height="240"></canvas>
             </div>
         </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
 
         <div>
-            <h4>최근 10 라운드 추이</h4>
-            <h6>평균값: 최근 20 라운드 평균</h6>
+            <h3>최근 10 라운드 추이 - 평균값: 최근 20 라운드 평균</h3>
              <div class="row">
             <div class="col-xs-6">
                 <canvas id="chart-percentage-score" height="240"></canvas>
@@ -268,7 +273,7 @@
         <!--'bogey','double_bogey_or_more','bounce_back','penalty','driving_distance']-->
 
         var trans=['스코어 (Score)','페어웨이 % (Driving Accuracy)',
-        '그린적중률 % (GIR %)','퍼팅수 (Putts/Round)',
+        '그린적중률 % (GIR %)',,
         'GIR 평균 팅수 (Putting Average)',
         '스크램블링 % (Scrambling)',
         '벙커 (Greenside bunker)',
@@ -281,6 +286,11 @@
         '벌타 (Penalty strokes/Round)',
         '드라이빙 거리(Driving Distance: meter)'
         ];
+        var power={score:'스코어 (Score)',putt:'퍼팅수 (Putts/Round)',sand_save:'벙커 스크램블링 % (Scrambling from Sand)',
+        gir:'그린적중률 % (GIR %)',fairway_hit:'페어웨이 % (Driving Accuracy)',proximity:'홀 접근 거리 (Proximity: meter)',
+        double_bogey_or_more:'더블보기이상 홀수(Double bogey)',bounce_back:'회복률 %(Bounce Back)',bogey:'보기 홀수 (Bogey/Round)',
+        penalty:'벌타 (Penalty strokes/Round)',score:'스코어 (Score)',bunker:'벙커 (Greenside bunker)',up_and_down:'스크램블링 % (Scrambling)',
+        driving_distance:'드라이빙 거리(Driving Distance: meter)',putt_gir:'GIR 평균 팅수 (Putting Average)',birdie:'버디이하 홀수 (Birdies/Round)'}
         var avg = avg_twenty["avg_twenty"]
         var labels = [];
         for(var i=1; i<avg_twenty["size"]+1; i++){
@@ -288,7 +298,6 @@
             label[0] = i;
             labels[i-1] = label;
         }
-
         for(var key in keys){
             red_bg = "rgba(255, 99, 132, 0.2)";
             red_bd = "rgba(255, 99, 132, 1.0)";
@@ -312,7 +321,7 @@
                 responsive: true,
                 title: {
                 display: true,
-                text: trans[key]
+                text: power[keys[key]]
                 },
                 tooltips: {
                     mode: 'index',

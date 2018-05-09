@@ -74,7 +74,7 @@ class GolfSwing(models.Model):
                 "Swing Center(DD)\n스윙 중심",
                 "Swing Plane(Dir)\n스윙 플레인",
                 "Body Rotation\n신체 회전",
-                "Length of Arc(Dist)\n스윙아크 길이백스윙 탑 위치",
+                "Length of Arc(Dist)\n스윙아크 길이",
                 "Width of Arc(Dist)\n스윙아크 넓이",
                 "Lever System(Dist)\n지레작용",
                 "Position(Dir)\n백스윙 탑 위치",

@@ -1,6 +1,7 @@
 #-*- coding:utf-8 -*-
 import datetime
 import sys
+import copy
 reload(sys)
 sys.setdefaultencoding('utf-8')
 from django.shortcuts import render, redirect, get_object_or_404
@@ -65,7 +66,6 @@ def average(rrs):
         for r in x:
             _sum += r[key]
         ret[key] = float(_sum) / len(x)
-
     # 해당 홀의 평균
     putt_gir_sum = 0
     gir_sum = 0
@@ -86,7 +86,7 @@ def average(rrs):
         bogey_or_more_sum += stat['bogey_or_more']
 
     non_gir_sum = 18 * len(x) - gir_sum
-    ret['putt_gir'] = putt_gir_sum / gir_sum if gir_sum != 0 else 0
+    ret['putt_gir'] = float(putt_gir_sum) / gir_sum if gir_sum != 0 else 0
     ret['up_and_down'] = 100.0 * up_and_down_sum / non_gir_sum if non_gir_sum != 0 else 0
     ret['sand_save'] = 100.0 * sand_save_sum / bunker_sum if bunker_sum != 0 else 0
     ret['bounce_back'] = 100.0 * bounce_back_sum / bogey_or_more_sum if bogey_or_more_sum != 0 else 0
@@ -236,14 +236,21 @@ def profile(request):
         print(ex)
 
 def avg_twenty_make(target_user):
-    queried = RoundingResult.objects.filter(user=target_user).order_by("create_time")
+    queried = RoundingResult.objects.filter(user=target_user).order_by("-date")
     size = min(len(queried), 20)
     queried = queried[:size]
     avg_seven = average(queried)
     ret = {}
     ret["avg_twenty"] = avg_seven
     size=min(len(queried),10)
+    queried = queried[:size]
     ret["size"] = size
+
+    tempQueried=copy.deepcopy(queried)
+
+    for i in range(10):
+        queried[i]=tempQueried[size-1-i]
+
     for key in avg_seven:
         ret[key+"_twenty"] = []
     for query in queried:
@@ -286,7 +293,7 @@ def round_result_add(request):
         stat = None
         return render(request,
                       'g1/round_result_add.html',
-                      {'course': course, 'rrf': rrf, 'rr': rr, 'stat': stat, 'course_id' : request.GET["course_id"]})
+                      {'field_name':request.GET["field_name"],'course': course, 'rrf': rrf, 'rr': rr, 'stat': stat, 'course_id' : request.GET["course_id"]})
     except Exception as ex:
         print(ex)
 
@@ -538,8 +545,7 @@ def play_rythm(request):
            two =[]
            three =[]
            for i in range(1, 19):
-               one.append( float(part_one["part_one_" + str(i)]) / size)
-
+               one.append(float(part_one["part_one_" + str(i)]) / size)
            for i in range(1, 7):
                two.append(float(part_two["part_two_" + str(i)]) /size)
 

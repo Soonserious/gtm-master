@@ -13,6 +13,9 @@
         <div class="panel-heading">
             <h5 class="panel-title text-center">라운드 게시</h5>
         </div>
+        <div>
+            <h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ field_name }}</h5>
+        </div>
         <div class="panel-body">
 
             <form class="form-horizontal" id="form" role="form" method="POST" action="/g1/round_result_add_submit">
@@ -85,7 +88,7 @@
                                     <td>{{ field }}</td>
                                 {% endfor %}
                                 <td>{{ stat.out_proximity|floatformat:2 }}</td>
-                            </tr>r
+                            </tr>
                             <tr>
                                 <th>드라이빙 거리(meter)</th>
                                 {% for field in rrf.field_driving_distance|slice:":9" %}
@@ -186,7 +189,7 @@
                    <input type="hidden" name="course_id" id="course_id" value='{{course_id}}'>
             </form>
 
-        </div>그랜드
+        </div>
     </div>
 {% endblock %}
 
