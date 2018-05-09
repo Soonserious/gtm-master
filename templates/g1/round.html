@@ -2,7 +2,6 @@
 {% load staticfiles %}
 
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{%static 'admin/css/g1/round.css' %}"/>
 {% endblock %}
 
 {% block content %}
@@ -14,6 +13,9 @@
 }
 table{
     width:1107px;
+}
+.AvgBold td{
+    font-weight: bold;
 }
 
 </style>
@@ -152,9 +154,9 @@ table{
                         <th colspan=12>Best 10 라운드 (Net Score)</th>
                     </tr>
                     <tr>
-                        <th>Date</th><th>Course</th><th>Score</th><th>Fwy (%)</th><th>Putts</th>
-                        <th>GIR (%)</th><th>Putts / GIR</th><th>Up & Down (%)</th><th>Sand Save (%)</th>
-                        <th>Birdies</th><th>Penalty Stroke</th>
+                        <th>Date</th><th>Course</th><th>스코어</th><th>페어웨이 (%)</th><th>퍼팅수</th>
+                        <th>그린적중률 (%)</th><th>GIR 평균 퍼팅수</th><th>스크램블링 (%)</th><th>벙커 스크램블링 (%)</th>
+                        <th>버디이하 홀수</th><th>벌타</th>
                     </tr>
                     </thead>
                     <tbody id='best_10'>

@@ -28,6 +28,8 @@
             height:
 
     }
+    textarea{max-width:100%;}
+    textarea.autosize{min-height:50px;}
 </style>
 {% endblock %}
 
@@ -206,16 +208,16 @@
                 <th class="text-center" colspan="2" rowspan="6" style="cursor:pointer; width: 70%; vertical-align:middle" data-toggle="modal" data-target="#myModal1">정보 수집 및 판단</th>
                 <td class="text-center relax-reaction" colspan="2" rowspan="30" style="width: 30%; vertical-align:middle">이<br><br>완<br><br>반<br><br>응</td>
                 <td colspan="2" rowspan="5" name="comment_0_0" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="comment_0_0">{{ comment_0_0 }}</textarea>
+                    <textarea id="comment_0_0" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_0_0">{{ comment_0_0 }}</textarea>
                 </td>
                 <td colspan="2" rowspan="5" name="comment_0_1" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="comment_0_1">{{ comment_0_1 }}</textarea>
+                    <textarea id="comment_0_1" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_0_1">{{ comment_0_1 }}</textarea>
                 </td>
                 <td colspan="2" rowspan="5" name="comment_0_2" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="comment_0_2">{{ comment_0_2 }}</textarea>
+                    <textarea id="comment_0_2" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_0_2">{{ comment_0_2 }}</textarea>
                 </td>
                 <td colspan="2" rowspan="5" name="comment_0_3" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="comment_0_3">{{ comment_0_3 }}</textarea>
+                    <textarea id="comment_0_3" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_0_3">{{ comment_0_3 }}</textarea>
                 </td>
             </tr>
             <!--<tr>-->
@@ -243,16 +245,16 @@
                 <th class="text-center" colspan="2" rowspan="5" style="cursor:pointer; vertical-align:middle" data-toggle="modal" data-target="#myModal2">수행 계획 결정</th>
                 <!--<td rowspan="1">클럽을 선택한다. 티샷은 티업 한다.</td>-->
                 <td colspan="2" rowspan="5" name="comment_1_0" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="content_1_0">{{ content_1_0 }}</textarea>
+                    <textarea id="comment_1_0" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_1_0">{{ comment_1_0 }}</textarea>
                 </td>
                 <td colspan="2" rowspan="5" name="comment_1_1" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="content_1_1">{{ content_1_1 }}</textarea>
+                    <textarea id="comment_1_1" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_1_1">{{ comment_1_1 }}</textarea>
                 </td>
                 <td colspan="2" rowspan="5" name="comment_1_2" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="content_1_2">{{ content_1_2 }}</textarea>
+                    <textarea id="comment_1_2" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_1_2">{{ comment_1_2 }}</textarea>
                 </td>
                 <td colspan="2" rowspan="5" name="comment_1_3" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="comment_1_3">{{ comment_1_3 }}</textarea>
+                    <textarea id="comment_1_3" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_1_3">{{ comment_1_3 }}</textarea>
                 </td>
             </tr>
             <!--<tr>-->
@@ -279,16 +281,16 @@
                 <th class="text-center" colspan="2" rowspan="4" style="cursor:pointer; vertical-align:middle" data-toggle="modal" data-target="#myModal3">정신적-신체적 예행연습 (Rehearsal Swing)</th>
                 <!--<td colspan="2" rowspan="1">볼의 뒤나 옆에서 한두 번의 부드러운 연습 스윙(풀스윙이나 부분 스윙)을 실행한다.</td>-->
                 <td colspan="2" rowspan="3" name="comment_2_0" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="content_2_0">{{ content_2_0 }}</textarea>
+                    <textarea id="comment_2_0" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_2_0">{{ comment_2_0 }}</textarea>
                 </td>
                 <td colspan="2" rowspan="3" name="comment_2_1" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="comment_2_1">{{ content_2_1 }}</textarea>
+                    <textarea id="comment_2_1" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_2_1">{{ comment_2_1 }}</textarea>
                 </td>
                 <td colspan="2" rowspan="3" name="comment_2_2" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="comment_2_2">{{ comment_2_2 }}</textarea>
+                    <textarea id="comment_2_2" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_2_2">{{ comment_2_2 }}</textarea>
                 </td>
                 <td colspan="2" rowspan="3" name="comment_2_3" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="comment_2_3">{{ comment_2_3 }}</textarea>
+                    <textarea id="comment_2_3" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_2_3">{{ comment_2_3 }}</textarea>
                 </td>
             </tr>
             <!--<tr>-->
@@ -308,16 +310,16 @@
                 <th class="text-center" colspan="2" rowspan="4" style="cursor:pointer; vertical-align:middle" data-toggle="modal" data-target="#myModal4">볼 비행 시각화</th>
                 <!--<td rowspan="1">볼 뒤에 서서 볼비행선 또는 퍼팅 라인을 확인한다.</td>-->
                 <td colspan="2" rowspan="3" name="comment_3_0" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="comment_3_0">{{ comment_3_0 }}</textarea>
+                    <textarea id="comment_3_0" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_3_0">{{ comment_3_0 }}</textarea>
                 </td>
                 <td colspan="2" rowspan="3" name="comment_3_1" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="comment_3_1">{{ comment_3_1 }}</textarea>
+                    <textarea id="comment_3_1" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_3_1">{{ comment_3_1 }}</textarea>
                 </td>
                 <td colspan="2" rowspan="3" name="comment_3_2" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="comment_3_2">{{ comment_3_2 }}</textarea>
+                    <textarea id="comment_3_2" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_3_2">{{ comment_3_2 }}</textarea>
                 </td>
                 <td colspan="2" rowspan="3" name="comment_3_3" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="comment_3_3">{{ comment_3_3 }}</textarea>
+                    <textarea id="comment_3_3" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_3_3">{{ comment_3_3 }}</textarea>
                 </td>
             </tr>
             <!--<tr>-->
@@ -337,16 +339,16 @@
                 <th colspan="2" class="text-center" rowspan="1" style="cursor:pointer; vertical-align:middle" data-toggle="modal" data-target="#myModal5">어드레스</th>
                 <!--<td rowspan="1">구체적이고 명확하고 일관된 행동으로 볼에 어드레스하며 그립(grip), 클럽해드 조준/신체 정렬(aim/alignment), 셋업(setup)을 한다.</td>-->
                 <td colspan="2" rowspan="1" name="comment_4_0" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="comment_4_0">{{ comment_4_0 }}</textarea>
+                    <textarea id="comment_4_0" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_4_0">{{ comment_4_0 }}</textarea>
                 </td>
                 <td colspan="2" rowspan="1" name="comment_4_1" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="comment_4_1">{{ comment_4_1 }}</textarea>
+                    <textarea id="comment_4_1" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_4_1">{{ comment_4_1 }}</textarea>
                 </td>
                 <td colspan="2" rowspan="1" name="comment_4_2" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="comment_4_2">{{ comment_4_2 }}</textarea>
+                    <textarea id="comment_4_2" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_4_2">{{ comment_4_2 }}</textarea>
                 </td>
                 <td colspan="2" rowspan="1" name="comment_4_3" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="comment_4_3">{{ comment_4_3 }}</textarea>
+                    <textarea id="comment_4_3" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_4_3">{{ comment_4_3 }}</textarea>
                 </td>
             </tr>
 
@@ -354,16 +356,16 @@
                 <th class="text-center" colspan="2" rowspan="3" style="cursor:pointer; vertical-align:middle" data-toggle="modal" data-target="#myModal6" >표적응시 및 집중</th>
                 <!--<td rowspan="1">표적(선)을 한두 번 응시한다.</td>-->
                 <td colspan="2" rowspan="2" name="comment_5_0" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="content_5_0">{{ content_5_0 }}</textarea>
+                    <textarea id="comment_5_0" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_5_0">{{ comment_5_0 }}</textarea>
                 </td>
                 <td colspan="2" rowspan="2" name="comment_5_1" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="comment_5_1">{{ comment_5_1 }}</textarea>
+                    <textarea id="comment_5_1" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_5_1">{{ comment_5_1 }}</textarea>
                 </td>
                 <td colspan="2" rowspan="2" name="comment_5_2" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="content_5_2">{{ comment_5_2}}</textarea>
+                    <textarea id="comment_5_2" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_5_2">{{ comment_5_2}}</textarea>
                 </td>
                 <td colspan="2" rowspan="2" name="comment_5_3" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="comment_5_3">{{ comment_5_3 }}</textarea>
+                    <textarea id="comment_5_3" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_5_3">{{ comment_5_3 }}</textarea>
                 </td>
             </tr>
             <tr></tr>
@@ -378,18 +380,18 @@
                 <th colspan="2" class="text-center" rowspan="3" style="cursor:pointer; vertical-align:middle" data-toggle="modal" data-target="#myModal7">실행</th>
                 <!--<td rowspan="1">자신의 스윙 단서를 이용하거나 운동감각적 느낌으로 자동적이고 본능적으로 지체 없이 실행한다.</td>-->
                 <td colspan="2" rowspan="2" name="comment_6_0" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="comment_6_0">{{ comment_6_0 }}</textarea>
-                    <div class="div-contenteditable" contenteditable="true">{{ comment_6_0 | linebreaksbr }}</div>
+                    <textarea id="comment_6_0" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_6_0">{{ comment_6_0 }}</textarea>
+                    <!--<div class="div-contenteditable" contenteditable="true">{{ comment_6_0 | linebreaksbr }}</div>-->
                 </td>
                 <td colspan="2" rowspan="2" name="comment_6_1" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="comment_6_1">{{ comment_6_1 }}</textarea>
-                    <div class="div-contenteditable" contenteditable="true">{{ comment_6_1 | linebreaksbr }}</div>
+                    <textarea id="comment_6_1" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_6_1">{{ comment_6_1 }}</textarea>
+                    <!--<div class="div-contenteditable" contenteditable="true">{{ comment_6_1 | linebreaksbr }}</div>-->
                 </td>
                 <td colspan="2" rowspan="2" name="comment_6_2" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="comment_6_2">{{ comment_6_2 }}</textarea>
+                    <textarea id="comment_6_2" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_6_2">{{ comment_6_2 }}</textarea>
                 </td>
                 <td colspan="2" rowspan="2" name="comment_6_3" class="td-contenteditable">
-                    <textarea required="required" class="table_data_remove_border_line" name="comment_6_3">{{ comment_6_3 }}</textarea>
+                    <textarea id="comment_6_3" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_6_3">{{ comment_6_3 }}</textarea>
                 </td>
             </tr>
             <!--<tr>-->
@@ -413,6 +415,46 @@
 
 {% block js %}
 <script>
+    $(document).ready(function(){
+        resize(document.getElementById("comment_0_0"));
+        resize(document.getElementById("comment_0_1"));
+        resize(document.getElementById("comment_0_2"));
+        resize(document.getElementById("comment_0_3"));
+
+        resize(document.getElementById("comment_1_0"));
+        resize(document.getElementById("comment_1_1"));
+        resize(document.getElementById("comment_1_2"));
+        resize(document.getElementById("comment_1_3"));
+
+        resize(document.getElementById("comment_2_0"));
+        resize(document.getElementById("comment_2_1"));
+        resize(document.getElementById("comment_2_2"));
+        resize(document.getElementById("comment_2_3"));
+
+        resize(document.getElementById("comment_3_0"));
+        resize(document.getElementById("comment_3_1"));
+        resize(document.getElementById("comment_3_2"));
+        resize(document.getElementById("comment_3_3"));
+
+        resize(document.getElementById("comment_4_0"));
+        resize(document.getElementById("comment_4_1"));
+        resize(document.getElementById("comment_4_2"));
+        resize(document.getElementById("comment_4_3"));
+
+        resize(document.getElementById("comment_5_0"));
+        resize(document.getElementById("comment_5_1"));
+        resize(document.getElementById("comment_5_2"));
+        resize(document.getElementById("comment_5_3"));
+
+        resize(document.getElementById("comment_6_0"));
+        resize(document.getElementById("comment_6_1"));
+        resize(document.getElementById("comment_6_2"));
+        resize(document.getElementById("comment_6_3"));
+    });
+    function resize(obj){
+        obj.style.height="1px";
+        obj.style.height=(12+obj.scrollHeight)+"px";
+    }
     function getCookie(name) {
         var cookieValue = null;
         if (document.cookie && document.cookie !== '') {

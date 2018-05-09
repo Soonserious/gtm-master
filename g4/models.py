@@ -529,7 +529,7 @@ class CourseManagement(models.Model):
     result_labels = ['Basic(기초정보이용)',
                      'Game plan(경기계획)',
                      'Decision-making process(의사결정과정)',
-                     'Stroke-saver system(다수관리시스템)',
+                     'Stroke-saver system(타수관리시스템)',
                      'Game Control Strategies(경기조절전략)']
     partition = [[i + 1 for i in range(7)],
                  [i + 8 for i in range(12)],

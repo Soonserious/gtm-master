@@ -40,6 +40,7 @@
     </div>
     <form action="/g1/round_result_add" type="POST" id="course_submit" >
         <input type="hidden" id="course_id" name="course_id">
+        <input type="hidden" id="field_name" name="field_name">
     </form>
 {% endblock %}
 
@@ -73,6 +74,7 @@
                                 var $t = $('#template').clone();
                                 $t.removeAttr('style');
                                 $t.attr('field_id', key);
+                                $t.attr('field_name',json[key].name);
                                 $t.find('label').html(json[key].name);
                                 for(var i = 0; i < 4; ++i) {
                                     if( json[key].tee_types.indexOf(i) != -1 )
@@ -90,13 +92,16 @@
             $('#field_choice').on('click', 'button', function(e) {
                 var base_url = '{% url "g1_course_info" %}';
                 var field_id = $(this).parent().attr('field_id');
+                var field_name = $(this).parent().attr('field_name');
                 var tee_type = $(this).attr('tee_type');
                 $.ajax({
                     url : base_url,
                     type : 'GET',
                     data : {"field_id" : field_id,
-                       "tee_type" : tee_type},
+                       "tee_type" : tee_type,
+                       "field_name":field_name},
                     success : function(json) {
+                        $("#field_name").val(field_name);
                         $("#course_id").val(json.course_id);
                         $("#course_submit").submit();
                     },
