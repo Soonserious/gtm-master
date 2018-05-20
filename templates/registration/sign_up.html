@@ -76,13 +76,19 @@
                         <input type="tel" class="form-control" id="id-phone_number" name="phone_number" maxlength="12"
                                placeholder="- 없이 숫자만 입력해주세요. (ex: 01012345678)" onkeyup="phone_number_typed(this.value)">
                     </div>
-                    <p>개인정보는 회원 식별 및 보다 나은 정보 및 서비스 제공을 위하여 최소한으로 입력받고 있습니다.</p>
+                    <div class="panel-body">
+
+                        <h5><input id="chkbox" type="checkbox" name="chkbox" value="HTML">개인정보 수집 및 이용에 동의</h5>
+                        <p>1.개인정보는 회원 식별 및 보다 나은 정보 및 서비스 제공을 위하여 최소한으로 입력받고 있습니다.</p>
+                        <p>2.동의를 거부 할 수 있으며 거부 시 이용이 제한 될 수 있습니다.</p>
                     <br>
-                    <button id="form_submit" type="submit" class="btn btn-default btn-lg btn-block">가입</button>
+                    </div>
+                    <button id="form_submit" type="submit" class="btn btn-default btn-lg btn-block" title="" disabled="true">가입</button>
                     {% if error_occurred %}
                     <div class="panel-footer">{{ error }}</div>
                     {% endif %}
                 </form>
+
             </div>
         </div>
     </div>
@@ -91,6 +97,15 @@
 
 {% block js %}
 <script type="text/javascript">
+    $("#chkbox").click(function(){
+        if($("#chkbox").is(":checked")){
+            $("#form_submit").attr("disabled",false);
+            $("#form_submit").attr("title","");
+        }else{
+            $("#form_submit").attr("disabled",true);
+            $("#form_submit").attr("title","개인정보 수집 및 이용에 동의해주세요");
+        }
+    });
     function association_selected(value) {
         var association_text = $("#id-association-text");
         association_text.val(value);

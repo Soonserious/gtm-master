@@ -37,6 +37,7 @@ def sign_up(request):
     if request.method == 'POST':
         user_form = forms.SignUpUserForm(data=request.POST)
         member_form = forms.SignUpMemberForm(data=request.POST)
+        print(request.POST)
         if user_form.is_valid() and member_form.is_valid():
             user = user_form.save()
             member = member_form.save(commit=False)
