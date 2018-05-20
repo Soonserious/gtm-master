@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-    <h4>플레이 리듬(Play Rythm)</h4>
+    <h2>플레이 리듬(Play Rhythm)</h2>
         <div class="page-header">
             <h3>홀별 플레이 리듬</h3>
         </div>
@@ -274,7 +274,7 @@
 
         var trans=['스코어 (Score)','페어웨이 % (Driving Accuracy)',
         '그린적중률 % (GIR %)',,
-        'GIR 평균 팅수 (Putting Average)',
+        'GIR 평균 퍼팅수 (Putting Average)',
         '스크램블링 % (Scrambling)',
         '벙커 (Greenside bunker)',
         '벙커 스크램블링 % (Scrambling from Sand)',
@@ -290,7 +290,7 @@
         gir:'그린적중률 % (GIR %)',fairway_hit:'페어웨이 % (Driving Accuracy)',proximity:'홀 접근 거리 (Proximity: meter)',
         double_bogey_or_more:'더블보기이상 홀수(Double bogey)',bounce_back:'회복률 %(Bounce Back)',bogey:'보기 홀수 (Bogey/Round)',
         penalty:'벌타 (Penalty strokes/Round)',score:'스코어 (Score)',bunker:'벙커 (Greenside bunker)',up_and_down:'스크램블링 % (Scrambling)',
-        driving_distance:'드라이빙 거리(Driving Distance: meter)',putt_gir:'GIR 평균 팅수 (Putting Average)',birdie:'버디이하 홀수 (Birdies/Round)'}
+        driving_distance:'드라이빙 거리(Driving Distance: meter)',putt_gir:'GIR 평균 퍼팅수 (Putting Average)',birdie:'버디이하 홀수 (Birdies/Round)'}
         var avg = avg_twenty["avg_twenty"]
         var labels = [];
         for(var i=1; i<avg_twenty["size"]+1; i++){
@@ -355,7 +355,7 @@
             if(keys[key]=='putt_gir'){
                 options.scales.yAxes[0].ticks.min=avg[keys[key]]-2;
                 options.scales.yAxes[0].ticks.max=avg[keys[key]]+2;
-
+                options.scales.yAxes[0].ticks.stepSize=2;
             }
 
 
