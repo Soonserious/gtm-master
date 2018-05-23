@@ -243,22 +243,23 @@ def avg_twenty_make(target_user):
     ret = {}
     ret["avg_twenty"] = avg_seven
     size=min(len(queried),10)
+    print(len(queried))
     queried = queried[:size]
     ret["size"] = size
 
     tempQueried=copy.deepcopy(queried)
-
-    for i in range(10):
+    for i in range(size):
         queried[i]=tempQueried[size-1-i]
-
     for key in avg_seven:
         ret[key+"_twenty"] = []
+
     for query in queried:
         one_query_list = [query]
         avg_query = average(one_query_list)
         for key in avg_seven:
             data_list = ret[key+"_twenty"]
             data_list.append(avg_query[key])
+
     return ret
 
 
@@ -551,11 +552,11 @@ def play_rythm(request):
 
            for i in range(1, 3):
                three.append(float(part_three["part_three_" + str(i)])/size)
-
        except ObjectDoesNotExist:
            one = []
            two = []
            three =[]
+       print("efef")
        avg_twenty = avg_twenty_make(target_user)
        return render(request, 'g1/play_rythm.html' , {"part_one" : one,
                                                       "part_two" : two,
