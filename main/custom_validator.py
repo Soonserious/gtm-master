@@ -1,7 +1,6 @@
 from django.utils.translation import ngettext  # https://docs.python.org/2/library/gettext.html#gettext.ngettext
 from django.core.exceptions import ValidationError
-
-
+import re
 # https://docs.djangoproject.com/en/2.0/_modules/django/contrib/auth/password_validation/#MinimumLengthValidator
 class MyCustomMinimumLengthValidator(object):
     def __init__(self, min_length=4):  # put default min_length here

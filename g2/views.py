@@ -27,28 +27,36 @@ def extract_key_contents(contents_dict):
 
 
 def render_eval_page(request, template_name, model_cls):
-    assert request.method == 'GET'
-    if request.user.is_staff:
-        if 'target_user_id' not in request.GET:
-            return render(request, 'common/access_forbidden.html')
-        else:
-            target_user_id = request.GET['target_user_id']
-    else:
-        target_user_id = request.user.username
-    context = {'target_user_id': target_user_id}
     try:
-        model = model_cls.objects.get(user=request.user)
-        context['record_exists'] = True
-        context["categories"] = model.fill_contents()
-        if model.video:
-            json_videos = json.loads(model.video)
-            videos = []
-            for key in json_videos:
-                videos.append(json.loads(json_videos.get(key)))
-            context["videos"] = videos
-    except ObjectDoesNotExist:
-        context["categories"] = model_cls.get_categories()
-    return render(request, template_name, context)
+        assert request.method == 'GET'
+        is_staff=False
+        if request.user.is_staff:
+            if 'target_user_id' not in request.GET:
+                return render(request, 'common/access_forbidden.html')
+            else:
+                target_user_id = request.GET['target_user_id']
+                is_staff = True
+        else:
+            target_user_id = request.user.username
+        context = {'target_user_id': target_user_id}
+        try:
+            if is_staff:
+                context['is_staff'] = True
+            model = model_cls.objects.get(user=User.objects.get(username=target_user_id))
+            context['record_exists'] = True
+            context["categories"] = model.fill_contents()
+            if model.video:
+                json_videos = json.loads(model.video)
+                videos = []
+                for key in json_videos:
+                    videos.append(json.loads(json_videos.get(key)))
+                context["videos"] = videos
+        except ObjectDoesNotExist:
+            context["categories"] = model_cls.get_categories()
+        print(context)
+        return render(request, template_name, context)
+    except Exception as e:
+        print(e)
 
 
 def update_eval_contents(request, form_cls , model):
@@ -63,24 +71,28 @@ def update_eval_contents(request, form_cls , model):
             target_user_id = request.user.username
         model_instance = None
         try :
-            model_instance = model.objects.get(user = request.user)
+            model_instance = model.objects.get(user = User.objects.get(username=target_user_id))
         except ObjectDoesNotExist:
+            print(request.POST)
+            target_user=request.POST
             form = form_cls(request.POST)
             if not form.is_valid():
                 return HttpResponse(form.errors)
             model_instance = form.save(commit=False)
-            model_instance.user = request.user
+            model_instance.user =User.objects.get(username=target_user_id)
         dumped_data = json.loads(request.POST['contents_dict'])
         if dumped_data["videos"]:
             video_dump = dict()
             for key in dumped_data["videos"]:
                 video_dump[key] = json.dumps(dumped_data["videos"].get(key))
             model_instance.video = json.dumps(video_dump)
+            print('dumped clear')
         else:
             model_instance.video = None
         contents = extract_key_contents(dumped_data)
         model_instance.dumped_contents = json.dumps(contents)
         model_instance.save()
+        print(dumped_data,"dumped")
         return JsonResponse({'status': 'success'})
     except Exception as ex:
         print(ex)
