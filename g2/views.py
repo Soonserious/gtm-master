@@ -53,7 +53,6 @@ def render_eval_page(request, template_name, model_cls):
                 context["videos"] = videos
         except ObjectDoesNotExist:
             context["categories"] = model_cls.get_categories()
-        print(context)
         return render(request, template_name, context)
     except Exception as e:
         print(e)
@@ -73,7 +72,6 @@ def update_eval_contents(request, form_cls , model):
         try :
             model_instance = model.objects.get(user = User.objects.get(username=target_user_id))
         except ObjectDoesNotExist:
-            print(request.POST)
             target_user=request.POST
             form = form_cls(request.POST)
             if not form.is_valid():
@@ -86,13 +84,11 @@ def update_eval_contents(request, form_cls , model):
             for key in dumped_data["videos"]:
                 video_dump[key] = json.dumps(dumped_data["videos"].get(key))
             model_instance.video = json.dumps(video_dump)
-            print('dumped clear')
         else:
             model_instance.video = None
         contents = extract_key_contents(dumped_data)
         model_instance.dumped_contents = json.dumps(contents)
         model_instance.save()
-        print(dumped_data,"dumped")
         return JsonResponse({'status': 'success'})
     except Exception as ex:
         print(ex)
