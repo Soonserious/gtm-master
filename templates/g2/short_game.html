@@ -38,7 +38,6 @@
                     <th class="text-center" rowspan="1" colspan="1" style="width: 36%">삭제</th>
                 </tr>
                 {% for video in videos %}
-                {%if is_staff %}
                     <tr class="video_class">
                         <td colspan="1" class="td-contenteditable" >
                             <textarea required="required" class="table_data_remove_border_line" name="video_number">{{video.0}}</textarea>
@@ -53,29 +52,11 @@
                             <button class="btn btn-primary" onclick="video_remove(this)">삭제</button>
                         </td>
                     </tr>
-                {%else%}
-                    <tr class="video_class">
-                        <td colspan="1" class="td-contenteditable" >
-                            <textarea required="required" disabled class="table_data_remove_border_line" name="video_number">{{video.0}}</textarea>
-                        </td>
-                        <td colspan="2" class="td-contenteditable" >
-                            <textarea required="required" disabled class="table_data_remove_border_line" name="video_address">{{video.1 }}</textarea>
-                        </td>
-                        <td colspan="2" class="td-contenteditable" >
-                            <textarea required="required" disabled class="table_data_remove_border_line" name="video_name">{{ video.2 }}</textarea>
-                        </td>
-                        <td colspan="1" class="td-contenteditable" >
-                            <button class="btn btn-primary" disabled onclick="video_remove(this)">삭제</button>
-                        </td>
-                    </tr>
-                {%endif%}
                 {% endfor%}
             </table>
-            {%if is_staff %}
             <div>
                 <button style="float:right" onclick="video_append()"class="btn btn-primary">동영상 링크 추가</button>
             </div>
-            {%endif%}
         </div>
 
             <div class="panel-body">
