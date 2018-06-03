@@ -8,19 +8,22 @@
 {% endblock %}
 
 {% block content %}
-    <h2>플레이 리듬(Play Rhythm)</h2>
+
         <div class="page-header">
-            <h3>홀별 플레이 리듬</h3>
+            <h3>플레이 리듬(Play Rhythm)</h3>
+        </div>
+        <div class="page-header">
+            <h4>홀별 플레이 리듬</h4>
         </div>
 
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-sm-12 col-sm-offset-0 col-xs-11 col-xs-offset-1">
                 <canvas id="one-chart" height="240"></canvas>
             </div>
         </div>
 
     <div class="page-header">
-            <h3>3홀별 플레이 리듬</h3>
+            <h4>3홀별 플레이 리듬</h4>
         </div>
 
         <div class="row">
@@ -30,7 +33,7 @@
         </div>
 
     <div class="page-header">
-            <h3>9홀별 플레이 리듬</h3>
+            <h4>9홀별 플레이 리듬</h4>
         </div>
 
         <div class="row">
@@ -38,15 +41,14 @@
                 <canvas id="three-chart" height="240"></canvas>
             </div>
         </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+
 
         <div>
-            <h3>최근 10 라운드 추이 - 평균값: 최근 20 라운드 평균</h3>
+            <div class="page-header">
+
+            <h3>최근 10 라운드 추이</h3>
+                <h4>평균값: 최근 20 라운드 평균</h4>
+            </div>
              <div class="row">
             <div class="col-xs-6">
                 <canvas id="chart-percentage-score" height="240"></canvas>
@@ -84,7 +86,7 @@
 
         <div class="row">
             <div class="col-xs-6">
-                <canvas id="chart-percentage-proximity" height="240"></canvas>
+                <canvas id="chart-percentage-bounce_back" height="240"></canvas>
             </div>
             <div class="col-xs-6">
                 <canvas id="chart-percentage-birdie" height="240"></canvas>
@@ -102,10 +104,10 @@
 
         <div class="row">
             <div class="col-xs-6">
-                <canvas id="chart-percentage-bounce_back" height="240"></canvas>
+                <canvas id="chart-percentage-penalty" height="240"></canvas>
             </div>
             <div class="col-xs-6">
-                <canvas id="chart-percentage-penalty" height="240"></canvas>
+                <canvas id="chart-percentage-proximity" height="240"></canvas>
             </div>
         </div>
 
@@ -167,6 +169,8 @@
                 backgroundColor: red_bg,
                 borderColor: red_bd,
                 borderWidth: 1,
+                pointRadius: 8,
+                pointHoverRadius:10,
                 data: {{part_one}}
 
         }]
@@ -175,9 +179,9 @@
             scales: {
                 yAxes: [{
                     ticks: {
-                        min: -4,
-                        max: 4,
-                        stepSize: 2
+                        min: -2,
+                        max: 3,
+                        stepSize: 1
                     }
                 }]
             }
@@ -198,6 +202,8 @@
                 label: "My Score",
                 backgroundColor: red_bg,
                 borderColor: red_bd,
+                pointRadius: 8,
+                pointHoverRadius:10,
                 borderWidth: 1,
                 data: {{part_two}}
 
@@ -214,9 +220,9 @@
 
                 yAxes: [{
                     ticks: {
-                        min: -4,
-                        max: 4,
-                        stepSize: 2
+                        min: -2,
+                        max: 3,
+                        stepSize: 1
                     }
                 }]
             }
@@ -228,13 +234,13 @@
             labels: [
                 ["전반 9홀 평균"],
                 ["후반 9홀 평균"],
-
             ],
             datasets: [{
                 label: "My Score",
                 backgroundColor: red_bg,
                 borderColor: red_bd,
                 borderWidth: 1,
+                pointRadius: 6,
                 data: {{part_three}}
 
         }]
@@ -243,14 +249,14 @@
             scales: {
                 yAxes: [{
                     ticks: {
-                        min: -4,
-                        max: 4,
-                        stepSize: 2
+                        min: -2,
+                        max: 3,
+                        stepSize: 1
                     }
                 }]
             }
         };
-        new Chart(ctx, {type: "line", data: data, options: options});
+        new Chart(ctx, {type: "bar", data: data, options: options});
     })
 
     function save_comment_clicked() {
@@ -313,6 +319,9 @@
                     backgroundColor: red_bg,
                     borderColor: red_bd,
                     borderWidth: 1,
+                    pointRadius: 8,
+                    pointHoverRadius: 10,
+
                     fill: false,
                     data: avg_twenty[keys[key]+"_twenty"]
                 }]

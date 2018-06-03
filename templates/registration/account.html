@@ -9,19 +9,72 @@
     <div class="form-group">
         <label class="control-label col-xs-2" for="username">User ID</label>
         <div class="col-xs-10">
-            <input type="text" class="form-control" id="username" name="username" value="{{ user.username}}" disabled>
+            <input type="text" class="form-control" id="username" name="username" value="{{ username}}" readonly>
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-xs-2" for="first_name">First name</label>
+        <label class="control-label col-xs-2" for="id-association-select">소속</label>
         <div class="col-xs-10">
-            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ user.first_name}}">
+        <select class="form-control" id="id-association-select" onchange="association_selected(this.value)">
+            <option disabled selected value> --선택-- </option>
+            <option value="훈련생">훈련생</option>
+            <option value="아마추어">아마추어</option>
+            <option value="KLPGA 투어 프로">KLPGA 투어 프로</option>
+            <option value="KLPGA 프로">KLPGA 프로</option>
+            <option value="KPGA 투어 프로">KPGA 투어 프로</option>
+            <option value="KPGA 프로">KPGA 프로</option>
+            <option value="">기타 (직접 입력)</option>
+        </select>
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-xs-2" for="last_name">Last name</label>
+        <div class="col-xs-offset-2 col-xs-10">
+        <input type="text" class="form-control" id="id-association-text" name="association" value="{{association}}"required>
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-2" for="full_name">이름</label>
         <div class="col-xs-10">
-            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ user.last_name}}">
+            <input type="text" class="form-control" id="full_name" name="full_name" value="{{full_name}}" readonly>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-2" for="sex">성별</label>
+        <div class="col-xs-10">
+            <input type="text" class="form-control" id="sex" name="sex" value="{{sex}}" readonly>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-2" for="email">이메일</label>
+        <div class="col-xs-10">
+            {% if email%}
+            <input type="email" class="form-control" id="email" name="email" value="{{email}}">
+            {%else%}
+            <input type="email" class="form-control" id="email" name="email">
+            {%endif%}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-2" for="birth">생일</label>
+        <div class="col-xs-10">
+            {%if birth%}
+            <input type="text" class="form-control" maxlength="8" onkeyup="birth_typed(this.value)" id="birth" name="birth" value="{{birth}}">
+            <p>YYYYMMDD 형식으로 입력해주세요. (ex: 19800101)</p>
+            {%else%}
+            <input type="text" class="form-control" maxlength="8" onkeyup="birth_typed(this.value)" id="birth" name="birth" placeholder="YYYYMMDD 형식으로 입력해주세요. (ex: 19800101)">
+            {%endif%}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-2" for="phone_number">전화번호</label>
+        <div class="col-xs-10">
+            {%if phone_number%}
+            <input type="tel" class="form-control" maxlength="12" onkeyup="phone_number_typed(this.value)" id="phone_number" name="phone_number" value="{{ phone_number}}">
+            <p>- 없이 숫자만 입력해주세요. (ex: 01012345678)</p>
+            {%else%}
+            <input type="tel" class="form-control" maxlength="12" onkeyup="phone_number_typed(this.value)" id="phone_number" name="phone_number" placeholder="- 없이 숫자만 입력해주세요. (ex: 01012345678)">
+            {%endif%}
         </div>
     </div>
     <div class="form-group">
@@ -72,6 +125,29 @@
 
 {% block js %}
 <script type="text/javascript">
+    function association_selected(value) {
+        var association_text = $("#id-association-text");
+        association_text.val(value);
+    }
+    function birth_typed(value) {
+        var parsed_int = parseInt(value, 10);
+        console.log("value: " + value + " parsed: " + parsed_int);
+        if (value != parsed_int) {
+            if (isNaN(parsed_int)) {
+                parsed_int = "";
+            }
+            $("#birth").val(parsed_int);
+        }
+    }
+    function phone_number_typed(value) {
+        var parsed_int = parseInt(value, 10);
+        if (value != parsed_int) {
+            if (isNaN(parsed_int)) {
+                parsed_int = "";
+            }
+            $("#phone_number").val(parsed_int);
+        }
+    }
     function change_pw_click() {
         $("#current_pw").val("");
         $("#fg_current_pw").toggle();

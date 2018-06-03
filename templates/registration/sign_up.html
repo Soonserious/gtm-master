@@ -60,8 +60,9 @@
                     </div>
                     <!--이메일: email-->
                     <div class="form-group">
-                        <label for="id-email">이메일 (선택)</label>
-                        <input type="email" class="form-control" id="id-email" name="email">
+                        <label for="id-phone_number">전화번호 (선택)</label>
+                        <input type="tel" class="form-control" id="id-phone_number" name="phone_number" maxlength="12"
+                               placeholder="- 없이 숫자만 입력해주세요. (ex: 01012345678)" onkeyup="phone_number_typed(this.value)">
                     </div>
                     <!--생년월일: birth-->
                     <div class="form-group">
@@ -69,12 +70,11 @@
                         <input type="text" class="form-control" id="id-birth" name="birth" maxlength="8"
                                placeholder="YYYYMMDD 형식으로 입력해주세요. (ex: 19800101)" onkeyup="birth_typed(this.value)">
                     </div>
-                    <!--전화번호: phone_number-->
                     <div class="form-group">
-                        <label for="id-phone_number">전화번호 (선택)</label>
-                        <input type="tel" class="form-control" id="id-phone_number" name="phone_number" maxlength="12"
-                               placeholder="- 없이 숫자만 입력해주세요. (ex: 01012345678)" onkeyup="phone_number_typed(this.value)">
+                        <label for="id-email">이메일 (선택)</label>
+                        <input type="email" class="form-control" id="id-email" name="email">
                     </div>
+                    <!--전화번호: phone_number-->
                     <div class="panel-body">
 
                         <h5><input id="chkbox" type="checkbox" name="chkbox" value="HTML">개인정보 수집 및 이용에 동의</h5>

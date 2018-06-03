@@ -10,7 +10,7 @@
         color: red;
     }
 
-    .td-contenteditable {
+    .td-contentEditable {
         height: 1px;
     }
 
@@ -182,6 +182,7 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-xs-3">검은 글씨는 행동전략을 나타낸다.</div>
+            <div class="col-xs-9"><p class="bg-info" style="font-weight:bold">'GPRM 구성 체계의 각 단계를 클릭/터치하면 GPRM단계별 전략이 나타납니다.</br> 각각의 전략 내용을 참고하여 자신의 프리샷 루틴을 제작 및 구축하세요.'</p></div>
         </div>
         <div class="row">
             <div class="col-xs-3 cog-strategy">파란 글씨는 인지전략을 나타낸다.</div>
@@ -206,7 +207,7 @@
             <!--Ewan rowspan="26"-->
             <tr>
                 <th class="text-center" colspan="2" rowspan="6" style="cursor:pointer; width: 70%; vertical-align:middle" data-toggle="modal" data-target="#myModal1">정보 수집 및 판단</th>
-                <td class="text-center relax-reaction" colspan="2" rowspan="30" style="width: 30%; vertical-align:middle">이<br><br>완<br><br>반<br><br>응</td>
+                <td class="text-center relax-reaction" colspan="2" rowspan="26" style="width: 30%; vertical-align:middle">이<br><br>완<br><br>반<br><br>응</td>
                 <td colspan="2" rowspan="5" name="comment_0_0" class="td-contenteditable">
                     <textarea id="comment_0_0" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_0_0">{{ comment_0_0 }}</textarea>
                 </td>
@@ -273,26 +274,26 @@
             <tr></tr>
             <tr></tr>
             <tr></tr>
-                       <tr></tr>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
             <tr>
-                <th class="text-center" colspan="2" rowspan="4" style="cursor:pointer; vertical-align:middle" data-toggle="modal" data-target="#myModal3">정신적-신체적 예행연습 (Rehearsal Swing)</th>
-                <!--<td colspan="2" rowspan="1">볼의 뒤나 옆에서 한두 번의 부드러운 연습 스윙(풀스윙이나 부분 스윙)을 실행한다.</td>-->
-                <td colspan="2" rowspan="3" name="comment_2_0" class="td-contenteditable">
+                <th class="text-center" colspan="2" rowspan="6" style="cursor:pointer; vertical-align:middle" data-toggle="modal" data-target="#myModal3">정신적-신체적 예행연습</th>
+                <!--<th class="text-center" colspan="2" rowspan="6" style="cursor:pointer; vertical-align:middle" data-toggle="modal" data-target="#myModal3">정신적-신체적 예행연습 (Rehearsal Swing)</th>-->
+
+                <!--<td rowspan="1">클럽을 선택한다. 티샷은 티업 한다.</td>-->
+                <td colspan="2" rowspan="5" name="comment_2_0" class="td-contenteditable">
                     <textarea id="comment_2_0" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_2_0">{{ comment_2_0 }}</textarea>
                 </td>
-                <td colspan="2" rowspan="3" name="comment_2_1" class="td-contenteditable">
+                <td colspan="2" rowspan="5" name="comment_2_1" class="td-contenteditable">
                     <textarea id="comment_2_1" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_2_1">{{ comment_2_1 }}</textarea>
                 </td>
-                <td colspan="2" rowspan="3" name="comment_2_2" class="td-contenteditable">
+                <td colspan="2" rowspan="5" name="comment_2_2" class="td-contenteditable">
                     <textarea id="comment_2_2" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_2_2">{{ comment_2_2 }}</textarea>
                 </td>
-                <td colspan="2" rowspan="3" name="comment_2_3" class="td-contenteditable">
+                <td colspan="2" rowspan="5" name="comment_2_3" class="td-contenteditable">
                     <textarea id="comment_2_3" onkeydown="resize(this)" onkeyup="resize(this)" required="required" class="autosize table_data_remove_border_line" name="comment_2_3">{{ comment_2_3 }}</textarea>
                 </td>
             </tr>
+            <tr></tr>
+            <tr></tr>
             <!--<tr>-->
                 <!--<td>퍼팅 - 볼 뒤나 옆에 어드레스 하여 퍼팅라인을 보거나 지면을 보면서 연습 스트로크를 두세 번 한다.</td>-->
             <!--</tr>-->
@@ -303,7 +304,7 @@
             <tr></tr>
             <tr></tr>
             <tr>
-                <td class="text-center relax-reaction" colspan="8">필요하면 깊은 숨을 쉬며 몸과 마음을 이완한다.(샷과 퍼팅 모두)<br>또는 워밍업을 하며 몸과 마음을 활성화시킨다.(퍼팅은 제외)</td>
+                <td class="text-center relax-reaction" rowspan="1" colspan="8">필요하면 깊은 숨을 쉬며 몸과 마음을 이완한다.(샷과 퍼팅 모두)<br>또는 워밍업을 하며 몸과 마음을 활성화시킨다.(퍼팅은 제외)</td>
             </tr>
 
             <tr>
@@ -404,9 +405,9 @@
         </table>
 
         <div class="row">
-            <div class="col-xs-10" align="right" id="submit_status"></div>
-            <div class="col-xs-2" align="right">
-                <button type="button" class="btn btn-primary" value=0>저장하기</button>
+            <div class="col-xs-12" align="right" id="submit_status"></div>
+            <div class="col-xs-12" align="right">
+                <button type="button" class="btn-block btn-lg btn btn-primary" value=0>저장하기</button>
             </div>
         </div>
     </div>
@@ -416,44 +417,53 @@
 {% block js %}
 <script>
     $(document).ready(function(){
-        resize(document.getElementById("comment_0_0"));
-        resize(document.getElementById("comment_0_1"));
-        resize(document.getElementById("comment_0_2"));
-        resize(document.getElementById("comment_0_3"));
+        initResize(document.getElementById("comment_0_0"));
+        initResize(document.getElementById("comment_0_1"));
+        initResize(document.getElementById("comment_0_2"));
+        initResize(document.getElementById("comment_0_3"));
 
-        resize(document.getElementById("comment_1_0"));
-        resize(document.getElementById("comment_1_1"));
-        resize(document.getElementById("comment_1_2"));
-        resize(document.getElementById("comment_1_3"));
+        initResize(document.getElementById("comment_1_0"));
+        initResize(document.getElementById("comment_1_1"));
+        initResize(document.getElementById("comment_1_2"));
+        initResize(document.getElementById("comment_1_3"));
 
-        resize(document.getElementById("comment_2_0"));
-        resize(document.getElementById("comment_2_1"));
-        resize(document.getElementById("comment_2_2"));
-        resize(document.getElementById("comment_2_3"));
+        initResize(document.getElementById("comment_2_0"));
+        initResize(document.getElementById("comment_2_1"));
+        initResize(document.getElementById("comment_2_2"));
+        initResize(document.getElementById("comment_2_3"));
 
-        resize(document.getElementById("comment_3_0"));
-        resize(document.getElementById("comment_3_1"));
-        resize(document.getElementById("comment_3_2"));
-        resize(document.getElementById("comment_3_3"));
+        initResize(document.getElementById("comment_3_0"));
+        initResize(document.getElementById("comment_3_1"));
+        initResize(document.getElementById("comment_3_2"));
+        initResize(document.getElementById("comment_3_3"));
 
-        resize(document.getElementById("comment_4_0"));
-        resize(document.getElementById("comment_4_1"));
-        resize(document.getElementById("comment_4_2"));
-        resize(document.getElementById("comment_4_3"));
+        initResize(document.getElementById("comment_4_0"));
+        initResize(document.getElementById("comment_4_1"));
+        initResize(document.getElementById("comment_4_2"));
+        initResize(document.getElementById("comment_4_3"));
 
-        resize(document.getElementById("comment_5_0"));
-        resize(document.getElementById("comment_5_1"));
-        resize(document.getElementById("comment_5_2"));
-        resize(document.getElementById("comment_5_3"));
+        initResize(document.getElementById("comment_5_0"));
+        initResize(document.getElementById("comment_5_1"));
+        initResize(document.getElementById("comment_5_2"));
+        initResize(document.getElementById("comment_5_3"));
 
-        resize(document.getElementById("comment_6_0"));
-        resize(document.getElementById("comment_6_1"));
-        resize(document.getElementById("comment_6_2"));
-        resize(document.getElementById("comment_6_3"));
+        initResize(document.getElementById("comment_6_0"));
+        initResize(document.getElementById("comment_6_1"));
+        initResize(document.getElementById("comment_6_2"));
+        initResize(document.getElementById("comment_6_3"));
     });
+    function initResize(obj){
+        obj.style.height="1px";
+        if(obj.scrollHeight>150){
+                obj.style.height="150px";
+        }
+        else{
+                obj.style.height=(10+obj.scrollHeight)+"px";
+        }
+    }
     function resize(obj){
         obj.style.height="1px";
-        obj.style.height=(12+obj.scrollHeight)+"px";
+        obj.style.height=(10+obj.scrollHeight)+"px";
     }
     function getCookie(name) {
         var cookieValue = null;
@@ -471,7 +481,7 @@
     }
     $(function() { $.ajaxSetup({headers: {"X-CSRFToken": getCookie("csrftoken")}}); });
 
-    $('div[contenteditable="true"]').keypress(function(event) {
+    $('div[contentEditable="true"]').keypress(function(event) {
         if (event.which != 13)
             return true;
 

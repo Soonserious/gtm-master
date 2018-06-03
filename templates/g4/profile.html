@@ -425,13 +425,17 @@ function drawRadarChart(ctx, axisLabels, b_label, c_label, b_values, c_values) {
                     data: b_values,
                     label: b_label,
                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255,99,132,1)'
+                    borderColor: 'rgba(255,99,132,1)',
+                    pointHoverRadius:7,
+                    pointRadius:7
                 },
                 {
                     data: c_values,
                     label: c_label,
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)'
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    pointHoverRadius:7,
+                    pointRadius:7
                 }
             ]
         },
