@@ -59,15 +59,23 @@ def sign_up(request):
     else:
         return render(request, 'registration/sign_up.html')
 
-
 def account(request):
     if request.method == 'GET':
-        return render(request, 'registration/account.html')
-
+        member=models.Member.objects.get(user=request.user)
+        ret={}
+        ret['username']=request.user.username
+        ret['sex']=member.sex
+        ret['association']=member.association
+        ret['full_name']=member.full_name
+        ret['phone_number']=member.phone_number
+        ret['email']=member.email
+        ret['birth']=member.birth
+        return render(request, 'registration/account.html',ret)
     elif request.method == 'POST':
-        print(request.POST)
         context = {'error': 0}
+        print(request.POST)
         user = User.objects.get(username=request.user.username)
+        member=models.Member.objects.get(user=request.user)
         if 'current_pw' in request.POST:
             if not request.user.check_password(request.POST['current_pw']):
                 context['error'] = True
@@ -80,14 +88,40 @@ def account(request):
             else:
                 user.set_password(request.POST['new_pw_1'])
                 context['error'] = False
-        user.first_name = request.POST['first_name']
-        user.last_name = request.POST['last_name']
-        user.save()
-        context['user'] = user
-        context['error'] = False
-        context['message'] = 'Your account information had been changed.'
+        member_form = forms.SignUpMemberForm(data=request.POST)
+        try:
 
-        return render(request, 'registration/account.html', context=context)
+            if member_form.is_valid():
+                member.birth=member_form.cleaned_data['birth']
+                member.email=member_form.cleaned_data['email']
+                member.phone_number=member_form.cleaned_data['phone_number']
+                member.association = member_form.cleaned_data['association']
+                member.sex = member_form.cleaned_data['sex']
+                member.save()
+            else:
+                errors = dict()
+                for e_dict in [member_form.errors]:
+                    errors.update(e_dict)
+                first_error_key = list(errors.keys())[0]
+                error_message = '{}: {}'.format(first_error_key, errors[first_error_key][0])
+                context['error'] = True
+                context['message']=error_message
+                return render(request, 'registration/account.html', context=context)
+            context['username'] = member.user.username
+            context['sex'] = member.sex
+            context['association'] = member.association
+            context['full_name'] = member.full_name
+            context['phone_number'] = member.phone_number
+            context['email'] = member.email
+            context['birth'] = member.birth
+            context['user'] = user
+            context['error'] = False
+            context['message'] = 'Your account information had been changed.'
+            return render(request, 'registration/account.html', context=context)
+        except Exception as ex:
+            print(ex)
+        # user.save()
+
 
 
 def user_passes_test(test_func, message):

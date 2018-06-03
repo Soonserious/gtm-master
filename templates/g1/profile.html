@@ -102,10 +102,10 @@
                 <td class="differential">{{ minus.sand_save|floatformat:2 }}%</td>
             </tr>
             <tr>
-                <th>홀 접근 거리 (Proximity: meter)</th>
-                <td>{{ cr.proximity|floatformat:2 }}</td>
-                <td>{{ avg.proximity|floatformat:2 }}</td>
-                <td class="differential">{{ minus.proximity|floatformat:2 }}</td>
+                <th>회복률 %(Bounce Back)</th>
+                <td>{{ cr.bounce_back|floatformat:2 }}%</td>
+                <td>{{ avg.bounce_back|floatformat:2 }}%</td>
+                <td class="differential">{{ minus.bounce_back|floatformat:2 }}%</td>
             </tr>
             <tr>
                 <th>버디이하 홀수 (Birdies/Round)</th>
@@ -126,16 +126,16 @@
                 <td class="differential">{{ minus.double_bogey_or_more|floatformat:2 }}</td>
             </tr>
             <tr>
-                <th>회복률 %(Bounce Back)</th>
-                <td>{{ cr.bounce_back|floatformat:2 }}%</td>
-                <td>{{ avg.bounce_back|floatformat:2 }}%</td>
-                <td class="differential">{{ minus.bounce_back|floatformat:2 }}%</td>
-            </tr>
-            <tr>
                 <th>벌타 (Penalty strokes/Round)</th>
                 <td>{{ cr.penalty|floatformat:2 }}</td>
                 <td>{{ avg.penalty|floatformat:2 }}</td>
                 <td class="differential">{{ minus.penalty|floatformat:2 }}</td>
+            </tr>
+            <tr>
+                <th>홀 접근 거리 (Proximity: meter)</th>
+                <td>{{ cr.proximity|floatformat:2 }}</td>
+                <td>{{ avg.proximity|floatformat:2 }}</td>
+                <td class="differential">{{ minus.proximity|floatformat:2 }}</td>
             </tr>
             <tr>
                 <th>드라이빙 거리(Driving Distance: meter)</th>
@@ -215,22 +215,22 @@
                     <tbody>
                     <tr>
                         <th>버디이하</th>
-                        <td>{{cr.birdie|floatformat:2 }}</td>
+                        <td>{{cr.stroke_birdie|floatformat:2 }}%</td>
                         <td>{{ birdie|floatformat:2 }}%</td>
                     </tr>
                     <tr>
                         <th>파</th>
-                        <td>{{cr.Par|floatformat:2 }}</td>
+                        <td>{{cr.stroke_Par|floatformat:2 }}%</td>
                         <td>{{ par|floatformat:2 }}%</td>
                     </tr>
                     <tr>
                         <th>보기</th>
-                        <td>{{cr.bogey|floatformat:2 }}</td>
+                        <td>{{cr.stroke_bogey|floatformat:2 }}%</td>
                         <td>{{ bogey|floatformat:2 }}%</td>
                     </tr>
                     <tr>
                         <th>더블보기이상</th>
-                        <td>{{cr.double_bogey_or_more|floatformat:2 }}</td>
+                        <td>{{cr.stroke_double_bogey_or_more|floatformat:2 }}%</td>
                         <td>{{ double_bogey_or_more|floatformat:2 }}%</td>
                     </tr>
                     </tbody>

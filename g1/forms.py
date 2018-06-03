@@ -9,7 +9,8 @@ class CriteriaForm(ModelForm):
         model = Criteria
         fields = ['score', 'fairway_hit', 'gir', 'putt', 'putt_gir',
                   'up_and_down', 'bunker', 'sand_save', 'proximity', 'birdie',  'bogey', 'double_bogey_or_more',
-                  'bounce_back', 'penalty', 'driving_distance', 'Par', 'par3', 'par4', 'par5']
+                  'bounce_back', 'penalty', 'driving_distance', 'Par', 'par3', 'par4', 'par5','stroke_birdie'
+                  ,'stroke_Par','stroke_bogey','stroke_double_bogey_or_more']
 
 
 class GolfFieldForm(ModelForm):

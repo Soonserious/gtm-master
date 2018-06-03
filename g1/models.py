@@ -28,6 +28,11 @@ class Criteria(models.Model):
     par3=models.FloatField(default=0.0)
     par4=models.FloatField(default=0.0)
     par5=models.FloatField(default=0.0)
+    stroke_birdie=models.FloatField(default=0.0)
+    stroke_Par=models.FloatField(default=0.0)
+    stroke_bogey=models.FloatField(default=0.0)
+    stroke_double_bogey_or_more=models.FloatField(default=0.0)
+
 
 
 class GolfField(models.Model):

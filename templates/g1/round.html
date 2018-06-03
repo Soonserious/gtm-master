@@ -50,59 +50,26 @@ table{
             </div>
             <br>
             <div style="overflow-x: auto;">
-                <table class="scrolltbody table-bordered">
-                    <thead style="width:1106px">
+                <table class="table-condensed table-striped table-bordered">
+                    <thead>
                     <tr>
                         <th colspan=12>최근 20라운드 Average</th>
                     </tr>
-                    <colgroup style="width:1106px">
-                        <col width="10%">
-                        <col width="20%">
-                        <col width="6%">
-                        <col width="7%">
-                        <col width="5%">
-                        <col width="7%">
-                        <col width="9%">
-                        <col width="12%">
-                        <col width="12%">
-                        <col width="5%">
-                        <col width="7%">
-
-                    </colgroup>
                     <tr>
                         <th>Date</th><th>Course</th><th>스코어</th><th>페어웨이(%)</th><th>퍼팅수</th>
                         <th>그린적중률(%)</th><th>GIR 평균퍼팅수</th><th>스크램블링(%)</th><th>벙커 스크램블링 (%)</th>
                         <th>버디이하 홀수</th><th>벌타</th>
                     </tr>
                     </thead>
-                </table>
-            <div class="scroll">
-                <table class="scrolltbody table-bordered">
-
-                    <colgroup style="width:1106px">
-                        <col width="10%">
-                        <col width="20%">
-                        <col width="6%">
-                        <col width="7%">
-                        <col width="5%">
-                        <col width="7%">
-                        <col width="9%">
-                        <col width="12%">
-                        <col width="12%">
-                        <col width="5%">
-                        <col width="7%">
-
-                    </colgroup>
-                    <tbody style="width:1106px" id='recent'>
-
+                    <tbody id='recent'>
                         {% for r in recent %}
                             <tr>
                                 <td>{{ r.date|date:"Y-m-d" }}</td>
                                 <td>{{ r.course }}</td>
                                 <td>{{ r.score }}</td>
                                 <td>{{ r.fairway_hit|floatformat:2 }}%</td>
-                                <td>{{ r.putt }}</td>
                                 <td>{{ r.gir|floatformat:2 }}%</td>
+                                <td>{{ r.putt }}</td>
                                 <td>{{ r.putt_gir|floatformat:2 }}</td>
                                 <td>{{ r.up_and_down|floatformat:2 }}%</td>
                                 <td>{{ r.sand_save|floatformat:2 }}%</td>
@@ -110,41 +77,20 @@ table{
                                 <td>{{ r.penalty }}</td>
                             </tr>
                         {% endfor %}
-                    </tbody>
-                </table>
-                </div>
-                <table style="width:1107px" class="scrolltbody table-bordered">
-                    <tfoot style="width:1106px">
-
-                    <colgroup style="width:1106px">
-                        <col width="10%">
-                        <col width="20%">
-                        <col width="6%">
-                        <col width="7%">
-                        <col width="5%">
-                        <col width="7%">
-                        <col width="9%">
-                        <col width="12%">
-                        <col width="12%">
-                        <col width="5%">
-                        <col width="7%">
-
-                    </colgroup>
-                    <tr class="AvgBold">
+                     <tr class="AvgBold">
                         <th colspan=2>Average</th>
                         <td>{{ recent_avg.score|floatformat:2 }}</td>
                         <td>{{ recent_avg.fairway_hit|floatformat:2 }}%</td>
-                        <td>{{ recent_avg.putt|floatformat:2 }}</td>
                         <td>{{ recent_avg.gir|floatformat:2 }}%</td>
+                        <td>{{ recent_avg.putt|floatformat:2 }}</td>
                         <td>{{ recent_avg.putt_gir|floatformat:2 }}</td>
                         <td>{{ recent_avg.up_and_down|floatformat:2 }}%</td>
                         <td>{{ recent_avg.sand_save|floatformat:2 }}%</td>
                         <td>{{ recent_avg.birdie|floatformat:2 }}</td>
                         <td>{{ recent_avg.penalty|floatformat:2 }}</td>
                     </tr>
-                    </tfoot>
+                    </tbody>
                 </table>
-
             </div>
             <br>
             <div style="overflow-x: auto;">
@@ -166,8 +112,8 @@ table{
                             <td>{{ r.course }}</td>
                             <td>{{ r.score|floatformat:2 }}</td>
                             <td>{{ r.fairway_hit|floatformat:2 }}%</td>
-                            <td>{{ r.putt }}</td>
                             <td>{{ r.gir|floatformat:2 }}%</td>
+                            <td>{{ r.putt }}</td>
                             <td>{{ r.putt_gir|floatformat:2 }}</td>
                             <td>{{ r.up_and_down|floatformat:2 }}%</td>
                             <td>{{ r.sand_save|floatformat:2 }}%</td>
@@ -179,8 +125,8 @@ table{
                         <th colspan=2>Average</th>
                         <td>{{ best_10_avg.score|floatformat:2  }}</td>
                         <td>{{ best_10_avg.fairway_hit|floatformat:2 }}%</td>
-                        <td>{{ best_10_avg.putt|floatformat:2 }}</td>
                         <td>{{ best_10_avg.gir|floatformat:2 }}%</td>
+                        <td>{{ best_10_avg.putt|floatformat:2 }}</td>
                         <td>{{ best_10_avg.putt_gir|floatformat:2 }}</td>
                         <td>{{ best_10_avg.up_and_down|floatformat:2 }}%</td>
                         <td>{{ best_10_avg.sand_save|floatformat:2 }}%</td>

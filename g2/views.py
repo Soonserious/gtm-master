@@ -89,6 +89,7 @@ def update_eval_contents(request, form_cls , model):
         contents = extract_key_contents(dumped_data)
         model_instance.dumped_contents = json.dumps(contents)
         model_instance.save()
+
         return JsonResponse({'status': 'success'})
     except Exception as ex:
         print(ex)
