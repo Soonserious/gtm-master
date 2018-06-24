@@ -11,6 +11,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse
 from django.utils.decorators import available_attrs
 from django.views.decorators.csrf import csrf_exempt
+import json
 
 from . import forms
 from . import models
@@ -35,6 +36,7 @@ def manager(request):
 def sign_up(request):
     # POST
     if request.method == 'POST':
+        print(request.POST)
         user_form = forms.SignUpUserForm(data=request.POST)
         member_form = forms.SignUpMemberForm(data=request.POST)
         if user_form.is_valid() and member_form.is_valid():
@@ -42,7 +44,10 @@ def sign_up(request):
             member = member_form.save(commit=False)
             member.user = user
             member.save()
-            return redirect('home')
+            context={'success':'회원가입을 축하합니다'}
+            return HttpResponse(json.dumps(context),content_type="application/json");
+            # return render(request, 'index.html', context={'alertSignup': True})
+            # return redirect('home')
         else:
             errors = dict()
             for e_dict in [user_form.errors, member_form.errors]:
@@ -52,9 +57,10 @@ def sign_up(request):
             error_messeage = '{}: {}'.format(first_error_key, errors[first_error_key][0])
             context = {
                 'error_occurred': True,
-                'error': error_messeage,
+                'error': error_messeage
             }
-            return render(request, 'registration/sign_up.html', context=context)
+            return HttpResponse(json.dumps(context),content_type="application/json");
+            # return render(request, 'registration/sign_up.html', context=context)
     # GET
     else:
         return render(request, 'registration/sign_up.html')
@@ -139,7 +145,6 @@ def user_passes_test(test_func, message):
             return view_func(request, *args, **kwargs)
         return _wrapped_view
     return decorator
-
 
 def has_permission_g1(user):
     if user.is_staff:

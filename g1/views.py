@@ -115,7 +115,13 @@ def handicap(rrs):
 @login_required
 def round(request):
     try :
-        target_user_id = request.user.username
+        if request.user.is_staff:
+            if 'target_user_id' not in request.GET:
+                target_user_id = request.user.username
+                #return render(request, 'common/access_forbidden.html')
+            else:
+                target_user_id = request.GET['target_user_id']
+                #is_staff = True
         target_user = User.objects.get(username=target_user_id)
         target_member = Member.objects.get(user=target_user)
         member_info = {

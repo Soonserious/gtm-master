@@ -53,11 +53,14 @@ class ViewManager:
                 assert isinstance(model, model_cls)
                 model.user = request.user
                 model.update_time = request.POST["date"]
+                print(model)
             scores = ViewManager.get_scores_from_post(request.POST)
             assert len(scores) == model.survey_info.num_questions
             model.dumped_scores = json.dumps(scores)
             model.save()
-            return JsonResponse(model.get_results())
+            #return JsonResponse(model.get_results())
+            #error 'unicode' object has no attribute 'astimezone'
+            return JsonResponse({'success':'success'})
         except Exception as ex:
             print(ex)
 

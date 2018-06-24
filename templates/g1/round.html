@@ -7,9 +7,8 @@
 {% block content %}
 <style>
 .scroll{
-    max-height:100px;
+    max-height:230px;
     overflow-y : scroll;
-    width:1130px;
 }
 table{
     width:1107px;
@@ -55,14 +54,15 @@ table{
             </div>
             <br>
             <div style="overflow-x: auto;">
+                <div class="scroll">
                 <table class="table-condensed table-striped table-bordered">
                     <thead>
                     <tr>
-                        <th colspan=12>최근 20라운드 Average</th>
+                        <th colspan=12>최근 20라운드</th>
                     </tr>
                     <tr>
-                        <th>Date</th><th>Course</th><th>스코어</th><th>페어웨이(%)</th><th>퍼팅수</th>
-                        <th>그린적중률(%)</th><th>GIR 평균퍼팅수</th><th>스크램블링(%)</th><th>벙커 스크램블링 (%)</th>
+                        <th>Date</th><th>Course</th><th>스코어</th><th>페어웨이(%)</th><th>그린적중률(%)</th>
+                        <th>퍼팅수</th><th>GIR 평균퍼팅수</th><th>스크램블링(%)</th><th>벙커 스크램블링 (%)</th>
                         <th>버디이하 홀수</th><th>벌타</th>
                     </tr>
                     </thead>
@@ -96,6 +96,7 @@ table{
                     </tr>
                     </tbody>
                 </table>
+                </div>
             </div>
             <br>
             <div style="overflow-x: auto;">
@@ -105,8 +106,8 @@ table{
                         <th colspan=12>Best 10 라운드 (Net Score)</th>
                     </tr>
                     <tr>
-                        <th>Date</th><th>Course</th><th>스코어</th><th>페어웨이 (%)</th><th>퍼팅수</th>
-                        <th>그린적중률 (%)</th><th>GIR 평균 퍼팅수</th><th>스크램블링 (%)</th><th>벙커 스크램블링 (%)</th>
+                        <th>Date</th><th>Course</th><th>스코어</th><th>페어웨이 (%)</th><th>그린적중률 (%)</th>
+                        <th>퍼팅수</th><th>GIR 평균 퍼팅수</th><th>스크램블링 (%)</th><th>벙커 스크램블링 (%)</th>
                         <th>버디이하 홀수</th><th>벌타</th>
                     </tr>
                     </thead>

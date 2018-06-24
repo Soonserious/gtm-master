@@ -95,6 +95,7 @@
                     <button id="short_game_submit" type="button" class="btn-block btn-lg btn btn-primary">저장하기</button>
                 </div>
             </div>
+                <div class="alarm"></div>
         </div>
         </form>
 
@@ -209,7 +210,8 @@
                 data: data,
                 dataType: "json",
                 success: function(data) {
-                    $("#submit").html(data['status']);
+                    alert("수정이 완료되었습니다.");
+                    $(".alarm").html(data['status']);
                     $("textarea").each(function(){
                         localStorage.removeItem($(this).attr("name"));
                     })

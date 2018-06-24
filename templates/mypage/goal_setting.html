@@ -362,6 +362,7 @@ function save_ltg_clicked() {
                 "ltg_date" : $("#ltg_date").val()},
         dataType: "json",
         success: function(data) {
+        alert('저장 되었습니다.');
             console.log("result: " + data["status"]);
 {#            $("#ltg_status").innerText[0].innerText = data["status"];#}
         }
@@ -401,6 +402,7 @@ function save_dg_clicked(dg_date, dg_content, dg_archieved) {
         data: data,
         dataType: "json",
         success: function(data) {
+            alert('저장 되었습니다.');
             console.log("result: " + data["status"]);
         }
     });
@@ -458,22 +460,22 @@ function changeLtgTable(result){
    $("#g3_pg").val(result.g3_pg);
    $("#g3_date").val(result.g3_date);
 
-   if(result.ltg_achieved != false){
+   if(result.ltg_achieved == true){
         $("#ltg_achieved").prop("checked","checked");
    }else{
          $("#ltg_achieved").removeProp("checked");
    }
-   if(result.g1_achieved != false){
+   if(result.g1_achieved == true){
         $("#g1_achieved").prop("checked","checked");
    }else{
          $("#g1_achieved").removeProp("checked");
    }
-   if(result.g2_achieved != false){
+   if(result.g2_achieved == true){
         $("#g2_achieved").prop("checked","checked");
    }else{
          $("#g2_achieved").removeProp("checked");
    }
-   if(result.g3_achieved!= false){
+   if(result.g3_achieved == true){
         $("#g3_achieved").prop("checked","checked");
    }else{
          $("#g3_achieved").removeProp("checked");
