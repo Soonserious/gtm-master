@@ -139,6 +139,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     {% if user.is_staff %}
                         <li><a href="{% url 'admin:main_member_changelist' %}">사용자관리</a></li>
+                        <li><a href="{% url 'admin:g1_roundingresult_changelist' %}">라운드 관리</a></li>
                     {% endif %}
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'account' %}">내 계정</a></li>
