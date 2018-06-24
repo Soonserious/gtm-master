@@ -179,7 +179,7 @@
             scales: {
                 yAxes: [{
                     ticks: {
-                        min: -2,
+                        min: -1,
                         max: 3,
                         stepSize: 1
                     }
@@ -187,7 +187,7 @@
             }
         };
         new Chart(ctx, {type: "line", data: data, options: options});
-
+8
          var ctx = $("#two-chart");
         var data = {
             labels: [
@@ -220,7 +220,7 @@
 
                 yAxes: [{
                     ticks: {
-                        min: -2,
+                        min: -1,
                         max: 3,
                         stepSize: 1
                     }
@@ -249,7 +249,7 @@
             scales: {
                 yAxes: [{
                     ticks: {
-                        min: -2,
+                        min: -1,
                         max: 3,
                         stepSize: 1
                     }
@@ -362,9 +362,15 @@
                 }
             };
             if(keys[key]=='putt_gir'){
-                options.scales.yAxes[0].ticks.min=avg[keys[key]]-2;
-                options.scales.yAxes[0].ticks.max=avg[keys[key]]+2;
+                options.scales.yAxes[0].ticks.min=avg[keys[key]]-1;
+                options.scales.yAxes[0].ticks.max=avg[keys[key]]+1;
                 options.scales.yAxes[0].ticks.stepSize=2;
+            }
+            if(keys[key]=='bounce_back'||keys[key]=='fairway_hit'||keys[key]=='up_and_down'||keys[key]=='sand_save'
+            ||keys[key]=='gir'){
+                options.scales.yAxes[0].ticks.min=avg[keys[key]]-20;
+                options.scales.yAxes[0].ticks.max=avg[keys[key]]+20;
+                options.scales.yAxes[0].ticks.stepSize=10;
             }
 
 

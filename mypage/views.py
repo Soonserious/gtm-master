@@ -188,7 +188,7 @@ def ltg_date_exsist(request):
             print(json)
             return JsonResponse(json)
         except ObjectDoesNotExist:
-            return JsonResponse({})
+            return JsonResponse({'false':'false'})
     except Exception as ex:
         print(ex)
 

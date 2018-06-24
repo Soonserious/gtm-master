@@ -53,6 +53,11 @@ class Member(models.Model):
         blank=True,
         null=True
     )
+    def delete(self):
+        print(self.user.username)
+        user=User.objects.get(username=self.user.username)
+        user.delete()
+        print('del')
     # 권한
     permission_g1 = models.BooleanField(default=False)
     permission_g2 = models.BooleanField(default=False)
@@ -62,6 +67,11 @@ class Member(models.Model):
 
 
 class MemberAdmin(admin.ModelAdmin):
+    def delete_selected(self,request,obj):
+        for o in obj.all():
+            user=User.objects.get(username=o.user.username)
+            user.delete()
+
     def allow_g1(self, request, queryset):
         rows_updated = queryset.update(permission_g1=True)
         self.message_user(request, "{}명 G1 사용 권한 부여 완료".format(rows_updated))
@@ -118,6 +128,7 @@ class MemberAdmin(admin.ModelAdmin):
             <select onchange="location = this.value;">
                 <option disabled selected value> --------- </option>
                 <option value="{}?target_user_id={}">G1&nbsp;</option>
+                <option value="{}?target_user_id={}">G1 RoundResult&nbsp;</option>
                 <option value="{}?target_user_id={}">G2 golf swing&nbsp;</option>
                 <option value="{}?target_user_id={}">G2 short game&nbsp;</option>
                 <option value="{}?target_user_id={}">G2 putting&nbsp;</option>
@@ -126,6 +137,7 @@ class MemberAdmin(admin.ModelAdmin):
             </select>
             """,
             reverse('g1_profile'), obj.user.username,
+            reverse('g1_round'), obj.user.username,
             reverse('g2_eval_golf_swing'), obj.user.username,
             reverse('g2_eval_short_game'), obj.user.username,
             reverse('g2_eval_putting'), obj.user.username,
@@ -147,5 +159,5 @@ class MemberAdmin(admin.ModelAdmin):
     list_editable = ('permission_g1', 'permission_g2', 'permission_g3', 'permission_g4', 'permission_mypage')
     list_filter = ['association']
     search_fields = ['user__username', 'full_name', 'association']
-    actions = [allow_g1, allow_g2, allow_g3, allow_g4, allow_mypage,
+    actions = ['delete_selected',allow_g1, allow_g2, allow_g3, allow_g4, allow_mypage,
                disallow_g1, disallow_g2, disallow_g3, disallow_g4, disallow_mypage]

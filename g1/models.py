@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib import admin
 from django.utils import timezone
 import json
 import operator
@@ -268,3 +269,13 @@ class AVG_Stroke(models.Model):
     double = models.FloatField()
 
 
+class RoundingResultAdmin(admin.ModelAdmin):
+    list_display=['user_id','field_name','date','score','driving_distance','fairway_hit','putt','bunker','penalty','proximity']
+    list_display_links=['user_id','field_name','date','score','driving_distance','fairway_hit','putt','bunker','penalty','proximity']
+    list_per_page = 20
+    def user_id(self,obj):
+        user=User.objects.get(id=obj.user_id)
+        return user.username
+    def field_name(self,obj):
+        course=Course.objects.get(id=obj.course_id)
+        return course.field.name
