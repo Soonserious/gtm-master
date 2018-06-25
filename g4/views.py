@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
+from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from main.models import Member
@@ -50,17 +51,21 @@ class ViewManager:
                 model = model_cls.objects.get(user=request.user, update_time=request.POST["date"])
             except ObjectDoesNotExist:
                 model = model_cls()
+                print(model,model_cls)
                 assert isinstance(model, model_cls)
                 model.user = request.user
+                print('aa')
+                print(request.POST["date"])
+                print(timezone.now)
                 model.update_time = request.POST["date"]
                 print(model)
             scores = ViewManager.get_scores_from_post(request.POST)
             assert len(scores) == model.survey_info.num_questions
             model.dumped_scores = json.dumps(scores)
             model.save()
-            #return JsonResponse(model.get_results())
+            return JsonResponse(model.get_results())
             #error 'unicode' object has no attribute 'astimezone'
-            return JsonResponse({'success':'success'})
+            #return JsonResponse({'success':'success'})
         except Exception as ex:
             print(ex)
 
@@ -212,12 +217,14 @@ def update(request):
                 print(len(queried))
                 latest_instance = queried[0]
                 latest_instance.comment = comment
+                print(latest_instace)
                 if isinstance(latest_instance,Acsi) or isinstance(latest_instance,CourseManagement):
                     latest_instance.strategy = request.POST["strategy"]
                 latest_instance.save()
                 status = 'success'
             else:
                 status = 'no matching record instances'
+            print(model_cls)
             return JsonResponse({
                 'status': status
             })

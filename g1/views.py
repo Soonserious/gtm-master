@@ -122,6 +122,8 @@ def round(request):
             else:
                 target_user_id = request.GET['target_user_id']
                 #is_staff = True
+        else:
+            target_user_id = request.user.username
         target_user = User.objects.get(username=target_user_id)
         target_member = Member.objects.get(user=target_user)
         member_info = {

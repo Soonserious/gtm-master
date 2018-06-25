@@ -10,7 +10,9 @@ import pytz
 
 def get_local_date(datetime):
     local_tz = pytz.timezone('Asia/Seoul')
-    return datetime.astimezone(local_tz).strftime("%Y-%m-%d %a %I:%M %p")
+    # print(datetime.astimezone(local_tz))
+    # print(datetime.astimezone(local_tz).strftime("%Y-%m-%d %a %I:%M %p"))
+    return datetime
 
 
 class SurveyInfo:
@@ -94,15 +96,12 @@ class OceanTest(models.Model):
         for i, div in enumerate(self.partition):
             for q_num in div:
                 result_values['score'][i] += loaded_scores[str(q_num)]
-
         result_values['t-score'] = []
         for i, (avg, stddev) in enumerate(zip(self.avg_values[getattr(self, 'sex')],
                                               self.stddev_values[getattr(self, 'sex')])):
             result_values['t-score'].append(50.0 + (result_values['score'][i] - avg) / stddev * 10.0)
-
         for key in ['score', 't-score']:
             result_values[key] = [round(x, 2) for x in result_values[key]]
-
         return {'date': get_local_date(getattr(self, 'update_time')),
                 'scores': result_values['score'],
                 't-scores': result_values['t-score']}
@@ -295,6 +294,7 @@ class Tops(models.Model):
     should_comment = models.BooleanField(default=True)
 
     def get_results(self):
+        print(timezone.now)
         loaded_scores = json.loads(getattr(self, 'dumped_scores'))
         for i in Tops.reverse_scoring:
             loaded_scores[str(i)] = Tops.reverse_constant - loaded_scores[str(i)]
