@@ -4,6 +4,9 @@
     <style>
         .positive { color:blue; }
         .negative { color:red; }
+        .par-font *{
+            font-size:11px;
+         }
     </style>
 {% endblock %}
 
@@ -169,13 +172,13 @@
                     <tr>
                         <th colspan="2">Par 3, 4, 5 홀 평균타수</th>
                     </tr>
-                    <tr>
+                    <tr class="par-font">
                         <th>Hole</th>
                         <th>PGA Tour 10%</th>
                         <th>평균타수</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="par-font">
                     <tr>
                         <th>Par 3</th>
                         <td>{{ cr.par3|floatformat:2 }}</td>
@@ -206,13 +209,13 @@
                     <tr>
                         <th colspan="2">스트로크(타수) 비율 분석</th>
                     </tr>
-                    <tr>
+                    <tr class="par-font">
                         <th>Stroke</th>
                         <th>PGA Tour 10%</th>
                         <th>평균비율(%)</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="par-font">
                     <tr>
                         <th>버디이하</th>
                         <td>{{cr.stroke_birdie|floatformat:2 }}%</td>
@@ -249,7 +252,7 @@
             {% if is_admin %}
                 <textarea id="comment" class="form-control" rows="5">{{ comment }}</textarea>
             {% else %}
-                <div class="well well-sm" id="comment" align="justify">{{ comment }}</div>
+                <textarea disabled class="well well-sm col-xs-12 text-height" id="comment" style="overflow:hidden;"align="justify">{{ comment }}</textarea>
             {% endif %}
             </div>
         </div>
@@ -275,7 +278,10 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.7/chartjs-plugin-annotation.js"></script>
     <script>
-
+    $(document).ready(function(){
+        obj=document.getElementById('comment');
+        obj.style.height=(10+obj.scrollHeight)+"px";
+    })
     function popUpPlayRythm(){
         $("#play_rythm").submit();
     }

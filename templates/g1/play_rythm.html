@@ -18,7 +18,7 @@
 
         <div class="row">
             <div class="col-sm-12 col-sm-offset-0 col-xs-11 col-xs-offset-1">
-                <canvas id="one-chart" height="240"></canvas>
+                <canvas id="one-chart" height="180"></canvas>
             </div>
         </div>
 
@@ -28,7 +28,7 @@
 
         <div class="row">
             <div class="col-xs-12">
-                <canvas id="two-chart" height="240"></canvas>
+                <canvas id="two-chart" height="180"></canvas>
             </div>
         </div>
 
@@ -38,7 +38,7 @@
 
         <div class="row">
             <div class="col-xs-12">
-                <canvas id="three-chart" height="240"></canvas>
+                <canvas id="three-chart" height="180"></canvas>
             </div>
         </div>
 
@@ -364,7 +364,7 @@
             if(keys[key]=='putt_gir'){
                 options.scales.yAxes[0].ticks.min=avg[keys[key]]-1;
                 options.scales.yAxes[0].ticks.max=avg[keys[key]]+1;
-                options.scales.yAxes[0].ticks.stepSize=2;
+                options.scales.yAxes[0].ticks.stepSize=1;
             }
             if(keys[key]=='bounce_back'||keys[key]=='fairway_hit'||keys[key]=='up_and_down'||keys[key]=='sand_save'
             ||keys[key]=='gir'){
