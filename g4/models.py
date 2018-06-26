@@ -3,16 +3,21 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+import datetime
 import numpy as np
 import json
 import pytz
 
 
-def get_local_date(datetime):
+def get_local_date(local_date):
     local_tz = pytz.timezone('Asia/Seoul')
+    # if isinstance(local_date,unicode):
+    #     local_date=str(local_date)
+    #     local_date=datetime.datetime.strptime(local_date,"%Y-%m-%d")
+    # local_date=local_date.replace(tzinfo=local_tz)
     # print(datetime.astimezone(local_tz))
-    # print(datetime.astimezone(local_tz).strftime("%Y-%m-%d %a %I:%M %p"))
-    return datetime
+    return local_date.astimezone(local_tz).strftime("%Y-%m-%d %a %I:%M %p")
+    # return datetime
 
 
 class SurveyInfo:
@@ -294,7 +299,6 @@ class Tops(models.Model):
     should_comment = models.BooleanField(default=True)
 
     def get_results(self):
-        print(timezone.now)
         loaded_scores = json.loads(getattr(self, 'dumped_scores'))
         for i in Tops.reverse_scoring:
             loaded_scores[str(i)] = Tops.reverse_constant - loaded_scores[str(i)]

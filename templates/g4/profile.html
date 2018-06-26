@@ -63,7 +63,7 @@
             {% if is_admin %}
             <textarea id="p0_comment" class="form-control" rows="5"></textarea>
             {% else %}
-            <div class="well well-sm" id="p0_comment" align="justify"></div>
+            <textarea disabled class="well well-sm col-xs-12" id="p0_comment" align="justify"></textarea>
             {% endif %}
         </div>
     </div>
@@ -112,7 +112,7 @@
             {% if is_admin %}
             <textarea id="p1_comment" class="form-control" rows="5"></textarea>
             {% else %}
-            <div class="well well-sm" id="p1_comment" align="justify"></div>
+            <textarea disabled class="well well-sm col-xs-12" id="p1_comment" align="justify"></textarea>
             {% endif %}
         </div>
     </div>
@@ -159,7 +159,7 @@
             {% if is_admin %}
             <textarea id="p2_comment" class="form-control" rows="5"></textarea>
             {% else %}
-            <div class="well well-sm" id="p2_comment" align="justify"></div>
+            <textarea disabled class="well well-sm col-xs-12" id="p2_comment" align="justify"></textarea>
             {% endif %}
         </div>
     </div>
@@ -206,7 +206,7 @@
             {% if is_admin %}
             <textarea id="p3_comment" class="form-control" rows="5"></textarea>
             {% else %}
-            <div class="well well-sm" id="p3_comment" align="justify"></div>
+            <textarea disabled class="well well-sm col-xs-12" id="p3_comment" align="justify"></textarea>
             {% endif %}
         </div>
     </div>
@@ -253,7 +253,7 @@
             {% if is_admin %}
             <textarea id="p4_comment" class="form-control" rows="5"></textarea>
             {% else %}
-            <div class="well well-sm" id="p4_comment" align="justify"></div>
+            <textarea disabled class="well well-sm col-xs-12" id="p4_comment" align="justify"></textarea>
             {% endif %}
         </div>
     </div>
@@ -264,7 +264,7 @@
             {% if is_admin %}
             <textarea id="p4_strategy" class="form-control" rows="5"></textarea>
             {% else %}
-            <div class="well well-sm" id="p4_strategy" align="justify"></div>
+            <textarea disabled class="well well-sm col-xs-12" id="p4_strategy" align="justify"></textarea>
             {% endif %}
         </div>
     </div>
@@ -309,7 +309,7 @@
             {% if is_admin %}
             <textarea id="p5_comment" class="form-control" rows="5"></textarea>
             {% else %}
-            <div class="well well-sm" id="p5_comment" align="justify"></div>
+            <textarea disabled class="well well-sm col-xs-12" id="p5_comment" align="justify"></textarea>
             {% endif %}
         </div>
     </div>
@@ -320,7 +320,7 @@
             {% if is_admin %}
             <textarea id="p5_strategy" class="form-control" rows="5"></textarea>
             {% else %}
-            <div class="well well-sm" id="p5_strategy" align="justify"></div>
+            <textarea disabled class="well well-sm col-xs-12" id="p5_strategy" align="justify"></textarea>
             {% endif %}
         </div>
     </div>
@@ -338,6 +338,17 @@
 {% block js %}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 <script type="text/javascript">
+$(function(){
+            for(var i=0;i<6;i++){
+                obj=document.getElementById('p'+i+'_comment');
+                obj.style.height=(10+obj.scrollHeight)+"px";
+            }
+            obj=document.getElementById('p4_strategy');
+            obj.style.height=(10+obj.scrollHeight)+"px";
+            obj=document.getElementById('p5_strategy');
+            obj.style.height=(10+obj.scrollHeight)+"px";
+
+});
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {

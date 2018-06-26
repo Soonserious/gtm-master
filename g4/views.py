@@ -10,6 +10,8 @@ from g4.models import OceanTest, Gmet, Tops, Fss, Acsi, CourseManagement
 from g4.forms import OceanTestForm, GmetForm, TopsForm, FssForm, AcsiForm, CourseManagementForm
 import json
 import re
+import datetime
+import pytz
 from django.core.exceptions import ObjectDoesNotExist
 
 class StringManager:
@@ -47,18 +49,19 @@ class ViewManager:
             if not form.is_valid():
                 return HttpResponse(form.errors)
             model = None
+            local_tz = pytz.timezone('Asia/Seoul')
+            req_date=request.POST["date"]
+            req_date = str(req_date)
+            req_date = datetime.datetime.strptime(req_date, "%Y-%m-%d")
+            req_date = req_date.replace(tzinfo=local_tz)
+
             try:
-                model = model_cls.objects.get(user=request.user, update_time=request.POST["date"])
+                model = model_cls.objects.get(user=request.user, update_time=req_date)
             except ObjectDoesNotExist:
                 model = model_cls()
-                print(model,model_cls)
                 assert isinstance(model, model_cls)
                 model.user = request.user
-                print('aa')
-                print(request.POST["date"])
-                print(timezone.now)
-                model.update_time = request.POST["date"]
-                print(model)
+                model.update_time = req_date
             scores = ViewManager.get_scores_from_post(request.POST)
             assert len(scores) == model.survey_info.num_questions
             model.dumped_scores = json.dumps(scores)
@@ -217,14 +220,12 @@ def update(request):
                 print(len(queried))
                 latest_instance = queried[0]
                 latest_instance.comment = comment
-                print(latest_instace)
                 if isinstance(latest_instance,Acsi) or isinstance(latest_instance,CourseManagement):
                     latest_instance.strategy = request.POST["strategy"]
                 latest_instance.save()
                 status = 'success'
             else:
                 status = 'no matching record instances'
-            print(model_cls)
             return JsonResponse({
                 'status': status
             })
