@@ -7,11 +7,12 @@
 {% block content %}
 <style>
 .scroll{
+    max-height:230px;
     overflow-y : scroll;
 }
 .body-scroll{
     width:1130px;
-    max-height:150px;
+    max-height:105px;
     overflow-y : scroll;
     overflow-x : hidden;
 }
@@ -21,16 +22,14 @@ table{
 .AvgBold td{
     font-weight: bold;
 }
-#recent td{
-    white-space:nowrap;
-}
+
 #best_10 td{
     white-space:nowrap;
 }
 </style>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h5 class="panel-title text-center">라운드 결과</h5>
+            <h5 class="panel-title text-center">라운드 개요</h5>
         </div>
         <div class="panel-body">
             <div class="panel panel-default">
@@ -62,13 +61,26 @@ table{
                 <div class="scroll">
                 <!--<table class="table-condensed table-striped table-bordered">-->
                     <!--<thead>-->
-               <table class="table-condensed table-striped table-bordered">
+               <table class="scrolltbody table-bordered">
                    <thead>
                     <tr>
-                        <th colspan=12>최근 20라운드</th>
+                        <th colspan=12 height="32px">최근 20라운드</th>
                     </tr>
+                    <colgroup>
+                        <col style="width:83px; height=52px;">
+                        <col width="213px" height="52px">
+                        <col width="52px" height="52px">
+                        <col width="92px" height="52px">
+                        <col width="107px" height="52px">
+                        <col width="53px" height="52px">
+                        <col width="114px" height="52px">
+                        <col width="107px" height="52px">
+                        <col width="139px" height="52px">
+                        <col width="99px" height="52px">
+                        <col width="47px" height="52px">
 
-                    <tr id="recent-sec-1">
+                    </colgroup>
+                    <tr>
                         <th>Date</th><th>Course</th><th>스코어</th><th>페어웨이(%)</th><th>그린적중률(%)</th>
                         <th>퍼팅수</th><th>GIR 평균퍼팅수</th><th>스크램블링(%)</th><th>벙커 스크램블링 (%)</th>
                         <th>버디이하 홀수</th><th>벌타</th>
@@ -76,12 +88,27 @@ table{
                     </thead>
                 </table>
                 <div class="body-scroll">
-                <table class="table-condensed table-striped table-bordered">
+                <table class="scrolltbody table-bordered">
 
-                    <tbody id="recent">
+                    <colgroup>
+                        <col width="10%">
+                        <col width="20%">
+                        <col width="6%">
+                        <col width="7%">
+                        <col width="5%">
+                        <col width="7%">
+                        <col width="9%">
+                        <col width="12%">
+                        <col width="12%">
+                        <col width="5%">
+                        <col width="7%">
+
+                    </colgroup>
+                    <tbody id='recent'>
+
                         {% for r in recent %}
-                            <tr id="recent-sec-2">
-                                <td class="inlineDate"><span>{{ r.date|date:"Y-m-d" }}</span></td>
+                            <tr>
+                                <td>{{ r.date|date:"Y-m-d" }}</td>
                                 <td>{{ r.course }}</td>
                                 <td>{{ r.score }}</td>
                                 <td>{{ r.fairway_hit|floatformat:2 }}%</td>
@@ -93,15 +120,29 @@ table{
                                 <td>{{ r.birdie }}</td>
                                 <td>{{ r.penalty }}</td>
                             </tr>
+
                         {% endfor %}
                     </tbody>
                 </table>
                 </div>
-                <table class="table-condensed table-striped table-bordered">
+                <table class="scrolltbody table-bordered">
                     <tfoot>
 
+                    <colgroup>
+                        <col width="10%">
+                        <col width="19.7%">
+                        <col width="6.1%">
+                        <col width="7.1%">
+                        <col width="5.1%">
+                        <col width="7%">
+                        <col width="9%">
+                        <col width="12%">
+                        <col width="12%">
+                        <col width="5%">
+                        <col width="7%">
 
-                     <tr id="recent-sec-3" class="AvgBold">
+                    </colgroup>
+                     <tr class="AvgBold">
                         <th colspan=2>Average</th>
                         <td>{{ recent_avg.score|floatformat:2 }}</td>
                         <td>{{ recent_avg.fairway_hit|floatformat:2 }}%</td>
@@ -167,42 +208,6 @@ table{
 
 {% block js %}
     <script>
-        var sec1=document.getElementById("recent-sec-1");
-        var sec2=document.getElementById("recent-sec-2");
-        var sec3=document.getElementById("recent-sec-3");
-
-        children1=sec1.childNodes;
-        children2=sec2.childNodes;
-        children3=sec3.childNodes;
-        var Arr=new Array();
-        var j=0;
-
-
-        for(var i=0;i<children2.length;i++){
-            if(children2[i].nodeName=="TD"){
-                children2[i].style.width=children2[i].clientWidth+"px";
-                Arr[j]=children2[i].style.width;
-                j++;
-            }
-        }
-        j=0;
-        for(var i=0;i<children1.length;i++){
-            if(children1[i].nodeName=="TH"){
-                children1[i].style.width=Arr[j];
-                j++;
-            }
-        }
-        j=0;
-        for(var i=0;i<children3.length;i++){
-            if(children3[i].nodeName=="TH"){
-                children3[i].style.width=Arr[j]+Arr[j+1];
-                j+=2;
-            }
-            if(children3[i].nodeName=="TD"){
-                children3[i].style.width=Arr[j];
-                j++;
-            }
-        }
         Number.prototype.zeroPad = Number.prototype.zeroPad ||
             function(base){
                 var nr = this, len = (String(base).length - String(nr).length)+1;

@@ -186,6 +186,11 @@
                         <Button class="btn-block btn-lg btn btn-primary" id="submit_button" >제출</button>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-xs-12" align="right">
+                        <label id="submit_result" ></label>
+                    </div>
+                </div>
                    <input type="hidden" name="course_id" id="course_id" value='{{course_id}}'>
             </form>
 
@@ -249,6 +254,9 @@
             event.preventDefault();
             console.log("form submitted!")
             console.log($(this).serialize());
+
+            $('submit_result').prop("disabled",true);
+
             $.ajax({
                 url : "/g1/round_result_add_submit/",
                 type : "POST",
@@ -270,6 +278,7 @@
                     $('#submit_result').html("제출 실패: " + errmsg);
                     $('#submit_result').show();
                     console.log(xhr.status + ": " + xhr.responseText);
+
                 }
             });
         });

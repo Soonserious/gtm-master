@@ -326,6 +326,7 @@
         var ctx = $("#chart-percentage");
         var data = {
             labels: [
+                ["평균", "스코어"],
                 ["페어웨이 %"],
                 ["그린적중률 %"],
                 ["스크램블링 %"],
@@ -338,6 +339,7 @@
                 borderColor: red_bd,
                 borderWidth: 1,
                 data: [
+                    {{ cr.score|floatformat:2 }},
                     {{ cr.fairway_hit|floatformat:2 }},
                     {{ cr.gir|floatformat:2 }},
                     {{ cr.up_and_down|floatformat:2 }},
@@ -350,6 +352,7 @@
                 borderColor: blue_bd,
                 borderWidth: 1,
                 data: [
+                    {{ avg.score|floatformat:2 }},
                     {{ avg.fairway_hit|floatformat:2 }},
                     {{ avg.gir|floatformat:2 }},
                     {{ avg.up_and_down|floatformat:2 }},
@@ -373,14 +376,13 @@
 
         var ctx = $("#chart-large");
         var data = {
-            labels: [["평균", "스코어"], ["퍼팅수"], ["홀","접근","거리"]],
+            labels: [["퍼팅수"], ["홀","접근","거리"]],
             datasets: [{
                 label: "PGA Tour 상위 10%",
                 backgroundColor: red_bg,
                 borderColor: red_bd,
                 borderWidth: 1,
                 data: [
-                    {{ cr.score|floatformat:2 }},
                     {{ cr.putt|floatformat:2 }},
                     {{ cr.proximity|floatformat:2 }}
                 ]
@@ -390,7 +392,6 @@
                 borderColor: blue_bd,
                 borderWidth: 1,
                 data: [
-                    {{ avg.score|floatformat:2 }},
                     {{ avg.putt|floatformat:2 }},
                     {{ avg.proximity|floatformat:2 }}
                 ]
@@ -401,8 +402,8 @@
                 yAxes: [{
                     ticks: {
                         min: 0,
-                        max: 100,
-                        stepSize: 10
+                        max: 50,
+                        stepSize: 5
                     }
                 }]
             }

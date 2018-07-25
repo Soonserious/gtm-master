@@ -270,6 +270,7 @@ class AVG_Stroke(models.Model):
 
 
 class RoundingResultAdmin(admin.ModelAdmin):
+
     list_display=['user_id','field_name','date','score','driving_distance','fairway_hit','putt','bunker','penalty','proximity']
     list_display_links=['user_id','field_name','date','score','driving_distance','fairway_hit','putt','bunker','penalty','proximity']
     list_per_page = 20
@@ -279,3 +280,4 @@ class RoundingResultAdmin(admin.ModelAdmin):
     def field_name(self,obj):
         course=Course.objects.get(id=obj.course_id)
         return course.field.name
+    search_fields=['user_id__username','course_id__field__name']

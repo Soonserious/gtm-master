@@ -347,7 +347,15 @@
                             drawLineChart(ctx, x_lists, y_lists, ds_labels);
                         }
                     }
+                    function initResize(obj){
+                        obj.style.height="1px";
+                        obj.style.height=(10+obj.scrollHeight)+"px";
+
+                    }
+                    initResize(document.getElementById("p0_comment"));
+                    initResize(document.getElementById("p1_comment"));
                 }
+
             });
         });
         $(function() {
@@ -365,5 +373,12 @@
                 });
             });
         });
+
+
+    $(document).ready(function(){
+
+
+
+    });
     </script>
 {% endblock %}

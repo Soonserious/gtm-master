@@ -515,6 +515,18 @@ $(function() {
                     $("#p" + i + "_strategy").html(data.strategies[i]);
                 }
             }
+                    function initResize(obj){
+                        obj.style.height="1px";
+                        obj.style.height=(10+obj.scrollHeight)+"px";
+
+                    }
+                    initResize(document.getElementById("p0_comment"));
+                    initResize(document.getElementById("p1_comment"));
+                    initResize(document.getElementById("p2_comment"));
+                    initResize(document.getElementById("p3_comment"));
+                    initResize(document.getElementById("p4_comment"));
+                    initResize(document.getElementById("p5_comment"));
+
             drawBarChart($("#p0_chart"), ["개방성", "성실성", "외향성", "친화성", "신경성"],
                 "Baseline T-Score", "Current T-Score",
                  data.b_eval[0]["t-scores"], data.c_eval[0]["t-scores"],

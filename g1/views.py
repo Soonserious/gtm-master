@@ -134,8 +134,8 @@ def round(request):
             'association': target_member.association,
         }
 
-        round_posted = RoundingResult.objects.filter(user=request.user).count()
-        rrs = RoundingResult.objects.filter(user=request.user).order_by('-date', '-create_time')[:20]
+        round_posted = RoundingResult.objects.filter(user=target_user).count()
+        rrs = RoundingResult.objects.filter(user=target_user).order_by('-date', '-create_time')[:20]
         best_10 = sorted(rrs, key=lambda rr: sum(rr.getscore()))[:10]
         return render(request, 'g1/round.html', {'member_info': member_info,
                                                  'recent': [info(rr) for rr in rrs],

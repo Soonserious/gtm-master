@@ -62,14 +62,14 @@
                         {% for third_category in second_category.1 %}
                             <tr>
                                 {% if forloop.counter0 == 0 %}
-                                    <td rowspan="{{ second_category.1|length }}" style="vertical-align:middle">{{ second_category.0 }}</td>
+                                    <td rowspan="{{ second_category.1|length }}" style="vertical-align:middle">{{ second_category.0 |linebreaksbr}}</td>
                                 {% endif %}
-                                <td>{{ third_category.0 }}</td>
+                                <td>{{ third_category.0 |linebreaksbr }}</td>
                                 <td name="comment_{{ forloop.parentloop.parentloop.counter0 }}_{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}">
-                                    {{ third_category.1 }}
+                                    {{ third_category.1 |linebreaksbr}}
                                 </td>
                                 <td name="drill_{{ forloop.parentloop.parentloop.counter0 }}_{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}">
-                                    {{ third_category.2 }}
+                                    {{ third_category.2 |linebreaksbr }}
                                 </td>
                             </tr>
                         {% endfor %}
@@ -122,14 +122,14 @@
                         {% for third_category in second_category.1 %}
                             <tr>
                                 {% if forloop.counter0 == 0 %}
-                                    <td rowspan="{{ second_category.1|length }}" style="vertical-align:middle">{{ second_category.0 }}</td>
+                                    <td rowspan="{{ second_category.1|length }}" style="vertical-align:middle">{{ second_category.0 |linebreaksbr}}</td>
                                 {% endif %}
-                                <td>{{ third_category.0 }}</td>
+                                <td>{{ third_category.0|linebreaksbr }}</td>
                                 <td name="comment_{{ forloop.parentloop.parentloop.counter0 }}_{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}">
-                                    {{ third_category.1 }}
+                                    {{ third_category.1 |linebreaksbr}}
                                 </td>
                                 <td name="drill_{{ forloop.parentloop.parentloop.counter0 }}_{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}">
-                                    {{ third_category.2 }}
+                                    {{ third_category.2 |linebreaksbr}}
                                 </td>
                             </tr>
                         {% endfor %}
@@ -182,14 +182,14 @@
                         {% for third_category in second_category.1 %}
                             <tr>
                                 {% if forloop.counter0 == 0 %}
-                                    <td rowspan="{{ second_category.1|length }}" style="vertical-align:middle">{{ second_category.0 }}</td>
+                                    <td rowspan="{{ second_category.1|length }}" style="vertical-align:middle">{{ second_category.0 |linebreaksbr}}</td>
                                 {% endif %}
-                                <td>{{ third_category.0 }}</td>
+                                <td>{{ third_category.0 |linebreaksbr}}</td>
                                 <td name="comment_{{ forloop.parentloop.parentloop.counter0 }}_{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}">
-                                    {{ third_category.1 }}
+                                    {{ third_category.1 |linebreaksbr}}
                                 </td>
                                 <td name="drill_{{ forloop.parentloop.parentloop.counter0 }}_{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}">
-                                    {{ third_category.2 }}
+                                    {{ third_category.2 |linebreaksbr}}
                                 </td>
                             </tr>
                         {% endfor %}
