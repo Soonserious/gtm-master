@@ -66,7 +66,7 @@
             </tr>
             <tr>
                 <td style="vertical-align:middle" class="td-contenteditable" name="content_0">
-                     <textarea required="required" class="table_data_remove_border_line" name="content_0">{{ content_0 }}</textarea>
+                     <textarea id="content_0" onkeyup="resize(this)" required="required" class="table_data_remove_border_line" name="content_0">{{ content_0 }}</textarea>
                 </td>
             </tr>
             <tr>
@@ -74,7 +74,7 @@
             </tr>
             <tr>
                 <td style="vertical-align:middle" class="td-contenteditable" name="content_1">
-                    <textarea required="required" class="table_data_remove_border_line" name="content_1">{{ content_1 }}</textarea>
+                    <textarea id="content_1" onkeyup="resize(this)" required="required" class="table_data_remove_border_line" name="content_1">{{ content_1 }}</textarea>
                 </td>
             </tr>
             <tr>
@@ -82,7 +82,7 @@
             </tr>
             <tr>
                 <td style="vertical-align:middle" class="td-contenteditable" name="content_2">
-                     <textarea required="required" class="table_data_remove_border_line" name="content_2">{{ content_2 }}</textarea>
+                     <textarea id="content_2" onkeyup="resize(this)" required="required" class="table_data_remove_border_line" name="content_2">{{ content_2 }}</textarea>
                 </td>
             </tr>
             <tr>
@@ -90,7 +90,7 @@
             </tr>
             <tr>
                 <td style="vertical-align:middle" class="td-contenteditable" name="content_3">
-                     <textarea required="required" class="table_data_remove_border_line" name="content_3">{{ content_3 }}</textarea>
+                     <textarea id="content_3" onkeyup="resize(this)" required="required" class="table_data_remove_border_line" name="content_3">{{ content_3 }}</textarea>
                 </td>
             </tr>
             <tr>
@@ -98,7 +98,7 @@
             </tr>
             <tr>
                 <td style="vertical-align:middle" class="td-contenteditable" name="content_4">
-                     <textarea required="required" class="table_data_remove_border_line" name="content_4">{{ content_4 }}</textarea>
+                     <textarea id="content_4" onkeyup="resize(this)" required="required" class="table_data_remove_border_line" name="content_4">{{ content_4 }}</textarea>
                 </td>
             </tr>
             <tr>
@@ -106,7 +106,7 @@
             </tr>
             <tr>
                 <td style="vertical-align:middle" class="td-contenteditable" name="content_5">
-                     <textarea required="required" class="table_data_remove_border_line" name="content_5">{{ content_5 }}</textarea>
+                     <textarea id="content_5" onkeyup="resize(this)" required="required" class="table_data_remove_border_line" name="content_5">{{ content_5 }}</textarea>
                 </td>
             </tr>
             <tr>
@@ -114,7 +114,7 @@
             </tr>
             <tr>
                 <td style="vertical-align:middle" class="td-contenteditable" name="content_6">
-                     <textarea required="required" class="table_data_remove_border_line" name="content_6">{{ content_6 }}</textarea>
+                     <textarea id="content_6" onkeyup="resize(this)" required="required" class="table_data_remove_border_line" name="content_6">{{ content_6 }}</textarea>
                 </td>
             </tr>
             <tr>
@@ -122,7 +122,7 @@
             </tr>
             <tr>
                 <td style="vertical-align:middle" class="td-contenteditable" name="content_7">
-                     <textarea required="required" class="table_data_remove_border_line" name="content_7">{{ content_7 }}</textarea>
+                     <textarea id="content_7" onkeyup="resize(this)" required="required" class="table_data_remove_border_line" name="content_7">{{ content_7 }}</textarea>
                 </td>
             </tr>
             <tr>
@@ -130,7 +130,7 @@
             </tr>
             <tr>
                 <td style="vertical-align:middle" class="td-contenteditable" name="content_8">
-                     <textarea required="required" class="table_data_remove_border_line" name="content_8">{{ content_8 }}</textarea>
+                     <textarea id="content_8" onkeyup="resize(this)" required="required" class="table_data_remove_border_line" name="content_8">{{ content_8 }}</textarea>
                 </td>
             </tr>
             <tr>
@@ -138,7 +138,7 @@
             </tr>
             <tr>
                 <td style="vertical-align:middle" class="td-contenteditable" name="content_9">
-                     <textarea required="required" class="table_data_remove_border_line" name="content_9">{{ content_9 }}</textarea>
+                     <textarea id="content_9" onkeyup="resize(this)" required="required" class="table_data_remove_border_line" name="content_9">{{ content_9 }}</textarea>
                 </td>
             </tr>
         </table>
@@ -159,7 +159,17 @@
 
 
 <script type='text/javascript'>
+$(function(){
+            for(var i=0;i<10;i++){
+                obj=document.getElementById('content_'+i);
+                obj.style.height=(10+obj.scrollHeight)+"px";
+            }
 
+});
+function resize(obj){
+    obj.style.height="1px";
+    obj.style.height=(10+obj.scrollHeight)+"px";
+}
  $(function () {
             $('input[name="date"]').datetimepicker({
                 format: 'YYYY-MM-DD',
@@ -286,6 +296,19 @@ $("#id-competition_level").on("input",function(){
                     $("textarea[name="+target+"]").val(data.dumped_contents[target]);
                     console.log(data.dumped_contents[target]);
                 }
+                    function initResize(obj){
+                        obj.style.height="1px";
+                        obj.style.height=(10+obj.scrollHeight)+"px";
+
+                    }
+                    initResize(document.getElementById("p0_comment"));
+                    initResize(document.getElementById("p1_comment"));
+                    initResize(document.getElementById("p2_comment"));
+                    initResize(document.getElementById("p3_comment"));
+                    initResize(document.getElementById("p4_comment"));
+                    initResize(document.getElementById("p5_comment"));
+                    initResize(document.getElementById("p4_strategy"));
+                    initResize(document.getElementById("p5_strategy"));
             }else{
                 $("textarea").each(function(){
                     $(this).val(" ");

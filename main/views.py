@@ -128,7 +128,8 @@ def account(request):
             print(ex)
         # user.save()
 
-
+def aside(request):
+    return render(request,'common/aside.html',context={'next':request.GET["next"]})
 
 def user_passes_test(test_func, message):
     """

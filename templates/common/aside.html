@@ -23,18 +23,20 @@
     {% block css %}
     {% endblock %}
     <style>
-        @media (max-width:767px){
-            #navbar{
-                display:none;
-            }
+        .navbar-toggle{
+            display:block !important;
+        }
+        .nav-text{
+            font-size: 25px;
+            text-align: center;
+        }
+        .li-text{
+            font-size: 15px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <div id="test-width1"></div>
-    <div id="test-width2"></div>
-    <div id="test-width3"></div>
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -51,7 +53,7 @@
                     <!--<span class="icon-bar"></span>-->
                     <!--<span class="icon-bar"></span>-->
                 <!--</button>-->
-                <button type="button" class="navbar-toggle collapsed" onclick="window.location.href='{% url 'aside' %}?next={{request.path}}'">
+                <button type="button" class="navbar-toggle collapsed" onclick="window.location.href='{{next}}'">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -59,13 +61,13 @@
                 </button>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div id="navbar" class="navbar-collapse collapse in">
+            <div id="navbar" class="navbar-collapse collapse in nav-text">
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             G1 골프 통계<span class="caret"></span>
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu li-text">
                             {% if user.is_staff %}
                                 <li><a href="{% url 'g1_criteria' %}">기준 설정</a></li>
                                 <li><a href="{% url 'g1_field_add' %}">코스 추가</a></li>
@@ -81,11 +83,11 @@
                             G2 기술 분석<span class="caret"></span>
                         </a>
                         {% if user.is_staff %}
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu li-text">
                                 <li><a>관리자 메뉴 없음</a></li>
                             </ul>
                         {% else %}
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu li-text">
                                 <li><a href="{% url 'g2_eval_golf_swing' %}">Golf Swing</a></li>
                                 <li><a href="{% url 'g2_eval_short_game' %}">Short Game</a></li>
                                 <li><a href="{% url 'g2_eval_putting' %}">Putting</a></li>
@@ -97,11 +99,11 @@
                             G3 연습 측정<span class="caret"></span>
                         </a>
                         {% if user.is_staff %}
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu li-text">
                                 <li><a>관리자 메뉴 없음</a></li>
                             </ul>
                         {% else %}
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu li-text">
                                 <li><a href="{% url 'g3_shot_challenge' %}">Shot Challenge</a></li>
                                 <li><a href="{% url 'g3_short_game' %}">Short Game</a></li>
                                 <li><a href="{% url 'g3_putting_game' %}">Putting Game</a></li>
@@ -114,11 +116,11 @@
                             G4 멘탈 측정<span class="caret"></span>
                         </a>
                         {% if user.is_staff %}
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu li-text">
                                 <li><a>관리자 메뉴 없음</a></li>
                             </ul>
                         {% else %}
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu li-text">
                                 <li><a href="{% url 'g4_ocean_test' %}">OCEAN Test</a></li>
                                 <li><a href="{% url 'g4_gmet' %}">GMET</a></li>
                                 <li><a href="{% url 'g4_tops' %}">TOPS</a></li>
@@ -133,11 +135,11 @@
                             My Page <span class="caret"></span>
                         </a>
                         {% if user.is_staff %}
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu li-text">
                                 <li><a>관리자 메뉴 없음</a></li>
                             </ul>
                         {% else %}
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu li-text">
                                 <li><a href="{% url 'g1_profile' %}">G1 통계 Profile</a></li>
                                 <li><a href="{% url 'g2_profile' %}">G2 기술 Profile</a></li>
                                 <li><a href="{% url 'g3_profile' %}">G3 연습 Profile</a></li>
@@ -165,13 +167,6 @@
             </div>
         </div><!-- /.container-fluid -->
     </nav>
-
-    {% include 'common/messages.html' %}
-
-    {% block content %}
-    {% endblock %}
-
-</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>

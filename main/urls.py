@@ -14,4 +14,5 @@ urlpatterns = [
         {'next_page': '/'}, name='sign_out'),
     url(r'^signup/$', views.sign_up, name='sign_up'),
     url(r'^account/$', views.account, name='account'),
+    url(r'^aside/$',views.aside,name='aside'),
 ]
