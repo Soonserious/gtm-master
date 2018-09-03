@@ -129,7 +129,12 @@ def account(request):
         # user.save()
 
 def aside(request):
-    return render(request,'common/aside.html',context={'next':request.GET["next"]})
+    try:
+        if request.GET["field_name"]:
+            return render(request, 'common/aside.html', context={'next': request.GET["next"]+"&field_name="+request.GET["field_name"]})
+
+    except:
+        return render(request, 'common/aside.html', context={'next': request.GET["next"]})
 
 def user_passes_test(test_func, message):
     """

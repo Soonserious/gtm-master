@@ -251,10 +251,8 @@ def avg_twenty_make(target_user):
     ret = {}
     ret["avg_twenty"] = avg_seven
     size=min(len(queried),10)
-    print(len(queried))
     queried = queried[:size]
     ret["size"] = size
-
     tempQueried=copy.deepcopy(queried)
     for i in range(size):
         queried[i]=tempQueried[size-1-i]
