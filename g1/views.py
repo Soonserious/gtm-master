@@ -561,7 +561,6 @@ def play_rythm(request):
            one = []
            two = []
            three =[]
-       print("efef")
        avg_twenty = avg_twenty_make(target_user)
        return render(request, 'g1/play_rythm.html' , {"part_one" : one,
                                                       "part_two" : two,

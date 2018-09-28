@@ -67,6 +67,7 @@ def sign_up(request):
 
 def account(request):
     if request.method == 'GET':
+        DATE_FORMAT="%Y%m%d"
         member=models.Member.objects.get(user=request.user)
         ret={}
         ret['username']=request.user.username
@@ -75,7 +76,7 @@ def account(request):
         ret['full_name']=member.full_name
         ret['phone_number']=member.phone_number
         ret['email']=member.email
-        ret['birth']=member.birth
+        ret['birth']=member.birth.strftime(DATE_FORMAT)
         return render(request, 'registration/account.html',ret)
     elif request.method == 'POST':
         context = {'error': 0}
@@ -92,8 +93,11 @@ def account(request):
                 context['message'] = 'New passwords do not match.'
                 render(request, 'registration/account.html', context=context)
             else:
+                print(request.POST['current_pw'])
+                print(request.POST['new_pw_1'])
                 user.set_password(request.POST['new_pw_1'])
                 context['error'] = False
+                user.save()
         member_form = forms.SignUpMemberForm(data=request.POST)
         try:
 

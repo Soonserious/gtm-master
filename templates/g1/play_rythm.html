@@ -355,7 +355,16 @@
                         ticks: {
                             min: avg[keys[key]]-10,
                             max: avg[keys[key]]+10,
-                            stepSize: 10
+                            stepSize: 10,
+                            callback:function(value,index,values){
+                                if(Math.floor(value)==value){
+                                    return value;
+                                }
+                                else{
+                                    return value.toFixed(2);
+                                 }
+                            }
+
 
                         }
                     }]
