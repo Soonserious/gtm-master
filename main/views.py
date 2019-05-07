@@ -67,22 +67,25 @@ def sign_up(request):
 
 def account(request):
     if request.method == 'GET':
-        DATE_FORMAT="%Y%m%d"
-        member=models.Member.objects.get(user=request.user)
-        ret={}
-        ret['username']=request.user.username
-        ret['sex']=member.sex
-        ret['association']=member.association
-        ret['full_name']=member.full_name
-        ret['phone_number']=member.phone_number
-        ret['email']=member.email
-        ret['birth']=member.birth.strftime(DATE_FORMAT)
-        return render(request, 'registration/account.html',ret)
+        DATE_FORMAT = "%Y%m%d"
+        member = models.Member.objects.get(user=request.user)
+        ret = {}
+        ret['username'] = request.user.username
+        ret['sex'] = member.sex
+        ret['association'] = member.association
+        ret['full_name'] = member.full_name
+        ret['phone_number'] = member.phone_number
+        ret['email'] = member.email
+        try:
+            ret['birth'] = member.birth.strftime(DATE_FORMAT)
+        except Exception as ex:
+            ret['birth'] = None
+        return render(request, 'registration/account.html', ret)
     elif request.method == 'POST':
         context = {'error': 0}
         print(request.POST)
         user = User.objects.get(username=request.user.username)
-        member=models.Member.objects.get(user=request.user)
+        member = models.Member.objects.get(user=request.user)
         if 'current_pw' in request.POST:
             if not request.user.check_password(request.POST['current_pw']):
                 context['error'] = True
@@ -102,9 +105,9 @@ def account(request):
         try:
 
             if member_form.is_valid():
-                member.birth=member_form.cleaned_data['birth']
-                member.email=member_form.cleaned_data['email']
-                member.phone_number=member_form.cleaned_data['phone_number']
+                member.birth = member_form.cleaned_data['birth']
+                member.email = member_form.cleaned_data['email']
+                member.phone_number = member_form.cleaned_data['phone_number']
                 member.association = member_form.cleaned_data['association']
                 member.sex = member_form.cleaned_data['sex']
                 member.save()
@@ -115,7 +118,7 @@ def account(request):
                 first_error_key = list(errors.keys())[0]
                 error_message = '{}: {}'.format(first_error_key, errors[first_error_key][0])
                 context['error'] = True
-                context['message']=error_message
+                context['message'] = error_message
                 return render(request, 'registration/account.html', context=context)
             context['username'] = member.user.username
             context['sex'] = member.sex
@@ -130,7 +133,7 @@ def account(request):
             return render(request, 'registration/account.html', context=context)
         except Exception as ex:
             print(ex)
-        # user.save()
+            # user.save()
 
 def aside(request):
     try:

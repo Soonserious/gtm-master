@@ -17,15 +17,10 @@ from django.contrib.messages import constants as messages
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '&2e^68#p@lpd!e53&h(4b5*i75np1)(m2r#8j(8_ls@34%o=0z'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+SECRET_KEY="&2e^68#p@lpd!e53&h(4b5*i75np1)(m2r#8j(8_ls@34%o=0z"
+
 
 ALLOWED_HOSTS = ['*']
 
@@ -90,9 +85,9 @@ DATABASES = {
 
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'pgbackup',
-        'USER': 'postgres',
-        'PASSWORD': 'ekscn123',
+        'NAME': '',
+        'USER': "",
+        'PASSWORD': "",
         'HOST': 'localhost',
         'PORT': '',
     }
