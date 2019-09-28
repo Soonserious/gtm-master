@@ -280,7 +280,9 @@
     <script>
     $(document).ready(function(){
         obj=document.getElementById('comment');
-        obj.style.height=(10+obj.scrollHeight)+"px";
+	if(obj != null){
+	        obj.style.height=(10+obj.scrollHeight)+"px";
+	}
     })
     function popUpPlayRythm(){
         $("#play_rythm").submit();

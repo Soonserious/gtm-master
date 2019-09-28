@@ -191,7 +191,9 @@
         $(function(){
                     for(var i=0;i<2;i++){
                         obj=document.getElementById('p'+i+'_comment');
-                        obj.style.height=(10+obj.scrollHeight)+"px";
+			if(obj != null){
+	                        obj.style.height=(10+obj.scrollHeight)+"px";
+			}
                     }
         });
         Chart.defaults.global.responsive = true;

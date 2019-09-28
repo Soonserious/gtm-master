@@ -236,7 +236,9 @@
 $(function(){
             for(var i=1;i<={{dg_data|length}};i++){
                 obj=document.getElementById('dg_'+i+'_content');
-                obj.style.height=(10+obj.scrollHeight)+"px";
+		if(obj != null){
+	                obj.style.height=(10+obj.scrollHeight)+"px";
+		}
             }
                 obj=document.getElementById('ltg_content');
                 obj.style.height=(10+obj.scrollHeight)+"px";

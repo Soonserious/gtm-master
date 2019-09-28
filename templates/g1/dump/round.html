@@ -77,51 +77,54 @@ caption{
                 <!--<table class="table-condensed table-striped table-bordered">-->
                     <!--<thead>-->
                <table class="scrolltbody table-bordered">
-		      <colgroup>
-                        <col width="90">
-                        <col width="141px">
-                        <col width="57px">
-                        <col width="101px">
-                        <col width="116px">
-                        <col width="57px">
-                        <col width="124px">
-                        <col width="117px">
-                        <col width="152px">
-                        <col width="108px">
-                        <col width="42px">
+                   <thead>
+                    <tr>
+                        <th colspan=12>최근 20라운드</th>
+                    </tr>
+                    <colgroup>
+                        <col width="10%">
+                        <col width="20%">
+                        <col width="6%">
+                        <col width="7%">
+                        <col width="5%">
+                        <col width="7%">
+                        <col width="9%">
+                        <col width="12%">
+                        <col width="12%">
+                        <col width="5%">
+                        <col width="7%">
                      </colgroup>
                     <tr>
                         <th id="dateWidth">Date</th>
-                        <th id="courseWidth">Course</th>
-                        <th>스코어</th>
-                        <th>페어웨이(%)</th>
-                        <th>그린적중률(%)</th>
+			<th id="courseWidth">Course</th>
+			<th>스코어</th>
+			<th>페어웨이(%)</th>
+			<th>그린적중률(%)</th>
                         <th>퍼팅수</th>
-                        <th>GIR 평균퍼팅수</th>
-                        <th>스크램블링(%)</th>
-                        <th>벙커 스크램블링 (%)</th>
+			<th>GIR 평균퍼팅수</th>
+			<th>스크램블링(%)</th>
+			<th>벙커 스크램블링 (%)</th>
                         <th>버디이하 홀수</th>
-                        <th>벌타</th>
+			<th>벌타</th>
+                    </tr>
                     </thead>
                 </table>
                 <div class="body-scroll">
                 <table class="scrolltbody table-bordered">
- 			   <colgroup>
-                        <col width="90">
-                        <col width="141px">
-                        <col width="57px">
-                        <col width="101px">
-                        <col width="116px">
-                        <col width="57px">
-                        <col width="124px">
-                        <col width="117px">
-                        <col width="152px">
-                        <col width="108px">
-                        <col width="42px">
+                     <colgroup>
+                        <col width="10%">
+                        <col width="20%">
+                        <col width="6%">
+                        <col width="7%">
+                        <col width="5%">
+                        <col width="7%">
+                        <col width="9%">
+                        <col width="12%">
+                        <col width="12%">
+                        <col width="5%">
+                        <col width="7%">
                      </colgroup>
-                    
-			<tbody id="recent">
-
+                     <tbody id="recent">
                         {% for r in recent %}
                             <tr>
                                 <td>{{ r.date|date:"Y-m-d" }}</td>
@@ -142,22 +145,20 @@ caption{
                 </table>
                 </div>
                 <table class="scrolltbody table-bordered">
-   <colgroup>
-                        <col width="90">
-                        <col width="141px">
-                        <col width="57px">
-                        <col width="101px">
-                        <col width="116px">
-                        <col width="57px">
-                        <col width="124px">
-                        <col width="117px">
-                        <col width="152px">
-                        <col width="108px">
-                        <col width="42px">
-                     </colgroup>
-
-
                     <tfoot>
+                     <colgroup>
+                        <col width="10%">
+                        <col width="20%">
+                        <col width="6%">
+                        <col width="7%">
+                        <col width="5%">
+                        <col width="7%">
+                        <col width="9%">
+                        <col width="12%">
+                        <col width="12%">
+                        <col width="5%">
+                        <col width="7%">
+                     </colgroup>
 			<tr style="visibility:hidden">
 				<td></td>
                         <td></td>

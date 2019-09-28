@@ -85,9 +85,9 @@ DATABASES = {
 
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '',
-        'USER': "",
-        'PASSWORD': "",
+        'NAME': 'gpes',
+        'USER': "postgres",
+        'PASSWORD': "dnflemf0805",
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -139,7 +139,7 @@ TIME_ZONE = 'Asia/Seoul'
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_ROOT = os.path.join(BASE_DIR, ".static")
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),

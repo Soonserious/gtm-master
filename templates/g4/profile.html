@@ -341,7 +341,9 @@
 $(function(){
             for(var i=0;i<6;i++){
                 obj=document.getElementById('p'+i+'_comment');
-                obj.style.height=(10+obj.scrollHeight)+"px";
+		if(obj != null){
+ 	               obj.style.height=(10+obj.scrollHeight)+"px";
+		}
             }
             obj=document.getElementById('p4_strategy');
             obj.style.height=(10+obj.scrollHeight)+"px";

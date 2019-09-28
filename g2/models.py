@@ -10,7 +10,7 @@ class GolfSwing(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     update_time = models.DateTimeField(default=timezone.now)
     dumped_contents = models.TextField(blank=True)
-    video = models.TextField(blank=True)
+    video = models.TextField(null=True,blank=True)
 
     @classmethod
     def get_categories(cls):
@@ -176,7 +176,7 @@ class ShortGame(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     update_time = models.DateTimeField(default=timezone.now)
     dumped_contents = models.TextField(blank=True)
-    video = models.TextField(blank=True)
+    video = models.TextField(null=True,blank=True)
     @classmethod
     def get_categories(cls):
         first_categories = cls._get_first_categories()
@@ -320,7 +320,7 @@ class Putting(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     update_time = models.DateTimeField(default=timezone.now)
     dumped_contents = models.TextField(blank=True)
-    video = models.TextField(blank=True)
+    video = models.TextField(null=True,blank=True)
     @classmethod
     def get_categories(cls):
         first_categories = cls._get_first_categories()
