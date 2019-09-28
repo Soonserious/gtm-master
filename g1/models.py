@@ -209,6 +209,7 @@ class RoundingResult(models.Model):
         return list(map(operator.and_, [False] + self.bogey_or_more(), self.birdie() + [False]))[0:-1]
 
     def get_stat(self):
+
         par4 = list(map(operator.ge, self.course.getpars(), [4] * len(self.course.getpars())))
         driving_distance = list(map(operator.mul, self.getdriving_distance(), par4))
         fairway_hit = list(map(operator.mul, self.getfairway_hit(), par4))
@@ -216,6 +217,17 @@ class RoundingResult(models.Model):
         par4_in_cnt = sum(par4[:9])
         par4_out_cnt = sum(par4[9:])
         par4_cnt = par4_in_cnt + par4_out_cnt
+
+        distance_cnt = 0
+        proximity_cnt = 0
+        fairway_cnt = 0
+
+        for cnt in driving_distance:
+            cnt if cnt !=0 else distance_cnt += 1
+        for cnt in self.getproximity():
+            cnt if cnt != 0 else proximity_cnt += 1
+        for cnt in fairway_hit:
+            cnt if cnt != 0 else fairway_cnt += 1
 
         return {
             'out_score': sum(self.getscore()[0:9]),
