@@ -238,7 +238,7 @@ class RoundingResult(models.Model):
             'driving_distance': sum(driving_distance) / distance_cnt if distance_cnt != 0 else 0,
             'out_fairway_hit': sum(fairway_hit[0:9]) * 100.0 / par4_in_cnt if par4_in_cnt != 0 else 0,
             'in_fairway_hit': sum(fairway_hit[9:18]) * 100.0 / par4_out_cnt if par4_out_cnt != 0 else 0,
-            'fairway_hit': sum(fairway_hit) * 100.0 / fairway_cnt if fairway_cnt != 0 else 0,
+            'fairway_hit': sum(fairway_hit) * 100.0 / par4_cnt if par4_cnt != 0 else 0,
             'out_putt': sum(self.getputt()[0:9]),
             'in_putt': sum(self.getputt()[9:18]),
             'putt': sum(self.getputt()),
