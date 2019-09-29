@@ -223,11 +223,11 @@ class RoundingResult(models.Model):
         fairway_cnt = 0
 
         for cnt in driving_distance:
-            cnt if cnt !=0 else distance_cnt += 1
+            distance_cnt += 1 if cnt != 0 else 0
         for cnt in self.getproximity():
-            cnt if cnt != 0 else proximity_cnt += 1
+            proximity_cnt += 1 if cnt != 0 else 0
         for cnt in fairway_hit:
-            cnt if cnt != 0 else fairway_cnt += 1
+            fairway_cnt += 1 if cnt != 0 else 0
 
         return {
             'out_score': sum(self.getscore()[0:9]),
